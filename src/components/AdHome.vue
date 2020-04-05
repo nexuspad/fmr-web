@@ -6,12 +6,6 @@
 </template>
 
 <script>
-import AdService from '../service/AdService';
-
 export default {
-  name: 'AdHome',
-  mounted () {
-    AdService.getAds();
-  }
 }
 </script>
