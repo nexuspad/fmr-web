@@ -1,0 +1,25 @@
+// Define your variable overrides here
+$primary: #213b89;
+$font-size-base: 0.8rem;
+
+$enable-shadows: true;
+$enable-gradients: true;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 456px,
+  md: 789px,
+  lg: 999px,
+  xl: 1234px
+);
+$bv-enable-table-stacked: false;
+
+// Include Bootstrap and BootstrapVue SCSS files
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
+
+// General style overrides and custom classes
+body { background:url(./images/bgr-body.png) repeat; color:#333333 }
+
+.content {margin-top:60px; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3; background-color: #ffffff;}
+
+.hasshadow { -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;}

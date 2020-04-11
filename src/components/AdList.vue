@@ -1,8 +1,13 @@
 <template>
   <div>
+    <div>
+      <a href="/ad/new?categoryId=3011">new ad</a>
+    </div>
     <state-selector />
+    <list-filter />
+    <category-navigation />
     This is the list home for state {{ state }}
-    <button @click="increment">press</button>
+    category {{ categoryId }}
   </div>
 </template>
 
@@ -11,40 +16,38 @@ import { onBeforeMount } from "@vue/composition-api";
 import AdService from "../service/AdService";
 import { listContextSetup } from "./ListContextHandler";
 import StateSelector from "./StateSelector";
+import ListFilter from "./ListFilter";
+import CategoryNavigation from "./CategoryNavigation";
 
 export default {
-    components: {
-        StateSelector
-    },
-    setup() {
-        const { state, currentCriteria } = listContextSetup();
+  components: {
+    StateSelector,
+    CategoryNavigation,
+    ListFilter
+  },
+  setup() {
+    const { state, categoryId, currentCriteria } = listContextSetup();
 
-        onBeforeMount(() => {
-            AdService.getAds(currentCriteria())
-            .then(adList => {
-                console.log(adList);
-            })
-            .catch(() => {
-                console.error("...error");
-            });
+    onBeforeMount(() => {
+      AdService.getAds(currentCriteria())
+        .then(adList => {
+          console.log(adList);
+        })
+        .catch(() => {
+          console.error("...error");
         });
+    });
 
-        function increment() {
-            // console.log(listContext)
-            state.value = "GA";
-            console.log(state);
-        }
-
-        return {
-            // listContext,
-            state,
-            increment
-        };
-    },
-    watch: {
-        '$route.params': function () {
-            console.log(this.$route.params)
-        }
+    return {
+      state,
+      categoryId
+    };
+  },
+  watch: {
+    "$route.params": function() {
+      // just checking
+      // console.log(this.$route.params)
     }
+  }
 };
 </script>

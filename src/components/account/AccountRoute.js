@@ -7,21 +7,23 @@ export default class AccountRoute {
     static routes() {
         return [
             {
-                path: '/register',
-                component: Register
-            },
-            {
-                path: '/login',
-                component: Login
-            },
-            {
                 path: '/account',
-                component: Account
-            },
-            {
-                path: '/myads',
-                component: MyAds
+                component: Account,
+                children: [
+                    {
+                        path: 'register',
+                        component: Register
+                    },
+                    {
+                        path: 'login',
+                        component: Login
+                    },
+                    {
+                        path: 'myads',
+                        component: MyAds
+                    }
+                ]
             }
-        ];
+        ]
     }
 }

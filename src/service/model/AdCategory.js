@@ -8,4 +8,8 @@ export default class AdCategory {
             this.name = jsonObj.name
         }
     }
+
+    equals (category) {
+        return this.id === category.id
+    }
 }
