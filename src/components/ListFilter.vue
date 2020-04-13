@@ -18,7 +18,7 @@
 
 <script>
 import { formSetup } from './GenericFormHandler'
-import { listContextSetup, listContextUpdate } from './ListContextHandler'
+import { listContextSetup, listContextUpdate } from './AppContextHandler'
 import StateSelector from "./StateSelector"
 
 export default {

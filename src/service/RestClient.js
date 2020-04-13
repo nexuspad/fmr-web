@@ -1,5 +1,5 @@
 import axios from 'axios'
-import EventManager from './EventManager';
+import EventManager from '../util/EventManager';
 import { AppStatus } from './AppCode';
 import AppError from './AppError';
 

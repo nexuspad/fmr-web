@@ -1,15 +1,50 @@
 <template>
-  <div class="p-2">
-    <h1>This is the ad edit page</h1>
-    <div class="form-group">
-      <button class="btn btn-primary" v-on:click="save">Save</button>
+  <div>
+    <top-navigation />
+    <div class="fmr-bordered-area rounded-sm p-3">
+      <div class="fmr-tab">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#Content">Content</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Photos">Photos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Preview">Preview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Submit">Submit</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" data-toggle="tab" href="#">Disabled</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="#">Cancel</a>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content pt-4">
+        <div class="tab-pane active" id="Content">
+          <residential-for-sale :ad="ad" />
+        </div>
+        <div class="tab-pane" id="Photos">
+          <uploader />
+        </div>
+        <div class="tab-pane" id="Submit">
+          <div class="form-group">
+            <button class="btn btn-primary" v-on:click="save">Save</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <residential-for-sale :ad="ad" />
-    <uploader />
+    <fmr-footer />
   </div>
 </template>
 
 <script>
+import TopNavigation from './TopNavigation'
+import FmrFooter from './FmrFooter'
 import ResidentialForSale from "./templates/ResidentialForSale";
 import Uploader from './Uploader'
 import AdService from "../service/AdService";
@@ -21,10 +56,10 @@ export default {
       categoryId: 0,
       id: 0,
       ad: new FmrAd()
-    };
+    }
   },
   components: {
-    ResidentialForSale, Uploader
+    TopNavigation, FmrFooter, ResidentialForSale, Uploader
   },
   mounted() {
     const self = this;

@@ -93,3 +93,18 @@ export function listContextUpdate () {
         changeFilter
     }
 }
+
+export function isLoggedIn() {
+    return false
+}
+
+export function currentActivity() {
+    console.log(':::::', router.currentRoute.name)
+    if (router.currentRoute.name === 'adNew' || router.currentRoute.name === 'adEdit') {
+        return 'editing'
+    } else if (router.currentRoute.name === 'account' || router.currentRoute.name === 'register' ||
+        router.currentRoute.name === 'login' || router.currentRoute.name === 'myAds') {
+        return 'account'
+    }
+    return 'browsing'
+}

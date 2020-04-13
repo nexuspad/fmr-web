@@ -1,5 +1,7 @@
 import { reactive } from '@vue/composition-api'
-import AccountService from '../../service/AccountService';
+import AccountService from '../../service/AccountService'
+import EventManager from '../../util/EventManager'
+import AppEvent from '../../util/AppEvent'
 
 export function accountSetup () {
     const account = reactive({
@@ -18,6 +20,7 @@ export function accountSetup () {
         })
         .catch((error) => {
             console.error(error)
+            EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
         })
     }
 

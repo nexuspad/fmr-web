@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { listContextSetup, listContextUpdate } from "./ListContextHandler";
+import { listContextSetup, listContextUpdate } from "./AppContextHandler";
 import { STATES } from "../service/AppData";
 
 export default {

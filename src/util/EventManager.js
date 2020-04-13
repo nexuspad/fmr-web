@@ -1,3 +1,5 @@
+import AppEvent from "./AppEvent";
+
 export default class EventManager {
   static listeners = new Map();
 
@@ -39,8 +41,8 @@ export default class EventManager {
     return false;
   }
 
-  static publishAppEvent (appEvent) {
-    EventManager.publish(appEvent.type, appEvent);
+  static publishApiEvent (appEvent) {
+    EventManager.publish(AppEvent.API_EVENT, appEvent);
   }
 
   static publish (eventName, ...args) {

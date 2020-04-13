@@ -1,19 +1,22 @@
 <template>
   <div>
     <top-navigation />
-    <h1>ads here</h1>
-    <router-view></router-view>
+    <div>
+      <category-navigation />
+      <router-view></router-view>
+    </div>
     <fmr-footer />
   </div>
 </template>
 
 <script>
 import TopNavigation from './TopNavigation'
+import CategoryNavigation from "./CategoryNavigation";
 import FmrFooter from './FmrFooter'
 
 export default {
   components: {
-    TopNavigation, FmrFooter
+    TopNavigation, CategoryNavigation, FmrFooter
   }
 }
 </script>

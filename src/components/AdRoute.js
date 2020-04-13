@@ -15,15 +15,17 @@ export default class AdRoute {
             },
             {
                 path: '/ad/new',
-                name: 'adEdit',
+                name: 'adNew',
                 component: AdEdit
             },
             {
                 path: '/ad/edit',
+                name: 'adEdit',
                 component: AdEdit
             },
             {
                 path: '/ad/:id',
+                name: 'adView',
                 component: AdView
             }
         ];

@@ -8,18 +8,22 @@ export default class AccountRoute {
         return [
             {
                 path: '/account',
+                name: 'account',
                 component: Account,
                 children: [
                     {
                         path: 'register',
+                        name: 'register',
                         component: Register
                     },
                     {
                         path: 'login',
+                        name: 'login',
                         component: Login
                     },
                     {
                         path: 'myads',
+                        name: 'myAds',
                         component: MyAds
                     }
                 ]

@@ -1,28 +1,28 @@
 <template>
-  <div>
-    <div>
-      <a href="/ad/new?categoryId=3011">new ad</a>
+  <div class="fmr-bordered-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 order-lg-1 order-md-1 order-sm-2">
+          this is the list
+        </div>
+        <div class="col-md-2 order-lg-2 order-md-2 order-sm-1">
+          <list-filter />
+          This is the list home for state {{ state }}
+          category {{ categoryId }}
+        </div>
+      </div>
     </div>
-    <state-selector />
-    <list-filter />
-    <category-navigation />
-    This is the list home for state {{ state }}
-    category {{ categoryId }}
   </div>
 </template>
 
 <script>
 import { onBeforeMount } from "@vue/composition-api";
 import AdService from "../service/AdService";
-import { listContextSetup } from "./ListContextHandler";
-import StateSelector from "./StateSelector";
+import { listContextSetup } from "./AppContextHandler";
 import ListFilter from "./ListFilter";
-import CategoryNavigation from "./CategoryNavigation";
 
 export default {
   components: {
-    StateSelector,
-    CategoryNavigation,
     ListFilter
   },
   setup() {

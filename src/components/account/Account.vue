@@ -1,8 +1,9 @@
 <template>
   <div>
     <top-navigation />
-    <h1>account</h1>
-    <router-view></router-view>
+    <div class="fmr-bordered-area">
+      <router-view></router-view>
+    </div>
     <fmr-footer />
   </div>
 </template>

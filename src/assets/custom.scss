@@ -1,6 +1,7 @@
 // Define your variable overrides here
 $primary: #213b89;
 $font-size-base: 0.8rem;
+$h1-font-size: 1rem;
 
 $enable-shadows: true;
 $enable-gradients: true;
@@ -20,6 +21,54 @@ $bv-enable-table-stacked: false;
 // General style overrides and custom classes
 body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
-.content {margin-top:60px; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3; background-color: #ffffff;}
+.fmr-bordered-area {background: #ffffff; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3;
+ -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;
+border-radius: 0.2rem !important; padding: 1.5rem}
 
-.hasshadow { -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;}
+.fmr-nav {border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;}
+
+.dropdown-menu.show {
+  display: flex;
+  width: 420px;
+  flex-wrap: wrap;
+}
+
+.dropdown-item {
+  width: 50%;
+}
+
+.fmr-message {
+  position:fixed; top:80px; left: 50%; transform: translate(-50%, 0); z-index: 9999;
+}
+
+.fmr-tab #tabs{
+  background: #007b5e;
+  color: #eee;
+}
+.fmr-tab #tabs h6.section-title{
+  color: #eee;
+}
+.fmr-tab #tabs, .fmr-tab .nav-tabs, .fmr-tab .nav-item.show,
+.fmr-tab .nav-link, .fmr-tab .nav-tabs, .fmr-tab .nav-link.active {
+  color: #0062cc;
+  background-color: transparent;
+  border-color: transparent transparent #f3f3f3;
+}
+.fmr-tab .nav-link {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.fmr-tab .nav-link.active {
+  border-bottom: 2px solid !important;
+}
+.fmr-tab .nav-link:hover {
+  border-color: transparent transparent #f3f3f3;
+}
+.fmr-tab thead{
+  background: #f3f3f3;
+  color: #333;
+}
+.fmr-tab a{
+  text-decoration: none;
+  color: #333
+}
