@@ -3,12 +3,14 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 order-lg-1 order-md-1 order-sm-2">
-          this is the list
+          <ul class="list-unstyled">
+            <li v-for="adItem in ads" v-bind:key="adItem.id">
+              <ad-summary :ad="adItem" />
+            </li>
+          </ul>
         </div>
         <div class="col-md-2 order-lg-2 order-md-2 order-sm-1">
           <list-filter />
-          This is the list home for state {{ state }}
-          category {{ categoryId }}
         </div>
       </div>
     </div>
@@ -16,37 +18,47 @@
 </template>
 
 <script>
-import { onBeforeMount } from "@vue/composition-api";
-import AdService from "../service/AdService";
-import { listContextSetup } from "./AppContextHandler";
 import ListFilter from "./ListFilter";
+import AdSummary from "./AdSummary";
+import AdService from "../service/AdService";
+import AppContext from './AppContext'
 
 export default {
   components: {
+    AdSummary,
     ListFilter
   },
-  setup() {
-    const { state, categoryId, currentCriteria } = listContextSetup();
+  data() {
+    return {
+      ads: []
+    };
+  },
+  mounted() {
+    const self = this;
 
-    onBeforeMount(() => {
-      AdService.getAds(currentCriteria())
+    AdService.getAds(AppContext.currentCriteria())
+      .then(adList => {
+        self.ads.push(...adList.ads);
+      })
+      .catch(() => {
+        console.error("...error");
+      });
+  },
+  watch: {
+    "$route.params": function() {
+      const self = this;
+
+      AdService.getAds(AppContext.currentCriteria())
         .then(adList => {
-          console.log(adList);
+          while (self.ads.length) {
+            self.ads.pop();
+          }
+          console.log('bbbb....')
+          self.ads.push(...adList.ads);
         })
         .catch(() => {
           console.error("...error");
         });
-    });
-
-    return {
-      state,
-      categoryId
-    };
-  },
-  watch: {
-    "$route.params": function() {
-      // just checking
-      // console.log(this.$route.params)
     }
   }
 };

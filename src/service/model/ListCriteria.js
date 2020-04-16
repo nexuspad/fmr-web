@@ -41,4 +41,32 @@ export default class ListCriteria {
         }
         this.filters.push(filter)
     }
+
+    getKey() {
+        if (this.key) {
+            return this.key
+        } else {
+            let parts = []
+            if (this.category) {
+                parts.push(this.category.id)
+            }
+            if (this.location) {
+                if (this.location.key) {
+                    parts.push(this.location.key)
+                }
+            }
+            if (this.filters && this.filters.length) {
+                this.filters.forEach((f) => {
+                    if (f.key) {
+                        parts.push(f.key)
+                    }
+                })
+            }
+            if (parts.length > 0) {
+                return parts.join('-')
+            }
+
+            return ''
+        }
+    }
 }

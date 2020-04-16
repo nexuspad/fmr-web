@@ -8,7 +8,9 @@ export default class StorageUtils {
   }
 
   static saveToSession (name, value) {
-    window.sessionStorage.setItem(name, JSON.stringify(value));
+    if (typeof(value) !== 'undefined') {
+      window.sessionStorage.setItem(name, JSON.stringify(value));
+    }
   }
 
   static getFromSession (name) {

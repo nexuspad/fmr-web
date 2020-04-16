@@ -20,6 +20,7 @@ export default class AdAttribute {
     static instance (name) {
         const attribute = new AdAttribute
         attribute.name = name
+        attribute.value = ''
         return attribute
     }
 }

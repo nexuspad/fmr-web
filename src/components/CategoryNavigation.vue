@@ -15,11 +15,12 @@
               <div class="container">
                 <div class="row">
                   <div class="col-auto">
-                    <h6 class="dropdown-header">Dropdown header</h6>
+                    <h4 class="dropdown-header">Residential</h4>
                     <a class="dropdown-item" href="#">Action</a>
                   </div>
                   <div class="col-auto">
-                    One of three columns
+                    <h4 class="dropdown-header">Commercial</h4>
+                    <a class="dropdown-item" href="#">Action</a>
                   </div>
                 </div>
               </div>
@@ -38,21 +39,9 @@
 </template>
 
 <script>
-import { listContextSetup } from "./AppContextHandler";
-import { CATEGORY_URIS } from "../service/AppData";
+// import { CATEGORY_URIS } from "../service/AppData"
+// import AppContext from './AppContext'
 
 export default {
-  setup() {
-    const { state, categoryId } = listContextSetup();
-
-    const buildUri = id => {
-      return "/" + state.value + "/" + CATEGORY_URIS[id];
-    };
-
-    return {
-      categoryId,
-      buildUri
-    };
-  }
-};
+}
 </script>

@@ -82,4 +82,19 @@ export default class AttributeFilter {
             return this.operator + '(' + value + ')'
         }
     }
+
+    get key() {
+        let key = ''
+        if (this.attribute) {
+            key += this.attribute.name
+            if (this.operator === 'EQ' || this.operator === 'GT' || this.operator === 'LT') {
+                key += this.operator.toLowerCase() + this.value
+            } else if (this.operator === 'IN') {
+                key += this.operator.toLowerCase() + '(' + this.values.join('|') + ')'
+            } else if (this.operator === 'RANGE') {
+                key += this.operator.toLowerCase() + '[' + this.minValue + '|' + this.maxValue + ']'
+            }
+        }
+        return key.length > 0 ? key : null
+    }
 }

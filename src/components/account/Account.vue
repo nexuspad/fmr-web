@@ -1,9 +1,7 @@
 <template>
   <div>
     <top-navigation />
-    <div class="fmr-bordered-area">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
     <fmr-footer />
   </div>
 </template>

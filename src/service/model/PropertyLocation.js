@@ -1,5 +1,3 @@
-import FmrObject from "./FmrObject"
-
 export default class PropertyLocation {
     state
     city
@@ -15,10 +13,25 @@ export default class PropertyLocation {
         }
     }
 
-    equals (location) {
-        return FmrObject.isEqual(this.state, location.state) &&
-            FmrObject.isEqual(this.city, location.city) &&
-            FmrObject.isEqual(this.zipCode, location.zipCode) &&
-            FmrObject.isEqual(this.neighborhood, location.neighborhood)
+    get key() {
+        let parts = [];
+        if (this.state && this.state.length === 2) {
+            parts.push(this.state)
+        }
+        if (this.city) {
+            parts.push(this.city)
+        }
+        if (this.zipCode) {
+            parts.push(this.zipCode)
+        }
+        if (this.neighborhood) {
+            parts.push(this.neighborhood)
+        }
+
+        if (parts.length > 0) {
+            return parts.join(',')
+        }
+
+        return null;
     }
 }

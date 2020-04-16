@@ -1,14 +1,13 @@
 <template>
   <div class="fmr-bordered-area">
     <div class="header">
-      <h1>My ads</h1>
+      <h1>Settings</h1>
     </div>
-    My ads.
+    Settings
   </div>
 </template>
 
 <script>
-
 export default {
 }
 </script>

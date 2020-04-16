@@ -37,4 +37,22 @@ export default class FmrAd {
             return AdAttribute.instance(name)
         }
     }
+
+    get title() {
+        return this.getAttribute('title').value
+    }
+
+    get description() {
+        return this.getAttribute('description').value
+    }
+
+    attributesTodisplay() {
+        let items = []
+        this.attributes.forEach((attr) => {
+            if (attr.id !== 1 && attr.id !== 2) {
+                items.push(attr)
+            }
+        })
+        return items
+    }
 }

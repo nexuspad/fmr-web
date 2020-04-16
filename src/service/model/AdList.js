@@ -28,6 +28,13 @@ export default class AdList {
         }
     }
 
+    getAd(id) {
+        const ad = this.ads.find((item) => {
+            return item.id == id
+        })
+        return ad
+    }
+
     getPage (page) {
         if (this.pages.indexOf(page) !== -1) {
             let i = this.pages.indexOf(page)

@@ -9,30 +9,40 @@ export default class AdRoute {
         return [
             {
                 path: '/:state?',
-                name: 'adHome',
                 component: AdHome,
                 children: AdRoute.categoryRoutes()
             },
             {
                 path: '/ad/new',
-                name: 'adNew',
+                name: 'AdNew',
                 component: AdEdit
             },
             {
                 path: '/ad/edit',
-                name: 'adEdit',
+                name: 'AdEdit',
                 component: AdEdit
             },
             {
                 path: '/ad/:id',
-                name: 'adView',
-                component: AdView
+                name: 'AdView',
+                component: AdView,
+                props: true
             }
         ];
     }
 
     static categoryRoutes () {
         let children = []
+        children.push(
+            {
+                name: 'NewAds',
+                path: '/',
+                component: AdList,
+                meta: {
+                    title: 'Latest listings'
+                }
+            }
+        )
         for (let categoryId in CATEGORY_URIS) {
             children.push({
                 name: CATEGORY_URIS[categoryId],

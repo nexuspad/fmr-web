@@ -1,25 +1,36 @@
 <template>
   <div>
-    <select class="form-control" v-model="state" v-on:change="changeState(state)">
-      <option v-for="(name, code) in STATES" :key="code" :value="code">{{name}}</option>
+    <select class="form-control" v-model="state" v-on:change="changeState()">
+      <option v-for="(name, code) in allStates" :key="code" :value="code">{{name}}</option>
     </select>
   </div>
 </template>
 
 <script>
-import { listContextSetup, listContextUpdate } from "./AppContextHandler";
 import { STATES } from "../service/AppData";
+import AppContext from './AppContext'
 
 export default {
-  setup() {
-    const { state } = listContextSetup();
-    const { changeState } = listContextUpdate();
-
+  data() {
     return {
-      STATES,
-      state,
-      changeState
-    };
+      allStates: STATES,
+      state: ''
+    }
+  },
+  beforeMount() {
+    this.state = AppContext.findStateInRoute(this.$route.params)
+  },
+  methods: {
+    changeState() {
+      AppContext.changeState(this.state)
+      this.$router.push({ name: this.$router.currentRoute.name, params: { state: this.state.toLowerCase() } });
+    }
+  },
+  watch: {
+    "$route.params.state": function() {
+      console.log('---->', AppContext.getState())
+      this.state = AppContext.getState()
+    }
   }
 };
 </script>

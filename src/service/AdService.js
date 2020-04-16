@@ -7,7 +7,19 @@ const AD_TEMPLATE = 'placead/template?categoryId=#CategoryId'
 const AD_ENTRY = 'ad?id=#Id'
 
 export default class AdService {
+    static _adList
+
     static getAds(listCriteria) {
+        console.log('listkey:', listCriteria.getKey())
+
+        if (AdService._adList) {
+            if (AdService._adList.listCriteria.key == listCriteria.getKey()) {
+                return new Promise((resolve) => {
+                    resolve(AdService._adList)
+                })
+            }
+        }
+
         let uri = AD_LISTING
         
         if (listCriteria.category) {
@@ -23,17 +35,16 @@ export default class AdService {
             listCriteria.filters.forEach(filter => {
                 filterJson[filter.attribute.name] = filter.paramExpression()
             });
-            console.log('>>>>', filterJson)
             uri = RestClient.addParamToUri(uri, 'filters', JSON.stringify(filterJson))
-            console.log('....', uri)
         }
 
         return new Promise((resolve, reject) => {
             RestClient.instance().get(uri)
             .then((response) => {
-                console.log(response)
                 if (response.data && response.data.code === 'SUCCESS') {
-                    resolve(new AdList(response.data.adList))
+                    AdService._adList = new AdList(response.data.adList);
+                    console.log(AdService._adList)
+                    resolve(AdService._adList)
                 } else {
                     reject()
                 }
@@ -65,6 +76,14 @@ export default class AdService {
     }
 
     static getAd(id) {
+        if (AdService._adList) {
+            const ad = AdService._adList.getAd(id)
+            if (ad) {
+                return new Promise((resolve) => {
+                    resolve(ad)
+                })
+            }
+        }
         let uri = AD_ENTRY.replace('#Id', id);
         return new Promise((resolve, reject) => {
             RestClient.instance().get(uri)

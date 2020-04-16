@@ -9,7 +9,7 @@ const title = ref('')
 const description = ref('')
 const interior = ref([])
 
-export function setupTemplate () {
+export function setupTemplate() {
     
     function getTemplate (categoryId, adId) {
         categoryId = 3011
@@ -33,5 +33,5 @@ export function setupTemplate () {
     }
 }
 
-export function adUpdate () {
+export function adUpdate() {
 }

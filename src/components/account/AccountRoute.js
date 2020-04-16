@@ -1,6 +1,8 @@
 import Register from './Register'
 import Login from './Login'
+import ResetPassword from './ResetPassword'
 import Account from './Account'
+import Settings from './Settings'
 import MyAds from './MyAds'
 
 export default class AccountRoute {
@@ -8,23 +10,48 @@ export default class AccountRoute {
         return [
             {
                 path: '/account',
-                name: 'account',
+                name: 'Account',
                 component: Account,
                 children: [
                     {
                         path: 'register',
-                        name: 'register',
-                        component: Register
+                        name: 'Register',
+                        component: Register,
+                        meta: {
+                            title: 'Register an account - posting is free'
+                        }
                     },
                     {
                         path: 'login',
-                        name: 'login',
-                        component: Login
+                        name: 'Login',
+                        component: Login,
+                        meta: {
+                            title: 'Log in to your account'
+                        }
+                    },
+                    {
+                        path: 'resetpassword',
+                        name: 'ResetPassword',
+                        component: ResetPassword,
+                        meta: {
+                            title: 'Reset account password'
+                        }
+                    },
+                    {
+                        path: 'settings',
+                        name: 'Settings',
+                        component: Settings,
+                        meta: {
+                            title: 'Account settings'
+                        }
                     },
                     {
                         path: 'myads',
-                        name: 'myAds',
-                        component: MyAds
+                        name: 'MyAds',
+                        component: MyAds,
+                        meta: {
+                            title: 'My ads'
+                        }
                     }
                 ]
             }

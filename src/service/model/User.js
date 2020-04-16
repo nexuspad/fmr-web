@@ -1,9 +1,9 @@
 export default class User {
-    id;
-    email;
-    status;
-    token;
-    verification;
+    id
+    email
+    status
+    token
+    verification
 
     constructor (jsonObj) {
         if (jsonObj) {
@@ -12,5 +12,12 @@ export default class User {
             this.status = jsonObj.status
             this.token = jsonObj.token
         }
+    }
+
+    get token() {
+        if (this.token) {
+            return this.token
+        }
+        return ''
     }
 }
