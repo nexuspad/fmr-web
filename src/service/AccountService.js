@@ -1,7 +1,7 @@
 import RestClient from './RestClient'
 import AccountServiceRequest from './AccountServiceRequest'
 import User from './model/User'
-import AppError from './AppError'
+import ApiError from './ApiError'
 import StorageUtils from '../util/StorageUtil'
 
 export default class AccountService {
@@ -46,12 +46,12 @@ export default class AccountService {
                     StorageUtils.saveToSession('token', AccountService._user.token)
                     resolve(new User(response.data.user))
                 } else {
-                    reject(new AppError(response.data.code))
+                    reject(new ApiError(response.data.code))
                 }
             })
             .catch((error) => {
                 console.log(error)
-                reject(new AppError(error.response.status))
+                reject(new ApiError(error.response.status))
             })  
         })
     }
@@ -63,11 +63,11 @@ export default class AccountService {
                 if (response.data && response.data.code === 'SUCCESS') {
                     resolve(new User(response.data.user))
                 } else {
-                    reject(new AppError(response.data.code))
+                    reject(new ApiError(response.data.code))
                 }
             })
             .catch((error) => {
-                reject(new AppError(error.response.status))
+                reject(new ApiError(error.response.status))
             })  
         })
     }
@@ -81,11 +81,11 @@ export default class AccountService {
                     StorageUtils.saveToSession('token', AccountService._user.token)
                     resolve(new User(response.data.user))
                 } else {
-                    reject(new AppError(response.data.code))
+                    reject(new ApiError(response.data.code))
                 }
             })
             .catch((error) => {
-                reject(new AppError(error.response.status))
+                reject(new ApiError(error.response.status))
             })  
         })
     }

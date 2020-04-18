@@ -1,25 +1,37 @@
 <template>
   <div>
-    <div class="form-inline">
-      <div class="form-group">
-        <div class="pr-2">
-          <input type="text" class="form-control" placeholder="Name" size="40" maxlength="40"
-            name="contact_name" v-model="ad.getAttribute('contact_name').value" />
-        </div>
-        <div class="pr-2">
-          <input type="tel" class="form-control" placeholder="Phone" size="12" maxlength="20"
-            name="contact_phone" v-model="ad.getAttribute('contact_phone').value" />
-        </div>
-        <div>
-          <input type="email" class="form-control" placeholder="Email" size="40" maxlength="80"
-            name="contact_email" v-model="ad.getAttribute('contact_email').value" />
-        </div>
+    <div class="form-row">
+      <div class="col-md-4">
+        <label for="contact_name">Contact name</label>
+        <input type="text" class="form-control" size="40" maxlength="40" id="contact_name"
+          name="contact_name" v-model="ad.getAttribute(attributeId('contact_name')).value" />
+      </div>
+      <div class="col-md-4">
+        <label for="contact_phone">phone</label>
+        <input type="text" class="form-control" size="12" maxlength="20" id="contact_phone"
+          name="contact_name" v-model="ad.getAttribute(attributeId('contact_phone')).value" />
+      </div>
+      <div class="col-md-4">
+        <label for="contact_email">email</label>
+        <input type="text" class="form-control" size="40" maxlength="80" id="contact_email"
+          name="contact_name" v-model="ad.getAttribute(attributeId('contact_email')).value" />
+      </div>
+    </div>
+    <div class="form-row mt-2">
+      <div class="col-md-3">
+        <label>Open house</label>
+        <datepicker input-class="form-control" v-model="ad.getAttribute(attributeId('open_house')).value" />
+      </div>
+      <div class="col-md-3">
+        <label>hours</label>
+        <input type="text" class="form-control" id="open_house_hours"
+          name="open_house_hours" v-model="ad.getAttribute(attributeId('open_house_hours')).value" />
       </div>
     </div>
 
     <div class="form-group mt-2">
       <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="byAgent" v-model="ad.getAttribute('represented_by').value" />
+        <input type="checkbox" class="custom-control-input" id="byAgent" v-model="ad.getAttribute(attributeId('represented_by')).value" />
         <label class="custom-control-label" for="byAgent">Represented by agent</label>
       </div>
     </div>
@@ -27,7 +39,14 @@
 </template>
 
 <script>
+import AppDataHelper from '../AppDataHelper'
+import Datepicker from 'vuejs-datepicker';
+
 export default {
-  props: ['ad']
+  mixins: [ AppDataHelper ],
+  props: ['ad'],
+  components: {
+    Datepicker
+  }
 }
 </script>

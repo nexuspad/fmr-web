@@ -54,6 +54,9 @@
       </div>
     </div>
     <fmr-footer />
+    <div>
+      <vue-headful :title="ad.title" description="" />
+    </div>
   </div>
 </template>
 
@@ -63,9 +66,10 @@ import CategoryNavigation from "./CategoryNavigation";
 import FmrFooter from './FmrFooter'
 import AdService from '../service/AdService'
 import FmrAd from '../service/model/FmrAd'
-import { attributeName } from '../service/AppData'
+import AppDataHelper from './AppDataHelper'
 
 export default {
+  mixins: [ AppDataHelper ],
   components: {
     TopNavigation, CategoryNavigation, FmrFooter
   },
@@ -79,11 +83,6 @@ export default {
     AdService.getAd(this.$route.params.id).then((ad) => {
       self.ad = ad
     })
-  },
-  methods: {
-    attributeName(id) {
-      return attributeName(id)
-    }
   }
 }
 </script>

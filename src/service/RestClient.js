@@ -1,7 +1,7 @@
 import axios from 'axios'
 import EventManager from '../util/EventManager';
 import { AppStatus } from './AppCode';
-import AppError from './AppError';
+import ApiError from './ApiError';
 
 export default class RestClient {
     static _axiosInstance = null;
@@ -13,7 +13,7 @@ export default class RestClient {
 
     static instance(token, optional = { timeout: 3000 }) {
         if (!this.apiUrl) {
-            throw new AppError(AppStatus.ABORT);
+            throw new ApiError(AppStatus.ABORT);
         }
 
         if (!token) token = '';

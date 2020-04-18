@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import AppError from '../service/AppError'
+import ApiError from '../service/ApiError'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
 
@@ -29,26 +29,26 @@ export default {
       showInformation: false,
       informationMessage: '',
       successMessage: 'success!',
-      failureMessage: 'failed!',
+      errorMessage: 'failed!',
       loadingIcon: false
     }
   },
   mounted () {
     EventManager.subscribe(AppEvent.API_EVENT, this.showApiResult)
-    EventManager.subscribe(AppEvent.ACCOUNT_CREATION_FAILURE, this.showErrorMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showUpdateResult)
   },
   beforeDestroy () {
     EventManager.unSubscribe(AppEvent.API_EVENT, this.showApiResult)
-    EventManager.unSubscribe(AppEvent.ACCOUNT_CREATION_FAILURE, this.showErrorMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showUpdateResult)
   },
   methods: {
     showApiResult (appEvent) {
       this.clearAll();
-      if (appEvent.error && appEvent.error instanceof AppError) {
+      if (appEvent.error && appEvent.error instanceof ApiError) {
         this.showError = true;
         this.errorMessage = appEvent.error.message;
       } else {
@@ -60,18 +60,7 @@ export default {
     showErrorMessage (appEvent) {
       this.clearAll()
       this.showError = true
-      this.failureMessage = appEvent.message
-    },
-    showUpdateResult (appEvent) {
-      this.clearAll();
-      if (appEvent.error && appEvent.error instanceof AppError) {
-        this.showError = true;
-        this.failureMessage = appEvent.message
-      } else {
-        this.showSuccess = true;
-        this.showSuccessWithCountDown = 2;
-        this.successMessage = appEvent.message
-      }
+      this.errorMessage = appEvent.error
     },
     showGeneralMessage (appEvent) {
       this.clearAll();
@@ -85,7 +74,6 @@ export default {
       this.showError = false;
       this.showSuccess = false;
       this.showInformation = false;
-      this.failureMessage = '';
       this.successMessage = '';
       this.informationMessage = '';
     }

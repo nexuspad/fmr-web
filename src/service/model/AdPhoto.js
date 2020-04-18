@@ -5,6 +5,8 @@ export default class AdPhoto {
     key
     displayOrder
 
+    url
+
     constructor (jsonObj) {
         if (jsonObj) {
             this.adId = jsonObj.adId
@@ -12,6 +14,9 @@ export default class AdPhoto {
             this.fileName = jsonObj.fileName
             this.key = jsonObj.key
             this.displayOrder = jsonObj.displayOrder
+
+            if (this.fileName)
+                this.url = 'http://findmyroof.com/var/post/' + this.adId + '/' + this.fileName
         }
     }
 }

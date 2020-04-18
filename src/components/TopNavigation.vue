@@ -23,6 +23,9 @@
       </ul>
       <ul class="navbar-nav justify-content-end" v-if="activity !== 'editing' && isLoggedIn">
         <li class="nav-item">
+          <router-link class="nav-link" to="/placead">Place an ad</router-link>
+        </li>
+        <li class="nav-item">
           <router-link class="nav-link" to="/account/myads">My ads</router-link>
         </li>
         <li class="nav-item">

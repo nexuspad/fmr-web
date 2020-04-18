@@ -3,9 +3,10 @@
     <top-navigation />
     <div class="fmr-bordered-area">
       <div class="header">
-        <h1>Single family home for rent</h1>
+        <h1>{{ categoryName(categoryId) }}</h1>
       </div>
-      <div class="p-2">
+      <message />
+      <div class="fmr-form p-2">
         <div class="fmr-tab">
           <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -18,7 +19,7 @@
               <a class="nav-link" data-toggle="tab" href="#Preview">Preview</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Submit">Submit</a>
+              <a class="nav-link" data-toggle="tab" href="#Submit" @click="save()">Submit</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" data-toggle="tab" href="#">Disabled</a>
@@ -28,9 +29,10 @@
             </li>
           </ul>
         </div>
-        <div class="tab-content pt-4">
+        <div class="tab-content pt-4 pl-4">
           <div class="tab-pane active" id="Content">
-            <residential-for-sale :ad="ad" />
+            <residential-for-sale :ad="ad" v-if="template == 'ResidentialForSale'" />
+            <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
           </div>
           <div class="tab-pane" id="Photos">
             <uploader />
@@ -41,7 +43,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <fmr-footer />
@@ -50,37 +51,51 @@
 
 <script>
 import TopNavigation from './TopNavigation'
+import Message from './Message'
 import FmrFooter from './FmrFooter'
 import ResidentialForSale from "./templates/ResidentialForSale";
+import ResidentialForRent from "./templates/ResidentialForRent";
 import Uploader from './Uploader'
 import AdService from "../service/AdService";
 import FmrAd from "../service/model/FmrAd";
+import AppDataHelper from './AppDataHelper'
 
 export default {
   data() {
     return {
+      template: '',
       categoryId: 0,
       id: 0,
       ad: new FmrAd()
     }
   },
+  mixins: [ AppDataHelper ],
   components: {
-    TopNavigation, FmrFooter, ResidentialForSale, Uploader
+    TopNavigation, FmrFooter, ResidentialForSale, ResidentialForRent, Uploader, Message
+  },
+  beforeMount() {
+    if (this.$route.query.categoryId) {
+      this.categoryId = this.$route.query.categoryId;
+      this.template = this.getTemplate(this.categoryId)
+    }
+    if (this.$route.query.id) {
+      this.id = this.$route.query.id;
+    }
   },
   mounted() {
     const self = this;
 
-    if (this.$route.query.id) {
-      this.id = this.$route.query.id;
+    if (this.id) {
       AdService.getAd(self.id)
         .then(ad => {
           self.ad = ad;
+          self.categoryId = self.ad.categoryId
+          self.template = self.getTemplate(self.categoryId)
         })
         .catch(() => {
           console.error("...error");
         })
-    } else if (this.$route.query.categoryId) {
-      this.categoryId = this.$route.query.categoryId;
+    } else if (this.categoryId) {
       AdService.adTemplate(self.categoryId)
         .then(draft => {
           self.ad = draft;
@@ -92,8 +107,21 @@ export default {
   },
   beforeDestroy() {},
   methods: {
+    getTemplate() {
+      let cCode = this.categoryCode(this.categoryId)
+      if (cCode.startsWith('for-rent|residential')) {
+        return 'ResidentialForRent'
+      } else if (cCode.startsWith('for-sale|residential')) {
+        return 'ResidentialForSale'
+      } else if (cCode.startsWith('for-rent|commercial')) {
+        return 'CommercialForRent'
+      } else if (cCode.startsWith('for-sale|commercial')) {
+        return 'CommercialForSale'
+      }
+    },
     save () {
-      console.log(this.ad)
+      console.log(this.ad.getAttribute(1))
+      console.log(this.ad.getAttribute(21))
     }
   },
   watch: {}

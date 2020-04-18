@@ -53,67 +53,218 @@ const STATES = {
     'wy': 'Wyoming'
 }
 
-const ATTRIBUTES = {
-    "1": "Title",
-    "2": "Description",
-    "8": "Bedroom",
-    "9": "Bathroom",
-    "10": "City",
-    "12": "State",
-    "19": "Square footage",
-    "21": "Monthly rent",
-    "22": "Asking price",
-    "23": "Year built",
-    "25": "Security deposit",
-    "26": "Minimal lease term",
-    "28": "Acreage",
-    "30": "Street address",
-    "31": "Represented by",
-    "33": "Zip code",
-    "35": "Homeowner association fee",
-    "36": "Condo fee",
-    "39": "Pet policy",
-    "41": "Other amenities",
-    "42": "Parking spaces",
-    "43": "School",
-    "46": "Basement",
-    "49": "Neighborhood",
-    "50": "Contact name",
-    "51": "Contact phone",
-    "52": "County",
-    "55": "Brokerage company",
-    "56": "MLS ID",
-    "57": "Lot size",
-    "60": "Interior",
-    "61": "Exterior",
-    "62": "Rent includes",
-    "63": "Lot developed",
-    "65": "Owner financing available",
-    "66": "Kitchen and dining",
-    "67": "Bed and bath",
-    "68": "Community",
-    "69": "Building amenities",
-    "70": "Pet policy",
-    "74": "Special offer"
+const ATTRIBUTES = 
+{
+    "1": "title",
+    "2": "description",
+    "8": "bedroom",
+    "9": "bathroom",
+    "10": "city",
+    "12": "state",
+    "19": "square_footage",
+    "21": "monthly_rent",
+    "22": "asking_price",
+    "23": "year_built",
+    "24": "cap_rate",
+    "25": "security_deposit",
+    "26": "minimal_lease_term",
+    "28": "acreage",
+    "29": "building_square_footage",
+    "30": "street_address",
+    "31": "represented_by",
+    "33": "zip_code",
+    "35": "homeowner_association_fee",
+    "36": "condo_fee",
+    "39": "pet_policy",
+    "41": "other_amenities",
+    "42": "parking_spaces",
+    "43": "school",
+    "46": "basement",
+    "49": "neighborhood",
+    "50": "contact_name",
+    "51": "contact_phone",
+    "52": "county",
+    "53": "open_house",
+    "54": "open_house_hours",
+    "55": "brokerage_company",
+    "56": "MLS_ID",
+    "57": "lot_size",
+    "60": "interior",
+    "61": "exterior",
+    "62": "rent_includes",
+    "63": "lot_developed",
+    "65": "owner_financing_available",
+    "66": "kitchen_and_dining",
+    "67": "bed_and_bath",
+    "68": "community",
+    "69": "building_amenities",
+    "70": "pet_policy",
+    "73": "available_date",
+    "74": "special_offer",
+    "1008": "rate"
 }
 
-const CATEGORY_URIS = {
-    3001: 'single-family-home-for-rent',
-    3002: 'townhouse-for-rent',
-    3003: 'apartment',
-    3004: 'condominium-for-rent',
-    2007: 'roommate',
-    3011: 'single-family-home-for-sale',
-    3012: 'townhouse-multi-unit-for-sale',
-    3013: 'condominium-for-sale',
-    3014: 'manufactured-home-for-sale',
-    1006: 'lease-purchase',
-    3015: 'land-for-sale',
-    2011: 'vacation-rental'
+const ATTRIBUTE_NAME_LOOKUP = {}
+for (let id in ATTRIBUTES) {
+    ATTRIBUTE_NAME_LOOKUP[ATTRIBUTES[id]] = id
 }
 
-function attributeName(attributeId) {
-    return ATTRIBUTES[attributeId]
+const CATEGORIES =
+{
+    "3008": {
+        "id": 3008,
+        "code": "for-rent|commercial|office-space",
+        "name": "office space for rent",
+        "uri": "office-space-for-rent"
+    },
+    "0": {
+        "id": 0,
+        "name": "all"
+    },
+    "3009": {
+        "id": 3009,
+        "code": "for-rent|commercial|warehouse",
+        "name": "warehouse/garage space for rent",
+        "uri": "warehouse-garage-space-for-rent"
+    },
+    "3010": {
+        "id": 3010,
+        "code": "for-rent|commercial|others",
+        "name": "others",
+        "uri": "other-commercial-properties-for-rent"
+    },
+    "3011": {
+        "id": 3011,
+        "code": "for-sale|residential|single-family-home",
+        "name": "single family home for sale",
+        "uri": "single-family-home-for-sale"
+    },
+    "3012": {
+        "id": 3012,
+        "code": "for-sale|residential|townhouse",
+        "name": "townhome/multi-unit for sale",
+        "uri": "townhome-multi-unit-for-sale"
+    },
+    "3013": {
+        "id": 3013,
+        "code": "for-sale|residential|condominium",
+        "name": "condominium for sale",
+        "uri": "condominium-for-sale"
+    },
+    "3014": {
+        "id": 3014,
+        "code": "for-sale|residential|manufactured-home",
+        "name": "manufactured home for sale",
+        "uri": "manufactured-home-for-sale"
+    },
+    "3015": {
+        "id": 3015,
+        "code": "for-sale|residential|land",
+        "name": "land",
+        "uri": "residential-land-for-sale"
+    },
+    "3016": {
+        "id": 3016,
+        "code": "for-sale|commercial|retail-center",
+        "name": "retail center for sale",
+        "uri": "retail-center-for-sale"
+    },
+    "3017": {
+        "id": 3017,
+        "code": "for-sale|commercial|office",
+        "name": "office building for sale",
+        "uri": "office-building-for-sale"
+    },
+    "3019": {
+        "id": 3019,
+        "code": "for-sale|commercial|gasstation",
+        "name": "gas station/convenient store for sale",
+        "uri": "gas-station-convenient-store-for-sale"
+    },
+    "3021": {
+        "id": 3021,
+        "code": "for-sale|commercial|warehouse",
+        "name": "warehouse/garage space for sale",
+        "uri": "warehouse-garage-space-for-sale"
+    },
+    "3022": {
+        "id": 3022,
+        "code": "for-sale|commercial|restaurant",
+        "name": "restaurant for sale",
+        "uri": "restaurant-for-sale"
+    },
+    "3023": {
+        "id": 3023,
+        "code": "for-sale|commercial|land",
+        "name": "land for sale",
+        "uri": "commercial-land-for-sale"
+    },
+    "3024": {
+        "id": 3024,
+        "code": "for-sale|commercial|others",
+        "name": "Others",
+        "uri": "other-commercial-properties-for-sale"
+    },
+    "3025": {
+        "id": 3025,
+        "code": "for-sale|residential|foreclosure",
+        "name": "foreclosures",
+        "uri": "foreclosures"
+    },
+    "2007": {
+        "id": 2007,
+        "code": "for-rent|residential|roommate",
+        "name": "roommate",
+        "uri": "roommate"
+    },
+    "2011": {
+        "id": 2011,
+        "code": "for-rent|vacation",
+        "name": "vacation rental",
+        "uri": "vacation-rental"
+    },
+    "1006": {
+        "id": 1006,
+        "code": "for-sale|residential|lease-purchase",
+        "name": "lease purchase",
+        "uri": "lease-purchase"
+    },
+    "3001": {
+        "id": 3001,
+        "code": "for-rent|residential|single-family-home",
+        "name": "single family home for rent",
+        "uri": "single-family-home-for-rent"
+    },
+    "3002": {
+        "id": 3002,
+        "code": "for-rent|residential|townhome",
+        "name": "townhome/multiple-unit for rent",
+        "uri": "townhome-multiple-unit-for-rent"
+    },
+    "3003": {
+        "id": 3003,
+        "code": "for-rent|residential|apartment",
+        "name": "apartment",
+        "uri": "apartment"
+    },
+    "3004": {
+        "id": 3004,
+        "code": "for-rent|residential|condominium",
+        "name": "condominium for rent",
+        "uri": "condominium-for-rent"
+    },
+    "3006": {
+        "id": 3006,
+        "code": "for-rent|commercial|retail-space",
+        "name": "commercial retail space for rent",
+        "uri": "commercial-retail-space-for-rent"
+    },
+    "3007": {
+        "id": 3007,
+        "code": "for-rent|commercial|shopping-center",
+        "name": "shopping center space for rent",
+        "uri": "shopping-center-space-for-rent"
+    }
 }
 
 const LOOKUPS = {
@@ -233,4 +384,20 @@ const LOOKUPS = {
     "STC": "Swimming/tennis community"
 }
 
-export { STATES, CATEGORY_URIS, attributeName, LOOKUPS }
+function attributeNameLookup(attributeId) {
+    return ATTRIBUTES[attributeId]
+}
+
+function attributeIdLookup(name) {
+    return parseInt(ATTRIBUTE_NAME_LOOKUP[name])
+}
+
+function categoryNameLookup(categoryId) {
+    if (!CATEGORIES[categoryId]) {
+        console.log('error ', categoryId)
+        return '';
+    }
+    return CATEGORIES[categoryId].name
+}
+
+export { STATES, CATEGORIES, LOOKUPS, attributeIdLookup, attributeNameLookup, categoryNameLookup }

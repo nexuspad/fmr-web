@@ -1,6 +1,6 @@
 import { ApiErrorMessage } from './AppCode'
 
-export default class AppError {
+export default class ApiError {
     code
     message
 

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label>Exterior</label>
+    <label>Building amenities</label>
     <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
-      <div class="mr-4" v-for="(option, index) in ad.getAttribute(attributeId('exterior')).options" :key="index">
+      <div class="mr-4" v-for="(option, index) in ad.getAttribute(attributeId('building_amenities')).options" :key="index">
         <input type="checkbox" v-model="selections" :id="index" :value="option" v-on:change="updateSelection()" />
         <span class="p-2">{{ lookup(option) }}</span>
       </div>
@@ -23,7 +23,6 @@ export default {
   props: ['ad'],
   methods: {
     updateSelection () {
-      this.ad.getAttribute('exterior').value = this.selections.join(',')
     }
   }
 }

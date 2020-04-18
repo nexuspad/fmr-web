@@ -41,8 +41,12 @@ export default class EventManager {
     return false;
   }
 
-  static publishApiEvent (appEvent) {
+  static publishApiEvent(appEvent) {
     EventManager.publish(AppEvent.API_EVENT, appEvent);
+  }
+
+  static publishAppEvent(appEvent) {
+    EventManager.publish(appEvent.type, appEvent);
   }
 
   static publish (eventName, ...args) {

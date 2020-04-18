@@ -25,7 +25,7 @@
           <a href="javascript:" @click="$router.push({name: 'ResetPassword'})">Reset password</a>
         </div>
         <div class="form-group col-lg-6">
-          <button class="btn btn-primary" v-on:click="login($event)" :disabled="posting">Login</button>
+          <button class="btn btn-primary" v-on:click="login()" :disabled="posting">Login</button>
         </div>
       </form>
     </div>

@@ -1,5 +1,7 @@
 export default class AppEvent {
     static API_EVENT = 'Api event'
+
+    static ACCOUNT_REGISTRATION_FAILURE = 'Registration failed'
     static ACCOUNT_LOGIN_SUCCESS = 'ACCOUNT_LOGIN_SUCCESS'
     static ACCOUNT_LOGIN_FAILURE = 'Login error'
     static ACCOUNT_PASSWORD_UPDATE = 'The password is successfully updated'
@@ -32,13 +34,10 @@ export default class AppEvent {
         return appEvent;
     }
 
-    static ofFailure(eventType, error, affectedItem) {
+    static ofFailure(eventType, errorMessage) {
         let appEvent = new AppEvent();
         appEvent.type = eventType;
-        appEvent.error = error;
-        if (affectedItem) {
-            appEvent.affectedItem = affectedItem;
-        }
+        appEvent.error = errorMessage
         return appEvent;
     }
 

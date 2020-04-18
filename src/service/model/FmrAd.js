@@ -1,11 +1,13 @@
-import AdAttribute from "./AdAttribute";
-import AdPhoto from "./AdPhoto";
+import AdCategory from './AdCategory'
+import AdAttribute from "./AdAttribute"
+import AdPhoto from "./AdPhoto"
 
 export default class FmrAd {
-    id;
-    status;
-    owner;
-    attributes = [];
+    id
+    category
+    status
+    owner
+    attributes = []
     photos = []
 
     attributeMap = new Map
@@ -13,37 +15,48 @@ export default class FmrAd {
     constructor(jsonObj) {
         if (jsonObj) {
             this.id = jsonObj.id
+            this.category = new AdCategory(jsonObj.category)
             this.status = jsonObj.status
+
+            const self = this
             if (jsonObj.attributes) {
                 jsonObj.attributes.forEach(element => {
                     const attrObj = new AdAttribute(element)
-                    this.attributes.push(attrObj)
-                    this.attributeMap.set(attrObj.name, attrObj)
-                });
+                    self.attributes.push(attrObj)
+                    self.attributeMap.set(attrObj.id, attrObj)
+                })
             }
 
             if (jsonObj.photos) {
                 jsonObj.photos.forEach(photoObj => {
-                    this.photos.push(new AdPhoto(photoObj))
+                    self.photos.push(new AdPhoto(photoObj))
                 })
             }
         }
     }
 
-    getAttribute (name) {
-        if (this.attributeMap.get(name)) {
-            return this.attributeMap.get(name)
+    getAttribute (id) {
+        if (this.attributeMap.has(id)) {
+            return this.attributeMap.get(id)
         } else {
-            return AdAttribute.instance(name)
+            return AdAttribute.instance(id)
         }
     }
 
     get title() {
-        return this.getAttribute('title').value
+        return this.getAttribute(1).value
     }
 
     get description() {
-        return this.getAttribute('description').value
+        return this.getAttribute(2).value
+    }
+
+    get city() {
+        return this.getAttribute(10).value
+    }
+    
+    get state() {
+        return this.getAttribute(12).value
     }
 
     attributesTodisplay() {
@@ -54,5 +67,19 @@ export default class FmrAd {
             }
         })
         return items
+    }
+
+    get categoryId() {
+        if (this.category) {
+            return this.category.id
+        }
+        return 0
+    }
+
+    get thumbnailUrl() {
+        if (this.photos.length > 0) {
+            return this.photos[0].url
+        }
+        return false
     }
 }

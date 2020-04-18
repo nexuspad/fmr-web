@@ -1,7 +1,9 @@
 // Define your variable overrides here
 $primary: #213b89;
+$fmrRed: #a01c1f;
 $font-size-base: 0.8rem;
 $h1-font-size: 1rem;
+$h2-font-size: 1rem;
 
 $enable-shadows: true;
 $enable-gradients: true;
@@ -16,10 +18,12 @@ $bv-enable-table-stacked: false;
 
 // Include Bootstrap and BootstrapVue SCSS files
 @import '~bootstrap/scss/bootstrap.scss';
-@import '~bootstrap-vue/src/index.scss';
 
 // General style overrides and custom classes
 body { background:url(./images/bgr-body.png) repeat; color:#333333 }
+
+.fmr-lg-text {font-size: 0.85rem}
+.fmr-red {color: $fmrRed;}
 
 .fmr-bordered-area {background: #ffffff; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3;
  -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;
@@ -38,6 +42,14 @@ border-radius: 0.2rem !important;}
 
 .dropdown-item {
   width: 50%;
+}
+
+.fmr-form label {
+  font-weight: bold; color: #565656;
+}
+.fmr-form label.required::after {
+  content:" *";
+  color: $fmrRed;
 }
 
 .fmr-message {
@@ -81,3 +93,9 @@ border-radius: 0.2rem !important;}
 
 .ico-deact {background:url(./images/deactivated.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
 .ico-disapp {background:url(./images/disapproved.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
+
+
+/* datepicker style hack */
+.vdp-datepicker input.form-control[readonly] {
+  background: none !important;
+}

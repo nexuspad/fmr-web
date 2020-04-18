@@ -11,7 +11,12 @@ export default class AdAttribute {
             this.name = jsonObj.name
             this.value = jsonObj.value
             this.options = jsonObj.options
-            this.required = jsonObj.required    
+            this.required = jsonObj.required
+
+            // do not show 0 in the form
+            if (this.value === 0) {
+                this.value = ''
+            }
         } else {
             this.options = []
         }
