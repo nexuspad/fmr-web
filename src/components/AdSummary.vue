@@ -4,7 +4,7 @@
       <div class="col-3">
         <img :src="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
         <div class="h-75 rounded shadow-sm text-center jumbotron" v-if="!ad.thumbnailUrl">
-          <div class="mt-n2">{{ categoryName(ad.category.id) }}</div>
+          <div class="mt-n2">{{ categoryName(ad.categoryId) }}</div>
         </div>
       </div>
       <div class="col-9">
@@ -16,21 +16,7 @@
             </div>
             <div class="col-3">
               <div class="container">
-                <div>
-                  <div class="row">
-                    <div class="col text-center">
-                      price
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col text-center">
-                      bath
-                    </div>
-                    <div class="col text-center">
-                      bed
-                    </div>
-                  </div>
-                </div>
+                <price-bed-bath :ad="ad" />
               </div>
             </div>
           </div>
@@ -47,9 +33,13 @@
 
 <script>
 import AppDataHelper from './AppDataHelper'
+import PriceBedBath from './addisplay/PriceBedBath'
 
 export default {
   mixins: [ AppDataHelper ],
+  components: {
+    PriceBedBath
+  },
   props: ['ad']
 }
 </script>

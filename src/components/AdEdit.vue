@@ -33,9 +33,14 @@
           <div class="tab-pane active" id="Content">
             <residential-for-sale :ad="ad" v-if="template == 'ResidentialForSale'" />
             <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
+            <commercial-for-sale :ad="ad" v-if="template == 'CommercialForSale'" />
+            <commercial-for-rent :ad="ad" v-if="template == 'CommercialForRent'" />
           </div>
           <div class="tab-pane" id="Photos">
             <uploader />
+          </div>
+          <div class="tab-pane" id="Preview">
+            <ad-detail :ad=ad />
           </div>
           <div class="tab-pane" id="Submit">
             <div class="form-group">
@@ -55,10 +60,15 @@ import Message from './Message'
 import FmrFooter from './FmrFooter'
 import ResidentialForSale from "./templates/ResidentialForSale";
 import ResidentialForRent from "./templates/ResidentialForRent";
+import CommercialForSale from "./templates/CommercialForSale";
+import CommercialForRent from "./templates/CommercialForRent";
 import Uploader from './Uploader'
+import AdDetail from './addisplay/AdDetail'
 import AdService from "../service/AdService";
 import FmrAd from "../service/model/FmrAd";
 import AppDataHelper from './AppDataHelper'
+import EventManager from '../util/EventManager'
+import AppEvent from '../util/AppEvent'
 
 export default {
   data() {
@@ -71,7 +81,8 @@ export default {
   },
   mixins: [ AppDataHelper ],
   components: {
-    TopNavigation, FmrFooter, ResidentialForSale, ResidentialForRent, Uploader, Message
+    TopNavigation, FmrFooter, ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
+    Uploader, AdDetail, Message
   },
   beforeMount() {
     if (this.$route.query.categoryId) {
@@ -92,20 +103,21 @@ export default {
           self.categoryId = self.ad.categoryId
           self.template = self.getTemplate(self.categoryId)
         })
-        .catch(() => {
-          console.error("...error");
+        .catch((error) => {
+          console.error("...error", error);
+          EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
         })
     } else if (this.categoryId) {
       AdService.adTemplate(self.categoryId)
         .then(draft => {
           self.ad = draft;
         })
-        .catch(() => {
-          console.error("...error");
+        .catch((error) => {
+          console.error("...error", error);
+          EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
         })
     }
   },
-  beforeDestroy() {},
   methods: {
     getTemplate() {
       let cCode = this.categoryCode(this.categoryId)
@@ -117,13 +129,12 @@ export default {
         return 'CommercialForRent'
       } else if (cCode.startsWith('for-sale|commercial')) {
         return 'CommercialForSale'
+      } else if (cCode.startsWith('for-rent|vacation')) {
+        return 'ResidentialForRent'
       }
     },
-    save () {
-      console.log(this.ad.getAttribute(1))
-      console.log(this.ad.getAttribute(21))
+    save() {
     }
-  },
-  watch: {}
+  }
 };
 </script>

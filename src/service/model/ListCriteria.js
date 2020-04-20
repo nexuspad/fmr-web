@@ -3,7 +3,7 @@ import PropertyLocation from './PropertyLocation'
 import AttributeFilter from './AttributeFilter'
 
 export default class ListCriteria {
-    status
+    statuses
     location
     category
     filters
@@ -15,7 +15,7 @@ export default class ListCriteria {
 
     constructor (jsonObj) {
         if (jsonObj) {
-            this.status = jsonObj.status
+            this.statuses = jsonObj.statuses
             this.location = new PropertyLocation(jsonObj.location)
             this.category = new AdCategory(jsonObj.category)
 

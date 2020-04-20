@@ -1,6 +1,6 @@
 import axios from 'axios'
 import EventManager from '../util/EventManager';
-import { AppStatus } from './AppCode';
+import AppEvent from '../util/AppEvent';
 import ApiError from './ApiError';
 
 export default class RestClient {
@@ -13,7 +13,7 @@ export default class RestClient {
 
     static instance(token, optional = { timeout: 3000 }) {
         if (!this.apiUrl) {
-            throw new ApiError(AppStatus.ABORT);
+            throw new ApiError(AppEvent.ABORT);
         }
 
         if (!token) token = '';
@@ -38,7 +38,7 @@ export default class RestClient {
             // Re-try once if there is certain error.
             this._axiosInstance.interceptors.response.use(
                 (data) => {
-                    EventManager.publish(AppStatus.LOADING, false);
+                    EventManager.publish(AppEvent.LOADING, false);
                     return data;
                 },
                 (error) => {
@@ -46,18 +46,18 @@ export default class RestClient {
                         console.log('Retry request...', error.config.url);
                         return axios.request(error.config);
                     }
-                    EventManager.publish(AppStatus.LOADING, false);
+                    EventManager.publish(AppEvent.LOADING, false);
                     return Promise.reject(error);
                 }
             );
 
             this._axiosInstance.interceptors.request.use(function (config) {
                 // before request is sent
-                EventManager.publish(AppStatus.LOADING, true);
+                EventManager.publish(AppEvent.LOADING, true);
                 return config;
             }, function (error) {
                 // request error
-                EventManager.publish(AppStatus.LOADING, false);
+                EventManager.publish(AppEvent.LOADING, false);
                 return Promise.reject(error);
             });
 

@@ -53,60 +53,217 @@ const STATES = {
     'wy': 'Wyoming'
 }
 
-const ATTRIBUTES = 
+const ATTRIBUTES =
 {
-    "1": "title",
-    "2": "description",
-    "8": "bedroom",
-    "9": "bathroom",
-    "10": "city",
-    "12": "state",
-    "19": "square_footage",
-    "21": "monthly_rent",
-    "22": "asking_price",
-    "23": "year_built",
-    "24": "cap_rate",
-    "25": "security_deposit",
-    "26": "minimal_lease_term",
-    "28": "acreage",
-    "29": "building_square_footage",
-    "30": "street_address",
-    "31": "represented_by",
-    "33": "zip_code",
-    "35": "homeowner_association_fee",
-    "36": "condo_fee",
-    "39": "pet_policy",
-    "41": "other_amenities",
-    "42": "parking_spaces",
-    "43": "school",
-    "46": "basement",
-    "49": "neighborhood",
-    "50": "contact_name",
-    "51": "contact_phone",
-    "52": "county",
-    "53": "open_house",
-    "54": "open_house_hours",
-    "55": "brokerage_company",
-    "56": "MLS_ID",
-    "57": "lot_size",
-    "60": "interior",
-    "61": "exterior",
-    "62": "rent_includes",
-    "63": "lot_developed",
-    "65": "owner_financing_available",
-    "66": "kitchen_and_dining",
-    "67": "bed_and_bath",
-    "68": "community",
-    "69": "building_amenities",
-    "70": "pet_policy",
-    "73": "available_date",
-    "74": "special_offer",
-    "1008": "rate"
+    "1": {
+        "name": "title",
+        "type": "string"
+    },
+    "2": {
+        "name": "description",
+        "type": "string"
+    },
+    "8": {
+        "name": "bedroom",
+        "type": "number"
+    },
+    "9": {
+        "name": "bathroom",
+        "type": "number"
+    },
+    "10": {
+        "name": "city",
+        "type": "string"
+    },
+    "12": {
+        "name": "state",
+        "type": "string"
+    },
+    "19": {
+        "name": "square_footage",
+        "type": "number"
+    },
+    "21": {
+        "name": "monthly_rent",
+        "type": "number"
+    },
+    "22": {
+        "name": "asking_price",
+        "type": "number"
+    },
+    "23": {
+        "name": "year_built",
+        "type": "number"
+    },
+    "24": {
+        "name": "cap_rate",
+        "type": "string"
+    },
+    "25": {
+        "name": "security_deposit",
+        "type": "number"
+    },
+    "26": {
+        "name": "minimal_lease_term",
+        "type": "number"
+    },
+    "28": {
+        "name": "acreage",
+        "type": "number"
+    },
+    "29": {
+        "name": "building_square_footage",
+        "type": "string"
+    },
+    "30": {
+        "name": "street_address",
+        "type": "string"
+    },
+    "31": {
+        "name": "represented_by",
+        "type": "string"
+    },
+    "33": {
+        "name": "zip_code",
+        "type": "string"
+    },
+    "35": {
+        "name": "homeowner_association_fee",
+        "type": "number"
+    },
+    "36": {
+        "name": "condo_fee",
+        "type": "number"
+    },
+    "39": {
+        "name": "pet_policy",
+        "type": "number"
+    },
+    "41": {
+        "name": "other_amenities",
+        "type": "string"
+    },
+    "42": {
+        "name": "parking_spaces",
+        "type": "number"
+    },
+    "43": {
+        "name": "school",
+        "type": "string"
+    },
+    "46": {
+        "name": "basement",
+        "type": "number"
+    },
+    "49": {
+        "name": "neighborhood",
+        "type": "string"
+    },
+    "50": {
+        "name": "contact_name",
+        "type": "string"
+    },
+    "51": {
+        "name": "contact_phone",
+        "type": "string"
+    },
+    "52": {
+        "name": "county",
+        "type": "string"
+    },
+    "53": {
+        "name": "open_house",
+        "type": "string"
+    },
+    "54": {
+        "name": "open_house_hours",
+        "type": "string"
+    },
+    "55": {
+        "name": "brokerage_company",
+        "type": "string"
+    },
+    "56": {
+        "name": "MLS_ID",
+        "type": "string"
+    },
+    "57": {
+        "name": "lot_size",
+        "type": "number"
+    },
+    "58": {
+        "name": "contact_email",
+        "type": "string"
+    },
+    "60": {
+        "name": "interior",
+        "type": "array"
+    },
+    "61": {
+        "name": "exterior",
+        "type": "array"
+    },
+    "62": {
+        "name": "rent_includes",
+        "type": "array"
+    },
+    "63": {
+        "name": "lot_developed",
+        "type": "array"
+    },
+    "65": {
+        "name": "owner_financing_available",
+        "type": "array"
+    },
+    "66": {
+        "name": "kitchen_and_dining",
+        "type": "array"
+    },
+    "67": {
+        "name": "bed_and_bath",
+        "type": "array"
+    },
+    "68": {
+        "name": "community",
+        "type": "array"
+    },
+    "69": {
+        "name": "condo_amenities",
+        "type": "array"
+    },
+    "70": {
+        "name": "pet_policy_details",
+        "type": "string"
+    },
+    "71": {
+        "name": "apartment_unit_amenities",
+        "type": "array"
+    },
+    "72": {
+        "name": "apartment_amenities",
+        "type": "array"
+    },
+    "73": {
+        "name": "available_date",
+        "type": "string"
+    },
+    "74": {
+        "name": "special_offer",
+        "type": "string"
+    },
+    "1004": {
+        "name": "current_zoning",
+        "type": "array"
+    },
+    "1008": {
+        "name": "rate",
+        "type": "string"
+    }
 }
 
 const ATTRIBUTE_NAME_LOOKUP = {}
 for (let id in ATTRIBUTES) {
-    ATTRIBUTE_NAME_LOOKUP[ATTRIBUTES[id]] = id
+    ATTRIBUTE_NAME_LOOKUP[ATTRIBUTES[id].name] = id
 }
 
 const CATEGORIES =
@@ -384,7 +541,22 @@ const LOOKUPS = {
     "STC": "Swimming/tennis community"
 }
 
+function stateName(code) {
+    code = code.toLowerCase()
+    if (STATES[code]) {
+        return STATES[code]
+    }
+    return ''
+}
+
+function attribute(id) {
+    return ATTRIBUTES[id]
+}
+
 function attributeNameLookup(attributeId) {
+    if (ATTRIBUTES[attributeId]) {
+        return ATTRIBUTES[attributeId].name
+    }
     return ATTRIBUTES[attributeId]
 }
 
@@ -400,4 +572,4 @@ function categoryNameLookup(categoryId) {
     return CATEGORIES[categoryId].name
 }
 
-export { STATES, CATEGORIES, LOOKUPS, attributeIdLookup, attributeNameLookup, categoryNameLookup }
+export { STATES, CATEGORIES, LOOKUPS, stateName, attribute, attributeIdLookup, attributeNameLookup, categoryNameLookup }

@@ -66,9 +66,6 @@
                 <a href="javascript:;" @click="newAd(3014)">Manufactured home for sale</a>
               </li>
               <li class="list-group-item fmr-lg-text">
-                <a href="javascript:;" @click="newAd(1006)">Lease purchase</a>
-              </li>
-              <li class="list-group-item fmr-lg-text">
                 <a href="javascript:;" @click="newAd(3015)">Land for sale</a>
               </li>
               <li class="list-group-item fmr-lg-text">

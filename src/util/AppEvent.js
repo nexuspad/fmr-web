@@ -1,6 +1,12 @@
 export default class AppEvent {
     static API_EVENT = 'Api event'
 
+    static LOADING = 'LOADING';
+    static TIMEOUT = 'TIMEOUT';
+    static EMPTY_DATA = 'EMPTY_DATA';
+    static UNKNOWN = 'UNKNOWN';
+    static ABORT = 'ABORT';
+
     static ACCOUNT_REGISTRATION_FAILURE = 'Registration failed'
     static ACCOUNT_LOGIN_SUCCESS = 'ACCOUNT_LOGIN_SUCCESS'
     static ACCOUNT_LOGIN_FAILURE = 'Login error'

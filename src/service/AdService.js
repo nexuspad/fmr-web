@@ -1,6 +1,8 @@
 import RestClient from './RestClient'
+import AccountService from './AccountService'
 import AdList from './model/AdList'
 import FmrAd from './model/FmrAd'
+import ApiError from './ApiError'
 
 const AD_LISTING = 'ads'
 const AD_TEMPLATE = 'placead/template?categoryId=#CategoryId'
@@ -46,12 +48,12 @@ export default class AdService {
                     console.log(AdService._adList)
                     resolve(AdService._adList)
                 } else {
-                    reject()
+                    reject(new ApiError(response.data.code))
                 }
             })
             .catch((error) => {
                 console.error(error)
-                reject()
+                reject(error)
             })
         })
     }
@@ -92,21 +94,59 @@ export default class AdService {
                 if (response.data && response.data.code === 'SUCCESS') {
                     resolve(new FmrAd(response.data.ad))
                 } else {
-                    reject()
+                    reject(new ApiError(response.data.code))
                 }
             })
             .catch((error) => {
                 console.error(error)
-                reject()
+                reject(error)
             })
         })
     }
 
     static update (adObj) {
         let uri = AD_ENTRY.replace('#Id', adObj.id);
-        RestClient.instance().post(uri)
-        .then((data) => {
-            console.log(data);
-        });
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).post(uri, adObj)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve(new FmrAd(response.data.ad))
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+        })
+
+    }
+
+    static myAds() {
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).get('/account/myads')
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve(new AdList(response.data.adList))
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+        })
     }
 }

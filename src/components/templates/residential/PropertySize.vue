@@ -11,24 +11,23 @@
         <input type="text" class="form-control" id="square_footage"
           name="square_footage" v-model="ad.getAttribute(attributeId('square_footage')).value" />
       </div>
-      <div class="col-md-1">
-        <label for="contact_phone">Basement</label>
-        <select id="basement" class="form-control" v-model="ad.getAttribute(attributeId('basement')).value">
-          <option>Yes</option>
-          <option>No</option>
-        </select>
-      </div>
       <div class="col-md-2">
         <label for="year_built">Year built</label>
         <input type="text" class="form-control" id="year_built"
           name="year_built" v-model="ad.getAttribute(attributeId('year_built')).value" />
+      </div>
+      <div class="col-md-1">
+        <label for="contact_phone">Basement</label>
+        <select id="basement" class="form-control" v-model="ad.getAttribute(attributeId('basement')).value">
+          <option v-for="(theValue, index) in ad.getAttribute(attributeId('basement')).options" :key="index" :value="theValue">{{theValue}}</option>
+        </select>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AppDataHelper from '../AppDataHelper'
+import AppDataHelper from '../../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],

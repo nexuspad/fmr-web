@@ -7,6 +7,7 @@ import VueTextareaAutosize from 'vue-textarea-autosize';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import './assets/custom.scss'
+import '@fortawesome/fontawesome-free/css/all.css'
 
 Vue.use(VueCompositionApi)
 Vue.use(VueRouter)

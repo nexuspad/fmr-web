@@ -24,6 +24,8 @@ body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
 .fmr-lg-text {font-size: 0.85rem}
 .fmr-red {color: $fmrRed;}
+.fmr-green{ color:#690 !important }
+.fmr-blue{ color:#7c97e6 }
 
 .fmr-bordered-area {background: #ffffff; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3;
  -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;
@@ -44,7 +46,7 @@ border-radius: 0.2rem !important;}
   width: 50%;
 }
 
-.fmr-form label {
+.fmr-form label, .fmr-ad-detail label {
   font-weight: bold; color: #565656;
 }
 .fmr-form label.required::after {
