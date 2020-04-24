@@ -12,6 +12,8 @@ export default class AppEvent {
     static ACCOUNT_LOGIN_FAILURE = 'Login error'
     static ACCOUNT_PASSWORD_UPDATE = 'The password is successfully updated'
   
+    static ACCT_AUTHENTICATION_FAILURE = 'Your session has timed out. Please re-login.'
+
     // the pre-defined AppEvent types
     type
     // Error object

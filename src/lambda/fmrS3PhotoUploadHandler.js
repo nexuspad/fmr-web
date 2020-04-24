@@ -6,7 +6,7 @@ var util = require('util');
 var https = require('https');
 
 // constants
-var MD_WIDTH = 750;
+var MD_WIDTH = 800;
 
 // get reference to S3 client 
 var s3 = new AWS.S3();
@@ -18,7 +18,7 @@ exports.handler = function (event, context, callback) {
   var srcBucket = event.Records[0].s3.bucket.name;
 
   // Object key may have spaces or unicode non-ASCII characters.
-  // srcKey should look like this: 914/upload/VB9qA/IMG-2383.JPG
+  // srcKey should look like this: USER_ID/AD_ID/IMG-2383.JPG
   var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
 
   // Infer the image type.
@@ -35,18 +35,14 @@ exports.handler = function (event, context, callback) {
   }
 
   var pieces = srcKey.split('/');
-  if (pieces[1] != 'upload') {
-    callback("Not in upload folder.");
-    return;
-  }
 
   var userId = pieces[0];
-  var uploadId = pieces[2];
+  var adId = pieces[2];
   var fileName = pieces[pieces.length - 1];
 
-  var destBucket = 'nexuspad';
+  var destBucket = 'findmyroof';
 
-  var uploadKeyPath = userId + '/upload/' + uploadId + '/';
+  var uploadKeyPath = userId + adId + '/';
 
   // re-oriented file has the same name
   var reorientKey = uploadKeyPath + fileName;
@@ -56,14 +52,6 @@ exports.handler = function (event, context, callback) {
   var ext = fileNameParts.pop();
   var resizeKey = uploadKeyPath + fileNameParts.join('.') + '-md' + '.' + ext;
 
-  var metaInfoKey = uploadKeyPath + "metaInfo.json";
-
-  var metaInfo = {
-    "imageInfo": {},
-    "mediumSize": {},
-    "originalFile": {}
-  };
-
   // Download the image from S3, transform, and upload to a different S3 bucket.
   async.waterfall([
     function download(next) {
@@ -72,17 +60,6 @@ exports.handler = function (event, context, callback) {
         Bucket: srcBucket,
         Key: srcKey
       }, next);
-    },
-
-    function metaData(response, next) {
-      gm(response.Body).identify(function (err, data) {
-        metaInfo.imageInfo = data;
-        if (err) {
-          next(err);
-        } else {
-          next(null, response);
-        }
-      })
     },
 
     function transform(response, next) {
@@ -106,12 +83,6 @@ exports.handler = function (event, context, callback) {
               next(err);
             }
 
-            metaInfo.originalFile = {
-              "fileName": reorientKey,
-              "width": size.width,
-              "height": size.height
-            };
-
             if (size.width > MD_WIDTH) {
               // Infer the scaling factor to avoid stretching the image unnaturally.
               var scalingFactor = MD_WIDTH / size.width;
@@ -124,12 +95,6 @@ exports.handler = function (event, context, callback) {
                 if (err) {
                   next(err);
                 } else {
-                  metaInfo.mediumSize = {
-                    "fileName": resizeKey,
-                    "width": width,
-                    "height": height
-                  };
-
                   s3.putObject({
                     Bucket: destBucket,
                     Key: resizeKey,
@@ -140,38 +105,20 @@ exports.handler = function (event, context, callback) {
                       next(err);
                     } else {
                       console.log('Upload successful: ' + resizeKey);
-                      // upload meta info
+                      // call API
                       next();
                     }
                   });
                 }
               });
             } else {
-              // upload meta info
+              // call API
               next();
             }
           });
         }
       });
     },
-
-    function uploadMeta(next) {
-      s3.putObject({
-        Bucket: destBucket,
-        Key: metaInfoKey,
-        Body: JSON.stringify(metaInfo),
-        ContentType: "application/json"
-      }, (err, data) => {
-        if (err) {
-          next(err);
-        } else {
-          console.log('Upload successful: ' + metaInfoKey);
-          // make call to API
-          next();
-        }
-      });
-    },
-
     function updateApi() {
       var data = JSON.stringify({
       });
@@ -179,7 +126,7 @@ exports.handler = function (event, context, callback) {
       var options = {
           host: 'api.findmyroof.com',
           port: '443',
-          path: '/api/upload/' + uploadId + '/photoinfo',
+          path: '/account/updateAd',
           method: 'POST',
           headers: {
               'Content-Type': 'application/json; charset=utf-8',
@@ -198,31 +145,6 @@ exports.handler = function (event, context, callback) {
         res.on('end', function() {
           var result = JSON.parse(msg);
           console.log('API response', result);
-          if (result['actionResult'] && result['actionResult'] === 'SUCCESS') {
-            // delete the incoming bucket entry
-            console.log('delete the incoming object ', srcBucket, uploadKeyPath)
-            var params = {
-              Bucket: srcBucket, 
-              Prefix: uploadKeyPath
-             };
-            
-            s3.listObjects(params, function(err, data) {
-              if (err) console.log(err, err.stack);
-              if (data.Contents.length !== 0) {
-                params = {Bucket: srcBucket};
-                params.Delete = {Objects:[]};
-            
-                data.Contents.forEach(function(content) {
-                  params.Delete.Objects.push({Key: content.Key});
-                });
-            
-                s3.deleteObjects(params, function(err, data) {
-                  if (err) console.log(err, err.stack);
-                  else console.log(data); 
-                });
-              }          
-            });
-          }
         });
       });
   

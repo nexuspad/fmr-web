@@ -22,7 +22,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <label for="sec_dep" class="required">Security deposit</label>
+          <label for="sec_dep">Security deposit</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-success text-light">$</div>

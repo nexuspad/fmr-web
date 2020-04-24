@@ -2,6 +2,7 @@ import Register from './Register'
 import Login from './Login'
 import ResetPassword from './ResetPassword'
 import Account from './Account'
+import Verification from './Verification'
 import Settings from './Settings'
 import MyAds from './MyAds'
 
@@ -35,6 +36,22 @@ export default class AccountRoute {
                         component: ResetPassword,
                         meta: {
                             title: 'Reset account password'
+                        }
+                    },
+                    {
+                        path: 'sendverificationcode',
+                        name: 'SendVerificationCode',
+                        component: Verification,
+                        meta: {
+                            title: 'Account verification'
+                        }
+                    },
+                    {
+                        path: 'verify',
+                        name: 'Verify',
+                        component: Verification,
+                        meta: {
+                            title: 'Account verification'
                         }
                     },
                     {

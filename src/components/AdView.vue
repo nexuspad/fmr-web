@@ -8,6 +8,7 @@
           <h1>{{ ad.city }}, {{ stateName(ad.state) }} {{ categoryName([ad.categoryId]) }} Ad# {{ ad.id }}</h1>
         </div>
         <ad-detail :ad=ad />
+        <ad-warning />
       </div>
     </div>
     <fmr-footer />
@@ -25,11 +26,12 @@ import FmrFooter from './FmrFooter'
 import AdService from '../service/AdService'
 import FmrAd from '../service/model/FmrAd'
 import AppDataHelper from './AppDataHelper'
+import AdWarning from './misc/AdWarning'
 
 export default {
   mixins: [ AppDataHelper ],
   components: {
-    TopNavigation, CategoryNavigation, AdDetail, FmrFooter
+    TopNavigation, CategoryNavigation, AdDetail, AdWarning, FmrFooter
   },
   data() {
     return {

@@ -26,6 +26,11 @@ body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 .fmr-red {color: $fmrRed;}
 .fmr-green{ color:#690 !important }
 .fmr-blue{ color:#7c97e6 }
+.fmr-warning { background:#fbfae9; border:1px solid #f4e5d0; }
+
+.fmr-photo { width:100%; object-fit: cover; }
+.fmr-photo:hover { cursor: move; }
+.fmr-photo-filename { position: absolute; top:1rem; left:1rem; background-color: #eee; padding:2px; border-radius: 0.2rem}
 
 .fmr-bordered-area {background: #ffffff; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3;
  -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;
@@ -35,6 +40,8 @@ border-radius: 0.2rem !important;}
   padding: 0.6em 0 0.2rem 1rem;}
 
 .fmr-nav {border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;}
+
+a.fas:hover { text-decoration: none; }
 
 .dropdown-menu.show {
   display: flex;

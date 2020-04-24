@@ -6,7 +6,8 @@ import ApiError from './ApiError'
 
 const AD_LISTING = 'ads'
 const AD_TEMPLATE = 'placead/template?categoryId=#CategoryId'
-const AD_ENTRY = 'ad?id=#Id'
+const AD_VIEW = 'ad?id=#Id'
+const AD_UPDATE = 'account/updateAd'
 
 export default class AdService {
     static _adList
@@ -86,11 +87,10 @@ export default class AdService {
                 })
             }
         }
-        let uri = AD_ENTRY.replace('#Id', id);
+        let uri = AD_VIEW.replace('#Id', id);
         return new Promise((resolve, reject) => {
             RestClient.instance().get(uri)
             .then((response) => {
-                console.log(response)
                 if (response.data && response.data.code === 'SUCCESS') {
                     resolve(new FmrAd(response.data.ad))
                 } else {
@@ -104,28 +104,32 @@ export default class AdService {
         })
     }
 
-    static update (adObj) {
-        let uri = AD_ENTRY.replace('#Id', adObj.id);
+    static update(adServiceRequest) {
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
-                RestClient.instance(token).post(uri, adObj)
+                RestClient.instance(token).post(AD_UPDATE, adServiceRequest)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve(new FmrAd(response.data.ad))
                     } else {
-                        reject(new ApiError(response.data.code))
+                        reject(new ApiError(response.data.code, response.data.details))
                     }
                 })
                 .catch((error) => {
-                    console.error(error)
+                    console.error('Ad service', error)
                     reject(error)
                 })
             })
             .catch((error) => {
-                console.error(error)
+                console.error('Account service', error)
+                reject(error)
             })
         })
+    }
 
+    static submitAndActivate(adObj) {
+        adObj.status = 'ACTIVE'
+        AdService.update(adObj)
     }
 
     static myAds() {
@@ -140,12 +144,13 @@ export default class AdService {
                     }
                 })
                 .catch((error) => {
-                    console.error(error)
+                    console.error('Ad service', error)
                     reject(error)
                 })
             })
             .catch((error) => {
-                console.error(error)
+                console.error('Account service', error)
+                reject(error)
             })
         })
     }

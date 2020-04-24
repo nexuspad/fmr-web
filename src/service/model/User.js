@@ -20,4 +20,18 @@ export default class User {
         }
         return ''
     }
+
+    isVerified() {
+        if (status === 1) {
+            return true
+        }
+        return false
+    }
+
+    verificationCodeSent() {
+        if (status === 2) {
+            return true
+        }
+        return false
+    }
 }

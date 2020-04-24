@@ -1,5 +1,8 @@
 import RestClient from './RestClient';
-import { PhotoUpdateRequest } from './PhotoUpdateRequest';
+import AccountService from './AccountService'
+import FmrAd from './model/FmrAd'
+import ApiError from './ApiError'
+import AdServiceRequest from './AdServiceRequest';
 
 export default class UploadService {
     uploadId = '';
@@ -9,51 +12,58 @@ export default class UploadService {
     _active = true;
 
     uploadFile(id, file, progressCallback) {
-        const cloudConfigUrl = '/upload/accesskey';
+        const cloudConfigUrl = '/upload/accessKey';
 
         // TODO
         const fileName = file.name
 
         const self = this
         return new Promise((resolve, reject) => {
-            const request = PhotoUpdateRequest.forAccess(id, fileName)
+            AccountService.getToken().then((token) => {
+                const request = AdServiceRequest.cloudUploadAccess(id, fileName)
 
-            // ============ I. create place holder for the upload ============
-            RestClient.instance().post(cloudConfigUrl, request)
-                .then(function (response) {
-                    // Parse application level response data
-                    console.log(response)
-                    if (response.data.code !== 'SUCCESS') {
-                        self._concludeService({ resolve: resolve, reject: reject, error: response.data.code });
-                    } else {
-                        progressCallback({ uploadId: fileName });
-
-                        // ============ II. upload the file to the cloud ============
-                        self._uploadToCloud(response.data.cloudConfig, file, progressCallback)
-                            .then(function (awsResponse) {
-                                console.log(awsResponse)
-                                // ============ III. complete the rest ============
-                                self._completeUpload()
-                                    .then(function (response) {
-                                        if (response.data.code !== 'SUCCESS') {
-                                            self._concludeService({ resolve: resolve, reject: reject, error: response.data.code });
-                                        } else {
-                                            // ============ FINAL resolve ============
-                                            self._concludeService({ resolve: resolve, reject: reject });
-                                        }
-                                    })
-                                    .catch(function (error) {
-                                        self._concludeService({ resolve: resolve, reject: reject, error: error });
-                                    });
-                            })
-                            .catch(function (error) {
-                                console.log(error)
-                            })
-                    }
-                })
-                .catch(function (error) {
-                    self._concludeService({ resolve: resolve, reject: reject, error: error });
-                });
+                // ============ I. create place holder for the upload ============
+                RestClient.instance(token).post(cloudConfigUrl, request)
+                    .then(function (response) {
+                        // Parse application level response data
+                        console.log(response)
+                        if (response.data.code !== 'SUCCESS') {
+                            self._concludeService({ resolve: resolve, reject: reject, error: new ApiError(response.data.code) });
+                        } else {
+                            progressCallback({ uploadId: fileName });
+    
+                            // ============ II. upload the file to the cloud ============
+                            const cloudConfig = response.data.cloudConfig
+                            self._uploadToCloud(cloudConfig, file, progressCallback)
+                                .then(function () {
+                                    // ============ III. call API to update database ============
+                                    self._completeUpload(token, id, cloudConfig.file_name, cloudConfig.s3_key)
+                                        .then(function (response) {
+                                            // ============ FINAL resolve into Uploader.vue ============
+                                            if (response.data.code == 'SUCCESS') {
+                                                self._concludeService({ resolve: resolve, ad: new FmrAd(response.data.ad) });
+                                            } else {
+                                                self._concludeService({ reject: reject, error: new ApiError(response.data.code) });
+                                            }
+                                        })
+                                        .catch(function (error) {
+                                            self._concludeService({ reject: reject, error: error });
+                                        });
+                                })
+                                .catch(function (error) {
+                                    console.log(error)
+                                })
+                        }
+                    })
+                    .catch(function (error) {
+                        self._concludeService({ reject: reject, error: error });
+                    });
+    
+            })
+            .catch((error) => {
+                console.error('Account service', error)
+                reject(error)
+            })
         });
     }
 
@@ -104,15 +114,17 @@ export default class UploadService {
         return axiosClient.post(cloudConfig.s3_url, formData, option);
     }
 
-    _completeUpload(id, fileName, key) {
-        const request = PhotoUpdateRequest.forAddingPhoto(id, fileName, key)
-        return RestClient.instance().post('/upload/updatePhoto', request)
+    // call API to update the database
+    _completeUpload(token, id, fileName, key) {
+        const request = AdServiceRequest.addPhoto(id, fileName, key)
+        return RestClient.instance(token).post('/upload/addPhoto', request)
     }
 
-    _concludeService({ resolve, reject, error = null }) {
+    // resolve into the Uploader.vue
+    _concludeService({ resolve, reject, ad, error = null }) {
         this._active = false
-        if (error === null) {
-            resolve()
+        if (resolve) {
+            resolve(ad)
         } else {
             reject(error)
         }

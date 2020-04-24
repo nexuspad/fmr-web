@@ -2,6 +2,7 @@ import axios from 'axios'
 import EventManager from '../util/EventManager';
 import AppEvent from '../util/AppEvent';
 import ApiError from './ApiError';
+import StorageUtils from '../util/StorageUtil'
 
 export default class RestClient {
     static _axiosInstance = null;
@@ -46,8 +47,23 @@ export default class RestClient {
                         console.log('Retry request...', error.config.url);
                         return axios.request(error.config);
                     }
+
                     EventManager.publish(AppEvent.LOADING, false);
-                    return Promise.reject(error);
+
+                    // status code like 403
+                    if (error.response.status === 403) {
+                        // a little clean up here
+                        StorageUtils.deleteFromSession('token')
+                        return Promise.reject(ApiError.authenticationError())
+                    } else if (error.response.status === 500) {
+                        return Promise.reject(ApiError.internalError())
+                    } else {
+                        if (error.response.data && error.response.data.code) {
+                            return Promise.reject(ApiError(error.response.data.code));
+                        } else {
+                            return Promise.reject(ApiError(error.response.status));
+                        }
+                    }
                 }
             );
 

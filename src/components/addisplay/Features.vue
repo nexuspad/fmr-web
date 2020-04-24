@@ -40,6 +40,14 @@
         </div>
       </div>
     </div>
+    <div v-if="hasAttributeValue('condo_amenities')">
+      <label>Community amenities</label>
+      <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
+        <div class="mr-4" v-for="(value, index) in attributeValue('condo_amenities')" :key="index">
+          <span class="p-2 text-nowrap"><i class="fas fa-check fa-xs mr-1"></i>{{ lookup(value) }}</span>
+        </div>
+      </div>
+    </div>
     <div v-if="hasAttributeValue('apartment_unit_amenities')">
       <label>Unit amenities</label>
       <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
@@ -48,10 +56,10 @@
         </div>
       </div>
     </div>
-    <div v-if="hasAttributeValue('community_amenities')">
-      <label>Community amenities</label>
+    <div v-if="hasAttributeValue('apartment_amenities')">
+      <label>Unit amenities</label>
       <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
-        <div class="mr-4" v-for="(value, index) in attributeValue('community_amenities')" :key="index">
+        <div class="mr-4" v-for="(value, index) in attributeValue('apartment_amenities')" :key="index">
           <span class="p-2 text-nowrap"><i class="fas fa-check fa-xs mr-1"></i>{{ lookup(value) }}</span>
         </div>
       </div>

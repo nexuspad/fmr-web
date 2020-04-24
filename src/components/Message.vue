@@ -1,13 +1,13 @@
 <template>
   <div class="fmr-message">
     <div class="alert alert-success alert-dismissible" role="alert" v-if="showSuccess">
-      {{ successMessage }}
+      <div v-html="successMessage"></div>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="alert alert-danger alert-dismissible" role="alert" v-if="showError">
-      {{ errorMessage }}
+      <div v-html="errorMessage"></div>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -34,7 +34,10 @@ export default {
     }
   },
   mounted () {
+    // Handle API response directly
     EventManager.subscribe(AppEvent.API_EVENT, this.showApiResult)
+
+    // Handle App internal checks
     EventManager.subscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showUpdateResult)

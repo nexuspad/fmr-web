@@ -19,19 +19,19 @@ export default class AccountService {
         } else {
             const token = StorageUtils.getFromSession('token')
             if (token) {
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     AccountService.current(token).then((userObj) => {
                         AccountService._user = userObj
                         resolve(AccountService._user.token)
                     }).catch(() => {
                         AccountService.cleanup()
-                        resolve(false)
+                        reject(ApiError.authenticationError())
                     })
                 })
             } else {
-                return new Promise((resolve) => {
+                return new Promise((resolve, reject) => {
                     AccountService.cleanup()
-                    resolve(false)
+                    reject(ApiError.authenticationError())
                 })    
             }
         }
@@ -72,6 +72,54 @@ export default class AccountService {
         })
     }
 
+    static sendVerificationCode(phoneNumber) {
+        let serviceRequest = AccountServiceRequest.forSendingVerification(phoneNumber)
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).post('/account/sendverificationcode', serviceRequest)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve(new User(response.data.user))
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    console.error('Ad service', error)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                console.error('Account service', error)
+                reject(error)
+            })
+        })
+    }
+
+    static verify(code) {
+        let serviceRequest = AccountServiceRequest.forVerification(code)
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).post('/account/verify', serviceRequest)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve(new User(response.data.user))
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    console.error('Ad service', error)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                console.error('Account service', error)
+                reject(error)
+            })
+        })
+    }
+
     static current(token) {
         return new Promise((resolve, reject) => {
             RestClient.instance(token).get('/account/session')
@@ -85,7 +133,7 @@ export default class AccountService {
                 }
             })
             .catch((error) => {
-                reject(new ApiError(error.response.status))
+                reject(error)
             })  
         })
     }

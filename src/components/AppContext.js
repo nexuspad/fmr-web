@@ -57,7 +57,8 @@ export default class AppContext {
         if (currentRoute.name === 'PlaceAd' || currentRoute.name === 'AdNew' || currentRoute.name === 'AdEdit') {
             return 'editing'
         } else if (currentRoute.name === 'Account' || currentRoute.name === 'Register' ||
-            currentRoute.name === 'Login' || currentRoute.name === 'Settings' || currentRoute.name === 'MyAds') {
+            currentRoute.name === 'Login' || currentRoute.name === 'Settings' || currentRoute.name === 'MyAds' ||
+            currentRoute.name ==='SendVerificationCode' || currentRoute.name === 'Verify') {
             return 'account'
         }
         return 'browsing'

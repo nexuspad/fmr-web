@@ -11,25 +11,25 @@ export default class FmrAd {
     photos = []
 
     attributeMap = new Map
-
+    
     constructor(jsonObj) {
         if (jsonObj) {
             this.id = jsonObj.id
             this.category = new AdCategory(jsonObj.category)
             this.status = jsonObj.status
 
-            const self = this
             if (jsonObj.attributes) {
                 jsonObj.attributes.forEach(element => {
                     const attrObj = new AdAttribute(element)
-                    self.attributes.push(attrObj)
-                    self.attributeMap.set(attrObj.id, attrObj)
+                    this.attributes.push(attrObj)
+                    this.attributeMap.set(attrObj.id, attrObj)
                 })
             }
 
             if (jsonObj.photos) {
                 jsonObj.photos.forEach(photoObj => {
-                    self.photos.push(new AdPhoto(photoObj))
+                    this.photos.push(new AdPhoto(photoObj))
+                    this.photos.sort((a, b) => parseInt(a.displayOrder) - parseInt(b.displayOrder))
                 })
             }
         }
@@ -79,6 +79,87 @@ export default class FmrAd {
     get thumbnailUrl() {
         if (this.photos.length > 0) {
             return this.photos[0].url
+        }
+        return false
+    }
+
+    addPhoto(photoObj) {
+        if (!this.photos) {
+            this.photos = []
+        }
+        this.photos.push(photoObj)
+    }
+
+    mergePhotos(updatedAd) {
+        if (!updatedAd.photos || updatedAd.photos.length === 0) {
+            return
+        }
+
+        if (!this.photos) {
+            this.photos = []
+            this.photos.push(...updatedAd.photos)
+            this.photos.sort((a, b) => parseInt(a.displayOrder) - parseInt(b.displayOrder))
+
+        } else {
+            // delete the existing ones that are not in the new photos
+            let viewIdsToDelete = []
+            this.photos.forEach((p) => {
+                if (!updatedAd._hasPhoto(p)) {
+                    viewIdsToDelete.push(p.viewId)
+                }
+            })
+            for (let i=this.photos.length-1; i>=0; i--) {
+                if (viewIdsToDelete.indexOf(this.photos[i].viewId) !== -1) {
+                    this.photos.splice(i, 1)
+                }
+            }
+
+            // go through the new ones, update the display order or add
+            let newPhotos = []
+            updatedAd.photos.forEach((p) => {
+                let isNewPhoto = true
+                for (let i=0; i<this.photos.length; i++) {
+                    if (this.photos[i].viewId === p.viewId) {
+                        isNewPhoto = false
+                        this.photos[i].displayOrder = p.displayOrder
+                    }
+                }
+                if (isNewPhoto) {
+                    newPhotos.push(p)
+                }
+            })
+
+            this.photos.push(...newPhotos)
+            this.photos.sort((a, b) => parseInt(a.displayOrder) - parseInt(b.displayOrder))
+        }
+    }
+
+    deletePhotos(photos) {
+        if (!this.photos) {
+            this.photos = []
+            this.photos.push(...photos)
+        } else {
+            photos.forEach((p) => {
+                if (!this._hasPhoto(p)) {
+                    this.photos.push(p)
+                }
+            })
+        }
+    }
+
+    getPhotos() {
+        return this.photos
+    }
+
+    _hasPhoto(photo) {
+        if (!this.photos) {
+            return false
+        } else {
+            for (let i=0; i<this.photos.length; i++) {
+                if (this.photos[i].viewId === photo.viewId) {
+                    return true
+                }
+            }
         }
         return false
     }

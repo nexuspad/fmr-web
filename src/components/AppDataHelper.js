@@ -8,6 +8,9 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 export default {
     methods: {
+        capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        },
         states() {
             return STATES
         },
@@ -15,7 +18,7 @@ export default {
             return stateName(code)
         },
         categoryName(id) {
-            return categoryNameLookup(id)
+            return this.capitalizeFirstLetter(categoryNameLookup(id))
         },
         categoryCode(categoryId) {
             let category = CATEGORIES[categoryId]

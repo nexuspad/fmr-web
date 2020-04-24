@@ -4,6 +4,7 @@ import ListCriteria from './ListCriteria'
 export default class AdList {
     listCriteria
     ads = []
+    totalCount
     pages = []
 
     constructor (jsonObj) {
@@ -12,8 +13,9 @@ export default class AdList {
             if (jsonObj.ads) {
                 jsonObj.ads.forEach(element => {
                     this.ads.push(new FmrAd(element))
-                });
+                })
             }
+            this.totalCount = jsonObj.totalCount
         }
     }
 
@@ -40,5 +42,12 @@ export default class AdList {
             let i = this.pages.indexOf(page)
             return this.ads.slice(i*this.listCriteria.countPerPage, (i+1)*this.listCriteria.countPerPage)
         }
+    }
+
+    totalPages () {
+        if (this.listCriteria && this.listCriteria.countPerPage > 0) {
+          return Math.ceil(this.totalCount / this.listCriteria.countPerPage);
+        }
+        return 1;
     }
 }

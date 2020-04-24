@@ -13,7 +13,7 @@
           <state-selector />
         </li>
       </ul>
-      <ul class="navbar-nav justify-content-end" v-if="activity !== 'editing' && !isLoggedIn">
+      <ul class="navbar-nav justify-content-end" v-if="!isLoggedIn">
         <li class="nav-item">
           <router-link class="nav-link" to="/account/register">Register</router-link>
         </li>
@@ -21,18 +21,22 @@
           <router-link class="nav-link" to="/account/login">Log in</router-link>
         </li>
       </ul>
-      <ul class="navbar-nav justify-content-end" v-if="activity !== 'editing' && isLoggedIn">
-        <li class="nav-item">
+      <ul class="navbar-nav justify-content-end" v-if="(activity === 'browsing' || activity === 'account') && isLoggedIn">
+        <li class="nav-item" v-if="!isVerified">
+          <router-link class="nav-link" to="/account/verify" v-if="verificationSent">Verify</router-link>
+          <router-link class="nav-link" to="/account/sendverificationcode" v-if="!verificationSent">Send verification code</router-link>
+        </li>
+        <li class="nav-item" v-if="isVerified">
           <router-link class="nav-link" to="/placead">Place an ad</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="isVerified">
           <router-link class="nav-link" to="/account/myads">My ads</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/account/settings">Settings</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" v-on:click="logout()">Log out</a>
+          <a class="nav-link" href="javascript:;" v-on:click="logout()">Log out</a>
         </li>
       </ul>
     </div>
@@ -48,7 +52,9 @@ export default {
   data() {
     return {
       activity: AppContext.activity(this.$route),
-      isLoggedIn: AccountService.currentUser() ? true : false
+      isLoggedIn: AccountService.currentUser() ? true : false,
+      isVerified: AccountService.currentUser() && AccountService.currentUser().isVerified() ? true : false,
+      verificationSent: AccountService.currentUser() && AccountService.currentUser().verificationCodeSent() ? true : false
     }
   },
   components: {
@@ -62,10 +68,16 @@ export default {
       } else {
           self.isLoggedIn = false
       }
-    })    
+    })
+    .catch(() => {
+      self.isLoggedIn = false
+    })   
   },
   methods: {
-    logout() {}
+    logout() {
+      AccountService.logout()
+      window.location = '/'
+    }
   }
 };
 </script>

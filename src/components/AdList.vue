@@ -14,11 +14,12 @@
           <div class="row pt-2">
             <div class="col"></div>
             <div class="col">
-              <nav aria-label="Page navigation" v-if="pages.length > 1">
+              <nav aria-label="Page navigation" v-if="allPageIds.length > 1">
                 <ul class="pagination">
                   <li class="page-item"><a class="page-link" href="#">previous</a></li>
-                  <li class="page-item" v-for="p in pages" :key="p">
-                    <router-link class="page-link" to="/">{{ p }}</router-link>
+                  <li class="page-item" v-for="(p, index) in pageIdsToDisplay" :key="index">
+                    <span class="page-link" v-if="p == 0">...</span>
+                    <router-link class="page-link" to="/" v-if="p != 0">{{ p }}</router-link>
                   </li>
                   <li class="page-item"><a class="page-link" href="#">next</a></li>
                 </ul>
@@ -56,7 +57,9 @@ export default {
   data() {
     return {
       ads: [],
-      pages: [1,2,3,4,5]
+      allPageIds: [],
+      pageIdsToDisplay: [],
+      currentPage: 1
     };
   },
   mounted() {
@@ -64,10 +67,10 @@ export default {
 
     AdService.getAds(AppContext.currentCriteria())
       .then(adList => {
-        self.ads.push(...adList.ads);
+        self.buildPages(adList)
       })
-      .catch(() => {
-        console.error("...error");
+      .catch((error) => {
+        console.error(error);
       });
   },
   watch: {
@@ -76,14 +79,39 @@ export default {
 
       AdService.getAds(AppContext.currentCriteria())
         .then(adList => {
-          while (self.ads.length) {
-            self.ads.pop();
-          }
-          self.ads.push(...adList.ads);
+          self.buildPages(adList)
         })
-        .catch(() => {
-          console.error("...error");
+        .catch((error) => {
+          console.error(error);
         });
+    }
+  },
+  methods: {
+    buildPages(adList) {
+      while (this.ads.length) {
+        this.ads.pop();
+      }
+      this.ads.push(...adList.ads);
+
+      while (this.allPageIds.length) {
+        this.allPageIds.pop();
+      }
+
+      let totalPages = adList.totalPages();
+      for (let i = 1; i <= totalPages; i++) {
+        this.allPageIds.push(i);
+      }
+
+      let len = this.allPageIds.length;
+      for (let i = 0; i<len; i++) {
+        let p = this.allPageIds[i]
+        if (Math.abs(p - this.currentPage) < 8 || p == this.allPageIds[len - 1] || p == 1) {
+          if (p > this.pageIdsToDisplay[this.pageIdsToDisplay.length - 1] + 1) {
+            this.pageIdsToDisplay.push(0) // 0 is the separator
+          }
+          this.pageIdsToDisplay.push(p)
+        }
+      }
     }
   }
 };

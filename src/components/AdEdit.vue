@@ -25,7 +25,7 @@
               <a class="nav-link disabled" data-toggle="tab" href="#">Disabled</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-danger" href="#">Cancel</a>
+              <router-link to="/account/myads" class="nav-link text-danger">Cancel</router-link>
             </li>
           </ul>
         </div>
@@ -37,7 +37,7 @@
             <commercial-for-rent :ad="ad" v-if="template == 'CommercialForRent'" />
           </div>
           <div class="tab-pane" id="Photos">
-            <uploader />
+            <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">
             <ad-detail :ad=ad />
@@ -134,6 +134,18 @@ export default {
       }
     },
     save() {
+      AdService.update(this.ad).then(() => {
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    },
+    submitAndActivate() {
+      AdService.submitAndActivate(this.ad).then(() => {
+      })
+      .catch((error) => {
+        console.error(error)
+      })
     }
   }
 };
