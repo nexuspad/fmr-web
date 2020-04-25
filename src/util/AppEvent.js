@@ -11,15 +11,22 @@ export default class AppEvent {
     static ACCOUNT_LOGIN_SUCCESS = 'ACCOUNT_LOGIN_SUCCESS'
     static ACCOUNT_LOGIN_FAILURE = 'Login error'
     static ACCOUNT_PASSWORD_UPDATE = 'The password is successfully updated'
+    static ACCOUNT_PASSWORD_UPDATE_FAILURE = 'ACCOUNT_PASSWORD_UPDATE_FAILURE'
   
     static ACCT_AUTHENTICATION_FAILURE = 'Your session has timed out. Please re-login.'
+
+    static AD_UPDATE = 'AD_UPDATE'
+    static AD_ACTIVATION = 'AD_ACTIVATION'
+    static AD_DEACTIVATION = 'AD_DEACTIVATION'
+    static AD_EXTENSION = 'AD_EXTENSION'
+    static AD_REMOVAL = 'AD_REMOVAL'
 
     // the pre-defined AppEvent types
     type
     // Error object
     error
-    // affected object. this can be an NPEntry, NPFolder
-    affectedItem
+
+    message
 
     get message() {
         if (this.affectedItem) {
@@ -28,38 +35,17 @@ export default class AppEvent {
         return this.type
     }
 
-    static ofIntention(eventType, param) {
+    static ofSuccess(eventType, message) {
         let appEvent = new AppEvent();
         appEvent.type = eventType;
-        appEvent.affectedItem = param;
-        return appEvent;
-    }
-
-    static ofSuccess(eventType, affectedItem) {
-        let appEvent = new AppEvent();
-        appEvent.type = eventType;
-        appEvent.affectedItem = affectedItem;
+        appEvent.message = message;
         return appEvent;
     }
 
     static ofFailure(eventType, errorMessage) {
         let appEvent = new AppEvent();
         appEvent.type = eventType;
-        appEvent.error = errorMessage
-        return appEvent;
-    }
-
-    static ofInformation(eventType, message) {
-        let appEvent = new AppEvent();
-        appEvent.type = eventType;
-        if (message) {
-            appEvent.message = message;
-        } else {
-            switch (eventType) {
-                case this.EMPTY_LIST:
-                    appEvent.message = 'Nothing in here';
-            }
-        }
+        appEvent.message = errorMessage
         return appEvent;
     }
 

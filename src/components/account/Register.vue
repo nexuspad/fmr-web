@@ -60,7 +60,7 @@ export default {
       } else {
           self.isLoggedIn = false
       }
-    })    
+    })
   },
   methods: {
     register() {
@@ -68,7 +68,7 @@ export default {
         EventManager.publishAppEvent(AppEvent.ofFailure(AppEvent.ACCOUNT_REGISTRATION_FAILURE, "Missing email address."))
         return
       }
-      console.log(this.password, this.confirmPassword)
+
       if (this.password !== this.confirmPassword) {
         EventManager.publishAppEvent(AppEvent.ofFailure(AppEvent.ACCOUNT_REGISTRATION_FAILURE, "Passwords don't match."))
         return

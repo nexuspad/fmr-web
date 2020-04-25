@@ -29,6 +29,42 @@ export default class AdServiceRequest {
         return serviceRequest
     }
 
+    static activate(id) {
+        const serviceRequest = new AdServiceRequest
+        serviceRequest.action = 'ACTIVATE'
+        const ad = new FmrAd
+        ad.id = id
+        serviceRequest.ad = ad
+        return serviceRequest
+    }
+
+    static deActivate(id) {
+        const serviceRequest = new AdServiceRequest
+        serviceRequest.action = 'DEACTIVATE'
+        const ad = new FmrAd
+        ad.id = id
+        serviceRequest.ad = ad
+        return serviceRequest
+    }
+
+    static extention(id) {
+        const serviceRequest = new AdServiceRequest
+        serviceRequest.action = 'EXTENSION'
+        const ad = new FmrAd
+        ad.id = id
+        serviceRequest.ad = ad
+        return serviceRequest
+    }
+
+    static remove(id) {
+        const serviceRequest = new AdServiceRequest
+        serviceRequest.action = 'REMOVE'
+        const ad = new FmrAd
+        ad.id = id
+        serviceRequest.ad = ad
+        return serviceRequest
+    }
+
     static cloudUploadAccess(id, fileName) {
         const serviceRequest = new AdServiceRequest
         serviceRequest.action = 'CLOUD_UPLOAD_ACCESS'

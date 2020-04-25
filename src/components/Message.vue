@@ -40,12 +40,14 @@ export default {
     // Handle App internal checks
     EventManager.subscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showUpdateResult)
   },
   beforeDestroy () {
     EventManager.unSubscribe(AppEvent.API_EVENT, this.showApiResult)
     EventManager.unSubscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showUpdateResult)
   },
   methods: {
@@ -63,7 +65,7 @@ export default {
     showErrorMessage (appEvent) {
       this.clearAll()
       this.showError = true
-      this.errorMessage = appEvent.error
+      this.errorMessage = appEvent.message
     },
     showGeneralMessage (appEvent) {
       this.clearAll();

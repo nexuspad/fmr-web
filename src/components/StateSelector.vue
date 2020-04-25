@@ -7,13 +7,14 @@
 </template>
 
 <script>
-import { STATES } from "../service/AppData";
 import AppContext from './AppContext'
+import AppDataHelper from './AppDataHelper'
 
 export default {
+  mixins: [ AppDataHelper ],
   data() {
     return {
-      allStates: STATES,
+      allStates: this.states(),
       state: ''
     }
   },
@@ -23,12 +24,15 @@ export default {
   methods: {
     changeState() {
       AppContext.changeState(this.state)
-      this.$router.push({ name: this.$router.currentRoute.name, params: { state: this.state.toLowerCase() } });
+      if (this.state.toLowerCase() === 'nationwide') {
+        this.$router.push({ name: this.$router.currentRoute.name, params: { state: '' } });
+      } else {
+        this.$router.push({ name: this.$router.currentRoute.name, params: { state: this.state.toLowerCase() } });
+      }
     }
   },
   watch: {
     "$route.params.state": function() {
-      console.log('---->', AppContext.getState())
       this.state = AppContext.getState()
     }
   }

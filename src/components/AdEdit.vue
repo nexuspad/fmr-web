@@ -69,6 +69,7 @@ import FmrAd from "../service/model/FmrAd";
 import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
+import AdUpdateHelper from './AdUpdateHelper'
 
 export default {
   data() {
@@ -79,7 +80,7 @@ export default {
       ad: new FmrAd()
     }
   },
-  mixins: [ AppDataHelper ],
+  mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
     TopNavigation, FmrFooter, ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
     Uploader, AdDetail, Message
@@ -132,13 +133,6 @@ export default {
       } else if (cCode.startsWith('for-rent|vacation')) {
         return 'ResidentialForRent'
       }
-    },
-    save() {
-      AdService.update(this.ad).then(() => {
-      })
-      .catch((error) => {
-        console.error(error)
-      })
     },
     submitAndActivate() {
       AdService.submitAndActivate(this.ad).then(() => {

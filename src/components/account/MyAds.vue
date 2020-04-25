@@ -8,22 +8,11 @@
             <h1>My ads</h1>
           </div>
           <ul class="list-unstyled">
-            <li v-for="adItem in ads" v-bind:key="adItem.id" class="border-bottom p-2">
-              <ad-summary :ad="adItem" />
-              <ul class="nav justify-content-end pagination">
-                <li class="page-item">
-                  <router-link :to="'/ad/edit?id=' + adItem.id" class="page-link active">Update</router-link>
-                </li>
-                <li class="page-item">
-                  <a class="page-link active" href="#">De-activate</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link active" href="#">Activate</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link active text-danger" href="#">Remove</a>
-                </li>
-              </ul>
+            <li v-for="ad in ads" v-bind:key="ad.id" class="border-bottom p-2">
+              <ad-summary :ad="ad" />
+              <div class="clearfix">
+                <ad-update-buttons :ad="ad" />
+              </div>
             </li>
           </ul>
           <div class="row pt-2">
@@ -57,10 +46,12 @@
 import AdSummary from "../AdSummary"
 import AdService from "../../service/AdService"
 import Message from '../Message'
+import AdUpdateHelper from '../AdUpdateHelper'
+import AdUpdateButtons from '../AdUpdateButtons'
 
 export default {
   components: {
-    AdSummary, Message
+    AdSummary, Message, AdUpdateButtons
   },
   data() {
     return {
@@ -68,6 +59,7 @@ export default {
       allPageIds: []
     };
   },
+  mixins: [ AdUpdateHelper ],
   mounted() {
     const self = this;
 

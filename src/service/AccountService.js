@@ -3,6 +3,7 @@ import AccountServiceRequest from './AccountServiceRequest'
 import User from './model/User'
 import ApiError from './ApiError'
 import StorageUtils from '../util/StorageUtil'
+import AccountSerivceRequest from './AccountServiceRequest'
 
 export default class AccountService {
     static _user = null
@@ -135,6 +136,45 @@ export default class AccountService {
             .catch((error) => {
                 reject(error)
             })  
+        })
+    }
+
+    static changePassword(password, newPassword) {
+        let serviceRequest = AccountSerivceRequest.forUpdatePassword(password, newPassword)
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).post('/account/updatePassword', serviceRequest)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        AccountService._user = new User(response.data.user)
+                        resolve(new User(response.data.user))
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    reject(error)
+                })  
+            })
+        })
+    }
+
+    static removeAccount(password) {
+        let serviceRequest = AccountSerivceRequest.forDeletaAccount(password)
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).post('/account/removeAccount', serviceRequest)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve()
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    reject(error)
+                })  
+            })
         })
     }
 

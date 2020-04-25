@@ -39,4 +39,21 @@ export default class AccountSerivceRequest {
         request.verificationCode = code
         return request
     }
+
+    static forUpdatePassword(password, newPassword) {
+        let request = new AccountSerivceRequest()
+        let user = new User()
+        user.password = password
+        request.user = user
+        request.newPassword = newPassword
+        return request
+    }
+
+    static forDeletaAccount(password) {
+        let request = new AccountSerivceRequest()
+        let user = new User()
+        user.password = password
+        request.user = user
+        return request
+    }
 }

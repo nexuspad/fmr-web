@@ -22,11 +22,17 @@ $bv-enable-table-stacked: false;
 // General style overrides and custom classes
 body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
-.fmr-lg-text {font-size: 0.85rem}
+.fmr-lg-text {font-size: 0.95rem}
 .fmr-red {color: $fmrRed;}
 .fmr-green{ color:#690 !important }
 .fmr-blue{ color:#7c97e6 }
 .fmr-warning { background:#fbfae9; border:1px solid #f4e5d0; }
+
+.fmr-forsale {background:url(./images/forsale.png) no-repeat 0 0; display:inline-block; width:35px; height:12px;}
+.fmr-forrent {background:url(./images/forrent.png) no-repeat 0 0; display:inline-block; width:37px; height:12px;}
+
+.fmr-deact {background:url(./images/deactivated.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
+.fmr-disapp {background:url(./images/disapproved.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
 
 .fmr-photo { width:100%; object-fit: cover; }
 .fmr-photo:hover { cursor: move; }
@@ -96,13 +102,6 @@ a.fas:hover { text-decoration: none; }
   text-decoration: none;
   color: #333
 }
-
-.ico-forsale {background:url(./images/forsale.png) no-repeat 0 0; display:inline-block; width:35px; height:12px;}
-.ico-forrent {background:url(./images/forrent.png) no-repeat 0 0; display:inline-block; width:37px; height:12px;}
-
-.ico-deact {background:url(./images/deactivated.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
-.ico-disapp {background:url(./images/disapproved.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
-
 
 /* datepicker style hack */
 .vdp-datepicker input.form-control[readonly] {

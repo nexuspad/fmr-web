@@ -27,6 +27,13 @@ export default {
             }
             return ''
         },
+        categoryUri(categoryId) {
+            let category = CATEGORIES[categoryId]
+            if (category) {
+                return category.uri
+            }
+            return ''
+        },
         attributeName(id) {
             let name = attributeNameLookup(id)
             if (!name) {

@@ -268,15 +268,69 @@ for (let id in ATTRIBUTES) {
 
 const CATEGORIES =
 {
+    "0": {
+        "id": 0,
+        "name": "all"
+    },
+    "1006": {
+        "id": 1006,
+        "code": "for-sale|residential|lease-purchase",
+        "name": "lease purchase",
+        "uri": "lease-purchase"
+    },
+    "2007": {
+        "id": 2007,
+        "code": "for-rent|residential|roommate",
+        "name": "roommate",
+        "uri": "roommate"
+    },
+    "2011": {
+        "id": 2011,
+        "code": "for-rent|vacation",
+        "name": "vacation rental",
+        "uri": "vacation-rental"
+    },
+    "3001": {
+        "id": 3001,
+        "code": "for-rent|residential|single-family-home",
+        "name": "single family home for rent",
+        "uri": "single-family-home-for-rent"
+    },
+    "3002": {
+        "id": 3002,
+        "code": "for-rent|residential|townhome",
+        "name": "townhome/multiple-unit for rent",
+        "uri": "townhome-multiple-unit-for-rent"
+    },
+    "3003": {
+        "id": 3003,
+        "code": "for-rent|residential|apartment",
+        "name": "apartment",
+        "uri": "apartment"
+    },
+    "3004": {
+        "id": 3004,
+        "code": "for-rent|residential|condominium",
+        "name": "condominium for rent",
+        "uri": "condominium-for-rent"
+    },
+    "3006": {
+        "id": 3006,
+        "code": "for-rent|commercial|retail-space",
+        "name": "commercial retail space for rent",
+        "uri": "commercial-retail-space-for-rent"
+    },
+    "3007": {
+        "id": 3007,
+        "code": "for-rent|commercial|shopping-center",
+        "name": "shopping center space for rent",
+        "uri": "shopping-center-space-for-rent"
+    },
     "3008": {
         "id": 3008,
         "code": "for-rent|commercial|office-space",
         "name": "office space for rent",
         "uri": "office-space-for-rent"
-    },
-    "0": {
-        "id": 0,
-        "name": "all"
     },
     "3009": {
         "id": 3009,
@@ -317,7 +371,7 @@ const CATEGORIES =
     "3015": {
         "id": 3015,
         "code": "for-sale|residential|land",
-        "name": "land",
+        "name": "residential land for sale",
         "uri": "residential-land-for-sale"
     },
     "3016": {
@@ -353,7 +407,7 @@ const CATEGORIES =
     "3023": {
         "id": 3023,
         "code": "for-sale|commercial|land",
-        "name": "land for sale",
+        "name": "commercial land for sale",
         "uri": "commercial-land-for-sale"
     },
     "3024": {
@@ -367,60 +421,6 @@ const CATEGORIES =
         "code": "for-sale|residential|foreclosure",
         "name": "foreclosures",
         "uri": "foreclosures"
-    },
-    "2007": {
-        "id": 2007,
-        "code": "for-rent|residential|roommate",
-        "name": "roommate",
-        "uri": "roommate"
-    },
-    "2011": {
-        "id": 2011,
-        "code": "for-rent|vacation",
-        "name": "vacation rental",
-        "uri": "vacation-rental"
-    },
-    "1006": {
-        "id": 1006,
-        "code": "for-sale|residential|lease-purchase",
-        "name": "lease purchase",
-        "uri": "lease-purchase"
-    },
-    "3001": {
-        "id": 3001,
-        "code": "for-rent|residential|single-family-home",
-        "name": "single family home for rent",
-        "uri": "single-family-home-for-rent"
-    },
-    "3002": {
-        "id": 3002,
-        "code": "for-rent|residential|townhome",
-        "name": "townhome/multiple-unit for rent",
-        "uri": "townhome-multiple-unit-for-rent"
-    },
-    "3003": {
-        "id": 3003,
-        "code": "for-rent|residential|apartment",
-        "name": "apartment",
-        "uri": "apartment"
-    },
-    "3004": {
-        "id": 3004,
-        "code": "for-rent|residential|condominium",
-        "name": "condominium for rent",
-        "uri": "condominium-for-rent"
-    },
-    "3006": {
-        "id": 3006,
-        "code": "for-rent|commercial|retail-space",
-        "name": "commercial retail space for rent",
-        "uri": "commercial-retail-space-for-rent"
-    },
-    "3007": {
-        "id": 3007,
-        "code": "for-rent|commercial|shopping-center",
-        "name": "shopping center space for rent",
-        "uri": "shopping-center-space-for-rent"
     }
 }
 

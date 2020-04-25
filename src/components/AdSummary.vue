@@ -11,7 +11,10 @@
         <div class="container">
           <div class="row">
             <div class="col-9">
-              <h2><router-link :to="'/ad/' + ad.id" class="fmr-red">{{ ad.title }}</router-link></h2>
+              <h2>
+                <router-link :to="'/ad/' + ad.id" class="fmr-red">{{ ad.title }}</router-link>
+                <span class="fmr-deact ml-2" v-if="!ad.isActive()"></span>
+              </h2>
               <div class="lead">{{ ad.city }}, {{ ad.state }}</div>
             </div>
             <div class="col-3">

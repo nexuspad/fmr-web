@@ -43,7 +43,7 @@
       </div>
       <div class="row">
         <!-- photo album -->
-        <div class="row row-cols-sm-1 row-cols-md-3 row-cols-lg-4" id="PropertyPhotos" :key=myKey>
+        <div class="row row-cols-sm-1 row-cols-md-3 row-cols-lg-4" id="PropertyPhotos" :key=forceRefreshKey>
           <div class="col" v-for="photo in ad.photos" v-bind:key="photo.displayOrder" :data-id="photo.viewId">
             <div class="card">
               <img :src="photo.url" class="fmr-photo" />
@@ -86,7 +86,7 @@ export default {
   props: [ 'ad' ],
   data() {
     return {
-      myKey: Date.now(),
+      forceRefreshKey: Date.now(),
       files: []
     };
   },
@@ -129,7 +129,7 @@ export default {
       const self = this
       AdService.update(AdServiceRequest.reorderPhotos(this.ad.id, viewIdInOrders)).then((ad) => {
         self.ad.mergePhotos(ad)
-        self.myKey = Date.now()
+        self.forceRefreshKey = Date.now()
       }).catch((error) => {
         console.error(error)
         EventManager.publishApiEvent(AppEvent.ofApiFailure(error));

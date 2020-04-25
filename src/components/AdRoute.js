@@ -59,13 +59,15 @@ export default class AdRoute {
                 }
             }
         )
+
         for (let categoryId in CATEGORIES) {
             children.push({
-                name: CATEGORIES[categoryId].categoryId,
-                path: '/' + CATEGORIES[categoryId].uri,
+                name: CATEGORIES[categoryId].id,
+                path: '/:state?/' + CATEGORIES[categoryId].uri,
                 component: AdList
             })
         }
+
         return children
     }
 }

@@ -59,6 +59,13 @@ export default class FmrAd {
         return this.getAttribute(12).value
     }
 
+    isActive() {
+        if (this.status === 'ACTIVE') {
+            return true
+        }
+        return false
+    }
+
     attributesTodisplay() {
         let items = []
         this.attributes.forEach((attr) => {
