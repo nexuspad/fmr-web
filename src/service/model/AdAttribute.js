@@ -1,3 +1,5 @@
+import { attributeTypeLookup } from '../../service/AppData'
+
 export default class AdAttribute {
     id
     name
@@ -13,6 +15,10 @@ export default class AdAttribute {
             this.options = jsonObj.options
             this.required = jsonObj.required
 
+            if (this.value && attributeTypeLookup(this.id) === 'array' && typeof(this.value) === 'string') {
+                this.value = this.value.split(',')
+            }
+
             // do not show 0 in the form
             if (this.value === 0) {
                 this.value = ''
@@ -27,5 +33,15 @@ export default class AdAttribute {
         attribute.name = name
         attribute.value = ''
         return attribute
+    }
+
+    // Normalize and set the value
+    setValue(value) {
+        let type = attributeTypeLookup(this.id)
+        if (type === 'array' && value instanceof Array) {
+            this.value = value.join(',')
+        } else {
+            this.value = value
+        }
     }
 }

@@ -19,7 +19,7 @@
       <div class="col-md-1">
         <label for="contact_phone">Basement</label>
         <select id="basement" class="form-control" v-model="ad.getAttribute(attributeId('basement')).value">
-          <option v-for="(theValue, index) in ad.getAttribute(attributeId('basement')).options" :key="index" :value="theValue">{{theValue}}</option>
+          <option v-for="(theValue, index) in attributeOptions('basement')" :key="index" :value="theValue">{{theValue}}</option>
         </select>
       </div>
     </div>

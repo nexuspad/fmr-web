@@ -1,7 +1,7 @@
 // Define your variable overrides here
 $primary: #213b89;
 $fmrRed: #a01c1f;
-$font-size-base: 0.8rem;
+$font-size-base: 0.9rem;
 $h1-font-size: 1rem;
 $h2-font-size: 1rem;
 
@@ -68,7 +68,7 @@ a.fas:hover { text-decoration: none; }
 }
 
 .fmr-message {
-  position:fixed; top:80px; left: 50%; transform: translate(-50%, 0); z-index: 9999;
+  position:fixed; top:80px; left: 50%; width:50%; transform: translate(-50%, 0); z-index: 9999;
 }
 
 .fmr-tab #tabs{

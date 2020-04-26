@@ -1,263 +1,486 @@
 const STATES = {
-    'nationwide': 'Nationwide', 
-    'al': 'Alabama',
-    'ak': 'Alaska',
-    'az': 'Arizona',
-    'ar': 'Arkansas',
-    'ca': 'California',
-    'co': 'Colorado',
-    'ct': 'Connecticut',
-    'dc': 'DC',
-    'de': 'Delaware',
-    'fl': 'Florida',
-    'ga': 'Georgia',
-    'hi': 'Hawaii',
-    'id': 'Idaho',
-    'il': 'Illinois',
-    'in': 'Indiana',
-    'ia': 'Iowa',
-    'ks': 'Kansas',
-    'ky': 'Kentucky',
-    'la': 'Louisiana',
-    'me': 'Maine',
-    'md': 'Maryland',
-    'ma': 'Massachusetts',
-    'mi': 'Michigan',
-    'mn': 'Minnesota',
-    'ms': 'Mississippi',
-    'mo': 'Missouri',
-    'mt': 'Montana',
-    'ne': 'Nebraska',
-    'nv': 'Nevada',
-    'nh': 'New Hampshire',
-    'nj': 'New Jersey',
-    'nm': 'New Mexico',
-    'ny': 'New York',
-    'nc': 'North Carolina',
-    'nd': 'North Dakota',
-    'oh': 'Ohio',
-    'ok': 'Oklahoma',
-    'or': 'Oregon',
-    'pa': 'Pennsylvania',
-    'ri': 'Rhode Island',
-    'sc': 'South Carolina',
-    'sd': 'South Dakota',
-    'tn': 'Tennessee',
-    'tx': 'Texas',
-    'ut': 'Utah',
-    'vt': 'Vermont',
-    'va': 'Virginia',
-    'wa': 'Washington',
-    'wv': 'West Virginia',
-    'wi': 'Wisconsin',
-    'wy': 'Wyoming'
+    'ALL': 'Nationwide', 
+    'AL': 'Alabama',
+    'AK': 'Alaska',
+    'AZ': 'Arizona',
+    'AR': 'Arkansas',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DC': 'DC',
+    'DE': 'Delaware',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'HI': 'Hawaii',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'IA': 'Iowa',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'ME': 'Maine',
+    'MD': 'Maryland',
+    'MA': 'Massachusetts',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MS': 'Mississippi',
+    'MO': 'Missouri',
+    'MT': 'Montana',
+    'NE': 'Nebraska',
+    'NV': 'Nevada',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NY': 'New York',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PA': 'Pennsylvania',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TM': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VT': 'Vermont',
+    'VA': 'Virginia',
+    'WA': 'Washington',
+    'WV': 'West Virginia',
+    'WI': 'Wisconsin',
+    'WY': 'Wyoming'
 }
 
 const ATTRIBUTES =
 {
     "1": {
         "name": "title",
-        "type": "string"
+        "id": 1,
+        "required": true
     },
     "2": {
         "name": "description",
-        "type": "string"
+        "id": 2,
+        "required": true
     },
     "8": {
         "name": "bedroom",
-        "type": "number"
+        "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ],
+        "id": 8,
+        "type": "number",
+        "required": true
     },
     "9": {
         "name": "bathroom",
-        "type": "number"
+        "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "1.5",
+            "2.5",
+            "3.5",
+            "4.5",
+            "5.5",
+            "6.5"
+        ],
+        "id": 9,
+        "type": "number",
+        "required": true
     },
     "10": {
         "name": "city",
-        "type": "string"
+        "id": 10,
+        "required": true
     },
     "12": {
         "name": "state",
-        "type": "string"
+        "id": 12,
+        "required": true
     },
     "19": {
         "name": "square_footage",
-        "type": "number"
+        "id": 19,
+        "type": "number",
+        "required": false
     },
     "21": {
         "name": "monthly_rent",
-        "type": "number"
+        "id": 21,
+        "type": "number",
+        "required": true
     },
     "22": {
         "name": "asking_price",
-        "type": "number"
+        "id": 22,
+        "type": "number",
+        "required": true
     },
     "23": {
         "name": "year_built",
-        "type": "number"
+        "id": 23,
+        "type": "number",
+        "required": false
     },
     "24": {
         "name": "cap_rate",
-        "type": "string"
+        "id": 24,
+        "required": false
     },
     "25": {
         "name": "security_deposit",
-        "type": "number"
+        "id": 25,
+        "type": "number",
+        "required": false
     },
     "26": {
         "name": "minimal_lease_term",
-        "type": "number"
+        "id": 26,
+        "required": false
     },
     "28": {
         "name": "acreage",
-        "type": "number"
+        "id": 28,
+        "type": "number",
+        "required": false
     },
     "29": {
         "name": "building_square_footage",
-        "type": "string"
+        "id": 29,
+        "type": "number",
+        "required": false
     },
     "30": {
         "name": "street_address",
-        "type": "string"
+        "id": 30,
+        "required": true
     },
     "31": {
         "name": "represented_by",
-        "type": "string"
+        "id": 31,
+        "required": false
+    },
+    "32": {
+        "name": "address_line_2",
+        "id": 32,
+        "required": false
     },
     "33": {
         "name": "zip_code",
-        "type": "string"
+        "id": 33,
+        "required": true
     },
     "35": {
         "name": "homeowner_association_fee",
-        "type": "number"
+        "id": 35,
+        "type": "number",
+        "required": false
     },
     "36": {
         "name": "condo_fee",
-        "type": "number"
+        "id": 36,
+        "type": "number",
+        "required": false
     },
     "39": {
         "name": "pet_policy",
-        "type": "number"
+        "options": [
+            "no",
+            "yes"
+        ],
+        "id": 39,
+        "required": false
     },
     "41": {
         "name": "other_amenities",
-        "type": "string"
+        "id": 41,
+        "required": false
     },
     "42": {
         "name": "parking_spaces",
-        "type": "number"
+        "id": 42,
+        "type": "number",
+        "required": false
     },
     "43": {
         "name": "school",
-        "type": "string"
+        "id": 43,
+        "required": false
     },
     "46": {
         "name": "basement",
-        "type": "number"
+        "options": [
+            "slab/none",
+            "full, unfinished",
+            "full, finished",
+            "crawl space",
+            "partial, unfinished",
+            "partial, finished"
+        ],
+        "id": 46,
+        "required": false
     },
     "49": {
         "name": "neighborhood",
-        "type": "string"
+        "id": 49,
+        "required": false
     },
     "50": {
         "name": "contact_name",
-        "type": "string"
+        "id": 50,
+        "required": false
     },
     "51": {
         "name": "contact_phone",
-        "type": "string"
+        "id": 51,
+        "required": false
     },
     "52": {
         "name": "county",
-        "type": "string"
+        "id": 52,
+        "required": false
     },
     "53": {
         "name": "open_house",
-        "type": "string"
+        "id": 53,
+        "required": false
     },
     "54": {
         "name": "open_house_hours",
-        "type": "string"
+        "id": 54,
+        "required": false
     },
     "55": {
         "name": "brokerage_company",
-        "type": "string"
+        "id": 55,
+        "required": false
     },
     "56": {
         "name": "MLS_ID",
-        "type": "string"
+        "id": 56,
+        "required": false
     },
     "57": {
         "name": "lot_size",
-        "type": "number"
+        "id": 57,
+        "type": "number",
+        "required": false
     },
     "58": {
         "name": "contact_email",
-        "type": "string"
+        "id": 58,
+        "required": false
     },
     "60": {
         "name": "interior",
-        "type": "array"
+        "options": [
+            "Hardwood floor",
+            "2-zone AC/heating",
+            "Washer and dryer",
+            "Laundry room",
+            "Furnished",
+            "Crown molding",
+            "Washer/dryer connection",
+            "Fireplace"
+        ],
+        "id": 60,
+        "type": "array",
+        "required": false
     },
     "61": {
         "name": "exterior",
-        "type": "array"
+        "options": [
+            "2-car parking space",
+            "3-car garage",
+            "Private swimming pool",
+            "Balcony",
+            "Deck",
+            "1-car garage",
+            "Irrigation system",
+            "Front porch",
+            "2-car garage",
+            "1-car parking space",
+            "Patio",
+            "Cul-de-sac",
+            "Fenced backyard"
+        ],
+        "id": 61,
+        "type": "array",
+        "required": false
     },
     "62": {
         "name": "rent_includes",
-        "type": "array"
+        "options": [
+            "Water and sewer",
+            "Electricity",
+            "Garbage pickup",
+            "Gas"
+        ],
+        "id": 62,
+        "type": "array",
+        "required": false
     },
     "63": {
         "name": "lot_developed",
-        "type": "array"
+        "options": [
+            "no",
+            "yes"
+        ],
+        "id": 63,
+        "required": false
     },
     "65": {
         "name": "owner_financing_available",
-        "type": "array"
+        "options": [
+            "no",
+            "yes"
+        ],
+        "id": 65,
+        "required": false
     },
     "66": {
         "name": "kitchen_and_dining",
-        "type": "array"
+        "options": [
+            "Breakfast area(nook)",
+            "Garbage disposal",
+            "Formal dining room",
+            "Dishwasher",
+            "Refrigerator",
+            "Range/oven",
+            "Granite countertops"
+        ],
+        "id": 66,
+        "type": "array",
+        "required": false
     },
     "67": {
         "name": "bed_and_bath",
-        "type": "array"
+        "options": [
+            "In-law suite",
+            "Separate shower in master bath",
+            "Walk-in closet in master",
+            "Guest suite on main",
+            "Master on main",
+            "Jacuzzi tub"
+        ],
+        "id": 67,
+        "type": "array",
+        "required": false
     },
     "68": {
         "name": "community",
-        "type": "array"
+        "options": [
+            "Gated community",
+            "Tennis",
+            "Fitness center",
+            "Golf",
+            "Shared swimming pool",
+            "Club house",
+            "Close to park",
+            "Hiking/biking trails",
+            "Basketball",
+            "Public transportation",
+            "Playground"
+        ],
+        "id": 68,
+        "type": "array",
+        "required": false
     },
     "69": {
         "name": "condo_amenities",
-        "type": "array"
+        "options": [
+            "Fitness center",
+            "24 Hour Concierge",
+            "On-site parking",
+            "Children's playroom",
+            "Garage parking"
+        ],
+        "id": 69,
+        "type": "array",
+        "required": false
     },
     "70": {
         "name": "pet_policy_details",
-        "type": "string"
+        "id": 70,
+        "required": false
     },
     "71": {
         "name": "apartment_unit_amenities",
-        "type": "array"
+        "options": [
+            "Eat in kitchen or dining",
+            "Washer and dryer",
+            "Ground floor",
+            "Dishwasher",
+            "Refrigerator",
+            "Deck",
+            "Furnished",
+            "Washer/dryer connection",
+            "High speed internet",
+            "Range/oven",
+            "Patio",
+            "Top floor",
+            "Fireplace"
+        ],
+        "id": 71,
+        "type": "array",
+        "required": false
     },
     "72": {
         "name": "apartment_amenities",
-        "type": "array"
+        "options": [
+            "Gated community",
+            "Laundry facilities",
+            "Tennis",
+            "Business center",
+            "Fitness center",
+            "Shared swimming pool",
+            "Storage Space(s)",
+            "Wheelchair Access",
+            "Garage parking",
+            "Club house",
+            "Hiking/biking trails",
+            "Public transportation"
+        ],
+        "id": 72,
+        "type": "array",
+        "required": false
     },
     "73": {
         "name": "available_date",
-        "type": "string"
+        "id": 73,
+        "required": false
     },
     "74": {
         "name": "special_offer",
-        "type": "string"
+        "id": 74,
+        "required": false
     },
     "1004": {
         "name": "current_zoning",
-        "type": "array"
+        "options": [
+            "Commercial",
+            "Residential"
+        ],
+        "id": 1004,
+        "required": false
     },
     "1008": {
         "name": "rate",
-        "type": "string"
+        "id": 1008,
+        "required": false
     }
 }
 
@@ -424,123 +647,6 @@ const CATEGORIES =
     }
 }
 
-const LOOKUPS = {
-    "MOM": "Master on main",
-    "GOM": "Guest suite on main",
-    "ILS": "In-law suite",
-    "SSM": "Separate shower in master bath",
-    "WIC": "Walk-in closet in master",
-    "JT": "Jacuzzi tub",
-    "RFG": "Refrigerator",
-    "DW": "Dishwasher",
-    "GD": "Garbage disposal",
-    "RO": "Range/oven",
-    "BA": "Breakfast area(nook)",
-    "GCS": "Granite countertops",
-    "FDG": "Formal dining room",
-    "FUR": "Furnished",
-    "WD": "Washer and dryer",
-    "WDH": "Washer/dryer connection",
-    "LR": "Laundry room",
-    "FP": "Fireplace",
-    "HW": "Hardwood floor",
-    "CM": "Crown molding",
-    "TZA": "2-zone AC/heating",
-    "PKG": "Parking",
-    "PARKING1": "1-car parking space",
-    "PARKING2": "2-car parking space",
-    "G1": "1-car garage",
-    "G2": "2-car garage",
-    "G3": "3-car garage",
-    "FB": "Fenced backyard",
-    "PSP": "Private swimming pool",
-    "PT": "Patio",
-    "DK": "Deck",
-    "BLY": "Balcony",
-    "FPCH": "Front porch",
-    "IS": "Irrigation system",
-    "CDS": "Cul-de-sac",
-    "CCG": "24 Hour Concierge",
-    "CP": "Children's playroom",
-    "OSP": "On-site parking",
-    "GC": "Gated community",
-    "FC": "Fitness center",
-    "CH": "Club house",
-    "SSP": "Shared swimming pool",
-    "TT": "Tennis",
-    "BB": "Basketball",
-    "PGD": "Playground",
-    "GLF": "Golf",
-    "PRK": "Close to park",
-    "HBT": "Hiking/biking trails",
-    "PTR": "Public transportation",
-    "WT": "Water and sewer",
-    "ELC": "Electricity",
-    "GAS": "Gas",
-    "GP": "Garbage pickup",
-    "NOFEE": "No broker fee",
-    "EXC": "Exclusive",
-    "DOORMAN": "Doorman",
-    "ELEVATOR": "Elevator",
-    "CAT": "Cats",
-    "DOG1": "Dogs (under 25 lbs)",
-    "DOG2": "Large Dogs",
-    "EIK": "Eat in kitchen or dining",
-    "HPI": "High speed internet",
-    "TF": "Top floor",
-    "GF": "Ground floor",
-    "LRF": "Laundry facilities",
-    "GGP": "Garage parking",
-    "STS": "Storage Space(s)",
-    "WCA": "Wheelchair Access",
-    "DMN": "Doorman",
-    "BIZ": "business center",
-    "LKF": "Lake front",
-    "BV": "Beach view",
-    "OV": "Ocean view",
-    "WV": "Water view",
-    "MTV": "Mountain view",
-    "FK": "Full kitchen",
-    "MV": "Microwave",
-    "CU": "Cooking utensils",
-    "IC": "Ice maker",
-    "CFM": "Coffee maker",
-    "LN": "Linens provided",
-    "AC": "Air conditioning",
-    "CF": "Ceiling fans",
-    "HT": "Hot tub",
-    "SNA": "Sauna",
-    "BNY": "Balcony",
-    "DCK": "Dock",
-    "TV": "Cable/Satellite TV",
-    "PC": "Computer",
-    "WB": "Internet",
-    "WF": "WiFi",
-    "CR": "Conference room",
-    "LT": "Live theater",
-    "MUS": "Museums",
-    "SRF": "Surfing",
-    "SAL": "Sailing",
-    "SDS": "Scuba diving/snorkeling",
-    "KYK": "Kayaking",
-    "PRS": "Parasailing",
-    "SKI": "Skiing",
-    "SNB": "Snowboarding",
-    "SNM": "Snowmobiling",
-    "ISK": "Ice skating",
-    "SLT": "Sledding/Tubing",
-    "FS": "Fishing",
-    "BOT": "Boating",
-    "RFT": "Rafting",
-    "HOR": "Horseback riding",
-    "ROC": "Rock climbing",
-    "LF": "Lake front",
-    "LK": "Lake",
-    "SP": "Private swimming pool",
-    "SPP": "Shared swimming pool",
-    "STC": "Swimming/tennis community"
-}
-
 function stateName(code) {
     code = code.toLowerCase()
     if (STATES[code]) {
@@ -560,6 +666,20 @@ function attributeNameLookup(attributeId) {
     return ATTRIBUTES[attributeId]
 }
 
+function attributeTypeLookup(attributeId) {
+    if (ATTRIBUTES[attributeId]) {
+        return ATTRIBUTES[attributeId].type
+    }
+    return ''
+}
+
+function attributeOptionsLookup(attributeId) {
+    if (ATTRIBUTES[attributeId]) {
+        return ATTRIBUTES[attributeId].options
+    }
+    return ''
+}
+
 function attributeIdLookup(name) {
     return parseInt(ATTRIBUTE_NAME_LOOKUP[name])
 }
@@ -572,4 +692,4 @@ function categoryNameLookup(categoryId) {
     return CATEGORIES[categoryId].name
 }
 
-export { STATES, CATEGORIES, LOOKUPS, stateName, attribute, attributeIdLookup, attributeNameLookup, categoryNameLookup }
+export { STATES, CATEGORIES, ATTRIBUTES, stateName, attribute, attributeIdLookup, attributeNameLookup, attributeTypeLookup, attributeOptionsLookup, categoryNameLookup }

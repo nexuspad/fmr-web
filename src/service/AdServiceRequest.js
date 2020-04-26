@@ -29,38 +29,38 @@ export default class AdServiceRequest {
         return serviceRequest
     }
 
-    static activate(id) {
+    static activate(adObj) {
         const serviceRequest = new AdServiceRequest
         serviceRequest.action = 'ACTIVATE'
         const ad = new FmrAd
-        ad.id = id
+        ad.id = adObj.id
         serviceRequest.ad = ad
         return serviceRequest
     }
 
-    static deActivate(id) {
+    static deActivate(adObj) {
         const serviceRequest = new AdServiceRequest
         serviceRequest.action = 'DEACTIVATE'
         const ad = new FmrAd
-        ad.id = id
+        ad.id = adObj.id
         serviceRequest.ad = ad
         return serviceRequest
     }
 
-    static extention(id) {
+    static extention(adObj) {
         const serviceRequest = new AdServiceRequest
         serviceRequest.action = 'EXTENSION'
         const ad = new FmrAd
-        ad.id = id
+        ad.id = adObj.id
         serviceRequest.ad = ad
         return serviceRequest
     }
 
-    static remove(id) {
+    static remove(adObj) {
         const serviceRequest = new AdServiceRequest
         serviceRequest.action = 'REMOVE'
         const ad = new FmrAd
-        ad.id = id
+        ad.id = adObj.id
         serviceRequest.ad = ad
         return serviceRequest
     }
@@ -141,8 +141,8 @@ export default class AdServiceRequest {
                 if (element.value) {
                     const attrObj = new AdAttribute
                     attrObj.id = element.id
-                    attrObj.value = element.value
-                    this.ad.attributes.push(attrObj)    
+                    attrObj.setValue(element.value)
+                    this.ad.attributes.push(attrObj)
                 }
             })
         }

@@ -15,16 +15,16 @@ export default {
   data() {
     return {
       allStates: this.states(),
-      state: ''
+      state: ''   // This should always be in uppercase
     }
   },
   beforeMount() {
-    this.state = AppContext.findStateInRoute(this.$route.params)
+    this.state = AppContext.findStateInRoute(this.$route.params).toUpperCase()
   },
   methods: {
     changeState() {
       AppContext.changeState(this.state)
-      if (this.state.toLowerCase() === 'nationwide') {
+      if (this.state === 'ALL') {
         this.$router.push({ name: this.$router.currentRoute.name, params: { state: '' } });
       } else {
         this.$router.push({ name: this.$router.currentRoute.name, params: { state: this.state.toLowerCase() } });
@@ -33,7 +33,7 @@ export default {
   },
   watch: {
     "$route.params.state": function() {
-      this.state = AppContext.getState()
+      this.state = AppContext.getState().toUpperCase()
     }
   }
 };

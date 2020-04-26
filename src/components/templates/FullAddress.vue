@@ -1,11 +1,18 @@
 <template>
   <div>
     <div class="form-row">
-      <div class="form-group col-md-9 mb-0">
+      <div class="form-group col-md-8 mb-0">
         <div class="form-group">
-          <label for="inputAddress" class="required">Address</label>
+          <label for="inputAddress" class="required">Street address</label>
           <input id="inputAddress" type="text" class="form-control"
             name="title" v-model="ad.getAttribute(attributeId('street_address')).value" />
+        </div>
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        <div class="form-group">
+          <label for="inputAddress2">Building, unit, suite, floor, etc.</label>
+          <input id="inputAddress2" type="text" class="form-control"
+            name="title" v-model="ad.getAttribute(attributeId('address_line_2')).value" />
         </div>
       </div>
     </div>
@@ -18,7 +25,7 @@
         <label for="inputState" class="required">State</label>
         <select id="inputState" class="form-control" v-model="ad.getAttribute(attributeId('state')).value">
           <option selected>Choose...</option>
-          <option v-for="(name, code) in states" :key="code" :value="code">{{name}}</option>
+          <option v-for="(name, code) in states()" :key="code" :value="code">{{name}}</option>
         </select>
       </div>
       <div class="form-group col-md-1">

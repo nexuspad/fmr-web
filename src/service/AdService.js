@@ -7,6 +7,7 @@ import ApiError from './ApiError'
 const AD_LISTING = 'ads'
 const AD_TEMPLATE = 'placead/template?categoryId=#CategoryId'
 const AD_VIEW = 'ad?id=#Id'
+const AD_EDIT = 'ad/edit?id=#Id'
 const AD_UPDATE = 'account/updateAd'
 
 export default class AdService {
@@ -78,7 +79,7 @@ export default class AdService {
         })
     }
 
-    static getAd(id) {
+    static getAd(id, forEditing = false) {
         if (AdService._adList) {
             const ad = AdService._adList.getAd(id)
             if (ad) {
@@ -87,7 +88,7 @@ export default class AdService {
                 })
             }
         }
-        let uri = AD_VIEW.replace('#Id', id);
+        let uri = forEditing? AD_EDIT.replace('#Id', id) : AD_VIEW.replace('#Id', id);
         return new Promise((resolve, reject) => {
             RestClient.instance().get(uri)
             .then((response) => {

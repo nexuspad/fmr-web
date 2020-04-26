@@ -15,15 +15,16 @@ export default class AppContext {
         return AppContext._state
     }
 
+    // _state should always be stored in lower case
     static changeState(theState) {
-        AppContext._state = theState
+        AppContext._state = theState.toLowerCase()
     }
 
     static findStateInRoute(routeParam) {
         if (routeParam.state) {
             AppContext._state = routeParam.state
         } else {
-            AppContext._state = 'nationwide'
+            AppContext._state = 'all'
         }
         return AppContext._state
     }

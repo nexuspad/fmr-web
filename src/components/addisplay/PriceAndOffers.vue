@@ -25,7 +25,7 @@
         <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
           <label>Rent includes</label>
           <div class="mr-4" v-for="(value, index) in attributeValue('rent_includes')" :key="index">
-            <span class="p-2">{{ lookup(value) }}</span>
+            <span class="p-2">{{ value }}</span>
           </div>
         </div>
       </div>

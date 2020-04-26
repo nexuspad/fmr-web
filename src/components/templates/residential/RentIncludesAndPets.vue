@@ -3,8 +3,8 @@
     <div class="col-md-6">
       <label>Rent includes</label>
       <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
-        <div class="mr-4" v-for="(option, index) in ad.getAttribute(attributeId('rent_includes')).options" :key="index">
-          <input type="checkbox" v-model="selections" :id="index" :value="option" v-on:change="updateSelection()" />
+        <div class="mr-4" v-for="(option, index) in attributeOptions('rent_includes')" :key="index">
+          <input type="checkbox" v-model="ad.getAttribute(attributeId('rent_includes')).value" :id="index" :value="option" />
           <span class="p-2">{{ option }}</span>
         </div>
       </div>
@@ -51,9 +51,6 @@ export default {
       } else {
         this.ad.getAttribute(this.attributeId('pet_policy')).value = 'no'
       }
-    },
-    updateSelection () {
-      this.ad.getAttribute('rent_includes').value = this.selections.join(',')
     }
   }
 }

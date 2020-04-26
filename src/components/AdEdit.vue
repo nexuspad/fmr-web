@@ -31,6 +31,9 @@
         </div>
         <div class="tab-content pt-4 pl-4">
           <div class="tab-pane active" id="Content">
+            <div class="form-group">
+              <button class="btn btn-primary" v-on:click="save">Save</button>
+            </div>
             <residential-for-sale :ad="ad" v-if="template == 'ResidentialForSale'" />
             <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
             <commercial-for-sale :ad="ad" v-if="template == 'CommercialForSale'" />
@@ -98,7 +101,7 @@ export default {
     const self = this;
 
     if (this.id) {
-      AdService.getAd(self.id)
+      AdService.getAd(self.id, true)
         .then(ad => {
           self.ad = ad;
           self.categoryId = self.ad.categoryId

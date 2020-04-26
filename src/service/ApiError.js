@@ -4,7 +4,7 @@ const ApiErrorMessage = {
     ACCT_LOGIN_FAILED: 'Login failed. Invalid credentials.',
     DATA_ERROR_AD_NOT_FOUND: 'The ad cannot be found in the system.',
     DATA_ERROR_MISSING_REQUIRED: 'Some required fields are missing',
-    ACCT_AUTHENTICATION_FAILURE: 'Your login session has expired. <a href="/login">Re-login</a>.'
+    ACCT_AUTHENTICATION_FAILURE: 'Your login session has expired. <a href="/account/login">Re-login</a>.'
 }
 
 export default class ApiError {

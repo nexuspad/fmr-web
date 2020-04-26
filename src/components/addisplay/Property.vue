@@ -1,11 +1,11 @@
 <template>
   <div class="pb-3 mb-2">
     <div class="d-flex flex-row flex-wrap bd-highlight">
-      <div class="mr-4">
+      <div class="mr-4" v-if="hasAttributeValue('bedroom')">
         <label>Bedroom</label>
         <div>{{ attributeValue('bedroom') }}</div>
       </div>
-      <div class="mr-4">
+      <div class="mr-4" v-if="hasAttributeValue('bathroom')">
         <label>Bathroom</label>
         <div>{{ attributeValue('bathroom') }}</div>
       </div>

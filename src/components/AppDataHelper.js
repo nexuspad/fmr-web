@@ -1,4 +1,4 @@
-import { STATES, CATEGORIES, LOOKUPS, stateName, attributeIdLookup, attributeNameLookup, categoryNameLookup, attribute } from '../service/AppData'
+import { STATES, CATEGORIES, stateName, attributeIdLookup, attributeNameLookup, attributeOptionsLookup, categoryNameLookup, attributeTypeLookup } from '../service/AppData'
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -37,19 +37,16 @@ export default {
         attributeName(id) {
             let name = attributeNameLookup(id)
             if (!name) {
-                console.error('Error finding the attribute name', id)
+                console.error('Error finding the attribute name using the id: ', id)
             }
             return name
         },
         attributeId(name) {
             let id = attributeIdLookup(name)
             if (!id) {
-                console.error('Error finding the attribute id', name)
+                console.error('Error finding the attribute id using the name: ', name)
             }
             return id
-        },
-        lookup(name) {
-            return LOOKUPS[name]
         },
         hasAttributeValue(name) {
             if (this.ad) {
@@ -61,25 +58,25 @@ export default {
         },
         attributeValue(name) {
             if (this.ad) {
+                let value = this.ad.getAttribute(this.attributeId(name)).value
                 if (this.attributeType(name) === 'array') {
-                    let value = this.ad.getAttribute(this.attributeId(name)).value
                     if (value) {
-                        return value.split(',')
+                        return value
                     } else {
                         return []
                     }
                 } else {
-                    return this.ad.getAttribute(this.attributeId(name)).value
+                    return value
                 }
             }
             return ''
         },
         attributeType(name) {
-            let attr = attribute(this.attributeId(name))
-            if (attr) {
-                return attr.type
-            }
-            return ''
+            return attributeTypeLookup(this.attributeId(name))
+        },
+        attributeOptions(name) {
+            let options = attributeOptionsLookup(this.attributeId(name))
+            return options? options : []
         },
         isHomeStyle(categoryId) {
             let code = this.categoryCode(categoryId)

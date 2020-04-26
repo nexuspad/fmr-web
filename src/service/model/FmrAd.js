@@ -35,6 +35,22 @@ export default class FmrAd {
         }
     }
 
+    copy(otherAd) {
+        this.status = otherAd.status
+        this.id = otherAd.id
+
+        if (otherAd.attributes) {
+            while (this.attributes.length) {
+                this.attributes.pop();
+            }
+            otherAd.attributes.forEach(element => {
+                const attrObj = new AdAttribute(element)
+                this.attributes.push(attrObj)
+                this.attributeMap.set(attrObj.id, attrObj)
+            })
+        }
+    }
+
     getAttribute (id) {
         if (this.attributeMap.has(id)) {
             return this.attributeMap.get(id)
