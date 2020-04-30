@@ -2,7 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <img :src="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
+        <router-link :to="'/ad/' + ad.id">
+          <img v-lazy="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
+        </router-link>
         <div class="h-75 rounded shadow-sm text-center jumbotron" v-if="!ad.thumbnailUrl">
           <div class="mt-n2">{{ categoryName(ad.categoryId) }}</div>
         </div>

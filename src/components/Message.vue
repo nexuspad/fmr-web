@@ -37,11 +37,18 @@ export default {
     // Handle API response directly
     EventManager.subscribe(AppEvent.API_EVENT, this.showApiResult)
 
+    EventManager.subscribe(AppEvent.GENERIC_MISSING_INPUT, this.showErrorMessage)
+
     // Handle App internal checks
     EventManager.subscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showSuccessMessage)
+
+    EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_FAILURE, this.showErrorMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_SUCCESS, this.showSuccessMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_FAILURE, this.showErrorMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, this.showSuccessMessage)
 
     EventManager.subscribe(AppEvent.AD_UPDATE_SUCCESS, this.showSuccessMessage)
     EventManager.subscribe(AppEvent.AD_UPDATE_FAILURE, this.showErrorMessage)
@@ -60,10 +67,18 @@ export default {
   },
   beforeDestroy () {
     EventManager.unSubscribe(AppEvent.API_EVENT, this.showApiResult)
+    
+    EventManager.unSubscribe(AppEvent.GENERIC_MISSING_INPUT, this.showErrorMessage)
+
     EventManager.unSubscribe(AppEvent.ACCOUNT_REGISTRATION_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showSuccessMessage)
+
+    EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_FAILURE, this.showErrorMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_SUCCESS, this.showSuccessMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_FAILURE, this.showErrorMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, this.showSuccessMessage)
 
     EventManager.unSubscribe(AppEvent.AD_UPDATE_SUCCESS, this.showSuccessMessage)
     EventManager.unSubscribe(AppEvent.AD_UPDATE_FAILURE, this.showErrorMessage)

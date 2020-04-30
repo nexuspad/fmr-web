@@ -35,34 +35,35 @@
                 </span>
               </div>
               <div class="col">
-                <a class="fas fa-times fa-lg fmr-red" href="javascript:;" @click="cancelUpload(index, fileObj)"></a>
+                <a class="fas fa-times fa-lg fmr-red" href="javascript:;" @click="cancelUpload(index, fileObj)"
+                  v-if="fileObj.status !== 'completed'"></a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <!-- photo album -->
-        <div class="row row-cols-sm-1 row-cols-md-3 row-cols-lg-4" id="PropertyPhotos" :key=forceRefreshKey>
-          <div class="col" v-for="photo in ad.photos" v-bind:key="photo.displayOrder" :data-id="photo.viewId">
-            <div class="card">
-              <img :src="photo.url" class="fmr-photo" />
-              <div class="card-body">
-                <h5 class="card-title" v-show="photo.newTitle == null" @click="photo.newTitle = photo.title ? photo.title : ''">
-                  {{ photo.title || 'Add a title' }}
-                </h5>
-                <div class="input-group" v-show="photo.newTitle != null">
-                  <input type="text" class="form-control" placeholder="Add a title" v-model="photo.newTitle">
-                  <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-success" type="button" @click="closeTitleInput(photo.viewId, true)">
-                      <i class="fas fa-check"></i></button>
-                    <button class="btn btn-outline-secondary" type="button" @click="closeTitleInput(photo.viewId, false)">
-                      <i class="fas fa-times"></i></button>
-                  </div>
+    </div>
+    <div class="container-fluid">
+      <!-- photo album -->
+      <div class="row row-cols-sm-1 row-cols-md-3 row-cols-lg-4" id="PropertyPhotos" :key=forceRefreshKey>
+        <div class="col" v-for="photo in ad.photos" v-bind:key="photo.displayOrder" :data-id="photo.viewId">
+          <div class="card">
+            <img :src="photo.url" class="fmr-photo" />
+            <div class="card-body">
+              <h5 class="card-title" v-show="photo.newTitle == null" @click="photo.newTitle = photo.title ? photo.title : ''">
+                {{ photo.title || 'Add a title' }}
+              </h5>
+              <div class="input-group" v-show="photo.newTitle != null">
+                <input type="text" class="form-control" placeholder="Add a title" v-model="photo.newTitle">
+                <div class="input-group-append" id="button-addon4">
+                  <button class="btn btn-outline-success" type="button" @click="closeTitleInput(photo.viewId, true)">
+                    <i class="fas fa-check"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" @click="closeTitleInput(photo.viewId, false)">
+                    <i class="fas fa-times"></i></button>
                 </div>
-                <div class="fmr-photo-filename">{{ photo.fileName }}</div>
-                <button class="btn btn-danger mt-1" v-on:click="deletePhoto(photo)">Delete</button>
               </div>
+              <div class="fmr-photo-filename">{{ photo.fileName }}</div>
+              <button class="btn btn-danger mt-1" v-on:click="deletePhoto(photo)">Delete</button>
             </div>
           </div>
         </div>

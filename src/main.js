@@ -3,6 +3,7 @@ import VueCompositionApi from '@vue/composition-api'
 import VueRouter from 'vue-router'
 import vueHeadful from 'vue-headful'
 import VueTextareaAutosize from 'vue-textarea-autosize';
+import VueLazyload from 'vue-lazyload'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
@@ -12,6 +13,8 @@ import '@fortawesome/fontawesome-free/css/all.css'
 Vue.use(VueCompositionApi)
 Vue.use(VueRouter)
 Vue.use(VueTextareaAutosize);
+Vue.use(VueLazyload)
+
 Vue.component('vue-headful', vueHeadful)
 
 Vue.config.productionTip = false

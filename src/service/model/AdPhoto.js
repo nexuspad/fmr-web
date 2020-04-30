@@ -20,7 +20,8 @@ export default class AdPhoto {
             this.displayOrder = jsonObj.displayOrder
 
             if (this.key) {
-                this.url = 'https://findmyroof.s3.amazonaws.com/' + this.key
+                let parts = this.key.split(':')
+                this.url = 'https://' + parts[0] + '.s3.amazonaws.com/' + parts[1]
             } else if (this.fileName) {
                 this.url = 'http://findmyroof.com/var/post/' + this.adId + '/' + this.fileName
             }

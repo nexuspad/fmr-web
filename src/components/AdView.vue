@@ -5,7 +5,7 @@
       <category-navigation />
       <div class="fmr-bordered-area">
         <div class="header">
-          <h1>{{ ad.city }}, {{ stateName(ad.state) }} {{ categoryName([ad.categoryId]) }} Ad# {{ ad.id }}</h1>
+          <h1 class="fmr-sm-text">{{ stateName(ad.state) }} / {{ ad.city }} / {{ categoryName([ad.categoryId]) }} / Ad# {{ ad.id }}</h1>
         </div>
         <ad-detail :ad=ad />
         <ad-warning />

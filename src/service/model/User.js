@@ -14,6 +14,14 @@ export default class User {
         }
     }
 
+    static visitor() {
+        const user = new User
+        user.id = 0
+        user.status = ''
+        user.token = false
+        return user
+    }
+
     get token() {
         if (this.token) {
             return this.token
@@ -22,14 +30,14 @@ export default class User {
     }
 
     isVerified() {
-        if (status === 1) {
+        if (this.status === 'VERIFIED') {
             return true
         }
         return false
     }
 
     verificationCodeSent() {
-        if (status === 2) {
+        if (this.status === 'VERIFICATION_SENT') {
             return true
         }
         return false

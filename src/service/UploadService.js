@@ -37,7 +37,7 @@ export default class UploadService {
                             self._uploadToCloud(cloudConfig, file, progressCallback)
                                 .then(function () {
                                     // ============ III. call API to update database ============
-                                    self._completeUpload(token, id, cloudConfig.file_name, cloudConfig.s3_key)
+                                    self._completeUpload(token, id, cloudConfig.file_name, cloudConfig.bucket, cloudConfig.s3_key)
                                         .then(function (response) {
                                             // ============ FINAL resolve into Uploader.vue ============
                                             if (response.data.code == 'SUCCESS') {
@@ -47,6 +47,7 @@ export default class UploadService {
                                             }
                                         })
                                         .catch(function (error) {
+                                            console.error(error)
                                             self._concludeService({ reject: reject, error: error });
                                         });
                                 })
@@ -115,9 +116,10 @@ export default class UploadService {
     }
 
     // call API to update the database
-    _completeUpload(token, id, fileName, key) {
+    _completeUpload(token, id, fileName, bucket, s3Key) {
+        let key = bucket + ':' + s3Key
         const request = AdServiceRequest.addPhoto(id, fileName, key)
-        return RestClient.instance(token).post('/upload/addPhoto', request)
+        return RestClient.instance(token).post('/account/updateAd', request)
     }
 
     // resolve into the Uploader.vue

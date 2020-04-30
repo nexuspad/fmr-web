@@ -24,7 +24,7 @@ export default class AppContext {
         if (routeParam.state) {
             AppContext._state = routeParam.state
         } else {
-            AppContext._state = 'all'
+            AppContext._state = 'ALL'
         }
         return AppContext._state
     }
@@ -55,10 +55,11 @@ export default class AppContext {
     }
 
     static activity(currentRoute) {
-        if (currentRoute.name === 'PlaceAd' || currentRoute.name === 'AdNew' || currentRoute.name === 'AdEdit') {
+        if (currentRoute.name === 'AdNew' || currentRoute.name === 'AdEdit') {
             return 'editing'
-        } else if (currentRoute.name === 'Account' || currentRoute.name === 'Register' ||
-            currentRoute.name === 'Login' || currentRoute.name === 'Settings' || currentRoute.name === 'MyAds' ||
+        } else if (currentRoute.name === 'Account' || currentRoute.name === 'Register' || currentRoute.name === 'ResetPassword' ||
+            currentRoute.name === 'Login' || currentRoute.name === 'Settings' || 
+            currentRoute.name === 'MyAds' || currentRoute.name === 'PlaceAd' ||
             currentRoute.name ==='SendVerificationCode' || currentRoute.name === 'Verify') {
             return 'account'
         }

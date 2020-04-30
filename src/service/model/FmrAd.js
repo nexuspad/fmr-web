@@ -10,6 +10,9 @@ export default class FmrAd {
     attributes = []
     photos = []
 
+    postDate
+    updateTime
+
     attributeMap = new Map
     
     constructor(jsonObj) {
@@ -17,6 +20,9 @@ export default class FmrAd {
             this.id = jsonObj.id
             this.category = new AdCategory(jsonObj.category)
             this.status = jsonObj.status
+
+            this.postDate = jsonObj.postDate
+            this.updateTime = jsonObj.updateTime
 
             if (jsonObj.attributes) {
                 jsonObj.attributes.forEach(element => {
@@ -36,8 +42,10 @@ export default class FmrAd {
     }
 
     copy(otherAd) {
-        this.status = otherAd.status
         this.id = otherAd.id
+        this.status = otherAd.status
+        this.postDate = otherAd.postDate
+        this.updateTime = otherAd.updateTime
 
         if (otherAd.attributes) {
             while (this.attributes.length) {
@@ -45,6 +53,7 @@ export default class FmrAd {
             }
             otherAd.attributes.forEach(element => {
                 const attrObj = new AdAttribute(element)
+                console.log('update ----> ', attrObj)
                 this.attributes.push(attrObj)
                 this.attributeMap.set(attrObj.id, attrObj)
             })
@@ -77,6 +86,13 @@ export default class FmrAd {
 
     isActive() {
         if (this.status === 'ACTIVE') {
+            return true
+        }
+        return false
+    }
+
+    isDraft() {
+        if (this.status === 'DRAFT') {
             return true
         }
         return false
@@ -115,6 +131,11 @@ export default class FmrAd {
 
     mergePhotos(updatedAd) {
         if (!updatedAd.photos || updatedAd.photos.length === 0) {
+            if (this.photos) {
+                while (this.photos.length) {
+                    this.photos.pop();
+                }    
+            }
             return
         }
 

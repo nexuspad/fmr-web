@@ -7,7 +7,12 @@
       </div>
       <message />
       <div class="fmr-form p-2">
-        <div class="fmr-tab">
+        <div class="fmr-tab shadow-sm sticky-top">
+          <div class="float-right mr-2 pt-1">
+            <!-- <button class="btn btn-primary" v-on:click="save">Save</button> -->
+            <button class="btn btn-primary" 
+              data-toggle="modal" data-target="#SubmissionConfirmation" v-if="!ad.isDraft()">Submit</button>
+          </div>
           <ul class="nav nav-tabs">
             <li class="nav-item">
               <a class="nav-link active" data-toggle="tab" href="#Content">Content</a>
@@ -19,41 +24,63 @@
               <a class="nav-link" data-toggle="tab" href="#Preview">Preview</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#Submit" @click="save()">Submit</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" data-toggle="tab" href="#">Disabled</a>
-            </li>
-            <li class="nav-item">
-              <router-link to="/account/myads" class="nav-link text-danger">Cancel</router-link>
+              <router-link to="/account/myads" class="nav-link text-danger" v-if="!ad.isDraft()">Cancel</router-link>
+              <a class="nav-link text-danger" data-toggle="tab" href="#Cancel" v-if="ad.isDraft()">Cancel</a>
             </li>
           </ul>
         </div>
-        <div class="tab-content pt-4 pl-4">
+        <div class="tab-content pt-4 pl-4 pr-2">
           <div class="tab-pane active" id="Content">
-            <div class="form-group">
-              <button class="btn btn-primary" v-on:click="save">Save</button>
-            </div>
             <residential-for-sale :ad="ad" v-if="template == 'ResidentialForSale'" />
             <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
             <commercial-for-sale :ad="ad" v-if="template == 'CommercialForSale'" />
             <commercial-for-rent :ad="ad" v-if="template == 'CommercialForRent'" />
+            <post-warning />
           </div>
           <div class="tab-pane" id="Photos">
             <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">
-            <ad-detail :ad=ad />
+            <ad-detail :ad=ad :key="ad.updateTime" />
           </div>
           <div class="tab-pane" id="Submit">
-            <div class="form-group">
-              <button class="btn btn-primary" v-on:click="save">Save</button>
+            <div class="align-middle text-center pt-5 pb-5">
+              <p>
+              Before submitting, please review and make sure you agree to FindMyRoof.com's Terms of use and Privacy policy.
+              </p>
+              <button class="btn btn-primary" v-on:click="save">I agree and submit</button>
+            </div>
+          </div>
+          <div class="tab-pane" id="Cancel">
+            <div class="align-middle text-center pt-5 pb-5">
+              <p>
+              A draft copy has been saved.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <fmr-footer />
+    <div class="modal" id="SubmissionConfirmation" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Submission confirmation</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Before submitting, please review and make sure you agree to FindMyRoof.com's Terms of use and Privacy policy.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">I agree and submit</button>
+          </div>
+      </div>
+    </div>
+</div>
   </div>
 </template>
 
@@ -73,6 +100,7 @@ import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
 import AdUpdateHelper from './AdUpdateHelper'
+import PostWarning from './misc/PostWarning'
 
 export default {
   data() {
@@ -86,7 +114,7 @@ export default {
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
     TopNavigation, FmrFooter, ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
-    Uploader, AdDetail, Message
+    Uploader, AdDetail, Message, PostWarning
   },
   beforeMount() {
     if (this.$route.query.categoryId) {

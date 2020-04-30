@@ -648,7 +648,7 @@ const CATEGORIES =
 }
 
 function stateName(code) {
-    code = code.toLowerCase()
+    code = code.toUpperCase()
     if (STATES[code]) {
         return STATES[code]
     }

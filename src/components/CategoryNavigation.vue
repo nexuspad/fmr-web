@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     getPath(categoryId) {
-      if (AppContext.getState()) {
+      if (AppContext.getState() && AppContext.getState() != 'ALL') {
         return '/' + AppContext.getState() + '/' + this.categoryUri(categoryId)
       } else {
         return '/' + this.categoryUri(categoryId)

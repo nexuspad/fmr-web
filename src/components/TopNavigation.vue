@@ -23,17 +23,16 @@
       </ul>
       <ul class="navbar-nav justify-content-end" v-if="(activity === 'browsing' || activity === 'account') && isLoggedIn">
         <li class="nav-item" v-if="!isVerified">
-          <router-link class="nav-link" to="/account/verify" v-if="verificationSent">Verify</router-link>
-          <router-link class="nav-link" to="/account/sendverificationcode" v-if="!verificationSent">Send verification code</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/verify'}" to="/account/verify">Verify your account</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" to="/placead">Place an ad</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/placead'}" to="/placead">Place an ad</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" to="/account/myads">My ads</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/myads'}" to="/account/myads">My ads</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/account/settings">Settings</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/settings'}" to="/account/settings">Settings</router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="javascript:;" v-on:click="logout()">Log out</a>
@@ -52,9 +51,9 @@ export default {
   data() {
     return {
       activity: AppContext.activity(this.$route),
-      isLoggedIn: AccountService.currentUser() ? true : false,
-      isVerified: AccountService.currentUser() && AccountService.currentUser().isVerified() ? true : false,
-      verificationSent: AccountService.currentUser() && AccountService.currentUser().verificationCodeSent() ? true : false
+      isLoggedIn: AccountService.currentUser().id > 0,
+      isVerified: AccountService.currentUser().isVerified(),
+      verificationSent: AccountService.currentUser().verificationCodeSent()
     }
   },
   components: {
@@ -64,19 +63,37 @@ export default {
     const self = this
     AccountService.getToken().then((token) => {
       if (token) {
-          self.isLoggedIn = true
+        self.isLoggedIn = true
+        self.isVerified = AccountService.currentUser().isVerified()
+        self.verificationSent = AccountService.currentUser() && AccountService.currentUser().verificationCodeSent()
+
+        if (self.$router.currentRoute.meta.redirectIfLoggedIn) {
+          self.$router.push('/account/myads')
+        }
       } else {
-          self.isLoggedIn = false
+        self.isLoggedIn = false
+        self.forceLogin()
       }
     })
     .catch(() => {
       self.isLoggedIn = false
-    })   
+      self.forceLogin()
+    })
   },
   methods: {
+    forceLogin() {
+      if (this.$router.currentRoute.meta.requiresAuth) {
+        AccountService.forceLogin({checkAuth: true, returnUrl: this.$route.path})
+      }
+    },
     logout() {
       AccountService.logout()
       window.location = '/'
+    }
+  },
+  watch: {
+    '$route.path': function() {
+        this.forceLogin()
     }
   }
 };

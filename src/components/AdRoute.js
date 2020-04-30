@@ -34,7 +34,7 @@ export default class AdRoute {
                 }
             },
             {
-                path: '/ad/:id',
+                path: '/ad/:id/:title?',
                 name: 'AdView',
                 component: AdView,
                 props: true

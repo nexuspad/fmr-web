@@ -6,14 +6,14 @@ import StorageUtils from '../util/StorageUtil'
 import AccountSerivceRequest from './AccountServiceRequest'
 
 export default class AccountService {
-    static _user = null
+    static _user = User.visitor()
 
     static currentUser() {
         return this._user
     }
 
     static getToken () {
-        if (AccountService._user) {
+        if (AccountService._user.token) {
             return new Promise((resolve) => {
                 resolve(AccountService._user.token)
             })
@@ -62,6 +62,7 @@ export default class AccountService {
             RestClient.instance().post('/register', AccountServiceRequest.forRegistration(email, password))
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
+                    AccountService._user = new User(response.data.user)
                     resolve(new User(response.data.user))
                 } else {
                     reject(new ApiError(response.data.code))
@@ -74,12 +75,13 @@ export default class AccountService {
     }
 
     static sendVerificationCode(phoneNumber) {
-        let serviceRequest = AccountServiceRequest.forSendingVerification(phoneNumber)
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
+                let serviceRequest = AccountServiceRequest.forSendingVerification(AccountService.currentUser().id, phoneNumber)
                 RestClient.instance(token).post('/account/sendverificationcode', serviceRequest)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
+                        AccountService._user = new User(response.data.user)
                         resolve(new User(response.data.user))
                     } else {
                         reject(new ApiError(response.data.code))
@@ -98,12 +100,13 @@ export default class AccountService {
     }
 
     static verify(code) {
-        let serviceRequest = AccountServiceRequest.forVerification(code)
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
+                let serviceRequest = AccountServiceRequest.forVerification(AccountService.currentUser().id, code)
                 RestClient.instance(token).post('/account/verify', serviceRequest)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
+                        AccountService._user = new User(response.data.user)
                         resolve(new User(response.data.user))
                     } else {
                         reject(new ApiError(response.data.code))
@@ -159,6 +162,40 @@ export default class AccountService {
         })
     }
 
+    static resetPasswordRequest(email) {
+        let serviceRequest = AccountSerivceRequest.forResetPasswordRequest(email)
+        return new Promise((resolve, reject) => {
+            RestClient.instance().post('/account/requestPasswordReset', serviceRequest)
+            .then((response) => {
+                if (response.data && response.data.code === 'SUCCESS') {
+                    resolve()
+                } else {
+                    reject(new ApiError(response.data.code))
+                }
+            })
+            .catch((error) => {
+                reject(error)
+            })  
+        })
+    }
+
+    static resetPassword(key, newPassword) {
+        let serviceRequest = AccountSerivceRequest.forResetPassword(key, newPassword)
+        return new Promise((resolve, reject) => {
+            RestClient.instance().post('/account/resetPassword', serviceRequest)
+            .then((response) => {
+                if (response.data && response.data.code === 'SUCCESS') {
+                    resolve()
+                } else {
+                    reject(new ApiError(response.data.code))
+                }
+            })
+            .catch((error) => {
+                reject(error)
+            })  
+        })
+    }
+
     static removeAccount(password) {
         let serviceRequest = AccountSerivceRequest.forDeletaAccount(password)
         return new Promise((resolve, reject) => {
@@ -178,12 +215,38 @@ export default class AccountService {
         })
     }
 
+    static forceLogin({checkAuth: checkAuth, returnUrl: url}) {
+        const kickToLogin = () => {
+            if (url) {
+                window.location = '/account/login?returnUrl=' + url
+            } else {
+                window.location = '/account/login'
+            }
+        }
+
+        if (checkAuth) {
+            const token = StorageUtils.getFromSession('token')
+            if (token) {
+                AccountService.current(token).then(() => {
+                }).catch(() => {
+                    AccountService.cleanup()
+                    kickToLogin()
+                })
+            } else {
+                AccountService.cleanup()
+                kickToLogin()
+            }    
+        } else {
+            kickToLogin()
+        }
+    }
+
     static logout() {
         AccountService.cleanup()
     }
 
     static cleanup() {
-        AccountService._user = null
+        AccountService._user = User.visitor()
         StorageUtils.deleteFromSession('token')
     }
 }

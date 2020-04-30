@@ -50,19 +50,25 @@ export default class RestClient {
 
                     EventManager.publish(AppEvent.LOADING, false);
 
-                    // status code like 403
-                    if (error.response.status === 403) {
-                        // a little clean up here
-                        StorageUtils.deleteFromSession('token')
-                        return Promise.reject(ApiError.authenticationError())
-                    } else if (error.response.status === 500) {
-                        return Promise.reject(ApiError.internalError())
-                    } else {
-                        if (error.response.data && error.response.data.code) {
-                            return Promise.reject(ApiError(error.response.data.code));
+                    // application error response is available
+                    if (error.response) {
+                        // status code like 403
+                        if (error.response.status === 403) {
+                            // a little clean up here
+                            StorageUtils.deleteFromSession('token')
+                            return Promise.reject(ApiError.authenticationError())
+                        } else if (error.response.status === 500) {
+                            return Promise.reject(ApiError.internalError())
                         } else {
-                            return Promise.reject(ApiError(error.response.status));
+                            if (error.response.data && error.response.data.code) {
+                                return Promise.reject(new ApiError(error.response.data.code));
+                            } else {
+                                return Promise.reject(new ApiError(error.response.status));
+                            }
                         }
+                    } else {
+                        console.error(error)
+                        return Promise.reject(ApiError.internalError())
                     }
                 }
             );
@@ -78,7 +84,7 @@ export default class RestClient {
             });
 
         } else {
-            this._axiosInstance.defaults.headers['jwtToken'] = token;
+            this._axiosInstance.defaults.headers['Authorization'] = token;
         }
 
         return this._axiosInstance;

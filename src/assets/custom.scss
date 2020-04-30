@@ -2,8 +2,8 @@
 $primary: #213b89;
 $fmrRed: #a01c1f;
 $font-size-base: 0.9rem;
-$h1-font-size: 1rem;
-$h2-font-size: 1rem;
+$h1-font-size: 1.2rem;
+$h2-font-size: 1.1rem;
 
 $enable-shadows: true;
 $enable-gradients: true;
@@ -23,6 +23,7 @@ $bv-enable-table-stacked: false;
 body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
 .fmr-lg-text {font-size: 0.95rem}
+.fmr-sm-text {font-size: 0.80rem}
 .fmr-red {color: $fmrRed;}
 .fmr-green{ color:#690 !important }
 .fmr-blue{ color:#7c97e6 }
@@ -36,7 +37,7 @@ body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
 .fmr-photo { width:100%; object-fit: cover; }
 .fmr-photo:hover { cursor: move; }
-.fmr-photo-filename { position: absolute; top:1rem; left:1rem; background-color: #eee; padding:2px; border-radius: 0.2rem}
+.fmr-photo-filename { position: absolute; top:1px; left:1px; background-color: #eee; padding:2px; font-size: 0.80rem; border-radius: 0.2rem}
 
 .fmr-bordered-area {background: #ffffff; border-width:1px; border-style:solid; border-color:#ddd #cbcbcb #b3b3b3;
  -moz-box-shadow: 0px 1px 3px #b3b3b3;-webkit-box-shadow: 0px 1px 3px #b3b3b3;box-shadow: 0px 1px 3px #b3b3b3;
@@ -60,6 +61,7 @@ a.fas:hover { text-decoration: none; }
 }
 
 .fmr-form label, .fmr-ad-detail label {
+  font-size: 0.8rem;
   font-weight: bold; color: #565656;
 }
 .fmr-form label.required::after {
@@ -71,31 +73,27 @@ a.fas:hover { text-decoration: none; }
   position:fixed; top:80px; left: 50%; width:50%; transform: translate(-50%, 0); z-index: 9999;
 }
 
-.fmr-tab #tabs{
-  background: #007b5e;
-  color: #eee;
-}
 .fmr-tab #tabs h6.section-title{
   color: #eee;
 }
 .fmr-tab #tabs, .fmr-tab .nav-tabs, .fmr-tab .nav-item.show,
 .fmr-tab .nav-link, .fmr-tab .nav-tabs, .fmr-tab .nav-link.active {
   color: #0062cc;
-  background-color: transparent;
-  border-color: transparent transparent #f3f3f3;
+  background-color: #ffffff;
+  border-color: transparent transparent #e3e3e3;
 }
 .fmr-tab .nav-link {
   padding-left: 2rem;
   padding-right: 2rem;
 }
 .fmr-tab .nav-link.active {
-  border-bottom: 2px solid !important;
+  border-bottom: 1px solid !important;
 }
 .fmr-tab .nav-link:hover {
-  border-color: transparent transparent #f3f3f3;
+  border-color: transparent transparent #e3e3e3;
 }
 .fmr-tab thead{
-  background: #f3f3f3;
+  background: #e3e3e3;
   color: #333;
 }
 .fmr-tab a{
