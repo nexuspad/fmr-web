@@ -78,6 +78,20 @@ export default {
             let options = attributeOptionsLookup(this.attributeId(name))
             return options? options : []
         },
+        isForRent(categoryId) {
+            let category = CATEGORIES[categoryId]
+            if (category && category.code.includes('for-rent')) {
+                return true
+            }
+            return false
+        },
+        isForSale(categoryId) {
+            let category = CATEGORIES[categoryId]
+            if (category && category.code.includes('for-sale')) {
+                return true
+            }
+            return false
+        },
         isHomeStyle(categoryId) {
             let code = this.categoryCode(categoryId)
             if (!code) {

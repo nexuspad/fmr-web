@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div style="height: 75vh" class="p-4">
+    No matching results
   </div>
 </template>
 

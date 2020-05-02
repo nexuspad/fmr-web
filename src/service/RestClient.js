@@ -55,7 +55,7 @@ export default class RestClient {
                         // status code like 403
                         if (error.response.status === 403) {
                             // a little clean up here
-                            StorageUtils.deleteFromSession('token')
+                            StorageUtils.delete('token')
                             return Promise.reject(ApiError.authenticationError())
                         } else if (error.response.status === 500) {
                             return Promise.reject(ApiError.internalError())
@@ -94,20 +94,6 @@ export default class RestClient {
         const instance = axios.create();
         instance.CancelToken = axios.CancelToken;
         return instance;
-    }
-
-    static addParamToUri(uri, key, value) {
-        if (!uri) {
-            return '';
-        }
-
-        let uriParts = uri.split('?');
-
-        if (uriParts.length > 1) {
-            return uri + '&' + key + '=' + encodeURIComponent(value);
-        } else {
-            return uri + '?' + key + '=' + encodeURIComponent(value);
-        }
     }
 
     static destroy() {

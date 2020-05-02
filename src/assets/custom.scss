@@ -22,7 +22,12 @@ $bv-enable-table-stacked: false;
 // General style overrides and custom classes
 body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
+h1 {text-transform: capitalize;}
+
+.fmr-logo {background:url(./images/findmyroof.png) no-repeat 0 0;}
+
 .fmr-lg-text {font-size: 0.95rem}
+.fmr-md-text {font-size: 0.90rem}
 .fmr-sm-text {font-size: 0.80rem}
 .fmr-red {color: $fmrRed;}
 .fmr-green{ color:#690 !important }
@@ -46,7 +51,8 @@ border-radius: 0.2rem !important;}
 .fmr-bordered-area .header {background: #f1f4fb; color:#555555; border-radius: 0.2rem 0.2em !important; 
   padding: 0.6em 0 0.2rem 1rem;}
 
-.fmr-nav {border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;}
+.fmr-nav {text-transform: capitalize;
+  border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;}
 
 a.fas:hover { text-decoration: none; }
 
@@ -77,7 +83,8 @@ a.fas:hover { text-decoration: none; }
   color: #eee;
 }
 .fmr-tab #tabs, .fmr-tab .nav-tabs, .fmr-tab .nav-item.show,
-.fmr-tab .nav-link, .fmr-tab .nav-tabs, .fmr-tab .nav-link.active {
+.fmr-tab .nav-link, .fmr-tab .nav-tabs, .fmr-tab .nav-link.active
+{
   color: #0062cc;
   background-color: #ffffff;
   border-color: transparent transparent #e3e3e3;
@@ -85,6 +92,7 @@ a.fas:hover { text-decoration: none; }
 .fmr-tab .nav-link {
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-bottom: 0.8rem;
 }
 .fmr-tab .nav-link.active {
   border-bottom: 1px solid !important;

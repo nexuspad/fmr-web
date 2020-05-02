@@ -45,6 +45,11 @@ export default {
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showSuccessMessage)
 
+    EventManager.subscribe(AppEvent.ACCOUNT_REQUEST_RESET_PASSWORD_SUCCESS, this.showSuccessMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_REQUEST_RESET_PASSWORD_FAILURE, this.showErrorMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_RESET_PASSWORD_SUCCESS, this.showSuccessMessage)
+    EventManager.subscribe(AppEvent.ACCOUNT_RESET_PASSWORD_FAILURE, this.showErrorMessage)
+
     EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_SUCCESS, this.showSuccessMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_FAILURE, this.showErrorMessage)
@@ -74,6 +79,11 @@ export default {
     EventManager.unSubscribe(AppEvent.ACCOUNT_LOGIN_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_PASSWORD_UPDATE, this.showSuccessMessage)
+
+    EventManager.unSubscribe(AppEvent.ACCOUNT_REQUEST_RESET_PASSWORD_SUCCESS, this.showSuccessMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_REQUEST_RESET_PASSWORD_FAILURE, this.showErrorMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_RESET_PASSWORD_SUCCESS, this.showSuccessMessage)
+    EventManager.unSubscribe(AppEvent.ACCOUNT_RESET_PASSWORD_FAILURE, this.showErrorMessage)
 
     EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_SUCCESS, this.showSuccessMessage)

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <top-navigation />
     <div class="fmr-bordered-area">
       <div class="header">
         <h1>{{ categoryName(categoryId) }}</h1>
@@ -8,10 +7,10 @@
       <message />
       <div class="fmr-form p-2">
         <div class="fmr-tab shadow-sm sticky-top">
-          <div class="float-right mr-2 pt-1">
-            <!-- <button class="btn btn-primary" v-on:click="save">Save</button> -->
+          <div class="float-right mr-2 pt-1 pb-1" style="background-color: #ffffff;">
+            <button class="btn btn-primary" v-on:click="save" v-if="!ad.isDraft()">Save</button>
             <button class="btn btn-primary" 
-              data-toggle="modal" data-target="#SubmissionConfirmation" v-if="!ad.isDraft()">Submit</button>
+              data-toggle="modal" data-target="#SubmissionConfirmation" v-if="ad.isDraft()">Submit</button>
           </div>
           <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -61,7 +60,6 @@
         </div>
       </div>
     </div>
-    <fmr-footer />
     <div class="modal" id="SubmissionConfirmation" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -78,16 +76,14 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">I agree and submit</button>
           </div>
+        </div>
       </div>
     </div>
-</div>
   </div>
 </template>
 
 <script>
-import TopNavigation from './TopNavigation'
 import Message from './Message'
-import FmrFooter from './FmrFooter'
 import ResidentialForSale from "./templates/ResidentialForSale";
 import ResidentialForRent from "./templates/ResidentialForRent";
 import CommercialForSale from "./templates/CommercialForSale";
@@ -113,7 +109,7 @@ export default {
   },
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
-    TopNavigation, FmrFooter, ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
+    ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
     Uploader, AdDetail, Message, PostWarning
   },
   beforeMount() {

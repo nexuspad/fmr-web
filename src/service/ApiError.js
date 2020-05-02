@@ -7,7 +7,10 @@ const ApiErrorMessage = {
     DATA_ERROR_AD_NOT_FOUND: 'The ad cannot be found in the system.',
     DATA_ERROR_MISSING_REQUIRED: 'Some required fields are missing',
     ACCT_AUTHENTICATION_FAILURE: 'Your login session has expired. <a href="/account/login">Re-login</a>.',
-    ACCT_WRONG_PASSWORD: 'The account password is incorrect.'
+    ACCT_WRONG_PASSWORD: 'The account password is incorrect.',
+    ACCT_INVALID_TOKEN: 'The reset key is invalid. Please try again.',
+
+    UPLOAD_FILE_NOT_SUPPORTED: 'The file is not a valid image. Only JPG, PNG and GIF files are allowed.'
 }
 
 export default class ApiError {

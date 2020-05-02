@@ -18,7 +18,7 @@ export default class AccountService {
                 resolve(AccountService._user.token)
             })
         } else {
-            const token = StorageUtils.getFromSession('token')
+            const token = StorageUtils.get('token')
             if (token) {
                 return new Promise((resolve, reject) => {
                     AccountService.current(token).then((userObj) => {
@@ -44,7 +44,7 @@ export default class AccountService {
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
                     AccountService._user = new User(response.data.user)
-                    StorageUtils.saveToSession('token', AccountService._user.token)
+                    StorageUtils.save('token', AccountService._user.token)
                     resolve(new User(response.data.user))
                 } else {
                     reject(new ApiError(response.data.code))
@@ -130,7 +130,7 @@ export default class AccountService {
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
                     AccountService._user = new User(response.data.user)
-                    StorageUtils.saveToSession('token', AccountService._user.token)
+                    StorageUtils.save('token', AccountService._user.token)
                     resolve(new User(response.data.user))
                 } else {
                     reject(new ApiError(response.data.code))
@@ -192,7 +192,7 @@ export default class AccountService {
             })
             .catch((error) => {
                 reject(error)
-            })  
+            })
         })
     }
 
@@ -225,7 +225,7 @@ export default class AccountService {
         }
 
         if (checkAuth) {
-            const token = StorageUtils.getFromSession('token')
+            const token = StorageUtils.get('token')
             if (token) {
                 AccountService.current(token).then(() => {
                 }).catch(() => {
@@ -247,6 +247,6 @@ export default class AccountService {
 
     static cleanup() {
         AccountService._user = User.visitor()
-        StorageUtils.deleteFromSession('token')
+        StorageUtils.delete('token')
     }
 }

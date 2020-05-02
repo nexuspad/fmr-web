@@ -60,6 +60,9 @@ export default {
   components: {
     Message
   },
+  mounted() {
+    this.key = this.$route.query.key
+  },
   methods: {
     requestPasswordReset() {
       const self = this
@@ -67,6 +70,7 @@ export default {
       AccountService.resetPasswordRequest(this.email)
       .then(() => {
         self.posting = false
+        EventManager.publishAppEvent(AppEvent.ofSuccess(AppEvent.ACCOUNT_REQUEST_RESET_PASSWORD_SUCCESS, "Your request has been received. Please check your inbox for further instructions."))
       })
       .catch((error) => {
         console.error(error)
@@ -80,6 +84,7 @@ export default {
       AccountService.resetPassword(this.key, this.password)
       .then(() => {
         self.posting = false
+        EventManager.publishAppEvent(AppEvent.ofSuccess(AppEvent.ACCOUNT_RESET_PASSWORD_SUCCESS, "Your password has been successfully changed."))
       })
       .catch((error) => {
         console.error(error)

@@ -22,10 +22,10 @@
         <h5>My roof, my rules</h5>
         <ul class="list-unstyled text-small">
           <li>
-            <a class="text-muted" href="#">Terms of service</a>
+            <a class="text-muted" href="#">Terms of Use</a>
           </li>
           <li>
-            <a class="text-muted" href="#">Privacy policy</a>
+            <a class="text-muted" href="#">Privacy Policy</a>
           </li>
         </ul>
       </div>

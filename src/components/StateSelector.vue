@@ -15,25 +15,20 @@ export default {
   data() {
     return {
       allStates: this.states(),
-      state: ''   // This should always be in uppercase
+      state: 'ALL'
     }
   },
   beforeMount() {
-    this.state = AppContext.findStateInRoute(this.$route.params).toUpperCase()
+    this.state = AppContext.getState() ? AppContext.getState().toUpperCase() : 'ALL'
   },
   methods: {
     changeState() {
-      AppContext.changeState(this.state)
-      if (this.state === 'ALL') {
-        this.$router.push({ name: this.$router.currentRoute.name, params: { state: '' } });
-      } else {
-        this.$router.push({ name: this.$router.currentRoute.name, params: { state: this.state.toLowerCase() } });
-      }
+      AppContext.changeState(this.state.toLowerCase())
     }
   },
   watch: {
     "$route.params.state": function() {
-      this.state = AppContext.getState().toUpperCase()
+      this.state = AppContext.getState() ? AppContext.getState().toUpperCase() : 'ALL'
     }
   }
 };

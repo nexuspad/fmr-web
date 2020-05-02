@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-transparent">
-    <a class="navbar-brand" href="/">
-      <img src="http://www.findmyroof.com/static/images/find-my-roof.png" />
+    <a class="navbar-brand" :href="homePath">
+      <img src="@/assets/images/findmyroof.png" />
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#AccountNav"
+      aria-controls="AccountNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    <div class="collapse navbar-collapse" id="AccountNav">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active" v-if="activity === 'browsing'">
           <state-selector />
@@ -18,24 +18,24 @@
           <router-link class="nav-link" to="/account/register">Register</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/account/login">Log in</router-link>
+          <router-link class="nav-link" to="/account/login">Log In</router-link>
         </li>
       </ul>
       <ul class="navbar-nav justify-content-end" v-if="(activity === 'browsing' || activity === 'account') && isLoggedIn">
         <li class="nav-item" v-if="!isVerified">
-          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/verify'}" to="/account/verify">Verify your account</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/verify'}" to="/account/verify">Verify Your Account</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" :class="{disabled : $route.path ==='/placead'}" to="/placead">Place an ad</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/placead'}" to="/placead">Place an Ad</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/myads'}" to="/account/myads">My ads</router-link>
+          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/myads'}" to="/account/myads">My Ads</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" :class="{disabled : $route.path ==='/account/settings'}" to="/account/settings">Settings</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:;" v-on:click="logout()">Log out</a>
+          <a class="nav-link" href="javascript:;" v-on:click="logout()">Log Out</a>
         </li>
       </ul>
     </div>
@@ -44,13 +44,14 @@
 
 <script>
 import StateSelector from "./StateSelector"
-import AppContext from './AppContext'
 import AccountService from '../service/AccountService'
+import AppContext from './AppContext';
 
 export default {
   data() {
     return {
-      activity: AppContext.activity(this.$route),
+      homePath: '/',
+      activity: this.$route.meta.activity ? this.$route.meta.activity : 'browsing',
       isLoggedIn: AccountService.currentUser().id > 0,
       isVerified: AccountService.currentUser().isVerified(),
       verificationSent: AccountService.currentUser().verificationCodeSent()
@@ -60,6 +61,7 @@ export default {
     StateSelector
   },
   beforeMount() {
+    this.homePath = AppContext.makePath()
     const self = this
     AccountService.getToken().then((token) => {
       if (token) {
@@ -93,7 +95,9 @@ export default {
   },
   watch: {
     '$route.path': function() {
-        this.forceLogin()
+      this.homePath = AppContext.makePath()
+      this.forceLogin()
+      this.activity = this.$route.meta.activity ? this.$route.meta.activity : 'browsing'
     }
   }
 };

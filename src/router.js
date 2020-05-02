@@ -2,6 +2,7 @@ import VueRouter from 'vue-router'
 
 import AdRoute from './components/AdRoute'
 import AccountRoute from './components/account/AccountRoute'
+import AppContext from './components/AppContext'
 
 const scrollBehavior = function (to, from, savedPosition) {
     if (savedPosition) {
@@ -25,8 +26,13 @@ const router = new VueRouter({
 router.addRoutes(AdRoute.routes())
 router.addRoutes(AccountRoute.routes())
 
-// https://alligator.io/vuejs/vue-router-modify-head/
 router.beforeEach((to, from, next) => {
+    // update app context
+    AppContext.updateContext({routeParams: to.params, routeQueries: to.query})
+
+    // -- Inject meta heads
+    // https://alligator.io/vuejs/vue-router-modify-head/
+
     // This goes through the matched routes from last to first, finding the closest route with a title.
     // eg. if we have /some/deep/nested/route and /some, /deep, and /nested have titles, nested's will be chosen.
     const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);

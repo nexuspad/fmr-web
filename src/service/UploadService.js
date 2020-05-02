@@ -1,8 +1,9 @@
-import RestClient from './RestClient';
+import RestClient from './RestClient'
 import AccountService from './AccountService'
 import FmrAd from './model/FmrAd'
 import ApiError from './ApiError'
-import AdServiceRequest from './AdServiceRequest';
+import AdServiceRequest from './AdServiceRequest'
+import FmrUtils from '../util/FmrUtils'
 
 export default class UploadService {
     uploadId = '';
@@ -11,11 +12,19 @@ export default class UploadService {
     _cancelled = false;
     _active = true;
 
+    _supportedExtentions = ['jpg', 'jpeg', 'gif', 'png']
+
     uploadFile(id, file, progressCallback) {
         const cloudConfigUrl = '/upload/accessKey';
 
-        // TODO
-        const fileName = file.name
+        // normalize the file name
+        let ext = FmrUtils.getExtention(file.name)
+        if (!ext || this._supportedExtentions.indexOf(ext.toLowerCase()) === -1) {
+            return new Promise((resolve, reject) => {
+                reject(new ApiError('UPLOAD_FILE_NOT_SUPPORTED'))
+            })
+        }
+        const fileName = file.name.replace(/[^A-Za-z0-9\s.]/g, '').replace(/\s+/g, '-').trim()
 
         const self = this
         return new Promise((resolve, reject) => {

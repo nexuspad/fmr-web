@@ -20,7 +20,8 @@ export default class AccountRoute {
                         component: Register,
                         meta: {
                             title: 'Register an account - posting is free',
-                            redirectIfLoggedIn: true
+                            redirectIfLoggedIn: true,
+                            activity: 'account'
                         }
                     },
                     {
@@ -29,7 +30,8 @@ export default class AccountRoute {
                         component: Login,
                         meta: {
                             title: 'Log in to your account',
-                            redirectIfLoggedIn: true
+                            redirectIfLoggedIn: true,
+                            activity: 'account'
                         }
                     },
                     {
@@ -38,7 +40,8 @@ export default class AccountRoute {
                         component: ResetPassword,
                         meta: {
                             title: 'Request account password reset',
-                            redirectIfLoggedIn: true
+                            redirectIfLoggedIn: true,
+                            activity: 'account'
                         }
                     },
                     {
@@ -47,7 +50,8 @@ export default class AccountRoute {
                         component: ResetPassword,
                         meta: {
                             title: 'Reset account password',
-                            redirectIfLoggedIn: true
+                            redirectIfLoggedIn: true,
+                            activity: 'account'
                         }
                     },
                     {
@@ -56,7 +60,8 @@ export default class AccountRoute {
                         component: Verification,
                         meta: {
                             title: 'Account verification',
-                            requiresAuth: true
+                            requiresAuth: true,
+                            activity: 'account'
                         }
                     },
                     {
@@ -65,7 +70,8 @@ export default class AccountRoute {
                         component: Settings,
                         meta: {
                             title: 'Account settings',
-                            requiresAuth: true
+                            requiresAuth: true,
+                            activity: 'account'
                         }
                     },
                     {
@@ -74,7 +80,8 @@ export default class AccountRoute {
                         component: MyAds,
                         meta: {
                             title: 'My ads',
-                            requiresAuth: true
+                            requiresAuth: true,
+                            activity: 'account'
                         }
                     }
                 ]

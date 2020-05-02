@@ -3,6 +3,7 @@ import AccountService from './AccountService'
 import AdList from './model/AdList'
 import FmrAd from './model/FmrAd'
 import ApiError from './ApiError'
+import FmrUtils from '../util/FmrUtils'
 
 const AD_LISTING = 'ads'
 const AD_TEMPLATE = 'placead/template?categoryId=#CategoryId'
@@ -27,11 +28,11 @@ export default class AdService {
         let uri = AD_LISTING
         
         if (listCriteria.category) {
-            uri = RestClient.addParamToUri(uri, 'categoryId', listCriteria.category.id)
+            uri = FmrUtils.addParamToUri(uri, 'categoryId', listCriteria.category.id)
         }
         
         if (listCriteria.location) {
-            uri = RestClient.addParamToUri(uri, 'location', JSON.stringify(listCriteria.location))
+            uri = FmrUtils.addParamToUri(uri, 'location', JSON.stringify(listCriteria.location))
         }
 
         if (listCriteria.filters) {
@@ -39,7 +40,7 @@ export default class AdService {
             listCriteria.filters.forEach(filter => {
                 filterJson[filter.attribute.name] = filter.paramExpression()
             });
-            uri = RestClient.addParamToUri(uri, 'filters', JSON.stringify(filterJson))
+            uri = FmrUtils.addParamToUri(uri, 'filters', JSON.stringify(filterJson))
         }
 
         return new Promise((resolve, reject) => {
@@ -63,18 +64,24 @@ export default class AdService {
     static adTemplate(categoryId) {
         let uri = AD_TEMPLATE.replace('#CategoryId', categoryId);
         return new Promise((resolve, reject) => {
-            RestClient.instance().get(uri)
-            .then((response) => {
-                console.log(response)
-                if (response.data && response.data.code === 'SUCCESS') {
-                    resolve(new FmrAd(response.data.ad))
-                } else {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).get(uri)
+                .then((response) => {
+                    console.log(response)
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve(new FmrAd(response.data.ad))
+                    } else {
+                        reject()
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
                     reject()
-                }
+                })    
             })
             .catch((error) => {
-                console.error(error)
-                reject()
+                console.error('Account service', error)
+                reject(error)
             })
         })
     }
@@ -90,16 +97,22 @@ export default class AdService {
         }
         let uri = forEditing? AD_EDIT.replace('#Id', id) : AD_VIEW.replace('#Id', id);
         return new Promise((resolve, reject) => {
-            RestClient.instance().get(uri)
-            .then((response) => {
-                if (response.data && response.data.code === 'SUCCESS') {
-                    resolve(new FmrAd(response.data.ad))
-                } else {
-                    reject(new ApiError(response.data.code))
-                }
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).get(uri)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve(new FmrAd(response.data.ad))
+                    } else {
+                        reject(new ApiError(response.data.code))
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    reject(error)
+                })    
             })
             .catch((error) => {
-                console.error(error)
+                console.error('Account service', error)
                 reject(error)
             })
         })

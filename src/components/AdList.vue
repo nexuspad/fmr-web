@@ -6,11 +6,12 @@
           <div class="header">
             <h1>List title here</h1>
           </div>
-          <ul class="list-unstyled">
+          <ul class="list-unstyled" v-if="ads.length > 0">
             <li v-for="adItem in ads" v-bind:key="adItem.id" class="border-bottom p-2">
               <ad-summary :ad="adItem" />
             </li>
           </ul>
+          <there-is-nothing v-if="ads.length === 0" />
           <div class="row pt-2">
             <div class="col"></div>
             <div class="col">
@@ -48,11 +49,11 @@ import ListFilter from "./ListFilter";
 import AdSummary from "./AdSummary";
 import AdService from "../service/AdService";
 import AppContext from './AppContext'
+import ThereIsNothing from './misc/ThereIsNothing'
 
 export default {
   components: {
-    AdSummary,
-    ListFilter
+    AdSummary, ListFilter, ThereIsNothing
   },
   data() {
     return {
@@ -65,25 +66,25 @@ export default {
   mounted() {
     const self = this;
 
-    AdService.getAds(AppContext.currentCriteria())
+    AdService.getAds(AppContext.searchCriteria())
+    .then(adList => {
+      self.buildPages(adList)
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  },
+  watch: {
+    "$route.params": function() {
+      const self = this;
+
+      AdService.getAds(AppContext.searchCriteria())
       .then(adList => {
         self.buildPages(adList)
       })
       .catch((error) => {
         console.error(error);
       });
-  },
-  watch: {
-    "$route.params": function() {
-      const self = this;
-
-      AdService.getAds(AppContext.currentCriteria())
-        .then(adList => {
-          self.buildPages(adList)
-        })
-        .catch((error) => {
-          console.error(error);
-        });
     }
   },
   methods: {
@@ -95,6 +96,10 @@ export default {
 
       while (this.allPageIds.length) {
         this.allPageIds.pop();
+      }
+
+      while (this.pageIdsToDisplay.length) {
+        this.pageIdsToDisplay.pop();
       }
 
       let totalPages = adList.totalPages();

@@ -7,7 +7,7 @@
     <div class="fmr-form mt-2 p-2 col-lg-6 offset-lg-3">
       <form v-on:submit.prevent>
         <div class="border-bottom lead bg-light mb-4">
-          Login to post ads
+          Login to your account
         </div>
         <div class="form-group">
           <label for="email">Email address</label>

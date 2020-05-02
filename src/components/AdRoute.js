@@ -14,7 +14,8 @@ export default class AdRoute {
                 name: 'PlaceAd',
                 component: PlaceAd,
                 meta: {
-                    title: 'Select a category'
+                    title: 'Select a category',
+                    activity: 'account'
                 }
             },
             {
@@ -22,7 +23,8 @@ export default class AdRoute {
                 name: 'AdNew',
                 component: AdEdit,
                 meta: {
-                    title: 'Add a new ad'
+                    title: 'Add a new ad',
+                    activity: 'editing'
                 }
             },
             {
@@ -30,7 +32,8 @@ export default class AdRoute {
                 name: 'AdEdit',
                 component: AdEdit,
                 meta: {
-                    title: 'Update ad'
+                    title: 'Update ad',
+                    activity: 'editing'
                 }
             },
             {

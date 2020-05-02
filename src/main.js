@@ -20,12 +20,19 @@ Vue.component('vue-headful', vueHeadful)
 Vue.config.productionTip = false
 
 import { router } from './router'
+import TopNavigation from './components/TopNavigation'
+import FmrFooter from './components/FmrFooter'
+
+Vue.component('TopNavigation', TopNavigation)
+Vue.component('FmrFooter', FmrFooter)
 
 new Vue({
   router,
   template: `
   <div class="container-fluid">
+    <top-navigation />
     <router-view></router-view>
+    <fmr-footer />
   </div>
   `,
 }).$mount('#app');

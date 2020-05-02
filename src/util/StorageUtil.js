@@ -1,19 +1,11 @@
 export default class StorageUtils {
-  static get (name) {
-    let value = window.sessionStorage.getItem(name);
-    if (value) {
-      return value;
-    }
-    return null;
-  }
-
-  static saveToSession (name, value) {
+  static save (name, value) {
     if (typeof(value) !== 'undefined') {
       window.sessionStorage.setItem(name, JSON.stringify(value));
     }
   }
 
-  static getFromSession (name) {
+  static get (name) {
     let jsonStr = window.sessionStorage.getItem(name);
     if (jsonStr) {
       return JSON.parse(jsonStr);
@@ -21,7 +13,7 @@ export default class StorageUtils {
     return null;
   }
 
-  static deleteFromSession (name) {
+  static delete (name) {
     window.sessionStorage.removeItem(name);
   }
 
