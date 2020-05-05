@@ -1,10 +1,8 @@
 import AdCategory from './AdCategory'
-import PropertyLocation from './PropertyLocation'
 import AttributeFilter from './AttributeFilter'
 
 export default class ListCriteria {
     statuses
-    location
     category
     filters
     searchKeyword
@@ -16,7 +14,6 @@ export default class ListCriteria {
     constructor (jsonObj) {
         if (jsonObj) {
             this.statuses = jsonObj.statuses
-            this.location = new PropertyLocation(jsonObj.location)
             this.category = new AdCategory(jsonObj.category)
 
             if (jsonObj.filters && jsonObj.filters.length > 0) {
@@ -47,26 +44,26 @@ export default class ListCriteria {
             return this.key
         } else {
             let parts = []
+            parts.push('list')
+
             if (this.category) {
                 parts.push(this.category.id)
             }
-            if (this.location) {
-                if (this.location.key) {
-                    parts.push(this.location.key)
-                }
-            }
+
             if (this.filters && this.filters.length) {
+                this.filters.sort((attrFilterA, attrFilterB) => {
+                    return attrFilterA.attribute.id - attrFilterB.attribute.id
+                })
                 this.filters.forEach((f) => {
                     if (f.key) {
                         parts.push(f.key)
                     }
                 })
             }
-            if (parts.length > 0) {
-                return parts.join('-')
-            }
 
-            return ''
+            parts.push('p' + this.page)
+
+            return parts.join('-')
         }
     }
 }

@@ -31,10 +31,6 @@ export default class AdService {
             uri = FmrUtils.addParamToUri(uri, 'categoryId', listCriteria.category.id)
         }
         
-        if (listCriteria.location) {
-            uri = FmrUtils.addParamToUri(uri, 'location', JSON.stringify(listCriteria.location))
-        }
-
         if (listCriteria.filters) {
             let filterJson = {}
             listCriteria.filters.forEach(filter => {
@@ -96,9 +92,31 @@ export default class AdService {
             }
         }
         let uri = forEditing? AD_EDIT.replace('#Id', id) : AD_VIEW.replace('#Id', id);
-        return new Promise((resolve, reject) => {
-            AccountService.getToken().then((token) => {
-                RestClient.instance(token).get(uri)
+
+        if (forEditing) {
+            return new Promise((resolve, reject) => {
+                AccountService.getToken().then((token) => {
+                    RestClient.instance(token).get(uri)
+                    .then((response) => {
+                        if (response.data && response.data.code === 'SUCCESS') {
+                            resolve(new FmrAd(response.data.ad))
+                        } else {
+                            reject(new ApiError(response.data.code))
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                        reject(error)
+                    })    
+                })
+                .catch((error) => {
+                    console.error('Account service', error)
+                    reject(error)
+                })
+            })    
+        } else {
+            return new Promise((resolve, reject) => {
+                RestClient.instance().get(uri)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve(new FmrAd(response.data.ad))
@@ -109,13 +127,9 @@ export default class AdService {
                 .catch((error) => {
                     console.error(error)
                     reject(error)
-                })    
-            })
-            .catch((error) => {
-                console.error('Account service', error)
-                reject(error)
-            })
-        })
+                })
+            })    
+        }
     }
 
     static update(adServiceRequest) {

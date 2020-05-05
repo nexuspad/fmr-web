@@ -1,59 +1,49 @@
 import ListCriteria from '../service/model/ListCriteria'
 import AdCategory from '../service/model/AdCategory'
-import PropertyLocation from '../service/model/PropertyLocation'
 import AttributeFilter from '../service/model/AttributeFilter'
 import { router } from '../router'
-import { CATEGORIES, stateName } from '../service/AppData'
+import { categoryLookup, categoryIdLookup, stateName } from '../service/AppData'
 import StorageUtils from '../util/StorageUtil'
-import FmrUtils from '../util/FmrUtils'
+import FilterParams from './FilterParams'
 
 export default class AppContext {
-    static _params = {
-        state: null,
-        city: null,
-        zipCode: null,
-        categoryId: 0,
-        filters: {}
+    static _filterParams = new FilterParams
+
+    static getParams() {
+        return this._filterParams.current()
     }
 
     static updateContext({routeParams = {}, routeQueries = {}}) {
-        this._params = this._merge(this._params, routeParams)
-        this._params['filters'] = this._merge(this._params['filters'], routeQueries)
+        if (routeParams['categoryName']) {
+            routeParams['categoryId'] = categoryIdLookup(routeParams['categoryName'])
+        }
+
+        this._filterParams.merge(routeParams, true)
+        this._filterParams.merge(routeQueries, true)
         
         this._mergeFromLocal()
 
         // store back locally
         this._updateLocal()
+    }
 
-        console.log('AppContext updated: ', AppContext.searchCriteria())
+    static getState() {
+        return this._filterParams.getState()
     }
 
     // _state should always be stored in lower case
     static changeState(theState) {
         if (this._isValidStateSelection(theState)) {
-            this._params['state'] = theState
+            this._filterParams.setState(theState)
         } else {
-            this._params['state'] = null
+            this._filterParams.setState(null)
         }
 
         // merge with the rest of the contexts
         this._updateLocal()
 
-        router.push(this.makePath())
-    }
-
-    static _merge(thisParams, otherParams) {
-        let mergedParams = {}
-        for (let name in thisParams) {
-            if (name !== 'filters') {
-                if (otherParams[name]) {
-                    mergedParams[name] = otherParams[name]
-                } else {
-                    mergedParams[name] = thisParams[name]
-                }
-            }
-        }
-        return mergedParams
+        let {path} = this.makePath()
+        router.push(path)
     }
 
     static _isValidStateSelection(theState) {
@@ -67,22 +57,13 @@ export default class AppContext {
     static _mergeFromLocal() {
         let localParams = StorageUtils.get('context')
         if (localParams != null && typeof localParams === 'object') {
-            for (let name in localParams) {
-                if (!this._params[name] && localParams[name]) {
-                    this._params[name] = localParams[name]
-                }
-            }
+            this._filterParams.merge(localParams, false)
         }
     }
 
     static _updateLocal() {
-        let params = {}
+        let params = this._filterParams.forLocalCopy()
 
-        for (let name in this._params) {
-            if (this._params[name]) {
-                params[name] = this._params[name]
-            }
-        }
         if (Object.keys(params).length > 0) {
             StorageUtils.save('context', params)
         } else {
@@ -90,81 +71,72 @@ export default class AppContext {
         }
     }
 
-    static changeFilter({name = '', value = ''}) {
-        switch(name) {
-        case 'city':
-            this._params[name] = value
-            break;
-        case 'zip':
-            this._params[name] = value
-            break;
-        case 'bedroom':
-            this._params[name] = value
-            break;
-        case 'bathroom':
-            this._params[name] = value
-            break;
-        }
-    }
-
-    static getState() {
-        return this._params['state']
-    }
-
     // This call should not update the states
-    static makePath(otherParams = {state: null, city: null, zipCode: null, categoryId: null, pageId: null}) {
-        let mergedParams = this._merge(this._params, otherParams)
+    static makePath(otherParams = {}) {
+        let fp = new FilterParams(this._filterParams)
+        fp.merge(otherParams, true)
 
-        let params = []
-
-        if (mergedParams['state'] && mergedParams['state'] !== 'all') {
-            params.push(mergedParams['state'])
+        let pathParams = []
+        if (fp.getState()) {
+            pathParams.push(fp.getState())
         }
 
-        if (mergedParams['categoryId']) {
-            const category = CATEGORIES[mergedParams['categoryId']]
-            if (category) {
-                params.push(category.uri)
-            }
+        if (fp.getCategoryId()) {
+            const category = categoryLookup(fp.getCategoryId())
+            pathParams.push(category.uri)
         }
 
-        let uri = '/' + params.join('/')
+        let path = '/' + pathParams.join('/')
 
-        if (mergedParams['city']) {
-            uri = FmrUtils.addParamToUri(uri, 'city', mergedParams['city'])
+        let queryParams = {}
+        for (let name in fp.getFilters()) {
+            queryParams[name] = fp.getFilters()[name]
         }
 
-        if (mergedParams['zipCode']) {
-            uri = FmrUtils.addParamToUri(uri, 'zipCode', mergedParams['zipCode'])
-        }
-
-        for (let name in mergedParams['filters']) {
-            uri = FmrUtils.addParamToUri(uri, name, mergedParams['filters'])
-        }
-
-        return uri
+        return {path: path, queryParams: queryParams}
     }
 
     static searchCriteria() {
         let listCriteria = new ListCriteria()
-        let location = new PropertyLocation()
 
-        // category
-        if (this._params['categoryId']) {
+        console.log('....', this._filterParams)
+
+        if (this._filterParams.getCategoryId()) {
             let category = new AdCategory()
-            category.id = this._params['categoryId']
+            category.id = this._filterParams.getCategoryId()
             listCriteria.category = category
         }
 
-        // location
-        if (this._params['state'] !== null) {
-            location.state = this._params['state']
+        if (this._filterParams.getState()) {
+            listCriteria.addFilter(AttributeFilter.eq('state', this._filterParams.getState()))
         }
-        listCriteria.location = location
 
-        // filters
-        if (this._params['zipCode']) {
-            listCriteria.addFilter(AttributeFilter.eq('zip_code', this._params['zipCode']))
+        listCriteria.page = this._filterParams.getPage()
+
+        for (let name in this._filterParams.getFilters()) {
+            let value = this._filterParams.getFilters()[name]
+            if (value !== null && typeof value !== 'undefined') {
+                value = value.replace(/\s/g,'')
+                if (value.length == 0) {
+                    continue
+                }
+
+                if (value.includes('-')) {
+                    let parts = value.split('-')
+                    if (parts[0] && parts[1]) {
+                        listCriteria.addFilter(AttributeFilter.range(name, parts[0], parts[1]))
+                    } else if (parts[0]) {
+                        listCriteria.addFilter(AttributeFilter.gt(name, parts[0]))
+                    } else if (parts[1]) {
+                        listCriteria.addFilter(AttributeFilter.lt(name, parts[1]))
+                    }
+                } else if (value.includes(',')) {
+                    let parts = value.split(',')
+                    listCriteria.addFilter(AttributeFilter.in(name, parts))
+                } else {
+                    listCriteria.addFilter(AttributeFilter.eq(name, value))
+                }
+            }
         }
 
         return listCriteria

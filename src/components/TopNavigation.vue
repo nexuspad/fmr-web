@@ -61,7 +61,8 @@ export default {
     StateSelector
   },
   beforeMount() {
-    this.homePath = AppContext.makePath()
+    let {path} = AppContext.makePath({categoryId: 0})
+    this.homePath = path
     const self = this
     AccountService.getToken().then((token) => {
       if (token) {
@@ -89,13 +90,18 @@ export default {
       }
     },
     logout() {
-      AccountService.logout()
-      window.location = '/'
+      AccountService.logout().then(() => {
+        window.location = '/'
+      })
+      .catch(() => {
+        window.location = '/'
+      })
     }
   },
   watch: {
     '$route.path': function() {
-      this.homePath = AppContext.makePath()
+      const {path} = AppContext.makePath({categoryId: 0})
+      this.homePath = path
       this.forceLogin()
       this.activity = this.$route.meta.activity ? this.$route.meta.activity : 'browsing'
     }

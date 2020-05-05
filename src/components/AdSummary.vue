@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <router-link :to="'/ad/' + ad.id">
+        <router-link :to="'/ad/' + ad.id + '/' + ad.uri">
           <img v-lazy="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
         </router-link>
         <div class="h-75 rounded shadow-sm text-center jumbotron" v-if="!ad.thumbnailUrl">
@@ -14,8 +14,10 @@
           <div class="row">
             <div class="col-9">
               <h2>
-                <router-link :to="'/ad/' + ad.id" class="fmr-red">{{ ad.title }}</router-link>
+                <router-link :to="'/ad/' + ad.id + '/' + ad.uri" class="fmr-red">{{ ad.title }}</router-link>
                 <span class="fmr-deact ml-2" v-if="!ad.isActive()"></span>
+                <span class="fmr-forsale ml-2" v-if="isForSale(ad.categoryId)"></span>
+                <span class="fmr-forrent ml-2" v-if="isForRent(ad.categoryId)"></span>
               </h2>
               <div class="lead">{{ ad.city }}, {{ ad.state }}</div>
             </div>

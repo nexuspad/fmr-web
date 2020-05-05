@@ -79,7 +79,7 @@ export default class AttributeFilter {
         }
 
         if (value !== null) {
-            return this.operator + '(' + value + ')'
+            return this.operator + '.' + value
         }
     }
 
@@ -88,11 +88,11 @@ export default class AttributeFilter {
         if (this.attribute) {
             key += this.attribute.name
             if (this.operator === 'EQ' || this.operator === 'GT' || this.operator === 'LT') {
-                key += this.operator.toLowerCase() + this.value
+                key += '.' + this.operator + '.' + this.value
             } else if (this.operator === 'IN') {
-                key += this.operator.toLowerCase() + '(' + this.values.join('|') + ')'
+                key += '.' + this.operator + '.' + this.values.join(',')
             } else if (this.operator === 'RANGE') {
-                key += this.operator.toLowerCase() + '[' + this.minValue + '|' + this.maxValue + ']'
+                key += '.' + this.operator + '.' + this.minValue + '-' + this.maxValue
             }
         }
         return key.length > 0 ? key : null

@@ -242,7 +242,27 @@ export default class AccountService {
     }
 
     static logout() {
-        AccountService.cleanup()
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).post('/account/logout')
+                .then((response) => {
+                    AccountService.cleanup()
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve()
+                    } else {
+                        reject()
+                    }
+                })
+                .catch((error) => {
+                    AccountService.cleanup()
+                    reject(error)
+                })    
+            })
+            .catch((error) => {
+                AccountService.cleanup()
+                reject(error)
+            })
+        })
     }
 
     static cleanup() {

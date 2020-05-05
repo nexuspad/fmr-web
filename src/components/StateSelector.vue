@@ -19,16 +19,19 @@ export default {
     }
   },
   beforeMount() {
-    this.state = AppContext.getState() ? AppContext.getState().toUpperCase() : 'ALL'
+    this.setState()
   },
   methods: {
+    setState() {
+      this.state = AppContext.getState() ? AppContext.getState().toUpperCase() : 'ALL'
+    },
     changeState() {
       AppContext.changeState(this.state.toLowerCase())
     }
   },
   watch: {
     "$route.params.state": function() {
-      this.state = AppContext.getState() ? AppContext.getState().toUpperCase() : 'ALL'
+      this.setState()
     }
   }
 };

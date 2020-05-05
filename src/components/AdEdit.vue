@@ -2,7 +2,10 @@
   <div>
     <div class="fmr-bordered-area">
       <div class="header">
-        <h1>{{ categoryName(categoryId) }}</h1>
+        <h1>
+          {{ categoryName(categoryId) }}
+          <span class="fmr-deact ml-2" v-if="!ad.isActive()"></span>
+        </h1>
       </div>
       <message />
       <div class="fmr-form p-2">
@@ -102,7 +105,7 @@ export default {
   data() {
     return {
       template: '',
-      categoryId: 0,
+      categoryId: null,
       id: 0,
       ad: new FmrAd()
     }

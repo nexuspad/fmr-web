@@ -10,6 +10,8 @@ export default class FmrAd {
     attributes = []
     photos = []
 
+    uri = ''
+
     postDate
     updateTime
 
@@ -23,6 +25,9 @@ export default class FmrAd {
 
             this.postDate = jsonObj.postDate
             this.updateTime = jsonObj.updateTime
+
+            if (jsonObj.uri)
+                this.uri = jsonObj.uri
 
             if (jsonObj.attributes) {
                 jsonObj.attributes.forEach(element => {

@@ -1,10 +1,7 @@
-import AdHome from './AdHome'
 import AdList from './AdList'
 import AdView from './AdView'
 import AdEdit from './AdEdit'
 import PlaceAd from './PlaceAd'
-
-import { CATEGORIES } from '../service/AppData'
 
 export default class AdRoute {
     static routes() {
@@ -43,34 +40,25 @@ export default class AdRoute {
                 props: true
             },
             {
-                path: '/:state?',
-                component: AdHome,
-                children: AdRoute.categoryRoutes()
-            }
-        ];
-    }
-
-    static categoryRoutes () {
-        let children = []
-        children.push(
-            {
                 name: 'NewAds',
                 path: '/',
                 component: AdList,
                 meta: {
                     title: 'Latest listings'
                 }
-            }
-        )
-
-        for (let categoryId in CATEGORIES) {
-            children.push({
-                name: CATEGORIES[categoryId].id,
-                path: '/:state?/' + CATEGORIES[categoryId].uri,
+            },
+            {
+                path: '/:state([a-z]{2})',
                 component: AdList
-            })
-        }
-
-        return children
+            },
+            {
+                path: '/:categoryName',
+                component: AdList
+            },
+            {
+                path: '/:state([a-z]{2})/:categoryName',
+                component: AdList
+            }
+        ];
     }
 }

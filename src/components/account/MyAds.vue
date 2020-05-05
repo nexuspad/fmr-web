@@ -15,22 +15,7 @@
               </div>
             </li>
           </ul>
-          <there-is-nothing v-if="selectedAds.length === 0" />
-          <div class="row pt-2">
-            <div class="col"></div>
-            <div class="col">
-              <nav aria-label="Page navigation" v-if="allPageIds.length > 1">
-                <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#">previous</a></li>
-                  <li class="page-item" v-for="p in allPageIds" :key="p">
-                    <router-link class="page-link" to="/">{{ p }}</router-link>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">next</a></li>
-                </ul>
-              </nav>
-            </div>
-            <div class="col"></div>
-          </div>
+          <there-is-nothing v-if="adList != null && selectedAds.length === 0" />
         </div>
       </div>
       <div class="col-md-2 order-lg-2 order-md-2 order-sm-1 mb-2 pr-0">
@@ -38,20 +23,20 @@
           <div class="header">
             <h1>My ads</h1>
           </div>
-          <ul class="nav flex-column">
+          <ul class="nav flex-column mb-4">
             <li class="nav-item">
-              <router-link class="nav-link" :class="{disabled: type=='all'}" to="/account/myads">All</router-link>
+              <router-link class="nav-link pb-0 fmr-lg-text" :class="{disabled: type=='all'}" to="/account/myads">All</router-link>
               <ul class="list-group-flush">
-                <li class="list-group-item">
+                <li class="list-group-item p-0">
                   <router-link class="nav-link" :class="{disabled: type=='for rent'}" to="/account/myads?forRent">For Rent</router-link>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item p-0">
                   <router-link class="nav-link" :class="{disabled: type=='for sale'}" to="/account/myads?forSale">For Sale</router-link>
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" :class="{disabled: type=='drafts'}" to="/account/myads?draft">Drafts</router-link>
+            <li class="nav-item mt-2">
+              <router-link class="nav-link fmr-lg-text" :class="{disabled: type=='drafts'}" to="/account/myads?draft">Drafts</router-link>
             </li>
           </ul>
         </div>
@@ -76,8 +61,7 @@ export default {
     return {
       type: 'all',
       selectedAds: [],
-      asList: null,
-      allPageIds: []
+      asList: null
     };
   },
   mixins: [ AppDataHelper ],
@@ -91,14 +75,6 @@ export default {
       .then(adList => {
         self.adList = adList
         self.display()
-
-        while (self.allPageIds.length) {
-          self.allPageIds.pop();
-        }
-        let totalPages = adList.totalPages();
-        for (let i = 1; i <= totalPages; i++) {
-          self.allPageIds.push(i);
-        }
       })
       .catch(() => {
         console.error("...error");

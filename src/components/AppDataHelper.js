@@ -1,4 +1,4 @@
-import { STATES, CATEGORIES, stateName, attributeIdLookup, attributeNameLookup, attributeOptionsLookup, categoryNameLookup, attributeTypeLookup } from '../service/AppData'
+import { allStatesOrTerritories, stateName, attributeIdLookup, attributeNameLookup, attributeOptionsLookup, categoryLookup, categoryNameLookup, attributeTypeLookup } from '../service/AppData'
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -12,7 +12,7 @@ export default {
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
         states() {
-            return STATES
+            return allStatesOrTerritories()
         },
         stateName(code) {
             return stateName(code)
@@ -21,14 +21,14 @@ export default {
             return this.capitalizeFirstLetter(categoryNameLookup(id))
         },
         categoryCode(categoryId) {
-            let category = CATEGORIES[categoryId]
+            let category = categoryLookup(categoryId)
             if (category) {
                 return category.code
             }
             return ''
         },
         categoryUri(categoryId) {
-            let category = CATEGORIES[categoryId]
+            let category = categoryLookup(categoryId)
             if (category) {
                 return category.uri
             }
@@ -79,14 +79,14 @@ export default {
             return options? options : []
         },
         isForRent(categoryId) {
-            let category = CATEGORIES[categoryId]
+            let category = categoryLookup(categoryId)
             if (category && category.code.includes('for-rent')) {
                 return true
             }
             return false
         },
         isForSale(categoryId) {
-            let category = CATEGORIES[categoryId]
+            let category = categoryLookup(categoryId)
             if (category && category.code.includes('for-sale')) {
                 return true
             }

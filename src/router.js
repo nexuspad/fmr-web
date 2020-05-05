@@ -26,7 +26,7 @@ const router = new VueRouter({
 router.addRoutes(AdRoute.routes())
 router.addRoutes(AccountRoute.routes())
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {    
     // update app context
     AppContext.updateContext({routeParams: to.params, routeQueries: to.query})
 
