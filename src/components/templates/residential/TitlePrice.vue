@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border-bottom pb-3 mb-3">
     <div class="form-group">
       <div>
         <label for="title" class="required">Title</label>
@@ -23,9 +23,9 @@
       <div class="col-md-4 pl-4">
         <label for="ofa">Owner financing available</label>
         <div class="custom-control custom-switch right">
-          <input type="checkbox" class="custom-control-input" id="byAgent" 
-            v-model="byAgent" @change="updateRepresentation()" />
-          <label class="custom-control-label" for="byAgent"></label>
+          <input type="checkbox" class="custom-control-input" id="ownerFinancing" 
+            v-model="ownerFinancingAvailable" @change="updateOwnerFinancing()" />
+          <label class="custom-control-label" for="ownerFinancing"></label>
         </div>
       </div>
     </div>
@@ -36,7 +36,15 @@
 import AppDataHelper from '../../AppDataHelper'
 
 export default {
+  data() {
+    return {
+      ownerFinancingAvailable: false
+    }
+  },
   mixins: [ AppDataHelper ],
-  props: ['ad']
+  props: ['ad'],
+  methods: {
+    updateOwnerFinancing() {}
+  }
 }
 </script>

@@ -17,7 +17,7 @@
           name="contact_name" v-model="ad.getAttribute(attributeId('contact_email')).value" />
       </div>
     </div>
-    <div class="form-row mt-2">
+    <div class="form-row mt-2" v-if="isHomeStyle(ad.categoryId)">
       <div class="col-md-3">
         <label>Open house</label>
         <datepicker input-class="form-control" v-model="ad.getAttribute(attributeId('open_house')).value" />

@@ -3,6 +3,7 @@ export default class FilterParams {
     _categoryId = 0
     _filters = {
         'zip_code': '',
+        'city': '',
         'bedroom': '',
         'bathroom': '',
         'price': '',
@@ -43,25 +44,42 @@ export default class FilterParams {
 
     merge(otherParams, alwaysOverwrite) {
         if (otherParams['state']) {
-            this._state = otherParams['state']
+            if (FilterParams.noValue(this._state)) {
+                this._state = otherParams['state'].toLowerCase()
+            } else {
+                if (alwaysOverwrite) {
+                    this._state = otherParams['state'].toLowerCase()
+                }
+            }
         }
-        if (otherParams['categoryId']) {
+        if (FilterParams.hasValue(otherParams['categoryId'])) {
             this._categoryId = otherParams['categoryId']
         }
+        
         if (otherParams['page']) {
             this._page = otherParams['page']
         }
 
         for (let name in this._filters) {
-            if (!FilterParams._noValue(otherParams[name])) {
-                if (alwaysOverwrite) {
-                    this._filters[name] = otherParams[name]
+            if (alwaysOverwrite) {
+                if (FilterParams.noValue(otherParams[name])) {       // this means the parameter should be removed
+                    this._filters[name] = ''
                 } else {
-                    // if NOT always overwrite, only replace when there is no current value
-                    if (FilterParams._noValue(this._filters[name])) {
-                        this._filters[name] = otherParams[name]
-                    }
+                    this._filters[name] = otherParams[name]
                 }
+            } else {
+                // if NOT always overwrite, only replace when there is no current value
+                if (FilterParams.noValue(this._filters[name]) && !FilterParams.noValue(otherParams[name])) {
+                    this._filters[name] = otherParams[name]
+                }
+            }
+        }
+    }
+
+    removeFilter(removeName) {
+        for (let name in this._filters) {
+            if (name === removeName) {
+                this._filters[name] = ''
             }
         }
     }
@@ -86,7 +104,11 @@ export default class FilterParams {
         return json
     }
 
-    static _noValue(value) {
-        return value === null || typeof value === 'undefined' ? true : false
+    static hasValue(value) {
+        return !FilterParams.noValue(value)
+    }
+
+    static noValue(value) {
+        return value === null || typeof value === 'undefined' || value.length === 0 ? true : false
     }
 }

@@ -19,7 +19,7 @@
         </ul>
       </div>
       <div class="col-3 col-md">
-        <h5>My roof, my rules</h5>
+        <h5>Legal Stuff</h5>
         <ul class="list-unstyled text-small">
           <li>
             <a class="text-muted" href="#">Terms of Use</a>

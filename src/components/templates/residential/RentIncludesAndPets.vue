@@ -1,25 +1,27 @@
 <template>
-  <div class="form-row">
-    <div class="col-md-6">
-      <label>Rent includes</label>
-      <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
-        <div class="mr-4" v-for="(option, index) in attributeOptions('rent_includes')" :key="index">
-          <input type="checkbox" v-model="ad.getAttribute(attributeId('rent_includes')).value" :id="index" :value="option" />
-          <span class="p-2">{{ option }}</span>
+  <div class="border-bottom pb-3 mb-3">
+    <div class="form-row">
+      <div class="col-md-6">
+        <label>Rent includes</label>
+        <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
+          <div class="mr-4" v-for="(option, index) in attributeOptions('rent_includes')" :key="index">
+            <input type="checkbox" v-model="ad.getAttribute(attributeId('rent_includes')).value" :id="index" :value="option" />
+            <span class="p-2">{{ option }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-2">
-      <label for="pp">Pet policy</label>
-      <select id="pp" class="form-control" v-model="allowPets" @change="updatePetPolicy()">
-        <option value="no">No</option>
-        <option value="yes">Yes</option>
-      </select>
-    </div>
-    <div class="col-md-4" v-show="allowPets === 'yes'">
-      <label for="ppd">Details</label>
-      <textarea-autosize id="ppd" class="form-control" v-model="ad.getAttribute(attributeId('pet_policy_details')).value"
-        :min-height="50" :max-height="80"></textarea-autosize>
+      <div class="col-md-2">
+        <label for="pp">Pet policy</label>
+        <select id="pp" class="form-control" v-model="allowPets" @change="updatePetPolicy()">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
+      <div class="col-md-4" v-show="allowPets === 'yes'">
+        <label for="ppd">Details</label>
+        <textarea-autosize id="ppd" class="form-control" v-model="ad.getAttribute(attributeId('pet_policy_details')).value"
+          :min-height="50" :max-height="80"></textarea-autosize>
+      </div>
     </div>
   </div>
 </template>

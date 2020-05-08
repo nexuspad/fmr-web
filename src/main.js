@@ -18,6 +18,7 @@ Vue.use(VueLazyload)
 Vue.component('vue-headful', vueHeadful)
 
 Vue.config.productionTip = false
+Vue.config.devtools = false
 
 import { router } from './router'
 import TopNavigation from './components/TopNavigation'

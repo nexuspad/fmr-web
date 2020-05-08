@@ -128,7 +128,7 @@ export default class UploadService {
     _completeUpload(token, id, fileName, bucket, s3Key) {
         let key = bucket + ':' + s3Key
         const request = AdServiceRequest.addPhoto(id, fileName, key)
-        return RestClient.instance(token).post('/account/updateAd', request)
+        return RestClient.instance(token).post('/account/ad/' + id, request)
     }
 
     // resolve into the Uploader.vue

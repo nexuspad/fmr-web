@@ -54,7 +54,7 @@ border-radius: 0.2rem !important;}
 .fmr-nav {text-transform: capitalize;
   border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;}
 
-a.fas:hover { text-decoration: none; cursor: pointer;
+a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
   -webkit-transform: scale(1.3);
   -moz-transform: scale(1.3);
   -ms-transform: scale(1.3);

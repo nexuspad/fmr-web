@@ -23,8 +23,8 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <select class="form-control" name="RentMin">
-            <option value="min">min</option>
+          <select class="form-control" name="RentMin" v-model="rentMin">
+            <option value="0">min</option>
             <option value=400 >$400</option>
             <option value=600 >$600</option>
             <option value=800 >$800</option>
@@ -39,8 +39,8 @@
           </select>
         </div>
         <div class="col-6">
-          <select class="form-control" name="RentMax">
-            <option value="min">min</option>
+          <select class="form-control" name="RentMax" v-model="rentMax">
+            <option value="max">max</option>
             <option value=400 >$400</option>
             <option value=600 >$600</option>
             <option value=800 >$800</option>
@@ -62,8 +62,8 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <select class="form-control" name="BedMin">
-            <option value="min">min</option>
+          <select class="form-control" name="BedMin" v-model="bedMin">
+            <option value="0">min</option>
             <option value=1 >1</option>
             <option value=2 >2</option>
             <option value=3 >3</option>
@@ -72,8 +72,8 @@
           </select>
         </div>
         <div class="col-6">
-          <select class="form-control" name="BedMax">
-            <option value="min">min</option>
+          <select class="form-control" name="BedMax" v-model="bedMax">
+            <option value="max">max</option>
             <option value=1 >1</option>
             <option value=2 >2</option>
             <option value=3 >3</option>
@@ -89,8 +89,8 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <select class="form-control" name="BathMin">
-            <option value="min">min</option>
+          <select class="form-control" name="BathMin" v-model="bathMin">
+            <option value="0">min</option>
             <option value=1 >1</option>
             <option value=2 >2</option>
             <option value=3 >3</option>
@@ -99,8 +99,8 @@
           </select>
         </div>
         <div class="col-6">
-          <select class="form-control" name="BathMax">
-            <option value="min">min</option>
+          <select class="form-control" name="BathMax" v-model="bathMax">
+            <option value="max">max</option>
             <option value=1 >1</option>
             <option value=2 >2</option>
             <option value=3 >3</option>
@@ -136,6 +136,14 @@ export default {
     return {
       city: '',
       zipCode: '',
+      bedMin: 0,
+      bedMax: 'max',
+      bathMin: 0,
+      bathMax: 'max',
+      rentMin: 0,
+      rentMax: 'max',
+      priceMin: 0,
+      priceMax: 'max',
       posting: false
     }
   },
@@ -145,13 +153,120 @@ export default {
   methods: {
     setFilter() {
       let params = AppContext.getParams().filters
-      console.log(params)
+      console.log('ListFilter....', params)
       this.city = params['city']
       this.zipCode = params['zip_code']
+      
+      if (params['bedroom'] && params['bedroom'].includes('-')) {
+        let [min, max] = params['bedroom'].split('-')
+        if (min) {
+          this.bedMin = min
+        } else {
+          this.bedMin = 0
+        }
+        if (max) {
+          this.bedMax = max
+        } else {
+          this.bedMax = 'max'
+        }
+      } else {
+        this.bedMin = 0
+        this.bedMax = 'max'
+      }
+
+      if (params['bathroom'] && params['bathroom'].includes('-')) {
+        let [min, max] = params['bathroom'].split('-')
+        if (min) {
+          this.bathMin = min
+        } else {
+          this.bathMin = 0
+        }
+        if (max) {
+          this.bathMax = max
+        } else {
+          this.bathMax = 'max'
+        }
+      } else {
+        this.bathMin = 0
+        this.bathMax = 'max'
+      }
     },
     applyFilter() {
-      let {path, queryParams} = AppContext.makePath({zip_code: this.zipCode, city: this.city})
+      let params = {}
+
+      // beds
+      let beds = ''
+      if (this.bedMin != 0) {
+        beds = this.bedMin + '-'
+        if (this.bedMax !== 'max' && parseInt(this.bedMax) > parseInt(this.bedMin)) {
+          beds += this.bedMax
+        }
+      } else if (this.bedMax != 'max') {
+        beds = '-' + this.bedMax
+      }
+      if (beds) {
+        params['bedroom'] = beds
+      }
+
+      // bath
+      let bath = ''
+      if (this.bathMin != 0) {
+        bath = this.bathMin + '-'
+        if (this.bathMax !== 'max' && parseInt(this.bathMax) > parseInt(this.bathMin)) {
+          bath += this.bathMax
+        }
+      } else if (this.bathMax != 'max') {
+        bath = '-' + this.bathMax
+      }
+      if (bath) {
+        params['bathroom'] = bath
+      }
+
+      // rent
+      let rent = ''
+      if (this.rentMin != 0) {
+        rent = this.rentMin + '-'
+        if (this.rentMax !== 'max' && parseInt(this.rentMax) > parseInt(this.rentMin)) {
+          rent += this.rentMax
+        }
+      } else if (this.rentMax != 'max') {
+        rent = '-' + this.rentMax
+      }
+      if (rent) {
+        params['rent'] = rent
+      }
+
+      // price
+      let price = ''
+      if (this.priceMin != 0) {
+        price = this.priceMin + '-'
+        if (this.priceMax !== 'max' && parseInt(this.priceMax) > parseInt(this.priceMin)) {
+          price += this.priceMax
+        }
+      } else if (this.priceMax != 'max') {
+        price = '-' + this.priceMax
+      }
+      if (price) {
+        params['price'] = price
+      }
+
+
+      // location
+      if (this.zipCode) {
+        params['zip_code'] = this.zipCode
+      }
+      if (this.city) {
+        params['city'] = this.city
+      }
+
+      let {path, queryParams} = AppContext.makePath(params)
+
       this.$router.push({path: path, query:queryParams})
+      .catch(error => {
+        if (error.name != "NavigationDuplicated") {
+          throw error;
+        }
+      });
     }
   },
   watch: {

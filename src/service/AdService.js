@@ -4,18 +4,18 @@ import AdList from './model/AdList'
 import FmrAd from './model/FmrAd'
 import ApiError from './ApiError'
 import FmrUtils from '../util/FmrUtils'
+import PromiseManager from '../util/PromiseManager'
 
 const AD_LISTING = 'ads'
-const AD_TEMPLATE = 'placead/template?categoryId=#CategoryId'
 const AD_VIEW = 'ad?id=#Id'
-const AD_EDIT = 'ad/edit?id=#Id'
-const AD_UPDATE = 'account/updateAd'
+const AD_TEMPLATE = 'account/ad/template?categoryId=#CategoryId'
+const AD_UPDATE = 'account/ad/#Id'
 
 export default class AdService {
     static _adList
 
     static getAds(listCriteria) {
-        console.log('listkey:', listCriteria.getKey())
+        console.log('List criteria with key...', listCriteria, listCriteria.getKey())
 
         if (AdService._adList) {
             if (AdService._adList.listCriteria.key == listCriteria.getKey()) {
@@ -44,7 +44,6 @@ export default class AdService {
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
                     AdService._adList = new AdList(response.data.adList);
-                    console.log(AdService._adList)
                     resolve(AdService._adList)
                 } else {
                     reject(new ApiError(response.data.code))
@@ -72,7 +71,7 @@ export default class AdService {
                 })
                 .catch((error) => {
                     console.error(error)
-                    reject()
+                    reject(error)
                 })    
             })
             .catch((error) => {
@@ -91,7 +90,7 @@ export default class AdService {
                 })
             }
         }
-        let uri = forEditing? AD_EDIT.replace('#Id', id) : AD_VIEW.replace('#Id', id);
+        let uri = forEditing? AD_UPDATE.replace('#Id', id) : AD_VIEW.replace('#Id', id);
 
         if (forEditing) {
             return new Promise((resolve, reject) => {
@@ -133,9 +132,18 @@ export default class AdService {
     }
 
     static update(adServiceRequest) {
-        return new Promise((resolve, reject) => {
+        const serviceUri = AD_UPDATE.replace('#Id', adServiceRequest.ad.id)
+
+        let p = PromiseManager.get(serviceUri, 'POST')
+
+        if (p) {
+            console.log('update in progress for ad: ' + adServiceRequest.ad.id)
+            return p
+        }
+
+        p = new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
-                RestClient.instance(token).post(AD_UPDATE, adServiceRequest)
+                RestClient.instance(token).post(serviceUri, adServiceRequest)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve(new FmrAd(response.data.ad))
@@ -153,11 +161,33 @@ export default class AdService {
                 reject(error)
             })
         })
+
+        PromiseManager.set(p, serviceUri, 'POST');
+
+        return p
     }
 
-    static submitAndActivate(adObj) {
-        adObj.status = 'ACTIVE'
-        AdService.update(adObj)
+    static delete(id) {
+        return new Promise((resolve, reject) => {
+            AccountService.getToken().then((token) => {
+                RestClient.instance(token).delete(AD_UPDATE.replace('#Id', id))
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve()
+                    } else {
+                        reject(new ApiError(response.data.code, response.data.details))
+                    }
+                })
+                .catch((error) => {
+                    console.error('Ad service', error)
+                    reject(error)
+                })
+            })
+            .catch((error) => {
+                console.error('Account service', error)
+                reject(error)
+            })
+        })
     }
 
     static myAds() {

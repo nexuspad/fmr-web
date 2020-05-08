@@ -50,8 +50,10 @@ export default {
         },
         hasAttributeValue(name) {
             if (this.ad) {
-                if (this.ad.getAttribute(this.attributeId(name)).value) {
-                    return true
+                if (this.ad.getAttribute(this.attributeId(name))) {
+                    let value = this.ad.getAttribute(this.attributeId(name)).value
+                    if (value !== null && typeof value !== 'undefined' && value.length > 0)
+                        return true
                 }
             }
             return false
@@ -117,6 +119,9 @@ export default {
         },
         isApartment(categoryId) {
             return categoryId == 3003 ? true : false
+        },
+        isLand(categoryId) {
+            return categoryId == 3015 || categoryId == 3023 ? true : false
         },
         dollar(amount) {
             return formatter.format(amount)

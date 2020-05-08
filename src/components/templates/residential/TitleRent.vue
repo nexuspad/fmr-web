@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <div class="border-bottom pb-3 mb-3">
     <div class="form-group">
       <div>
         <label for="title" class="required">Title</label>

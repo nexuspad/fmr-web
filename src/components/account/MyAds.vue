@@ -9,7 +9,8 @@
           </div>
           <ul class="list-unstyled" v-if="selectedAds.length > 0">
             <li v-for="ad in selectedAds" v-bind:key="ad.id" class="border-bottom p-2">
-              <ad-summary :ad="ad" />
+              <ad-summary :ad="ad" v-if="!ad.isDraft()" />
+              <draft-summary :ad="ad" v-if="ad.isDraft()" />
               <div class="clearfix">
                 <ad-update-buttons :ad="ad" />
               </div>
@@ -47,26 +48,33 @@
 
 <script>
 import AdSummary from "../AdSummary"
+import DraftSummary from "../DraftSummary"
 import AdService from "../../service/AdService"
 import Message from '../Message'
 import AppDataHelper from '../AppDataHelper'
 import AdUpdateButtons from '../AdUpdateButtons'
 import ThereIsNothing from '../misc/ThereIsNothing'
+import EventManager from '../../util/EventManager'
+import AppEvent from '../../util/AppEvent'
 
 export default {
   components: {
-    AdSummary, Message, AdUpdateButtons, ThereIsNothing
+    AdSummary, DraftSummary, Message, AdUpdateButtons, ThereIsNothing
   },
   data() {
     return {
       type: 'all',
       selectedAds: [],
-      asList: null
+      adList: null
     };
   },
   mixins: [ AppDataHelper ],
   mounted() {
     this.getMyAds()
+    EventManager.subscribe(AppEvent.AD_REMOVAL_SUCCESS, this.getMyAds)
+  },
+  beforeDestroy() {
+    EventManager.unSubscribe(AppEvent.AD_REMOVAL_SUCCESS, this.getMyAds)
   },
   methods: {
     getMyAds() {
@@ -76,11 +84,14 @@ export default {
         self.adList = adList
         self.display()
       })
-      .catch(() => {
-        console.error("...error");
+      .catch((error) => {
+        EventManager.publishApiEvent(AppEvent.ofApiFailure(error))
       });
     },
     display() {
+      if (this.adList == null) {
+        return
+      }
       if (typeof this.$route.query['draft'] !== 'undefined') {
         this.drafts()
       } else if (typeof this.$route.query['forRent'] !== 'undefined') {
@@ -119,8 +130,7 @@ export default {
         this.selectedAds.pop();
       }
       this.adList.ads.forEach(ad => {
-        console.log(ad.category.id)
-        if (this.isForRent(ad.category.id)) {
+        if (this.isForRent(ad.category.id) && ad.status !== 'DRAFT') {
           this.selectedAds.push(ad)
         }
       })
@@ -131,7 +141,7 @@ export default {
         this.selectedAds.pop();
       }
       this.adList.ads.forEach(ad => {
-        if (this.isForSale(ad.category.id)) {
+        if (this.isForSale(ad.category.id) && ad.status !== 'DRAFT') {
           this.selectedAds.push(ad)
         }
       })

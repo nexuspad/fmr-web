@@ -26,7 +26,7 @@ function stateName(code) {
     return ''
 }
 
-function attribute(id) {
+function attributeLookup(id) {
     return ATTRIBUTES[id]
 }
 
@@ -77,7 +77,7 @@ function categoryIdLookup(uri) {
 export {
     allStatesOrTerritories,
     stateName, 
-    attribute, 
+    attributeLookup, 
     attributeIdLookup, 
     attributeNameLookup, 
     attributeTypeLookup, 

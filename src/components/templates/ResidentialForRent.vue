@@ -2,11 +2,8 @@
   <div class="mb-4">
     <title-rent :ad=ad />
     <rent-includes-and-pets :ad=ad />
-    <hr/>
     <full-address :ad=ad />
-    <hr/>
     <bed-bath :ad=ad />
-    <hr/>
     <property-size :ad=ad v-if="isHomeStyle(ad.categoryId)" />
     <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondo(ad.categoryId)" />

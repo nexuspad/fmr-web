@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border-bottom pb-3 mb-3">
     <div class="form-row">
       <div class="form-group col-md-8 mb-0">
         <div class="form-group">
@@ -25,7 +25,7 @@
         <label for="inputState" class="required">State</label>
         <select id="inputState" class="form-control" v-model="ad.getAttribute(attributeId('state')).value">
           <option selected>Choose...</option>
-          <option v-for="(name, code) in states()" :key="code" :value="code">{{name}}</option>
+          <option v-for="(name, code) in selectableStates" :key="code" :value="code">{{name}}</option>
         </select>
       </div>
       <div class="form-group col-md-1">
@@ -45,6 +45,13 @@ import AppDataHelper from '../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],
-  props: ['ad']
+  props: ['ad'],
+  computed: {
+    selectableStates: function() {
+      let states = this.states()
+      delete states['ALL']
+      return states
+    }
+  }
 }
 </script>

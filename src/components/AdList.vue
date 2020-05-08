@@ -9,13 +9,15 @@
             <div class="header">
               <h1>{{ title }}</h1>
             </div>
+            <div v-if="adList == null" class="p-4">Loading...</div>
+            <list-filter-badges />
             <ul class="list-unstyled" v-if="ads.length > 0">
               <li v-for="adItem in ads" v-bind:key="adItem.id" class="border-bottom p-2">
                 <ad-summary :ad="adItem" />
               </li>
             </ul>
             <there-is-nothing v-if="adList !== null && ads.length === 0" />
-            <div class="row pt-2">
+            <div class="row pt-2" v-if="pageCount > 0">
               <div class="col"></div>
               <div class="col">
                 <nav aria-label="Page navigation">
@@ -46,15 +48,16 @@
 import CategoryNavigation from "./CategoryNavigation"
 import Paginate from 'vuejs-paginate'
 import AppDataHelper from './AppDataHelper'
-import ListFilter from "./ListFilter";
-import AdSummary from "./AdSummary";
-import AdService from "../service/AdService";
+import ListFilter from "./ListFilter"
+import AdSummary from "./AdSummary"
+import AdService from "../service/AdService"
 import AppContext from './AppContext'
 import ThereIsNothing from './misc/ThereIsNothing'
+import ListFilterBadges from './ListFilterBadges'
 
 export default {
   components: {
-    CategoryNavigation, Paginate, AdSummary, ListFilter, ThereIsNothing
+    CategoryNavigation, Paginate, AdSummary, ListFilter, ThereIsNothing, ListFilterBadges
   },
   mixins: [ AppDataHelper ],
   data() {

@@ -6,6 +6,12 @@
       </button>
       <div v-html="successMessage"></div>
     </div>
+    <div class="alert alert-primary" role="alert" v-if="showInformation">
+      <button type="button" class="close" @click="showInformation=false" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div v-html="informationMessage"></div>
+    </div>
     <div class="alert alert-danger" role="alert" v-if="showError">
       <button type="button" class="close" @click="showError=false" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -25,7 +31,6 @@ export default {
     return {
       showError: false,
       showSuccess: false,
-      showSuccessWithCountDown: 0,
       showInformation: false,
       informationMessage: '',
       successMessage: 'success!',
@@ -110,12 +115,14 @@ export default {
     showApiResult (appEvent) {
       this.clearAll();
       if (appEvent.error && appEvent.error instanceof ApiError) {
-        this.showError = true;
-        this.errorMessage = appEvent.error.message;
+        this.showError = true
+        this.errorMessage = appEvent.error.message
+      } else if (appEvent.message) {
+        this.showSuccess = true
+        this.successMessage = appEvent.message
       } else {
-        this.showSuccess = true;
-        this.showSuccessWithCountDown = 2;
-        this.successMessage = appEvent.message;
+        this.showInformation = true
+        this.informationMessage = 'Sorry, something weird just happened. The application went banana.'
       }
     },
     showSuccessMessage (appEvent) {

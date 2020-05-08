@@ -1,6 +1,9 @@
 <template>
   <div class="fmr-bordered-area">
     <div class="header">
+      <div class="mr-2 float-right">
+        <a class="far fa-times-circle fa-lg" @click="$router.back(-1)"></a>
+      </div>
       <h1>Select a category</h1>
     </div>
     <div class="container m-0 p-4">
@@ -105,7 +108,7 @@
 export default {
   methods: {
     newAd(categoryId) {
-      this.$router.push({ name: 'AdNew', query: {categoryId: categoryId} });
+      this.$router.push({ name: 'AdEdit', query: {categoryId: categoryId} });
     }
   }
 }

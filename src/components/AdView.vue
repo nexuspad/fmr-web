@@ -3,16 +3,16 @@
     <category-navigation />
     <div class="fmr-bordered-area">
       <div class="header">
-        <h1 class="fmr-md-text">
+        <h1 class="fmr-md-text" v-if="ad.id > 0">
           <a class="fas fa-chevron-circle-left fa-lg pr-2" @click="$router.go(-1)"></a>
           <router-link :to="getPath({state: ad.state})">{{ stateName(ad.state) }}</router-link> / 
-          <router-link :to="getPath({state: ad.state, city: ad.city})">{{ ad.city }}</router-link> / 
-          <router-link :to="getPath({categoryId: ad.category.id})">{{ categoryName([ad.categoryId]) }}</router-link> / 
+          <router-link :to="{path: getPath({state: ad.state}), query: {city: ad.city}}">{{ ad.city }}</router-link> / 
+          <router-link :to="getPath({state: ad.state, categoryId: ad.category.id})">{{ categoryName([ad.categoryId]) }}</router-link> / 
           Ad# {{ ad.id }}
         </h1>
       </div>
-      <ad-detail :ad=ad />
-      <ad-warning />
+      <ad-detail :ad=ad v-if="ad.id > 0" />
+      <ad-warning v-if="ad.id > 0" />
     </div>
     <vue-headful :title="ad.title" description="" />
   </div>

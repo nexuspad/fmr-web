@@ -12,20 +12,36 @@ export default class RestClient {
         return axios.get(fullUrl);
     }
 
-    static instance(token, optional = { timeout: 3000 }) {
+    static instance(token = null, optional = { timeout: 3000 }) {
         if (!this.apiUrl) {
             throw new ApiError(AppEvent.ABORT);
         }
 
-        if (!token) token = '';
+        let tokenInHeader = null
+        if (this._axiosInstance !== null) {
+            tokenInHeader = this._axiosInstance.defaults.headers['Authorization']
+            if (typeof tokenInHeader === 'undefined' || (tokenInHeader != null && tokenInHeader.length === 0)) {
+                tokenInHeader = null
+            }    
+        }
 
-        if (this._axiosInstance !== null && this._axiosInstance.defaults.headers['Authorization'] !== token) {
-            console.log('[RestClient] reset...because the Authorization token has changed');
+        // only reset when there is an existing token in the header, and it's different from the new non-null token
+        if (token === null && tokenInHeader !== null) {
+            console.log('[RestClient] reset...because the Authorization token needs to be removed: ' + tokenInHeader);
             this._axiosInstance = null;
+
+        } else if (token !== null && tokenInHeader !== token) {
+            console.log('[RestClient] reset...because the Authorization token has changed.');
+            this._axiosInstance = null;
+        }
+
+        if (token && typeof token !== 'string') {
+            throw Error('token is not a string', token)
         }
 
         if (this._axiosInstance === null) {
             let headers
+
             if (token)
                 headers = { 'Authorization': token };
 
@@ -84,7 +100,8 @@ export default class RestClient {
             });
 
         } else {
-            this._axiosInstance.defaults.headers['Authorization'] = token;
+            if (token)
+                this._axiosInstance.defaults.headers['Authorization'] = token;
         }
 
         return this._axiosInstance;

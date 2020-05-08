@@ -18,7 +18,7 @@ export default class AccountService {
                 resolve(AccountService._user.token)
             })
         } else {
-            const token = StorageUtils.get('token')
+            const token = StorageUtils.getString('token')
             if (token) {
                 return new Promise((resolve, reject) => {
                     AccountService.current(token).then((userObj) => {
@@ -44,7 +44,7 @@ export default class AccountService {
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
                     AccountService._user = new User(response.data.user)
-                    StorageUtils.save('token', AccountService._user.token)
+                    StorageUtils.saveString('token', AccountService._user.token)
                     resolve(new User(response.data.user))
                 } else {
                     reject(new ApiError(response.data.code))
@@ -52,7 +52,7 @@ export default class AccountService {
             })
             .catch((error) => {
                 console.log(error)
-                reject(new ApiError(error.response.status))
+                reject(error)
             })  
         })
     }
@@ -130,7 +130,7 @@ export default class AccountService {
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
                     AccountService._user = new User(response.data.user)
-                    StorageUtils.save('token', AccountService._user.token)
+                    StorageUtils.saveString('token', AccountService._user.token)
                     resolve(new User(response.data.user))
                 } else {
                     reject(new ApiError(response.data.code))
@@ -225,7 +225,7 @@ export default class AccountService {
         }
 
         if (checkAuth) {
-            const token = StorageUtils.get('token')
+            const token = StorageUtils.getString('token')
             if (token) {
                 AccountService.current(token).then(() => {
                 }).catch(() => {

@@ -1,11 +1,8 @@
 <template>
   <div class="mb-4">
     <title-price :ad=ad />
-    <hr/>
     <full-address :ad=ad />
-    <hr/>
-    <bed-bath :ad=ad />
-    <hr/>
+    <bed-bath :ad=ad v-if="!isLand(ad.categoryId)" />
     <property-size :ad=ad v-if="isHomeStyle(ad.categoryId)" />
     <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />

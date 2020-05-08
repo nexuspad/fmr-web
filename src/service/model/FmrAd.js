@@ -3,7 +3,7 @@ import AdAttribute from "./AdAttribute"
 import AdPhoto from "./AdPhoto"
 
 export default class FmrAd {
-    id
+    id = 0
     category
     status
     owner
@@ -24,7 +24,7 @@ export default class FmrAd {
             this.status = jsonObj.status
 
             this.postDate = jsonObj.postDate
-            this.updateTime = jsonObj.updateTime
+            this.updateTime = new Date(jsonObj.updateTime * 1000).toLocaleTimeString("en-US")
 
             if (jsonObj.uri)
                 this.uri = jsonObj.uri
@@ -91,6 +91,13 @@ export default class FmrAd {
 
     isActive() {
         if (this.status === 'ACTIVE') {
+            return true
+        }
+        return false
+    }
+
+    isDeactivated() {
+        if (this.status === 'DEACTIVATED') {
             return true
         }
         return false

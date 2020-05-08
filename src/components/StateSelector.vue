@@ -26,7 +26,8 @@ export default {
       this.state = AppContext.getState() ? AppContext.getState().toUpperCase() : 'ALL'
     },
     changeState() {
-      AppContext.changeState(this.state.toLowerCase())
+      const {path} = AppContext.changeState(this.state.toLowerCase())
+      this.$router.push(path)
     }
   },
   watch: {

@@ -4,9 +4,6 @@ export default class AttributeFilter {
     attribute
     operator
     value
-    values
-    minValue
-    maxValue
 
     constructor (jsonObj) {
         if (jsonObj) {
@@ -28,37 +25,18 @@ export default class AttributeFilter {
         return filter
     }
 
-    static in (name, values) {
+    static in (name, value) {
         const filter = new AttributeFilter()
         filter.operator = 'IN'
-        filter.attribute = new AdAttribute()
-        filter.attribute.name = name
-        filter.values = values
-        return filter
-    }
-
-    static range (name, minValue, maxValue) {
-        const filter = new AttributeFilter()
-        filter.operator = 'RANGE'
-        filter.attribute = new AdAttribute()
-        filter.attribute.name = name
-        filter.minValue = minValue
-        filter.maxValue = maxValue
-        return filter
-    }
-
-    static gt (name, value) {
-        const filter = new AttributeFilter()
-        filter.operator = 'GT'
         filter.attribute = new AdAttribute()
         filter.attribute.name = name
         filter.value = value
         return filter
     }
 
-    static lt (name, value) {
+    static range (name, value) {
         const filter = new AttributeFilter()
-        filter.operator = 'LT'
+        filter.operator = 'RANGE'
         filter.attribute = new AdAttribute()
         filter.attribute.name = name
         filter.value = value
@@ -66,34 +44,13 @@ export default class AttributeFilter {
     }
 
     paramExpression () {
-        let value = null;
-
-        if (this.operator === 'EQ' || this.operator === 'GT' || this.operator === 'LT') {
-            value = this.value
-        } else if (this.operator === 'IN') {
-            if (this.values instanceof Array && this.values.length > 0) {
-                value = this.values.join(',')
-            }
-        } else if (this.operator === 'RANGE') {
-            value = this.minValue + '-' + this.maxValue
-        }
-
-        if (value !== null) {
-            return this.operator + '.' + value
-        }
+        return this.operator + '.' + this.value
     }
 
     get key() {
         let key = ''
         if (this.attribute) {
-            key += this.attribute.name
-            if (this.operator === 'EQ' || this.operator === 'GT' || this.operator === 'LT') {
-                key += '.' + this.operator + '.' + this.value
-            } else if (this.operator === 'IN') {
-                key += '.' + this.operator + '.' + this.values.join(',')
-            } else if (this.operator === 'RANGE') {
-                key += '.' + this.operator + '.' + this.minValue + '-' + this.maxValue
-            }
+            key += this.attribute.name + '.' + this.operator + '.' + this.value
         }
         return key.length > 0 ? key : null
     }

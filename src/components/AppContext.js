@@ -1,7 +1,6 @@
 import ListCriteria from '../service/model/ListCriteria'
 import AdCategory from '../service/model/AdCategory'
 import AttributeFilter from '../service/model/AttributeFilter'
-import { router } from '../router'
 import { categoryLookup, categoryIdLookup, stateName } from '../service/AppData'
 import StorageUtils from '../util/StorageUtil'
 import FilterParams from './FilterParams'
@@ -13,14 +12,20 @@ export default class AppContext {
         return this._filterParams.current()
     }
 
+    // called by router to set the context
     static updateContext({routeParams = {}, routeQueries = {}}) {
+        // convert the category name in the uri to category id
         if (routeParams['categoryName']) {
             routeParams['categoryId'] = categoryIdLookup(routeParams['categoryName'])
         }
 
+        // merge into the context and overwrite existing values
         this._filterParams.merge(routeParams, true)
         this._filterParams.merge(routeQueries, true)
         
+        console.log('From the route....', this._filterParams);
+
+        // merge the locally saved context.
         this._mergeFromLocal()
 
         // store back locally
@@ -32,26 +37,47 @@ export default class AppContext {
     }
 
     // _state should always be stored in lower case
-    static changeState(theState) {
-        if (this._isValidStateSelection(theState)) {
-            this._filterParams.setState(theState)
-        } else {
+    static changeState(stateCode) {
+        if (!stateCode || stateCode === 'all') {
             this._filterParams.setState(null)
+        } else {
+            if (stateName(stateCode)) {
+                this._filterParams.setState(stateCode)
+            } else {
+                this._filterParams.setState(null)
+            }    
         }
 
-        // merge with the rest of the contexts
         this._updateLocal()
 
-        let {path} = this.makePath()
-        router.push(path)
+        return this.makePath()
     }
 
-    static _isValidStateSelection(theState) {
-        let name = stateName(theState)
-        if (name && name.toLowerCase() !== 'nationwide') {
-            return true
+    // This call creates path and params for the route, it should not update the context
+    static makePath(updateParams = {}) {
+        let fp = new FilterParams(this._filterParams)
+        fp.merge(updateParams, true)
+
+        let pathParams = []
+        if (fp.getState()) {
+            pathParams.push(fp.getState())
         }
-        return false
+
+        if (fp.getCategoryId()) {
+            const category = categoryLookup(fp.getCategoryId())
+            pathParams.push(category.uri)
+        }
+
+        let path = '/' + pathParams.join('/')
+
+        let queryParams = {}
+        for (let name in fp.getFilters()) {
+            if (!FilterParams.noValue(fp.getFilters()[name])) {
+                queryParams[name] = fp.getFilters()[name]
+            }
+        }
+
+        return {path: path, queryParams: queryParams}
     }
 
     static _mergeFromLocal() {
@@ -71,35 +97,8 @@ export default class AppContext {
         }
     }
 
-    // This call should not update the states
-    static makePath(otherParams = {}) {
-        let fp = new FilterParams(this._filterParams)
-        fp.merge(otherParams, true)
-
-        let pathParams = []
-        if (fp.getState()) {
-            pathParams.push(fp.getState())
-        }
-
-        if (fp.getCategoryId()) {
-            const category = categoryLookup(fp.getCategoryId())
-            pathParams.push(category.uri)
-        }
-
-        let path = '/' + pathParams.join('/')
-
-        let queryParams = {}
-        for (let name in fp.getFilters()) {
-            queryParams[name] = fp.getFilters()[name]
-        }
-
-        return {path: path, queryParams: queryParams}
-    }
-
     static searchCriteria() {
         let listCriteria = new ListCriteria()
-
-        console.log('....', this._filterParams)
 
         if (this._filterParams.getCategoryId()) {
             let category = new AdCategory()
@@ -122,14 +121,7 @@ export default class AppContext {
                 }
 
                 if (value.includes('-')) {
-                    let parts = value.split('-')
-                    if (parts[0] && parts[1]) {
-                        listCriteria.addFilter(AttributeFilter.range(name, parts[0], parts[1]))
-                    } else if (parts[0]) {
-                        listCriteria.addFilter(AttributeFilter.gt(name, parts[0]))
-                    } else if (parts[1]) {
-                        listCriteria.addFilter(AttributeFilter.lt(name, parts[1]))
-                    }
+                    listCriteria.addFilter(AttributeFilter.range(name, value))
                 } else if (value.includes(',')) {
                     let parts = value.split(',')
                     listCriteria.addFilter(AttributeFilter.in(name, parts))
@@ -138,7 +130,6 @@ export default class AppContext {
                 }
             }
         }
-
         return listCriteria
     }
 }

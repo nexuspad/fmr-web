@@ -3,12 +3,12 @@ const ATTRIBUTES =
     "1": {
         "name": "title",
         "id": 1,
-        "required": true
+        "type": "string"
     },
     "2": {
         "name": "description",
         "id": 2,
-        "required": true
+        "type": "string"
     },
     "8": {
         "name": "bedroom",
@@ -22,123 +22,116 @@ const ATTRIBUTES =
             "7"
         ],
         "id": 8,
-        "type": "number",
-        "required": true
+        "type": "number"
     },
     "9": {
         "name": "bathroom",
         "options": [
             "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
             "1.5",
+            "2",
             "2.5",
+            "3",
             "3.5",
+            "4",
             "4.5",
+            "5",
             "5.5",
-            "6.5"
+            "6",
+            "6.5",
+            "7"
         ],
         "id": 9,
-        "type": "number",
-        "required": true
+        "type": "number"
     },
     "10": {
         "name": "city",
         "id": 10,
-        "required": true
+        "type": "string"
     },
     "12": {
         "name": "state",
         "id": 12,
-        "required": true
+        "type": "string"
     },
     "19": {
         "name": "square_footage",
         "id": 19,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "21": {
         "name": "monthly_rent",
         "id": 21,
-        "type": "number",
-        "required": true
+        "type": "number"
     },
     "22": {
         "name": "asking_price",
         "id": 22,
-        "type": "number",
-        "required": true
+        "type": "number"
     },
     "23": {
         "name": "year_built",
         "id": 23,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "24": {
         "name": "cap_rate",
         "id": 24,
-        "required": false
+        "type": "string"
     },
     "25": {
         "name": "security_deposit",
         "id": 25,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "26": {
         "name": "minimal_lease_term",
         "id": 26,
-        "required": false
+        "type": "string"
     },
     "28": {
         "name": "acreage",
         "id": 28,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "29": {
         "name": "building_square_footage",
         "id": 29,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "30": {
         "name": "street_address",
         "id": 30,
-        "required": true
+        "type": "string"
     },
     "31": {
         "name": "represented_by",
+        "options": [
+            "agent",
+            "owner"
+        ],
         "id": 31,
-        "required": false
+        "type": "string"
     },
     "32": {
         "name": "address_line_2",
         "id": 32,
-        "required": false
+        "type": "string"
     },
     "33": {
         "name": "zip_code",
         "id": 33,
-        "required": true
+        "type": "string"
     },
     "35": {
         "name": "homeowner_association_fee",
         "id": 35,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "36": {
         "name": "condo_fee",
         "id": 36,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "39": {
         "name": "pet_policy",
@@ -147,136 +140,136 @@ const ATTRIBUTES =
             "yes"
         ],
         "id": 39,
-        "required": false
+        "type": "string"
     },
     "41": {
         "name": "other_amenities",
         "id": 41,
-        "required": false
+        "type": "string"
     },
     "42": {
         "name": "parking_spaces",
         "id": 42,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "43": {
         "name": "school",
         "id": 43,
-        "required": false
+        "type": "string"
     },
     "46": {
         "name": "basement",
         "options": [
-            "slab/none",
-            "full, unfinished",
-            "full, finished",
             "crawl space",
+            "full, finished",
+            "full, unfinished",
+            "partial, finished",
             "partial, unfinished",
-            "partial, finished"
+            "slab/none"
         ],
         "id": 46,
-        "required": false
+        "type": "string"
+    },
+    "47": {
+        "name": "close_to",
+        "id": 47,
+        "type": "string"
     },
     "49": {
         "name": "neighborhood",
         "id": 49,
-        "required": false
+        "type": "string"
     },
     "50": {
         "name": "contact_name",
         "id": 50,
-        "required": false
+        "type": "string"
     },
     "51": {
         "name": "contact_phone",
         "id": 51,
-        "required": false
+        "type": "string"
     },
     "52": {
         "name": "county",
         "id": 52,
-        "required": false
+        "type": "string"
     },
     "53": {
         "name": "open_house",
         "id": 53,
-        "required": false
+        "type": "string"
     },
     "54": {
         "name": "open_house_hours",
         "id": 54,
-        "required": false
+        "type": "string"
     },
     "55": {
         "name": "brokerage_company",
         "id": 55,
-        "required": false
+        "type": "string"
     },
     "56": {
         "name": "MLS_ID",
         "id": 56,
-        "required": false
+        "type": "string"
     },
     "57": {
         "name": "lot_size",
         "id": 57,
-        "type": "number",
-        "required": false
+        "type": "number"
     },
     "58": {
         "name": "contact_email",
         "id": 58,
-        "required": false
+        "type": "string"
     },
     "60": {
         "name": "interior",
         "options": [
-            "Hardwood floor",
             "2-zone AC/heating",
-            "Washer and dryer",
-            "Laundry room",
-            "Furnished",
             "Crown molding",
-            "Washer/dryer connection",
-            "Fireplace"
+            "Fireplace",
+            "Furnished",
+            "Hardwood floor",
+            "Laundry room",
+            "Washer and dryer",
+            "Washer/dryer connection"
         ],
         "id": 60,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "61": {
         "name": "exterior",
         "options": [
+            "1-car garage",
+            "1-car parking space",
+            "2-car garage",
             "2-car parking space",
             "3-car garage",
-            "Private swimming pool",
             "Balcony",
-            "Deck",
-            "1-car garage",
-            "Irrigation system",
-            "Front porch",
-            "2-car garage",
-            "1-car parking space",
-            "Patio",
             "Cul-de-sac",
-            "Fenced backyard"
+            "Deck",
+            "Fenced backyard",
+            "Front porch",
+            "Irrigation system",
+            "Patio",
+            "Private swimming pool"
         ],
         "id": 61,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "62": {
         "name": "rent_includes",
         "options": [
-            "Water and sewer",
             "Electricity",
             "Garbage pickup",
-            "Gas"
+            "Gas",
+            "Water and sewer"
         ],
         "id": 62,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "63": {
         "name": "lot_developed",
@@ -285,7 +278,12 @@ const ATTRIBUTES =
             "yes"
         ],
         "id": 63,
-        "required": false
+        "type": "string"
+    },
+    "64": {
+        "name": "hide_my_address",
+        "id": 64,
+        "type": "string"
     },
     "65": {
         "name": "owner_financing_available",
@@ -294,138 +292,137 @@ const ATTRIBUTES =
             "yes"
         ],
         "id": 65,
-        "required": false
+        "type": "string"
     },
     "66": {
         "name": "kitchen_and_dining",
         "options": [
             "Breakfast area(nook)",
-            "Garbage disposal",
-            "Formal dining room",
             "Dishwasher",
-            "Refrigerator",
+            "Formal dining room",
+            "Garbage disposal",
+            "Granite countertops",
             "Range/oven",
-            "Granite countertops"
+            "Refrigerator"
         ],
         "id": 66,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "67": {
         "name": "bed_and_bath",
         "options": [
-            "In-law suite",
-            "Separate shower in master bath",
-            "Walk-in closet in master",
             "Guest suite on main",
+            "In-law suite",
+            "Jacuzzi tub",
             "Master on main",
-            "Jacuzzi tub"
+            "Separate shower in master bath",
+            "Walk-in closet in master"
         ],
         "id": 67,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "68": {
         "name": "community",
         "options": [
-            "Gated community",
-            "Tennis",
-            "Fitness center",
-            "Golf",
-            "Shared swimming pool",
-            "Club house",
-            "Close to park",
-            "Hiking/biking trails",
             "Basketball",
+            "Close to park",
+            "Club house",
+            "Fitness center",
+            "Gated community",
+            "Golf",
+            "Hiking/biking trails",
+            "Playground",
             "Public transportation",
-            "Playground"
+            "Shared swimming pool",
+            "Tennis"
         ],
         "id": 68,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "69": {
         "name": "condo_amenities",
         "options": [
-            "Fitness center",
             "24 Hour Concierge",
-            "On-site parking",
             "Children's playroom",
-            "Garage parking"
+            "Fitness center",
+            "Garage parking",
+            "On-site parking"
         ],
         "id": 69,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "70": {
         "name": "pet_policy_details",
         "id": 70,
-        "required": false
+        "type": "string"
     },
     "71": {
         "name": "apartment_unit_amenities",
         "options": [
-            "Eat in kitchen or dining",
-            "Washer and dryer",
-            "Ground floor",
-            "Dishwasher",
-            "Refrigerator",
             "Deck",
+            "Dishwasher",
+            "Eat in kitchen or dining",
+            "Fireplace",
             "Furnished",
-            "Washer/dryer connection",
+            "Ground floor",
             "High speed internet",
-            "Range/oven",
             "Patio",
+            "Range/oven",
+            "Refrigerator",
             "Top floor",
-            "Fireplace"
+            "Washer and dryer",
+            "Washer/dryer connection"
         ],
         "id": 71,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "72": {
         "name": "apartment_amenities",
         "options": [
-            "Gated community",
-            "Laundry facilities",
-            "Tennis",
             "Business center",
+            "Club house",
             "Fitness center",
+            "Garage parking",
+            "Gated community",
+            "Hiking/biking trails",
+            "Laundry facilities",
+            "Public transportation",
             "Shared swimming pool",
             "Storage Space(s)",
-            "Wheelchair Access",
-            "Garage parking",
-            "Club house",
-            "Hiking/biking trails",
-            "Public transportation"
+            "Tennis",
+            "Wheelchair Access"
         ],
         "id": 72,
-        "type": "array",
-        "required": false
+        "type": "array"
     },
     "73": {
         "name": "available_date",
         "id": 73,
-        "required": false
+        "type": "string"
     },
     "74": {
         "name": "special_offer",
         "id": 74,
-        "required": false
+        "type": "string"
+    },
+    "75": {
+        "name": "college_campus",
+        "id": 75,
+        "type": "string"
     },
     "1004": {
         "name": "current_zoning",
         "options": [
-            "Commercial",
-            "Residential"
+            "commercial",
+            "residential"
         ],
         "id": 1004,
-        "required": false
+        "type": "string"
     },
     "1008": {
         "name": "rate",
         "id": 1008,
-        "required": false
+        "type": "string"
     }
 }
 

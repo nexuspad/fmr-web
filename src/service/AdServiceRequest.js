@@ -29,6 +29,13 @@ export default class AdServiceRequest {
         return serviceRequest
     }
 
+    static submit(adObj) {
+        const serviceRequest = new AdServiceRequest
+        serviceRequest.action = 'SUBMIT'
+        serviceRequest.copyVerify(adObj)
+        return serviceRequest
+    }
+
     static activate(adObj) {
         const serviceRequest = new AdServiceRequest
         serviceRequest.action = 'ACTIVATE'
@@ -133,6 +140,7 @@ export default class AdServiceRequest {
     copyVerify(adObj) {
         this.ad = new FmrAd
         this.ad.id = adObj.id
+        this.ad.status = adObj.status
         this.ad.category = new AdCategory()
         this.ad.category.id = adObj.categoryId
 

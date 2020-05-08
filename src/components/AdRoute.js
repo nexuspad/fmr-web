@@ -16,15 +16,6 @@ export default class AdRoute {
                 }
             },
             {
-                path: '/ad/new',
-                name: 'AdNew',
-                component: AdEdit,
-                meta: {
-                    title: 'Add a new ad',
-                    activity: 'editing'
-                }
-            },
-            {
                 path: '/ad/edit',
                 name: 'AdEdit',
                 component: AdEdit,

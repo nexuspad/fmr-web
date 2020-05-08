@@ -2,18 +2,26 @@
   <div>
     <div class="fmr-bordered-area">
       <div class="header">
-        <h1>
+        <span class="h1">
           {{ categoryName(categoryId) }}
-          <span class="fmr-deact ml-2" v-if="!ad.isActive()"></span>
-        </h1>
+          <span class="fmr-deact ml-2" v-if="ad.isDeactivated()"></span>
+        </span>
+        <span class="font-italic font-weight-light fmr-sm-text" v-if="ad.isDraft()">draft
+          &nbsp;<span v-if="ad.id">#{{ ad.id }}</span>
+        </span>
+        <div class="mr-2 float-right">
+          <a class="far fa-times-circle fa-lg" @click="exitEdit()"></a>
+        </div>
       </div>
       <message />
       <div class="fmr-form p-2">
         <div class="fmr-tab shadow-sm sticky-top">
-          <div class="float-right mr-2 pt-1 pb-1" style="background-color: #ffffff;">
-            <button class="btn btn-primary" v-on:click="save" v-if="!ad.isDraft()">Save</button>
+          <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1" style="background-color: #ffffff;">
+            <button class="btn btn-primary" :class="{disabled: invalidFields.length > 0}" 
+              v-on:click="save()" v-if="!ad.isDraft()">Save</button>
             <button class="btn btn-primary" 
-              data-toggle="modal" data-target="#SubmissionConfirmation" v-if="ad.isDraft()">Submit</button>
+              data-toggle="modal" data-target="#SubmissionConfirmation" :class="{disabled: invalidFields.length > 0}" 
+              v-if="ad.isDraft()">Submit</button>
           </div>
           <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -25,10 +33,12 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#Preview">Preview</a>
             </li>
+            <!--
             <li class="nav-item">
               <router-link to="/account/myads" class="nav-link text-danger" v-if="!ad.isDraft()">Cancel</router-link>
               <a class="nav-link text-danger" data-toggle="tab" href="#Cancel" v-if="ad.isDraft()">Cancel</a>
             </li>
+            -->
           </ul>
         </div>
         <div class="tab-content pt-4 pl-4 pr-2">
@@ -43,7 +53,15 @@
             <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">
-            <ad-detail :ad=ad :key="ad.updateTime" />
+            <ad-detail :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
+            <div v-if="invalidFields.length > 0">
+              The following fields are required:
+              <ul class="list-unstyled" v-if="invalidFields.length > 0">
+                <li v-for="(field, index) in invalidFields" v-bind:key="index" class="border-bottom p-2">
+                  {{ field }}
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="tab-pane" id="Submit">
             <div class="align-middle text-center pt-5 pb-5">
@@ -56,7 +74,9 @@
           <div class="tab-pane" id="Cancel">
             <div class="align-middle text-center pt-5 pb-5">
               <p>
-              A draft copy has been saved.
+              A draft copy has been saved. Keep it?
+              <a class="text-primary ml-4 mr-4" href="">Yes</a>
+              <a class="text-danger" href="">No</a>
               </p>
             </div>
           </div>
@@ -67,17 +87,17 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Submission confirmation</h5>
+            <h5 class="modal-title">Submission Confirmation</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <p>Before submitting, please review and make sure you agree to FindMyRoof.com's Terms of use and Privacy policy.</p>
+            <p>Before submitting, please review and make sure you agree to FindMyRoof.com's Terms of Service and Privacy Policy.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">I agree and submit</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" @click="submit()">I agree and submit</button>
           </div>
         </div>
       </div>
@@ -94,7 +114,6 @@ import CommercialForRent from "./templates/CommercialForRent";
 import Uploader from './Uploader'
 import AdDetail from './addisplay/AdDetail'
 import AdService from "../service/AdService";
-import FmrAd from "../service/model/FmrAd";
 import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
@@ -107,13 +126,19 @@ export default {
       template: '',
       categoryId: null,
       id: 0,
-      ad: new FmrAd()
+      ad: null,
+      timerId: 0
     }
   },
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
     ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
     Uploader, AdDetail, Message, PostWarning
+  },
+  computed: {
+    invalidFields: function() {
+      return this.checkInvalidFields(this.ad)
+    }
   },
   beforeMount() {
     if (this.$route.query.categoryId) {
@@ -148,6 +173,15 @@ export default {
           EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
         })
     }
+
+    // set a timer to save every 5 seconds
+    this.timerId = setInterval(() => self.save(), 20000);
+  },
+  beforeDestroy() {
+    if (this.timerId) {
+      console.log('exit editing page...')
+      clearInterval(this.timerId)
+    }
   },
   methods: {
     getTemplate() {
@@ -164,12 +198,9 @@ export default {
         return 'ResidentialForRent'
       }
     },
-    submitAndActivate() {
-      AdService.submitAndActivate(this.ad).then(() => {
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    exitEdit() {
+      this.save()
+      this.$router.back(-1)
     }
   }
 };

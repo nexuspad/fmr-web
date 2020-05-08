@@ -3,7 +3,7 @@
     <h2 class="fmr-red ml-4 mt-2">{{ ad.title }}</h2>
     <div class="container pl-0 mt-3 ml-4 mb-4 fmr-ad-detail">
       <div class="row border-bottom shadow-sm">
-        <div class="col-md-4">
+        <div class="col-md-4 border-right" v-if="ad.thumbnailUrl">
           <div class="container mb-4">
             <div class="row">
               <div class="col">
@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-        <div class="col border-left pb-4">
+        <div class="col pb-4">
           <price-and-offers :ad="ad" />
           {{ ad.description }}
         </div>
