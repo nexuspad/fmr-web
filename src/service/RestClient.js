@@ -68,11 +68,15 @@ export default class RestClient {
 
                     // application error response is available
                     if (error.response) {
-                        // status code like 403
-                        if (error.response.status === 403) {
+                        if (error.response.status === 401) {
+                            // unauthorized 401
                             // a little clean up here
                             StorageUtils.delete('token')
                             return Promise.reject(ApiError.authenticationError())
+                        } else if (error.response.status === 403) {
+                            // forbidden
+                            window.location = '/site/accessdenied'
+                            return Promise.reject(ApiError.accessDenied())
                         } else if (error.response.status === 500) {
                             return Promise.reject(ApiError.internalError())
                         } else {

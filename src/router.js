@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import AdRoute from './components/AdRoute'
 import AccountRoute from './components/account/AccountRoute'
 import AppContext from './components/AppContext'
+import MiscRoute from './components/misc/MiscRoute';
 
 const scrollBehavior = function (to, from, savedPosition) {
     if (savedPosition) {
@@ -23,6 +24,7 @@ const router = new VueRouter({
     scrollBehavior,
 });
 
+router.addRoutes(MiscRoute.routes())
 router.addRoutes(AdRoute.routes())
 router.addRoutes(AccountRoute.routes())
 

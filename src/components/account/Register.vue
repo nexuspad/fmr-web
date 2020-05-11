@@ -6,23 +6,23 @@
     </div>
     <div class="fmr-form mt-2 p-2 col-lg-6 offset-lg-3">
       <form v-on:submit.prevent>
-        <div class="border-bottom lead bg-light mb-4">
+        <div class="border-bottom lead bg-light pl-1 mb-4">
           Create a new account
         </div>
-        <div class="form-group">
+        <div class="form-group pl-1">
           <label for="email" class="required">Email address</label>
           <input type="email" class="form-control" id="email" v-model="email" aria-describedby="emailHelp">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-        <div class="form-group">
+        <div class="form-group pl-1">
           <label for="password" class="required">Password</label>
           <input type="password" class="form-control" id="password" v-model="password">
         </div>
-        <div class="form-group">
+        <div class="form-group pl-1">
           <label for="confirmPassword" class="required">Confirm password</label>
           <input type="password" class="form-control" id="confirmPassword" v-model="confirmPassword">
         </div>
-        <div class="form-group">
+        <div class="form-group pl-1">
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="agreeTos" v-model="agreeToTos">
             <span class="form-check-label" for="agreeTos">

@@ -24,7 +24,7 @@
       <div class="form-group col-md-3">
         <label for="inputState" class="required">State</label>
         <select id="inputState" class="form-control" v-model="ad.getAttribute(attributeId('state')).value">
-          <option selected>Choose...</option>
+          <option :value="''">Choose...</option>
           <option v-for="(name, code) in selectableStates" :key="code" :value="code">{{name}}</option>
         </select>
       </div>
@@ -48,7 +48,8 @@ export default {
   props: ['ad'],
   computed: {
     selectableStates: function() {
-      let states = this.states()
+      let states = []
+      states.push(...this.states())
       delete states['ALL']
       return states
     }

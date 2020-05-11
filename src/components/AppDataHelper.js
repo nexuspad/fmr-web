@@ -18,7 +18,9 @@ export default {
             return stateName(code)
         },
         categoryName(id) {
-            return this.capitalizeFirstLetter(categoryNameLookup(id))
+            if (id)
+                return this.capitalizeFirstLetter(categoryNameLookup(id))
+            return ''
         },
         categoryCode(categoryId) {
             let category = categoryLookup(categoryId)

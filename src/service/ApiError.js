@@ -9,6 +9,7 @@ const ApiErrorMessage = {
     ACCT_AUTHENTICATION_FAILURE: 'Your login session has expired. <a href="/account/login">Re-login</a>.',
     ACCT_WRONG_PASSWORD: 'The account password is incorrect.',
     ACCT_INVALID_TOKEN: 'The reset key is invalid. Please try again.',
+    ACCESS_DENIED: 'Access denied.',
 
     UPLOAD_FILE_NOT_SUPPORTED: 'The file is not a valid image. Only JPG, PNG and GIF files are allowed.'
 }
@@ -39,6 +40,13 @@ export default class ApiError {
     static authenticationError() {
         const error = new ApiError
         error.code = 'ACCT_AUTHENTICATION_FAILURE'
+        error.message = ApiErrorMessage[error.code]
+        return error
+    }
+
+    static accessDenied() {
+        const error = new ApiError
+        error.code = 'ACCESS_DENIED'
         error.message = ApiErrorMessage[error.code]
         return error
     }

@@ -8,7 +8,7 @@
             <h1>{{ type }}</h1>
           </div>
           <ul class="list-unstyled" v-if="selectedAds.length > 0">
-            <li v-for="ad in selectedAds" v-bind:key="ad.id" class="border-bottom p-2">
+            <li v-for="ad in selectedAds" v-bind:key="ad.id" class="border-bottom p-2 mb-4">
               <ad-summary :ad="ad" v-if="!ad.isDraft()" />
               <draft-summary :ad="ad" v-if="ad.isDraft()" />
               <div class="clearfix">

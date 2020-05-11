@@ -19,20 +19,29 @@ export default {
             this.$router.push({path: pathToEdit});
         },
         checkInvalidFields(ad) {
-            let invalidAttributes = []
-            ad.attributes.forEach(attribute => {
-                if (attribute.required === true && (typeof attribute.value === 'undefined' || attribute.value.length === 0)) {
-                    invalidAttributes.push(attribute.name)
-                }
-            })
-            return invalidAttributes
+            if (ad !== null) {
+                let invalidAttributes = []
+                ad.attributes.forEach(attribute => {
+                    if (attribute.required === true && (typeof attribute.value === 'undefined' || attribute.value.length === 0)) {
+                        invalidAttributes.push(attribute.name)
+                    }
+                })
+                return invalidAttributes    
+            }
+            return []
         },
         save(background=true) {
             let serviceRequest = AdServiceRequest.fullUpdate(this.ad)
             const self = this
             AdService.update(serviceRequest).then((updatedAd) => {
                 self.ad.copy(updatedAd)
+                console.log('saved...')
+
+                // the server timestamp is a little different from the local, so set it to local here.
+                self.ad.updateTime = Math.floor(Date.now() / 1000)
+
                 self.checkInvalidFields(self.ad)
+
                 if (!background) {
                     let message = 'The ad #' + updatedAd.id + ' has been updated.' 
                     EventManager.publishAppEvent(AppEvent.ofSuccess(AppEvent.AD_UPDATE_SUCCESS, message))    

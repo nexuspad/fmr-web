@@ -4,24 +4,24 @@
       <div class="header">
         <span class="h1">
           {{ categoryName(categoryId) }}
-          <span class="fmr-deact ml-2" v-if="ad.isDeactivated()"></span>
+          <span class="fmr-deact ml-2" v-if="ad !== null && ad.isDeactivated()"></span>
         </span>
-        <span class="font-italic font-weight-light fmr-sm-text" v-if="ad.isDraft()">draft
-          &nbsp;<span v-if="ad.id">#{{ ad.id }}</span>
+        <span class="font-italic font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft()">draft
+          &nbsp;<span v-if="ad !== null && ad.id">#{{ ad.id }}</span>
         </span>
         <div class="mr-2 float-right">
           <a class="far fa-times-circle fa-lg" @click="exitEdit()"></a>
         </div>
       </div>
       <message />
-      <div class="fmr-form p-2">
+      <div class="fmr-form p-2" v-if="ad !== null">
         <div class="fmr-tab shadow-sm sticky-top">
-          <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1" style="background-color: #ffffff;">
+          <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1">
             <button class="btn btn-primary" :class="{disabled: invalidFields.length > 0}" 
-              v-on:click="save()" v-if="!ad.isDraft()">Save</button>
+              v-on:click="save(false)" v-if="ad !== null && !ad.isDraft()">Save</button>
             <button class="btn btn-primary" 
               data-toggle="modal" data-target="#SubmissionConfirmation" :class="{disabled: invalidFields.length > 0}" 
-              v-if="ad.isDraft()">Submit</button>
+              v-if="ad !== null && ad.isDraft()">Submit</button>
           </div>
           <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -47,6 +47,7 @@
             <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
             <commercial-for-sale :ad="ad" v-if="template == 'CommercialForSale'" />
             <commercial-for-rent :ad="ad" v-if="template == 'CommercialForRent'" />
+            <land-for-sale :ad="ad" v-if="template == 'LandForSale'" />
             <post-warning />
           </div>
           <div class="tab-pane" id="Photos">
@@ -55,10 +56,10 @@
           <div class="tab-pane" id="Preview">
             <ad-detail :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
             <div v-if="invalidFields.length > 0">
-              The following fields are required:
-              <ul class="list-unstyled" v-if="invalidFields.length > 0">
-                <li v-for="(field, index) in invalidFields" v-bind:key="index" class="border-bottom p-2">
-                  {{ field }}
+              The following fields are required before you can submit the ad:
+              <ul v-if="invalidFields.length > 0">
+                <li v-for="(field, index) in invalidFields" v-bind:key="index" class="border-bottom p-2 text-capitalize">
+                  {{ field.replace('_', ' ') }}
                 </li>
               </ul>
             </div>
@@ -107,13 +108,14 @@
 
 <script>
 import Message from './Message'
-import ResidentialForSale from "./templates/ResidentialForSale";
-import ResidentialForRent from "./templates/ResidentialForRent";
-import CommercialForSale from "./templates/CommercialForSale";
-import CommercialForRent from "./templates/CommercialForRent";
+import ResidentialForSale from "./templates/ResidentialForSale"
+import ResidentialForRent from "./templates/ResidentialForRent"
+import CommercialForSale from "./templates/CommercialForSale"
+import CommercialForRent from "./templates/CommercialForRent"
+import LandForSale from './templates/LandForSale'
 import Uploader from './Uploader'
 import AdDetail from './addisplay/AdDetail'
-import AdService from "../service/AdService";
+import AdService from "../service/AdService"
 import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
@@ -127,12 +129,13 @@ export default {
       categoryId: null,
       id: 0,
       ad: null,
+      changeTimestamp: 0,
       timerId: 0
     }
   },
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
-    ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, 
+    ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, LandForSale,
     Uploader, AdDetail, Message, PostWarning
   },
   computed: {
@@ -175,7 +178,7 @@ export default {
     }
 
     // set a timer to save every 5 seconds
-    this.timerId = setInterval(() => self.save(), 20000);
+    this.timerId = setInterval(() => self.saveAsNeeded(), 20000);
   },
   beforeDestroy() {
     if (this.timerId) {
@@ -196,11 +199,25 @@ export default {
         return 'CommercialForSale'
       } else if (cCode.startsWith('for-rent|vacation')) {
         return 'ResidentialForRent'
+      } else if (cCode.startsWith('for-sale|land')) {
+        return 'LandForSale'
       }
     },
     exitEdit() {
       this.save()
       this.$router.back(-1)
+    },
+    saveAsNeeded() {
+      if (this.changeTimestamp - this.ad.updateTime > 2)
+        this.save()
+    }
+  },
+  watch: {
+    'ad.attributes': {
+      handler() {
+        this.changeTimestamp = Math.floor(Date.now() / 1000)
+      },
+      deep: true
     }
   }
 };

@@ -35,7 +35,7 @@
           </div>
           <div class="row">
             <div class="col">
-              {{ ad.updateTime }}
+              {{ ad.updateTimeDisplay }}
             </div>
           </div>
         </div>

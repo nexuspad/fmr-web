@@ -1,7 +1,12 @@
 <template>
   <div>
+    <div class="p-2 pr-4 text-right fmr-sm-text">
+      Last Updated:  {{ ad.updateTimeDisplay }},
+      expires in {{ daysToExpire() }} days
+    </div>
     <div class="btn-group float-right mr-4">
       <button type="button" class="btn btn-primary" @click="editAd()">Update</button>
+      <button type="button" class="btn btn-primary" @click="extend()" v-if="daysToExpire() < 7">Extend</button>
       <button type="button" class="btn btn-primary" :class="{disabled : ad.isActive()}" @click="activate()" v-if="!ad.isDraft()">
         Activate
       </button>
@@ -41,6 +46,11 @@ import AdUpdateHelper from './AdUpdateHelper'
 
 export default {
   props: ['ad'],
-  mixins: [ AdUpdateHelper ]
+  mixins: [ AdUpdateHelper ],
+  methods: {
+    daysToExpire() {
+      return Math.floor((this.ad.expiryDate - new Date())/86400000)
+    }
+  }
 }
 </script>

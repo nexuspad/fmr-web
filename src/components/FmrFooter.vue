@@ -8,13 +8,13 @@
         <h5>About</h5>
         <ul class="list-unstyled text-small">
           <li>
-            <a class="text-muted" href="#">The Site</a>
+            <router-link class="text-muted" to="/site/aboutus">The Site</router-link>
           </li>
           <li>
-            <a class="text-muted" href="#">FAQs</a>
+            <router-link class="text-muted" to="/site/faqs">FAQs</router-link>
           </li>
           <li>
-            <a class="text-muted" href="#">Contact</a>
+            <router-link class="text-muted" to="/site/contactus">Contact</router-link>
           </li>
         </ul>
       </div>
@@ -22,10 +22,10 @@
         <h5>Legal Stuff</h5>
         <ul class="list-unstyled text-small">
           <li>
-            <a class="text-muted" href="#">Terms of Use</a>
+            <router-link class="text-muted" to="/site/termsofservice">Terms of Use</router-link>
           </li>
           <li>
-            <a class="text-muted" href="#">Privacy Policy</a>
+            <router-link class="text-muted" to="/site/privacypolicy">Privacy Policy</router-link>
           </li>
         </ul>
       </div>

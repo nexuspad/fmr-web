@@ -7,10 +7,10 @@
       </div>
       <div class="p-2">
         <div class="fmr-form p-2 col-lg-6 offset-lg-3">
-          <div class="border-bottom lead bg-light mb-4">
+          <div class="border-bottom lead bg-light pl-1 mb-4">
             Please enter your account email address below and click on "Request password reset" button. You will receive instructions on how to reset your password.
           </div>
-          <div class="form-group">
+          <div class="form-group pl-1">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" v-model="email" aria-describedby="emailHelp">
           </div>
@@ -26,10 +26,10 @@
       </div>
       <div class="p-2">
         <div class="fmr-form p-2 col-lg-6 offset-lg-3">
-          <div class="border-bottom lead bg-light mb-4">
+          <div class="border-bottom lead bg-light pl-1 mb-4">
             Enter your new password below
           </div>
-          <div class="form-group">
+          <div class="form-group pl-1">
             <label for="password">New password</label>
             <input type="password" class="form-control" id="password" v-model="password">
           </div>

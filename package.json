@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "serve.admin": "vue-cli-service serve",
     "build:admin": "vue-cli-service build --no-clean --dest dist/admin src/admin/index.js",
     "lint": "vue-cli-service lint",
     "deploy": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket findmyroof.com"

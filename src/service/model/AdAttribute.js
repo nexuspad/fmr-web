@@ -15,14 +15,21 @@ export default class AdAttribute {
             this.options = jsonObj.options
             this.required = jsonObj.required
 
-            if (this.value && attributeTypeLookup(this.id) === 'array' && typeof(this.value) === 'string') {
-                this.value = this.value.split(',')
-            }
-
-            // do not show 0 in the form
-            if (this.value === 0) {
+            // normalize the value to empty string
+            if (this.value === null || typeof this.value === 'undefined') {
                 this.value = ''
             }
+
+            if (attributeTypeLookup(this.id) === 'array') {
+                if (!this.value) {
+                    this.value = []
+                } else {
+                    if (typeof(this.value) === 'string') {
+                        this.value = this.value.split(',')
+                    }
+                }
+            }
+
         } else {
             this.options = []
         }

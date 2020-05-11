@@ -1,9 +1,8 @@
 import RestClient from './RestClient'
-import AccountServiceRequest from './AccountServiceRequest'
 import User from './model/User'
 import ApiError from './ApiError'
 import StorageUtils from '../util/StorageUtil'
-import AccountSerivceRequest from './AccountServiceRequest'
+import AccountServiceRequest from './AccountServiceRequest'
 
 export default class AccountService {
     static _user = User.visitor()
@@ -143,7 +142,7 @@ export default class AccountService {
     }
 
     static changePassword(password, newPassword) {
-        let serviceRequest = AccountSerivceRequest.forUpdatePassword(password, newPassword)
+        let serviceRequest = AccountServiceRequest.forUpdatePassword(password, newPassword)
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
                 RestClient.instance(token).post('/account/updatePassword', serviceRequest)
@@ -163,7 +162,7 @@ export default class AccountService {
     }
 
     static resetPasswordRequest(email) {
-        let serviceRequest = AccountSerivceRequest.forResetPasswordRequest(email)
+        let serviceRequest = AccountServiceRequest.forResetPasswordRequest(email)
         return new Promise((resolve, reject) => {
             RestClient.instance().post('/account/requestPasswordReset', serviceRequest)
             .then((response) => {
@@ -180,7 +179,7 @@ export default class AccountService {
     }
 
     static resetPassword(key, newPassword) {
-        let serviceRequest = AccountSerivceRequest.forResetPassword(key, newPassword)
+        let serviceRequest = AccountServiceRequest.forResetPassword(key, newPassword)
         return new Promise((resolve, reject) => {
             RestClient.instance().post('/account/resetPassword', serviceRequest)
             .then((response) => {
@@ -197,7 +196,7 @@ export default class AccountService {
     }
 
     static removeAccount(password) {
-        let serviceRequest = AccountSerivceRequest.forDeletaAccount(password)
+        let serviceRequest = AccountServiceRequest.forDeletaAccount(password)
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
                 RestClient.instance(token).post('/account/removeAccount', serviceRequest)

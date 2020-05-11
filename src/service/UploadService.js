@@ -15,7 +15,7 @@ export default class UploadService {
     _supportedExtentions = ['jpg', 'jpeg', 'gif', 'png']
 
     uploadFile(id, file, progressCallback) {
-        const cloudConfigUrl = '/upload/accessKey';
+        const cloudConfigUrl = '/account/upload/accessKey';
 
         // normalize the file name
         let ext = FmrUtils.getExtention(file.name)

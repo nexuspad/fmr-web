@@ -13,7 +13,9 @@ export default class FmrAd {
     uri = ''
 
     postDate
+    expiryDate
     updateTime
+    updateTimeDisplay
 
     attributeMap = new Map
     
@@ -23,8 +25,9 @@ export default class FmrAd {
             this.category = new AdCategory(jsonObj.category)
             this.status = jsonObj.status
 
-            this.postDate = jsonObj.postDate
-            this.updateTime = new Date(jsonObj.updateTime * 1000).toLocaleTimeString("en-US")
+            this.expiryDate = Date.parse(jsonObj.expiryDate)
+            this.updateTime = jsonObj.updateTime
+            this.updateTimeDisplay = new Date(jsonObj.updateTime * 1000).toLocaleTimeString("en-US")
 
             if (jsonObj.uri)
                 this.uri = jsonObj.uri
@@ -58,7 +61,6 @@ export default class FmrAd {
             }
             otherAd.attributes.forEach(element => {
                 const attrObj = new AdAttribute(element)
-                console.log('update ----> ', attrObj)
                 this.attributes.push(attrObj)
                 this.attributeMap.set(attrObj.id, attrObj)
             })
@@ -218,5 +220,11 @@ export default class FmrAd {
             }
         }
         return false
+    }
+
+    printSelf() {
+        this.attributes.forEach(a => {
+            console.log(a.id, a.name, a.value)
+        })
     }
 }

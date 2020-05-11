@@ -6,10 +6,10 @@
     </div>
     <div class="fmr-form p-4 col-lg-6 offset-lg-3">
       <div v-show="!verificationSent">
-        <div class="border-bottom lead bg-light">
+        <div class="border-bottom lead bg-light pl-1">
           Mobile verification is required for ad posting.
         </div>
-        <div class="mt-4">
+        <div class="mt-4 pl-1">
           <div>
             <label class="font-weight-bold">Mobile phone number</label>
             <div class="input-group mb-4">
@@ -34,10 +34,10 @@
         </div>
       </div>
       <div v-show="verificationSent">
-        <div class="border-bottom lead bg-light">
+        <div class="border-bottom lead bg-light pl-1">
           Your verification code has been texted to the number you provided. Please enter it below and click on "Confirm" button.
         </div>
-        <div class="mt-4">
+        <div class="mt-4 pl-1">
           <label class="font-weight-bold">Verification code</label>
           <div class="input-group mb-3">
             <input type="text" class="form-control" v-model="verificationCode" />
