@@ -25,12 +25,24 @@
         <label>Basement</label>
         <div>{{ attributeValue('basement') }}</div>
       </div>
+      <div class="mr-4" v-if="hasAttributeValue('model')">
+        <label>Model</label>
+        <div>{{ attributeValue('model') }}</div>
+      </div>
+      <div class="mr-4" v-if="hasAttributeValue('dimension')">
+        <label>Dimension</label>
+        <div>{{ attributeValue('dimension') }}</div>
+      </div>
+      <div class="mr-4" v-if="hasAttributeValue('community_type')">
+        <label>Community type</label>
+        <div>{{ attributeValue('community_type') }}</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import AppDataHelper from '../AppDataHelper'
+import AppDataHelper from '../../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],

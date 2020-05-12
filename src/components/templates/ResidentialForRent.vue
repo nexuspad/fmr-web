@@ -4,7 +4,8 @@
     <rent-includes-and-pets :ad=ad />
     <full-address :ad=ad />
     <bed-bath :ad=ad />
-    <property-size :ad=ad v-if="isHomeStyle(ad.categoryId)" />
+    <manufactured-home :ad=ad v-if="isManufacturedHome(ad.categoryId)" />
+    <property-size :ad=ad v-if="isHomeStyle(ad.categoryId) || isManufacturedHome(ad.categoryId)" />
     <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondo(ad.categoryId)" />
     <bed-bath-features :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
@@ -35,6 +36,7 @@ import Community from './residential/Community'
 import OtherAmenities from './OtherAmenities'
 import Contact from './Contact'
 import PropertySize from './residential/PropertySize'
+import ManufacturedHome from './residential/ManufacturedHome'
 import Description from './Description'
 import AppDataHelper from '../AppDataHelper'
 
@@ -44,7 +46,7 @@ export default {
   components: {
       TitleRent, RentIncludesAndPets, BedBath, FullAddress,
       Interior, Exterior, CondoAmenities, KitchenDining, BedBathFeatures, ApartmentUnitAmenities, ApartmentAmenities,
-      Community, OtherAmenities, Contact, PropertySize, Description
+      Community, OtherAmenities, Contact, PropertySize, ManufacturedHome, Description
   },
   methods: {
   }

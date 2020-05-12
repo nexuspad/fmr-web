@@ -30,7 +30,7 @@
           <router-link class="nav-link" :class="{disabled: $route.path ==='/account/verify'}" to="/account/verify">Verify Your Account</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/placead'}" to="/placead">Place an Ad</router-link>
+          <router-link class="nav-link" :class="{disabled: $route.path ==='/placead'}" to="/placead">Post an Ad</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
           <router-link class="nav-link" :class="{disabled: $route.path ==='/account/myads'}" to="/account/myads">My Ads</router-link>

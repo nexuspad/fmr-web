@@ -14,6 +14,7 @@
         </div>
       </div>
       <message />
+      <div v-if="ad == null" class="p-4">Loading...</div>
       <div class="fmr-form p-2" v-if="ad !== null">
         <div class="fmr-tab shadow-sm sticky-top">
           <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1">
@@ -54,7 +55,7 @@
             <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">
-            <ad-detail :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
+            <ad-detail-residential :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
             <div v-if="invalidFields.length > 0">
               The following fields are required before you can submit the ad:
               <ul v-if="invalidFields.length > 0">
@@ -114,7 +115,7 @@ import CommercialForSale from "./templates/CommercialForSale"
 import CommercialForRent from "./templates/CommercialForRent"
 import LandForSale from './templates/LandForSale'
 import Uploader from './Uploader'
-import AdDetail from './addisplay/AdDetail'
+import AdDetailResidential from './addisplay/AdDetailResidential'
 import AdService from "../service/AdService"
 import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
@@ -136,7 +137,7 @@ export default {
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
     ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, LandForSale,
-    Uploader, AdDetail, Message, PostWarning
+    Uploader, AdDetailResidential, Message, PostWarning
   },
   computed: {
     invalidFields: function() {
@@ -170,6 +171,8 @@ export default {
       AdService.adTemplate(self.categoryId)
         .then(draft => {
           self.ad = draft;
+          // set an update time for use in "saveAsNeeded"
+          self.ad.updateTime = Math.floor(Date.now() / 1000)
         })
         .catch((error) => {
           console.error("...error", error);
@@ -182,7 +185,6 @@ export default {
   },
   beforeDestroy() {
     if (this.timerId) {
-      console.log('exit editing page...')
       clearInterval(this.timerId)
     }
   },
@@ -204,7 +206,7 @@ export default {
       }
     },
     exitEdit() {
-      this.save()
+      this.saveAsNeeded()
       this.$router.back(-1)
     },
     saveAsNeeded() {

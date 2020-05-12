@@ -22,17 +22,20 @@
                     <router-link class="dropdown-item primary" :to="getPath(3002)">Townhomes/multi-units</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3003)">Apartments</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3004)">Condos</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3029)">Manufactured homes</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(2007)">Find roommate</router-link>
                   </div>
                   <div class="col-6">
                     <h4 class="dropdown-header">
                       <router-link :to="getPath(2010)">Commercial</router-link>
                     </h4>
-                    <router-link class="dropdown-item primary" :to="getPath(3006)">Retail spaces</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3007)">Shopping centers</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3008)">Office spaces</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3009)">Warehouse spaces</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3010)">Others</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3008)">Office space</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3006)">Retail space</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3009)">Industrial space</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3007)">Shopping center</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3031)">Healthcare space</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3033)">Hospitality space</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3010)">Mixed use / others</router-link>
                   </div>
                 </div>
               </div>
@@ -60,13 +63,15 @@
                     <h4 class="dropdown-header">
                       <router-link :to="getPath(2011)">Commercial</router-link>
                     </h4>
-                    <router-link class="dropdown-item primary" :to="getPath(3016)">Retail centers</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3017)">Office buildings</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3019)">Gas stations/stores</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3021)">Warehouse spaces</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3016)">Retail centers</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3021)">Industrial spaces</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3022)">Restaurants</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3030)">Shopping center</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3032)">Healthcare</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3034)">Hospitality</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3023)">Land</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3024)">Others</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3024)">Mixed use / others</router-link>
                   </div>
                 </div>
               </div>

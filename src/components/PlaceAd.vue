@@ -25,6 +25,9 @@
               <a href="javascript:;" @click="newAd(3003)">Apartment</a>
             </li>
             <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3029)">Manufactured home for rent</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(2011)">Vacation rental</a>
             </li>
             <li class="list-group-item fmr-lg-text">
@@ -34,19 +37,25 @@
           <h3 class="ml-2 mt-4"><small>Commercial</small></h3>
           <ul class="list-group ml-4">
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3006)">Commercial retail space for rent</a>
-            </li>
-            <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3007)">Shopping center space for rent</a>
-            </li>
-            <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3008)">Office space for rent</a>
             </li>
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3009)">Warehouse/garage space for rent</a>
+              <a href="javascript:;" @click="newAd(3006)">Retail space for rent</a>
             </li>
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3010)">Others</a>
+              <a href="javascript:;" @click="newAd(3009)">Industrial space for rent</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3007)">Shopping center for rent</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3031)">Healthcare space for rent</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3033)">Hospitality space for rent</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3010)">Mixed use and others</a>
             </li>
           </ul>
         </div>
@@ -76,25 +85,35 @@
           <h3 class="ml-2 mt-4"><small>Commercial</small></h3>
           <ul class="list-group ml-4">
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3016)">Retail center for sale</a>
-            </li>
-            <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3017)">Office building for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3019)">Gas station/convenient store for sale</a>
+              <a href="javascript:;" @click="newAd(3016)">Retail space for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3021)">Warehouse/garage space for sale</a>
+              <a href="javascript:;" @click="newAd(3021)">Industrial space for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3022)">Restaurant for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3030)">Shopping center for sale</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3032)">Healthcare space for sale</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3034)">Hospitality space for sale</a>
+            </li>
+
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3019)">Gas station/convenient store for sale</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3023)">Land for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3024)">Others</a>
+              <a href="javascript:;" @click="newAd(3024)">Mixed use and others</a>
             </li>
           </ul>
         </div>

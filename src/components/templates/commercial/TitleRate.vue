@@ -20,14 +20,6 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 pl-4">
-        <label for="ofa">Owner financing available</label>
-        <div class="custom-control custom-switch right">
-          <input type="checkbox" class="custom-control-input" id="ownerFinancing" 
-            v-model="ad.getAttribute(attributeId('owner_financing_available')).value" />
-          <label class="custom-control-label" for="ownerFinancing"></label>
-        </div>
-      </div>
     </div>
   </div>
 </template>

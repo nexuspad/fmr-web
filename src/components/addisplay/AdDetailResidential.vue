@@ -14,7 +14,7 @@
         </div>
         <div class="col pb-4">
           <price-and-offers :ad="ad" />
-          {{ ad.description }}
+          <div v-html=ad.description></div>
         </div>
       </div>
       <div class="row mt-4">
@@ -59,10 +59,10 @@
 <script>
 import VueGallery from 'vue-gallery'
 import AppDataHelper from '../AppDataHelper'
-import PriceAndOffers from './PriceAndOffers'
+import PriceAndOffers from './residential/PriceAndOffers'
 import FullAddress from './FullAddress'
-import Property from './Property'
-import Features from './Features'
+import Property from './residential/Property'
+import Features from './residential/Features'
 
 export default {
   mixins: [ AppDataHelper ],

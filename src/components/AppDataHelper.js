@@ -119,11 +119,17 @@ export default {
         isCondo(categoryId) {
             return categoryId == 3004 || categoryId == 3013 ? true : false
         },
+        isManufacturedHome(categoryId) {
+            return categoryId == 3014 || categoryId == 3029 ? true : false
+        },
         isApartment(categoryId) {
             return categoryId == 3003 ? true : false
         },
         isLand(categoryId) {
             return categoryId == 3015 || categoryId == 3023 ? true : false
+        },
+        isForeClosure(categoryId) {
+            return categoryId == 3025 ? true : false
         },
         dollar(amount) {
             return formatter.format(amount)

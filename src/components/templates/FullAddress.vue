@@ -48,8 +48,7 @@ export default {
   props: ['ad'],
   computed: {
     selectableStates: function() {
-      let states = []
-      states.push(...this.states())
+      let states = Object.assign({}, this.states())
       delete states['ALL']
       return states
     }

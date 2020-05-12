@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import AppDataHelper from '../AppDataHelper'
+import AppDataHelper from '../../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],

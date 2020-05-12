@@ -34,7 +34,7 @@
         <div class="custom-control custom-switch">
           <input type="checkbox" class="custom-control-input" id="byAgent" 
             v-model="byAgent" @change="updateRepresentation()" />
-          <label class="custom-control-label" for="byAgent">Represented by agent</label>
+          <label class="custom-control-label" for="byAgent">Represented by agent or property manager</label>
         </div>
       </div>
     </div>

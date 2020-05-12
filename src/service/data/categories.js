@@ -144,7 +144,7 @@ const CATEGORIES =
     },
     "3012": {
         "id": 3012,
-        "code": "for-sale|residential|townhouse",
+        "code": "for-sale|residential|townhome",
         "name": "townhome/multi-unit for sale",
         "uri": "townhome-multi-unit-for-sale",
         "residential": true,
@@ -160,7 +160,7 @@ const CATEGORIES =
     },
     "3014": {
         "id": 3014,
-        "code": "for-sale|manufactured-home",
+        "code": "for-sale|residential|manufactured-home",
         "name": "manufactured home for sale",
         "uri": "manufactured-home-for-sale",
         "residential": false,
@@ -236,6 +236,14 @@ const CATEGORIES =
         "name": "foreclosures",
         "uri": "foreclosures",
         "residential": true,
+        "commercial": false
+    },
+    "3029": {
+        "id": 3029,
+        "code": "for-rent|residential|manufactured-home",
+        "name": "manufactured home for rent",
+        "uri": "manufactured-home-for-rent",
+        "residential": false,
         "commercial": false
     }
 }

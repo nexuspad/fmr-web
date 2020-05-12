@@ -11,6 +11,7 @@ export default class FmrAd {
     photos = []
 
     uri = ''
+    subTitle = ''
 
     postDate
     expiryDate
@@ -31,6 +32,8 @@ export default class FmrAd {
 
             if (jsonObj.uri)
                 this.uri = jsonObj.uri
+
+            this.subTitle = jsonObj.subTitle
 
             if (jsonObj.attributes) {
                 jsonObj.attributes.forEach(element => {
@@ -80,7 +83,7 @@ export default class FmrAd {
     }
 
     get description() {
-        return this.getAttribute(2).value
+        return this.getAttribute(2).value.replace(/\n/g, '<br/>')
     }
 
     get city() {

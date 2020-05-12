@@ -54,6 +54,11 @@ const ATTRIBUTES =
         "id": 12,
         "type": "string"
     },
+    "18": {
+        "name": "dimension",
+        "id": 18,
+        "type": "string"
+    },
     "19": {
         "name": "square_footage",
         "id": 19,
@@ -398,7 +403,7 @@ const ATTRIBUTES =
     "73": {
         "name": "available_date",
         "id": 73,
-        "type": "string"
+        "type": "date"
     },
     "74": {
         "name": "special_offer",
@@ -408,6 +413,16 @@ const ATTRIBUTES =
     "75": {
         "name": "college_campus",
         "id": 75,
+        "type": "string"
+    },
+    "81": {
+        "name": "community_type",
+        "id": 81,
+        "type": "string"
+    },
+    "83": {
+        "name": "model",
+        "id": 83,
         "type": "string"
     },
     "1004": {

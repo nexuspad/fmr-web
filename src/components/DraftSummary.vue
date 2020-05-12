@@ -30,12 +30,7 @@
           </div>
           <div class="row">
             <div class="col">
-              {{ ad.description.substr(0, 280) }}
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              {{ ad.updateTimeDisplay }}
+              {{ ad.subTitle }}
             </div>
           </div>
         </div>
@@ -46,7 +41,7 @@
 
 <script>
 import AppDataHelper from './AppDataHelper'
-import PriceBedBath from './addisplay/PriceBedBath'
+import PriceBedBath from './addisplay/residential/PriceBedBath'
 
 export default {
   mixins: [ AppDataHelper ],
