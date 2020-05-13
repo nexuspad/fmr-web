@@ -30,6 +30,10 @@ export default class AdService {
         if (listCriteria.category) {
             uri = FmrUtils.addParamToUri(uri, 'categoryId', listCriteria.category.id)
         }
+
+        if (listCriteria.page > 1) {
+            uri = FmrUtils.addParamToUri(uri, 'page', listCriteria.page)
+        }
         
         if (listCriteria.filters) {
             let filterJson = {}

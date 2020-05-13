@@ -90,7 +90,7 @@ const ATTRIBUTES =
         "type": "number"
     },
     "26": {
-        "name": "minimal_lease_term",
+        "name": "lease_term",
         "id": 26,
         "type": "string"
     },
@@ -100,7 +100,7 @@ const ATTRIBUTES =
         "type": "number"
     },
     "29": {
-        "name": "building_square_footage",
+        "name": "space_size",
         "id": 29,
         "type": "number"
     },
@@ -110,10 +110,10 @@ const ATTRIBUTES =
         "type": "string"
     },
     "31": {
-        "name": "represented_by",
+        "name": "represented_by_owner",
         "options": [
-            "agent",
-            "owner"
+            "no",
+            "yes"
         ],
         "id": 31,
         "type": "string"
@@ -216,7 +216,7 @@ const ATTRIBUTES =
         "type": "string"
     },
     "56": {
-        "name": "MLS_ID",
+        "name": "mls_id",
         "id": 56,
         "type": "string"
     },
@@ -228,6 +228,11 @@ const ATTRIBUTES =
     "58": {
         "name": "contact_email",
         "id": 58,
+        "type": "string"
+    },
+    "59": {
+        "name": "company_web_address",
+        "id": 59,
         "type": "string"
     },
     "60": {
@@ -411,8 +416,23 @@ const ATTRIBUTES =
         "type": "string"
     },
     "75": {
-        "name": "college_campus",
+        "name": "college",
         "id": 75,
+        "type": "string"
+    },
+    "76": {
+        "name": "elementary_school",
+        "id": 76,
+        "type": "string"
+    },
+    "77": {
+        "name": "middle_school",
+        "id": 77,
+        "type": "string"
+    },
+    "78": {
+        "name": "high_school",
+        "id": 78,
         "type": "string"
     },
     "81": {
@@ -423,6 +443,123 @@ const ATTRIBUTES =
     "83": {
         "name": "model",
         "id": 83,
+        "type": "string"
+    },
+    "91": {
+        "name": "sleeps",
+        "id": 91,
+        "type": "string"
+    },
+    "92": {
+        "name": "min_stay",
+        "id": 92,
+        "type": "string"
+    },
+    "93": {
+        "name": "rate_per_night",
+        "id": 93,
+        "type": "string"
+    },
+    "101": {
+        "name": "typical_floor_size",
+        "id": 101,
+        "type": "number"
+    },
+    "102": {
+        "name": "gross_leasable_area",
+        "id": 102,
+        "type": "number"
+    },
+    "110": {
+        "name": "rate_sqft_year",
+        "id": 110,
+        "type": "number"
+    },
+    "111": {
+        "name": "tenancy",
+        "options": [
+            "multiple",
+            "single"
+        ],
+        "id": 111,
+        "type": "string"
+    },
+    "112": {
+        "name": "building_size_sqft",
+        "id": 112,
+        "type": "number"
+    },
+    "121": {
+        "name": "building_class",
+        "options": [
+            "A",
+            "B",
+            "C"
+        ],
+        "id": 121,
+        "type": "string"
+    },
+    "122": {
+        "name": "zoning_code",
+        "id": 122,
+        "type": "string"
+    },
+    "123": {
+        "name": "number_of_stories",
+        "id": 123,
+        "type": "string"
+    },
+    "124": {
+        "name": "parking",
+        "id": 124,
+        "type": "string"
+    },
+    "125": {
+        "name": "parking_ratio",
+        "id": 125,
+        "type": "string"
+    },
+    "126": {
+        "name": "condition",
+        "id": 126,
+        "type": "string"
+    },
+    "131": {
+        "name": "price_per_sqft",
+        "id": 131,
+        "type": "number"
+    },
+    "140": {
+        "name": "commercial_amenities",
+        "options": [
+            "24 Hour Access",
+            "Air Conditioning",
+            "Bus Line",
+            "Central Heating",
+            "Conferencing Facility",
+            "Food Service"
+        ],
+        "id": 140,
+        "type": "array"
+    },
+    "151": {
+        "name": "land_assessment",
+        "id": 151,
+        "type": "number"
+    },
+    "152": {
+        "name": "improvement_assessment",
+        "id": 152,
+        "type": "number"
+    },
+    "153": {
+        "name": "total_assessment",
+        "id": 153,
+        "type": "number"
+    },
+    "154": {
+        "name": "parcel_number",
+        "id": 154,
         "type": "string"
     },
     "1004": {

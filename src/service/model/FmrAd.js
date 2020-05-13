@@ -225,6 +225,10 @@ export default class FmrAd {
         return false
     }
 
+    hasCoordinate() {
+        return false
+    }
+
     printSelf() {
         this.attributes.forEach(a => {
             console.log(a.id, a.name, a.value)

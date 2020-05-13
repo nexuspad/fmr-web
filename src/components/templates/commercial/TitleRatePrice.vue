@@ -10,6 +10,25 @@
     <div class="form-row">
       <div class="col-md-4">
         <div class="form-group">
+          <label for="rate_sqft_year" class="required">Rate/SF/YR</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-success text-light">$</div>
+            </div>
+            <input type="text" class="form-control"
+              name="rate_sqft_year" v-model="ad.getAttribute(attributeId('rate_sqft_year')).value" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 pl-4">
+        <label for="lease_term">Lease term</label>
+        <input type="text" class="form-control"
+          name="lease_term" v-model="ad.getAttribute(attributeId('lease_term')).value" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-4">
+        <div class="form-group">
           <label for="asking_price" class="required">Asking price</label>
           <div class="input-group">
             <div class="input-group-prepend">
@@ -19,6 +38,11 @@
               name="asking_price" v-model="ad.getAttribute(attributeId('asking_price')).value" />
           </div>
         </div>
+      </div>
+      <div class="col-md-4 pl-4">
+        <label for="price_per_sqft">Price per SF</label>
+        <input type="text" class="form-control"
+          name="price_per_sqft" v-model="ad.getAttribute(attributeId('price_per_sqft')).value" />
       </div>
     </div>
   </div>

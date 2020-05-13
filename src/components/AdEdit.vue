@@ -55,7 +55,7 @@
             <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">
-            <ad-detail-residential :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
+            <ad-detail :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
             <div v-if="invalidFields.length > 0">
               The following fields are required before you can submit the ad:
               <ul v-if="invalidFields.length > 0">
@@ -115,7 +115,7 @@ import CommercialForSale from "./templates/CommercialForSale"
 import CommercialForRent from "./templates/CommercialForRent"
 import LandForSale from './templates/LandForSale'
 import Uploader from './Uploader'
-import AdDetailResidential from './addisplay/AdDetailResidential'
+import AdDetail from './addisplay/AdDetail'
 import AdService from "../service/AdService"
 import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
@@ -137,7 +137,7 @@ export default {
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
     ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, LandForSale,
-    Uploader, AdDetailResidential, Message, PostWarning
+    Uploader, AdDetail, Message, PostWarning
   },
   computed: {
     invalidFields: function() {

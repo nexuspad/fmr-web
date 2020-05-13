@@ -66,12 +66,12 @@
                     <router-link class="dropdown-item primary" :to="getPath(3017)">Office buildings</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3016)">Retail centers</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3021)">Industrial spaces</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3022)">Restaurants</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3030)">Shopping center</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3032)">Healthcare</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3034)">Hospitality</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3023)">Land</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3022)">Restaurants</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3024)">Mixed use / others</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3023)">Land</router-link>
                   </div>
                 </div>
               </div>

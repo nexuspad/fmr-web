@@ -94,9 +94,6 @@
               <a href="javascript:;" @click="newAd(3021)">Industrial space for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3022)">Restaurant for sale</a>
-            </li>
-            <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3030)">Shopping center for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
@@ -105,15 +102,14 @@
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3034)">Hospitality space for sale</a>
             </li>
-
             <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3019)">Gas station/convenient store for sale</a>
-            </li>
-            <li class="list-group-item fmr-lg-text">
-              <a href="javascript:;" @click="newAd(3023)">Land for sale</a>
+              <a href="javascript:;" @click="newAd(3022)">Restaurant for sale</a>
             </li>
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3024)">Mixed use and others</a>
+            </li>
+            <li class="list-group-item fmr-lg-text">
+              <a href="javascript:;" @click="newAd(3023)">Land for sale</a>
             </li>
           </ul>
         </div>

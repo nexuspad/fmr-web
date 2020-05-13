@@ -16,12 +16,12 @@
           <input type="text" class="form-control" placeholder="zip code" v-model="zipCode" />
         </div>
       </div>
-      <div class="row">
+      <div class="row" v-if="forRent">
         <div class="col">
           Rent
         </div>
       </div>
-      <div class="row mb-2">
+      <div class="row mb-2" v-if="forRent">
         <div class="col-6">
           <select class="form-control" name="RentMin" v-model="rentMin">
             <option value="0">min</option>
@@ -52,6 +52,42 @@
             <option value=2000 >$2,000</option>
             <option value=2500 >$2,500</option>
             <option value=3000 >$3,000</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" v-if="forSale">
+        <div class="col">
+          Price
+        </div>
+      </div>
+      <div class="row mb-2" v-if="forSale">
+        <div class="col-6">
+          <select class="form-control" name="PriceMin" v-model="priceMin">
+            <option value="0">min</option>
+            <option value=100000 >$100,000</option>
+            <option value=200000 >$200,000</option>
+            <option value=300000 >$300,000</option>
+            <option value=400000 >$400,000</option>
+            <option value=500000 >$500,000</option>
+            <option value=600000 >$600,000</option>
+            <option value=700000 >$700,000</option>
+            <option value=800000 >$800,000</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <select class="form-control" name="PriceMax" v-model="priceMax">
+            <option value="max">max</option>
+            <option value=200000 >$200,000</option>
+            <option value=300000 >$300,000</option>
+            <option value=400000 >$400,000</option>
+            <option value=500000 >$500,000</option>
+            <option value=600000 >$600,000</option>
+            <option value=700000 >$700,000</option>
+            <option value=800000 >$800,000</option>
+            <option value=900000 >$900,000</option>
+            <option value=1000000 >$1M</option>
+            <option value=1250000 >$1.25M</option>
+            <option value=15000000 >$1.5M</option>
           </select>
         </div>
       </div>
@@ -127,13 +163,17 @@
 <script>
 import StateSelector from "./StateSelector"
 import AppContext from './AppContext'
+import AppDataHelper from './AppDataHelper'
 
 export default {
+  mixins: [ AppDataHelper ],
   components: {
     StateSelector
   },
   data() {
     return {
+      forRent: false,
+      forSale: false,
       city: '',
       zipCode: '',
       bedMin: 0,
@@ -153,7 +193,6 @@ export default {
   methods: {
     setFilter() {
       let params = AppContext.getParams().filters
-      console.log('ListFilter....', params)
       this.city = params['city']
       this.zipCode = params['zip_code']
       
@@ -272,6 +311,8 @@ export default {
   watch: {
     "$route.query": function() {
       this.setFilter()
+      this.forRent = this.isForRent(AppContext.getCategoryId())
+      this.forSale = this.isForSale(AppContext.getCategoryId())
     }
   }
 }

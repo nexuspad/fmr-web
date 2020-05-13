@@ -3,6 +3,8 @@
     <title-rent :ad=ad />
     <rent-includes-and-pets :ad=ad />
     <full-address :ad=ad />
+    <location-close-to :ad=ad />
+    <schools :ad=ad />
     <bed-bath :ad=ad />
     <manufactured-home :ad=ad v-if="isManufacturedHome(ad.categoryId)" />
     <property-size :ad=ad v-if="isHomeStyle(ad.categoryId) || isManufacturedHome(ad.categoryId)" />
@@ -16,6 +18,7 @@
     <community :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <other-amenities :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <description :ad=ad />
+    <by-owner :ad=ad v-if="isByOwnerEligible(ad.categoryId)" />
     <contact :ad=ad />
   </div>
 </template>
@@ -25,6 +28,8 @@ import TitleRent from './residential/TitleRent'
 import RentIncludesAndPets from './residential/RentIncludesAndPets'
 import BedBath from './residential/BedBath'
 import FullAddress from './FullAddress'
+import LocationCloseTo from './LocationCloseTo'
+import Schools from './Schools'
 import Interior from './residential/Interior'
 import Exterior from './residential/Exterior'
 import KitchenDining from './residential/KitchenDining'
@@ -35,6 +40,7 @@ import ApartmentAmenities from './residential/ApartmentAmenities'
 import Community from './residential/Community'
 import OtherAmenities from './OtherAmenities'
 import Contact from './Contact'
+import ByOwner from './residential/ByOwner'
 import PropertySize from './residential/PropertySize'
 import ManufacturedHome from './residential/ManufacturedHome'
 import Description from './Description'
@@ -44,9 +50,9 @@ export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-      TitleRent, RentIncludesAndPets, BedBath, FullAddress,
+      TitleRent, RentIncludesAndPets, BedBath, FullAddress, LocationCloseTo, Schools,
       Interior, Exterior, CondoAmenities, KitchenDining, BedBathFeatures, ApartmentUnitAmenities, ApartmentAmenities,
-      Community, OtherAmenities, Contact, PropertySize, ManufacturedHome, Description
+      Community, OtherAmenities, Contact, ByOwner, PropertySize, ManufacturedHome, Description
   },
   methods: {
   }

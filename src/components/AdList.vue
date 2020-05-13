@@ -91,7 +91,9 @@ export default {
       });
     },
     gotoPage(pageId) {
-      console.log('go to page', pageId)
+      let {path, queryParams} = AppContext.makePath({page: pageId})
+      console.log(path, queryParams)
+      this.$router.push({path: path, query:queryParams})
     },
     buildPages(adList) {
       this.title = this.categoryName(adList.listCriteria.category.id)

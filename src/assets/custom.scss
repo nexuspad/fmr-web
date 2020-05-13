@@ -41,7 +41,7 @@ h1 {text-transform: capitalize;}
 .fmr-deact {background:url(./images/deactivated.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
 .fmr-disapp {background:url(./images/disapproved.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
 
-.fmr-photo { width:100%; object-fit: cover; }
+.fmr-photo { width:400px; object-fit: cover; }
 .fmr-photo:hover { cursor: move; }
 .fmr-photo-filename { position: absolute; top:1px; left:1px; background-color: #eee; padding:2px; font-size: 0.80rem; border-radius: 0.2rem}
 
@@ -74,7 +74,7 @@ a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
 }
 
 .fmr-form label, .fmr-ad-detail label {
-  font-size: 0.8rem;
+  font-size: 0.90rem;
   font-weight: bold; color: #565656;
 }
 .fmr-form label.required::after {
@@ -116,7 +116,25 @@ a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
   color: #333
 }
 
+.fmr-ad-detail label {
+  margin-bottom: 0.1rem !important;
+}
+
 /* datepicker style hack */
 .vdp-datepicker input.form-control[readonly] {
   background: none !important;
 }
+
+/* photo gallery */
+.image {
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
+}
+
+// .fmr-container-fluid-fix .row {
+//   margin-right: 0px !important;
+// }

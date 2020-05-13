@@ -11,7 +11,7 @@
           Ad# {{ ad.id }}
         </h1>
       </div>
-      <ad-detail-residential :ad=ad v-if="ad.id > 0" />
+      <ad-detail :ad=ad v-if="ad.id > 0" />
       <ad-warning v-if="ad.id > 0" />
     </div>
     <vue-headful :title="ad.title" description="" />
@@ -21,7 +21,7 @@
 <script>
 import CategoryNavigation from "./CategoryNavigation"
 import AppContext from './AppContext'
-import AdDetailResidential from './addisplay/AdDetailResidential'
+import AdDetail from './addisplay/AdDetail'
 import AdService from '../service/AdService'
 import FmrAd from '../service/model/FmrAd'
 import AppDataHelper from './AppDataHelper'
@@ -30,7 +30,7 @@ import AdWarning from './misc/AdWarning'
 export default {
   mixins: [ AppDataHelper ],
   components: {
-    CategoryNavigation, AdDetailResidential, AdWarning
+    CategoryNavigation, AdDetail, AdWarning
   },
   data() {
     return {

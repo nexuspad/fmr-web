@@ -84,17 +84,22 @@ export default {
         },
         isForRent(categoryId) {
             let category = categoryLookup(categoryId)
-            if (category && category.code.includes('for-rent')) {
-                return true
-            }
-            return false
+            return category && category.code.includes('for-rent') ? true : false
         },
         isForSale(categoryId) {
             let category = categoryLookup(categoryId)
-            if (category && category.code.includes('for-sale')) {
-                return true
-            }
-            return false
+            return category && category.code.includes('for-sale') ? true : false
+        },
+        isResidential(categoryId) {
+            let category = categoryLookup(categoryId)
+            return category && category.code.includes('residential') ? true : false
+        },
+        isCommercial(categoryId) {
+            let category = categoryLookup(categoryId)
+            return category && category.code.includes('commercial') ? true : false
+        },
+        isLand(categoryId) {
+            return categoryId == 3015 || categoryId == 3023 ? true : false
         },
         isHomeStyle(categoryId) {
             let code = this.categoryCode(categoryId)
@@ -125,11 +130,11 @@ export default {
         isApartment(categoryId) {
             return categoryId == 3003 ? true : false
         },
-        isLand(categoryId) {
-            return categoryId == 3015 || categoryId == 3023 ? true : false
-        },
         isForeClosure(categoryId) {
             return categoryId == 3025 ? true : false
+        },
+        isByOwnerEligible(categoryId) {
+            return [3001, 3002, 3004, 3029, 2011, 3011, 3012, 3013, 3014, 3015].includes(categoryId) ? true : false
         },
         dollar(amount) {
             return formatter.format(amount)

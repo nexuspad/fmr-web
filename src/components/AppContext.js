@@ -36,6 +36,10 @@ export default class AppContext {
         return this._filterParams.getState()
     }
 
+    static getCategoryId() {
+        return this._filterParams.getCategoryId()
+    }
+
     // _state should always be stored in lower case
     static changeState(stateCode) {
         if (!stateCode || stateCode === 'all') {
@@ -71,6 +75,10 @@ export default class AppContext {
         let path = '/' + pathParams.join('/')
 
         let queryParams = {}
+        if (fp.getPage() != 1) {
+            queryParams['page'] = fp.getPage()
+        }
+        
         for (let name in fp.getFilters()) {
             if (!FilterParams.noValue(fp.getFilters()[name])) {
                 queryParams[name] = fp.getFilters()[name]

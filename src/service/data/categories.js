@@ -3,6 +3,7 @@ const CATEGORIES =
     "0": {
         "id": 0,
         "name": "latest listings",
+        "code": "latest",
         "residential": false,
         "commercial": false
     },
@@ -120,17 +121,17 @@ const CATEGORIES =
     },
     "3009": {
         "id": 3009,
-        "code": "for-rent|commercial|warehouse",
-        "name": "warehouse/garage space for rent",
-        "uri": "warehouse-garage-space-for-rent",
+        "code": "for-rent|commercial|industrial",
+        "name": "industrial space for rent",
+        "uri": "industrial-space-for-rent",
         "residential": false,
         "commercial": true
     },
     "3010": {
         "id": 3010,
         "code": "for-rent|commercial|others",
-        "name": "others",
-        "uri": "other-commercial-properties-for-rent",
+        "name": "mixed use and others",
+        "uri": "mixed-use-commercial-properties-for-rent",
         "residential": false,
         "commercial": true
     },
@@ -163,7 +164,7 @@ const CATEGORIES =
         "code": "for-sale|residential|manufactured-home",
         "name": "manufactured home for sale",
         "uri": "manufactured-home-for-sale",
-        "residential": false,
+        "residential": true,
         "commercial": false
     },
     "3015": {
@@ -200,9 +201,9 @@ const CATEGORIES =
     },
     "3021": {
         "id": 3021,
-        "code": "for-sale|commercial|warehouse",
-        "name": "warehouse/garage space for sale",
-        "uri": "warehouse-garage-space-for-sale",
+        "code": "for-sale|commercial|industrial",
+        "name": "industrial space for sale",
+        "uri": "industrial-space-for-sale",
         "residential": false,
         "commercial": true
     },
@@ -225,8 +226,8 @@ const CATEGORIES =
     "3024": {
         "id": 3024,
         "code": "for-sale|commercial|others",
-        "name": "Others",
-        "uri": "other-commercial-properties-for-sale",
+        "name": "mixed use and others",
+        "uri": "mixed-use-commercial-properties-for-sale",
         "residential": false,
         "commercial": true
     },
@@ -243,8 +244,48 @@ const CATEGORIES =
         "code": "for-rent|residential|manufactured-home",
         "name": "manufactured home for rent",
         "uri": "manufactured-home-for-rent",
-        "residential": false,
+        "residential": true,
         "commercial": false
+    },
+    "3030": {
+        "id": 3030,
+        "code": "for-sale|commercial|shopping-center",
+        "name": "shopping center for sale",
+        "uri": "shopping-center-for-sale",
+        "residential": false,
+        "commercial": true
+    },
+    "3031": {
+        "id": 3031,
+        "code": "for-rent|commercial|healthcare",
+        "name": "healthcare space for rent",
+        "uri": "healthcare-space-for-rent",
+        "residential": false,
+        "commercial": true
+    },
+    "3032": {
+        "id": 3032,
+        "code": "for-sale|commercial|healthcare",
+        "name": "healthcare space for sale",
+        "uri": "healthcare-space-for-sale",
+        "residential": false,
+        "commercial": true
+    },
+    "3033": {
+        "id": 3033,
+        "code": "for-rent|commercial|hospitality",
+        "name": "hospitality space for rent",
+        "uri": "hospitality-space-for-rent",
+        "residential": false,
+        "commercial": true
+    },
+    "3034": {
+        "id": 3034,
+        "code": "for-sale|commercial|hospitality",
+        "name": "hospitality space for sale",
+        "uri": "hospitality-space-for-sale",
+        "residential": false,
+        "commercial": true
     }
 }
 
