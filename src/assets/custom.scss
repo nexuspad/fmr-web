@@ -77,6 +77,11 @@ a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
   font-size: 0.90rem;
   font-weight: bold; color: #565656;
 }
+
+.fmr-ad-detail label {
+  margin-bottom: 0.1rem !important;
+}
+
 .fmr-form label.required::after {
   content:" *";
   color: $fmrRed;
@@ -116,10 +121,6 @@ a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
   color: #333
 }
 
-.fmr-ad-detail label {
-  margin-bottom: 0.1rem !important;
-}
-
 /* datepicker style hack */
 .vdp-datepicker input.form-control[readonly] {
   background: none !important;
@@ -135,6 +136,6 @@ a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
   margin: 5px;
 }
 
-// .fmr-container-fluid-fix .row {
-//   margin-right: 0px !important;
-// }
+ul.pagination {
+  margin-bottom: 0;
+}

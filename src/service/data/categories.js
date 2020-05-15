@@ -2,8 +2,8 @@ const CATEGORIES =
 {
     "0": {
         "id": 0,
-        "name": "latest listings",
         "code": "latest",
+        "name": "latest listings",
         "residential": false,
         "commercial": false
     },
@@ -90,8 +90,8 @@ const CATEGORIES =
     "3004": {
         "id": 3004,
         "code": "for-rent|residential|condominium",
-        "name": "condominium for rent",
-        "uri": "condominium-for-rent",
+        "name": "condo for rent",
+        "uri": "condo-for-rent",
         "residential": true,
         "commercial": false
     },
@@ -154,8 +154,8 @@ const CATEGORIES =
     "3013": {
         "id": 3013,
         "code": "for-sale|residential|condominium",
-        "name": "condominium for sale",
-        "uri": "condominium-for-sale",
+        "name": "condo for sale",
+        "uri": "condo-for-sale",
         "residential": true,
         "commercial": false
     },
@@ -188,14 +188,6 @@ const CATEGORIES =
         "code": "for-sale|commercial|office",
         "name": "office building for sale",
         "uri": "office-building-for-sale",
-        "residential": false,
-        "commercial": true
-    },
-    "3019": {
-        "id": 3019,
-        "code": "for-sale|commercial|gasstation",
-        "name": "gas station/convenient store for sale",
-        "uri": "gas-station-convenient-store-for-sale",
         "residential": false,
         "commercial": true
     },

@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <div class="d-flex flex-row flex-wrap bd-highlight">
-      <div class="mr-4" v-if="hasAttributeValue('tenancy')">
-        <label>Tenancy</label>
-        <div>{{ attributeValue('tenancy') }}</div>
-      </div>
+  <div class="row mb-4">
+    <div class="col-md-2">
+      <label>Tenancy</label>
+      <div class="text-capitalize">{{ attributeValue('tenancy') }}</div>
+    </div>
+    <div class="col-md-10" v-if="hasAttributeValue('tenants')">
+      <label>Tenants</label>
+      <div v-html="addLineBreak(attributeValue('tenants'))"></div>
     </div>
   </div>
 </template>

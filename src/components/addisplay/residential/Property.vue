@@ -11,11 +11,11 @@
       </div>
       <div class="mr-4" v-if="hasAttributeValue('lot_size')">
         <label>Lot size</label>
-        <div>{{ attributeValue('lot_size') }}</div>
+        <div>{{ attributeValue('lot_size') }} AC</div>
       </div>
       <div class="mr-4" v-if="hasAttributeValue('square_footage')">
         <label>Square footage</label>
-        <div>{{ attributeValue('square_footage') }}</div>
+        <div>{{ attributeValue('square_footage') }} SF</div>
       </div>
       <div class="mr-4" v-if="hasAttributeValue('year_built')">
         <label>Year built</label>

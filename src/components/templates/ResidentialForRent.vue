@@ -7,7 +7,7 @@
     <schools :ad=ad />
     <bed-bath :ad=ad />
     <manufactured-home :ad=ad v-if="isManufacturedHome(ad.categoryId)" />
-    <property-size :ad=ad v-if="isHomeStyle(ad.categoryId) || isManufacturedHome(ad.categoryId)" />
+    <property-size :ad=ad />
     <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondo(ad.categoryId)" />
     <bed-bath-features :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />

@@ -7,10 +7,22 @@
         <div class="col-md-10 order-lg-1 order-md-1 order-sm-2 p-0">
           <div class="fmr-bordered-area">
             <div class="header">
-              <h1>{{ title }}</h1>
+              <div class="container pl-0 pr-0">
+                <div class="row no-gutters">
+                  <div class="col-md-6">
+                    <h1>{{ title }}</h1>
+                  </div>
+                  <div class="col-md-6">
+                    <paginate v-show="adList !== null && pageCount > 1" class="float-right mr-2"
+                      :page-count="pageCount" :page-range="5" :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
+                      :container-class="'pagination'" :prev-class="'page-item'" :next-class="'page-item'" :page-class="'page-item'"
+                      :page-link-class="'page-link'" :prev-link-class="'page-link'" :next-link-class="'page-link'" />
+                  </div>
+                </div>
+              </div>
             </div>
             <div v-if="adList == null" class="p-4">Loading...</div>
-            <list-filter-badges />
+            <list-filter-badges v-show="adList !== null" />
             <ul class="list-unstyled" v-if="ads.length > 0">
               <li v-for="adItem in ads" v-bind:key="adItem.id" class="border-bottom p-2">
                 <ad-summary :ad="adItem" />
@@ -18,12 +30,12 @@
             </ul>
             <there-is-nothing v-if="adList !== null && ads.length === 0" />
             <div class="row pt-2" v-if="pageCount > 0">
-              <div class="col"></div>
-              <div class="col">
-                <nav aria-label="Page navigation">
-                  <paginate :page-count="pageCount" :page-range="5" :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
-                    :container-class="'pagination'" :prev-class="'page-link'" :next-class="'page-link'" :page-class="'page-link'" />
-                </nav>
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <paginate v-show="adList !== null && pageCount > 1" class="float-right mr-2 mb-4"
+                  :page-count="pageCount" :page-range="5" :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
+                  :container-class="'pagination'" :prev-class="'page-item'" :next-class="'page-item'" :page-class="'page-item'"
+                  :page-link-class="'page-link'" :prev-link-class="'page-link'" :next-link-class="'page-link'" />
               </div>
               <div class="col"></div>
             </div>
@@ -79,6 +91,10 @@ export default {
   },
   methods: {
     getAds() {
+      while (this.ads.length) {
+        this.ads.pop();
+      }
+      this.adList = null
       const self = this;
 
       AdService.getAds(AppContext.searchCriteria())

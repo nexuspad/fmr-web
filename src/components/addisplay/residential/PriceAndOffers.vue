@@ -12,7 +12,7 @@
     <div class="row" v-if="hasAttributeValue('monthly_rent')">
       <div class="col">
         <label>Monthly rent:</label>
-        {{ attributeValue('monthly_rent') }}
+        <strong class="fmr-green ml-1">{{ dollar(attributeValue('monthly_rent')) }}</strong>
       </div>
       <div class="col">
         <div v-if="hasAttributeValue('special_offer')">
@@ -20,7 +20,13 @@
         </div>
       </div>
     </div>
-    <div class="row" v-if="hasAttributeValue('rent_includes')">
+    <div class="row" v-if="hasAttributeValue('security_deposit')">
+      <div class="col">
+        <label>Security deposit:</label>
+        <strong class="fmr-green ml-1">{{ dollar(attributeValue('security_deposit')) }}</strong>
+      </div>
+    </div>
+    <div class="row pt-2" v-if="hasAttributeValue('rent_includes')">
       <div class="col">
         <label>Rent includes</label>
         <div class="d-flex flex-row flex-wrap bd-highlight mb-3">

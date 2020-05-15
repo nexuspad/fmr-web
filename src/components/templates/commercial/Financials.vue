@@ -15,18 +15,33 @@
       </div>
       <div class="col-md-2">
         <label for="land_assessment">Land assessment</label>
-        <input type="text" class="form-control" id="land_assessment" placeholder=""
-          name="land_assessment" v-model="ad.getAttribute(attributeId('land_assessment')).value" />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text fmr-green bg-light">$</div>
+          </div>
+          <input type="text" class="form-control" id="land_assessment"
+            name="land_assessment" v-model="ad.getAttribute(attributeId('land_assessment')).value" />
+        </div>
       </div>
       <div class="col-md-2">
         <label for="improvement_assessment">Improvement assessment</label>
-        <input type="text" class="form-control" id="improvement_assessment" placeholder=""
-          name="improvement_assessment" v-model="ad.getAttribute(attributeId('improvement_assessment')).value" />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text fmr-green bg-light">$</div>
+          </div>
+          <input type="text" class="form-control" id="improvement_assessment"
+            name="improvement_assessment" v-model="ad.getAttribute(attributeId('improvement_assessment')).value" />
+        </div>
       </div>
       <div class="col-md-2">
         <label for="total_assessment">Total assessment</label>
-        <input type="text" class="form-control" id="total_assessment" placeholder=""
-          name="total_assessment" v-model="ad.getAttribute(attributeId('total_assessment')).value" />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text fmr-green bg-light">$</div>
+          </div>
+          <input type="text" class="form-control" id="total_assessment"
+            name="total_assessment" v-model="ad.getAttribute(attributeId('total_assessment')).value" />
+        </div>
       </div>
     </div>
   </div>

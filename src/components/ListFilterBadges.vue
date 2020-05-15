@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ul class="list-inline">
+  <div class="border-bottom pt-2 pr-2" v-if="filters.length > 0">
+    <ul class="list-inline text-right mb-1">
       <li v-for="(filter, index) in filters" v-bind:key="index" class="list-inline-item">
         <span class="badge badge-info fmr-sm-text pt-1 pl-2">{{ filter.value }}
           <button type="button" class="icon-button" v-on:click="removeFilter(filter.name)">
@@ -57,8 +57,6 @@ export default {
           this.filters.push({name: name, value: rangeValue(name, contextFilters[name])})
         }
       }
-
-      console.log('++++', this.filters)
     },
     removeFilter(name) {
       let overwriteParam = {}

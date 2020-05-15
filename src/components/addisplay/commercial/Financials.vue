@@ -13,15 +13,15 @@
       </div>
       <div class="mr-4" v-if="hasAttributeValue('land_assessment')">
         <label>Land assessment</label>
-        <div>{{ attributeValue('land_assessment') }}</div>
+        <div>{{ dollar(attributeValue('land_assessment')) }}</div>
       </div>
       <div class="mr-4" v-if="hasAttributeValue('improvement_assessment')">
         <label>Improvement assessment</label>
-        <div>{{ attributeValue('improvement_assessment') }}</div>
+        <div>{{ dollar(attributeValue('improvement_assessment')) }}</div>
       </div>
       <div class="mr-4" v-if="hasAttributeValue('total_assessment')">
         <label>Total assessment</label>
-        <div>{{ attributeValue('total_assessment') }}</div>
+        <div>{{ dollar(attributeValue('total_assessment')) }}</div>
       </div>
     </div>
   </div>

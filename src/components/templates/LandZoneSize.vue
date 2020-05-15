@@ -10,8 +10,13 @@
       </div>
       <div class="col-md-2">
         <label for="lot_size">Size</label>
-        <input type="text" class="form-control" id="lot_size" placeholder="ex. 2 acres"
-          name="lot_size" v-model="ad.getAttribute(attributeId('lot_size')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="lot_size" placeholder="ex. 1.68"
+            name="lot_size" v-model="ad.getAttribute(attributeId('lot_size')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">AC</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
         <label for="parcel_id">Parcel number</label>

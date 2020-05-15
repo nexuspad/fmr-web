@@ -13,7 +13,7 @@
           <label for="asking_price" class="required">Asking price</label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text bg-success text-light">$</div>
+              <div class="input-group-text fmr-green bg-light">$</div>
             </div>
             <input type="text" class="form-control"
               name="asking_price" v-model="ad.getAttribute(attributeId('asking_price')).value" />

@@ -18,7 +18,7 @@ export default {
             return stateName(code)
         },
         categoryName(id) {
-            if (id)
+            if (id || id == 0)
                 return this.capitalizeFirstLetter(categoryNameLookup(id))
             return ''
         },
@@ -54,8 +54,13 @@ export default {
             if (this.ad) {
                 if (this.ad.getAttribute(this.attributeId(name))) {
                     let value = this.ad.getAttribute(this.attributeId(name)).value
-                    if (value !== null && typeof value !== 'undefined' && value.length > 0)
-                        return true
+                    if (value !== null && typeof value !== 'undefined') {
+                        if (typeof(value) === 'string') {
+                            return value.length > 0 ? true : false
+                        } else {
+                            return true
+                        }
+                    }
                 }
             }
             return false
@@ -121,6 +126,9 @@ export default {
             }
             return false
         },
+        isSingleFamily(categoryId) {
+            return categoryId == 3001 || categoryId == 3011 ? true : false
+        },
         isCondo(categoryId) {
             return categoryId == 3004 || categoryId == 3013 ? true : false
         },
@@ -135,6 +143,15 @@ export default {
         },
         isByOwnerEligible(categoryId) {
             return [3001, 3002, 3004, 3029, 2011, 3011, 3012, 3013, 3014, 3015].includes(categoryId) ? true : false
+        },
+        addLineBreak(value) {
+            return value.replace(/\n/g, '<br/>')
+        },
+        formatDate(aDate) {
+            if (aDate instanceof Date) {
+                return aDate.toLocaleDateString()
+            }
+            return aDate
         },
         dollar(amount) {
             return formatter.format(amount)

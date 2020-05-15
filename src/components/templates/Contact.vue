@@ -26,7 +26,7 @@
       <div class="col-md-3">
         <label for="mls_id">MLS or other ID</label>
         <input type="text" class="form-control" id="mls_id"
-          name="mls_id" v-model="ad.getAttribute(attributeId('MLS_ID')).value" />
+          name="mls_id" v-model="ad.getAttribute(attributeId('mls_id')).value" />
       </div>
     </div>
     <div class="form-row mt-2" v-show="!isByOwner">
@@ -39,7 +39,8 @@
     <div class="form-row mt-2" v-if="isHomeStyle(ad.categoryId)">
       <div class="col-md-3">
         <label>Open house</label>
-        <datepicker input-class="form-control" v-model="ad.getAttribute(attributeId('open_house')).value" />
+        <datepicker input-class="form-control" bootstrap-styling clear-button format="yyyy-MM-dd"
+          v-model="ad.getAttribute(attributeId('open_house')).value" />
       </div>
       <div class="col-md-3">
         <label>hours</label>

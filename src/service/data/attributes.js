@@ -193,7 +193,7 @@ const ATTRIBUTES =
     "51": {
         "name": "contact_phone",
         "id": 51,
-        "type": "string"
+        "type": "number"
     },
     "52": {
         "name": "county",
@@ -203,7 +203,7 @@ const ATTRIBUTES =
     "53": {
         "name": "open_house",
         "id": 53,
-        "type": "string"
+        "type": "date"
     },
     "54": {
         "name": "open_house_hours",
@@ -488,6 +488,11 @@ const ATTRIBUTES =
         "name": "building_size_sqft",
         "id": 112,
         "type": "number"
+    },
+    "113": {
+        "name": "tenants",
+        "id": 113,
+        "type": "string"
     },
     "121": {
         "name": "building_class",

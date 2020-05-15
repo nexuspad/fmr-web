@@ -42,8 +42,8 @@
             -->
           </ul>
         </div>
-        <div class="tab-content pt-4 pl-4 pr-2">
-          <div class="tab-pane active" id="Content">
+        <div class="tab-content pt-4 pr-2">
+          <div class="tab-pane active pl-4" id="Content">
             <residential-for-sale :ad="ad" v-if="template == 'ResidentialForSale'" />
             <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
             <commercial-for-sale :ad="ad" v-if="template == 'CommercialForSale'" />
@@ -51,7 +51,7 @@
             <land-for-sale :ad="ad" v-if="template == 'LandForSale'" />
             <post-warning />
           </div>
-          <div class="tab-pane" id="Photos">
+          <div class="tab-pane pl-4" id="Photos">
             <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">

@@ -28,7 +28,7 @@ export default class FmrAd {
 
             this.expiryDate = Date.parse(jsonObj.expiryDate)
             this.updateTime = jsonObj.updateTime
-            this.updateTimeDisplay = new Date(jsonObj.updateTime * 1000).toLocaleTimeString("en-US")
+            this.updateTimeDisplay = new Date(jsonObj.updateTime * 1000).toLocaleString("en-US")
 
             if (jsonObj.uri)
                 this.uri = jsonObj.uri

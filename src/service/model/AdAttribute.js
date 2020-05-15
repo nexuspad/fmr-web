@@ -30,14 +30,21 @@ export default class AdAttribute {
                 }
             }
 
+            if (attributeTypeLookup(this.id) === 'date' && typeof(this.value) === 'string') {
+                let parts = this.value.split('-')
+                if (parts.length == 3) {
+                    this.value = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]))
+                }
+            }
+
         } else {
             this.options = []
         }
     }
 
-    static instance (name) {
+    static instance (id) {
         const attribute = new AdAttribute
-        attribute.name = name
+        attribute.id = id
         attribute.value = ''
         return attribute
     }

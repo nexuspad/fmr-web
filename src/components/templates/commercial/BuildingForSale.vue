@@ -3,24 +3,34 @@
     <div class="form-row mb-2">
       <!-- office space -->
       <div class="col-md-2">
-        <label for="space_size">Space size</label>
-        <input type="text" class="form-control" id="space_size" placeholder="ex. 800 sqft."
-          name="space_size" v-model="ad.getAttribute(attributeId('space_size')).value" />
-      </div>
-      <div class="col-md-2">
         <label for="building_size_sqft">Building size</label>
-        <input type="text" class="form-control" id="building_size_sqft" placeholder="ex. 5000 sqft."
-          name="building_size_sqft" v-model="ad.getAttribute(attributeId('building_size_sqft')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="building_size_sqft" placeholder="ex. 5000"
+            name="building_size_sqft" v-model="ad.getAttribute(attributeId('building_size_sqft')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">SF</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
         <label for="typical_floor_size">Floor size</label>
-        <input type="text" class="form-control" id="typical_floor_size" placeholder="ex. 2000 sqft"
-          name="typical_floor_size" v-model="ad.getAttribute(attributeId('typical_floor_size')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="typical_floor_size" placeholder="ex. 2000"
+            name="typical_floor_size" v-model="ad.getAttribute(attributeId('typical_floor_size')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">SF</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
         <label for="gross_leasable_area">Gross leasable area</label>
-        <input type="text" class="form-control" id="gross_leasable_area"
-          name="gross_leasable_area" v-model="ad.getAttribute(attributeId('gross_leasable_area')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="gross_leasable_area" placeholder="ex. 2000"
+            name="gross_leasable_area" v-model="ad.getAttribute(attributeId('gross_leasable_area')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">SF</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-row">
@@ -33,7 +43,7 @@
       </div>
       <div class="col-md-2">
         <label for="number_of_stories">Number of stories</label>
-        <input type="text" class="form-control" id="number_of_stories" placeholder="ex. 2000 sqft"
+        <input type="text" class="form-control" id="number_of_stories" placeholder=""
           name="number_of_stories" v-model="ad.getAttribute(attributeId('number_of_stories')).value" />
       </div>
       <div class="col-md-2">

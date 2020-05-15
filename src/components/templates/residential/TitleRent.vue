@@ -13,7 +13,7 @@
           <label for="monthly_rent" class="required">Monthly rent</label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text bg-success text-light">$</div>
+              <div class="input-group-text fmr-green bg-light">$</div>
             </div>
             <input type="text" class="form-control" id="monthly_rent"
               name="monthly_rent" v-model="ad.getAttribute(attributeId('monthly_rent')).value" />
@@ -25,7 +25,7 @@
           <label for="sec_dep">Security deposit</label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text bg-success text-light">$</div>
+              <div class="input-group-text fmr-green bg-light">$</div>
             </div>
             <input type="text" class="form-control" id="sec_dep"
               name="security_deposit" v-model="ad.getAttribute(attributeId('security_deposit')).value" />
@@ -34,7 +34,8 @@
       </div>
       <div class="col-md-2">
         <label>Available date</label>
-        <datepicker input-class="form-control" v-model="ad.getAttribute(attributeId('available_date')).value" />
+        <datepicker input-class="form-control" bootstrap-styling clear-button
+          v-model="ad.getAttribute(attributeId('available_date')).value" />
       </div>
     </div>
     <div class="form-row">
@@ -49,7 +50,7 @@
 
 <script>
 import AppDataHelper from '../../AppDataHelper'
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from 'vuejs-datepicker'
 
 export default {
   mixins: [ AppDataHelper ],

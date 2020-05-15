@@ -7,7 +7,7 @@
     <bed-bath :ad=ad v-if="!isHomeStyle(ad.categoryId)" />
     <bed-bath-basement :ad=ad v-if="isHomeStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
     <manufactured-home :ad=ad v-if="isManufacturedHome(ad.categoryId)" />
-    <property-size :ad=ad v-if="isHomeStyle(ad.categoryId) || isManufacturedHome(ad.categoryId) || isForeClosure(ad.categoryId)" />
+    <property-size :ad=ad />
     <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
     <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
     <bed-bath-features :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />

@@ -8,12 +8,17 @@
       </div>
       <div class="col-md-2">
         <label for="lot_size">Lot size</label>
-        <input type="text" class="form-control" id="lot_size" placeholder="ex. 2 acres"
-          name="lot_size" v-model="ad.getAttribute(attributeId('lot_size')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="lot_size" placeholder="ex. 3.14"
+            name="lot_size" v-model="ad.getAttribute(attributeId('lot_size')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">AC</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
-        <label for="lot_size">Parking</label>
-        <input type="text" class="form-control" id="parking" placeholder="ex. 20 surface parking spaces"
+        <label for="lot_size">Parking space</label>
+        <input type="text" class="form-control" id="parking" placeholder="ex. 20 surface, 50 garage"
           name="parking" v-model="ad.getAttribute(attributeId('parking')).value" />
       </div>
       <div class="col-md-2">

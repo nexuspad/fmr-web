@@ -1,9 +1,9 @@
 <template>
   <div class="mb-4">
-    <title-rate-price :ad=ad />
+    <title-price :ad=ad />
     <full-address :ad=ad />
     <location-close-to :ad=ad />
-    <building :ad=ad />
+    <building-for-sale :ad=ad />
     <lot-parking :ad=ad />
     <tenancy :ad=ad />
     <com-amenities :ad=ad />
@@ -21,8 +21,8 @@ import LocationCloseTo from './LocationCloseTo'
 import Contact from './Contact'
 import Description from './Description'
 import OtherAmenities from './OtherAmenities'
-import TitleRatePrice from './commercial/TitleRatePrice'
-import Building from './commercial/Building'
+import TitlePrice from './commercial/TitlePrice'
+import BuildingForSale from './commercial/BuildingForSale'
 import LotParking from './commercial/LotParking'
 import ComAmenities from './commercial/ComAmenities'
 import Tenancy from './commercial/Tenancy'
@@ -32,7 +32,7 @@ export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    FullAddress, LocationCloseTo, Contact, Description, TitleRatePrice, Building, LotParking, ComAmenities, OtherAmenities, Tenancy, Financials
+    FullAddress, LocationCloseTo, Contact, Description, TitlePrice, BuildingForSale, LotParking, ComAmenities, OtherAmenities, Tenancy, Financials
   }
 }
 </script>
