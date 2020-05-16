@@ -180,6 +180,11 @@ const ATTRIBUTES =
         "id": 47,
         "type": "string"
     },
+    "48": {
+        "name": "geo_coordinates",
+        "id": 48,
+        "type": "string"
+    },
     "49": {
         "name": "neighborhood",
         "id": 49,

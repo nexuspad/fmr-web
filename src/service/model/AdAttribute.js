@@ -20,6 +20,11 @@ export default class AdAttribute {
                 this.value = ''
             }
 
+            if (this.id === 48) {
+                this.value = JSON.parse(this.value)
+                console.log(this.value)
+            }
+
             if (attributeTypeLookup(this.id) === 'array') {
                 if (!this.value) {
                     this.value = []
@@ -28,9 +33,7 @@ export default class AdAttribute {
                         this.value = this.value.split(',')
                     }
                 }
-            }
-
-            if (attributeTypeLookup(this.id) === 'date' && typeof(this.value) === 'string') {
+            } else if (attributeTypeLookup(this.id) === 'date' && typeof(this.value) === 'string') {
                 let parts = this.value.split('-')
                 if (parts.length == 3) {
                     this.value = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]))

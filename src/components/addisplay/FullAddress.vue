@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-2">
     <label>Property address:</label>
     {{ attributeValue('street_address') }}
     {{ attributeValue('city') }}, {{ attributeValue('state') }} {{ attributeValue('zip_code') }}

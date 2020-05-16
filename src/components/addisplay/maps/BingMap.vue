@@ -3,8 +3,11 @@
 </template>
 
 <script>
+import AppDataHelper from '../../AppDataHelper'
+
 // https://github.com/microsoft/BingMapsV8CodeSamples/tree/master/Samples/Map
 export default {
+  mixins: [ AppDataHelper ],
   props: ['ad'],
   mounted() {
     const self = this
@@ -20,8 +23,9 @@ export default {
   },
   methods: {
     initMap: function() {
+      const geoCoordinates = this.ad.getAttribute(this.attributeId('geo_coordinates')).value.latLng
       new window.Microsoft.Maps.Map('#Map', {
-            center: new window.Microsoft.Maps.Location(39.824647, -99.524267),
+            center: new window.Microsoft.Maps.Location(geoCoordinates.lat, geoCoordinates.lng),
             mapTypeId: window.Microsoft.Maps.MapTypeId.aerial,
             zoom: 4
         });
