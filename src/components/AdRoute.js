@@ -39,6 +39,18 @@ export default class AdRoute {
                 }
             },
             {
+                path: '/:state([a-z]{2})/:fsbo(fsbo)',
+                component: AdList
+            },
+            {
+                path: '/:fsbo(fsbo)/:categoryName',
+                component: AdList
+            },
+            {
+                path: '/:state([a-z]{2})/:fsbo(fsbo)/:categoryName',
+                component: AdList
+            },
+            {
                 path: '/:state([a-z]{2})',
                 component: AdList
             },

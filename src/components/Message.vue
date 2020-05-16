@@ -60,6 +60,8 @@ export default {
     EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_FAILURE, this.showErrorMessage)
     EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, this.showSuccessMessage)
 
+    EventManager.subscribe(AppEvent.ACCOUNT_DELETION_SUCCESS, this.showSuccessMessage)
+
     EventManager.subscribe(AppEvent.AD_UPDATE_SUCCESS, this.showSuccessMessage)
     EventManager.subscribe(AppEvent.AD_UPDATE_FAILURE, this.showErrorMessage)
 
@@ -94,6 +96,8 @@ export default {
     EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_CODE_SUCCESS, this.showSuccessMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_FAILURE, this.showErrorMessage)
     EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, this.showSuccessMessage)
+
+    EventManager.unSubscribe(AppEvent.ACCOUNT_DELETION_SUCCESS, this.showSuccessMessage)
 
     EventManager.unSubscribe(AppEvent.AD_UPDATE_SUCCESS, this.showSuccessMessage)
     EventManager.unSubscribe(AppEvent.AD_UPDATE_FAILURE, this.showErrorMessage)

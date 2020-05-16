@@ -67,6 +67,10 @@ export default class AppContext {
             pathParams.push(fp.getState())
         }
 
+        if (fp.isFsbo()) {
+            pathParams.push('fsbo')
+        }
+
         if (fp.getCategoryId()) {
             const category = categoryLookup(fp.getCategoryId())
             pathParams.push(category.uri)
@@ -116,6 +120,10 @@ export default class AppContext {
 
         if (this._filterParams.getState()) {
             listCriteria.addFilter(AttributeFilter.eq('state', this._filterParams.getState()))
+        }
+
+        if (this._filterParams.isFsbo()) {
+            listCriteria.addFilter(AttributeFilter.eq('represented_by_owner', 'yes'))
         }
 
         listCriteria.page = this._filterParams.getPage()

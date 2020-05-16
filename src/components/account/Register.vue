@@ -4,7 +4,10 @@
     <div class="header">
       <h1>Free registration</h1>
     </div>
-    <div class="fmr-form mt-2 p-2 col-lg-6 offset-lg-3">
+    <div class="fmr-form mt-2 p-2 col-lg-6 offset-lg-3 pt-4 pb-4" v-if="registrationSuccess">
+      Your account has been created. <a href="/account/login">Login in here</a>.
+    </div>
+    <div class="fmr-form mt-2 p-2 col-lg-6 offset-lg-3" v-if="!registrationSuccess">
       <form v-on:submit.prevent>
         <div class="border-bottom lead bg-light pl-1 mb-4">
           Create a new account
@@ -26,8 +29,8 @@
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="agreeTos" v-model="agreeToTos">
             <span class="form-check-label" for="agreeTos">
-              Check here to indicate that you have read and agree to the Terms of use
-              and Privacy policy.
+              Check here to indicate that you have read and agree to the Terms of Use
+              and Privacy Policy.
             </span>
           </div>
         </div>
@@ -55,6 +58,7 @@ export default {
       password: '',
       confirmPassword: '',
       agreeToTos: false,
+      registrationSuccess: false,
       posting: false
     }
   },
@@ -71,12 +75,15 @@ export default {
       }
 
       if (!this.agreeToTos) {
-        EventManager.publishAppEvent(AppEvent.ofFailure(AppEvent.ACCOUNT_REGISTRATION_FAILURE, "You must agree to our Terms of Use and Privacy policies."))
+        EventManager.publishAppEvent(AppEvent.ofFailure(AppEvent.ACCOUNT_REGISTRATION_FAILURE, "You must agree to our Terms of Use and Privacy Policies."))
         return
       }
 
+      const self = this
       AccountService.register(this.email, this.password)
-      .then(() => {})
+      .then(() => {
+        self.registrationSuccess = true
+      })
       .catch((error) => {
         EventManager.publishApiEvent(AppEvent.ofApiFailure(error))
       })

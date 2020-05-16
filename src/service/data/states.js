@@ -42,7 +42,7 @@ const STATES = {
     'RI': 'Rhode Island',
     'SC': 'South Carolina',
     'SD': 'South Dakota',
-    'TM': 'Tennessee',
+    'TN': 'Tennessee',
     'TX': 'Texas',
     'UT': 'Utah',
     'VT': 'Vermont',

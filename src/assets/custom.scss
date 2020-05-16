@@ -25,6 +25,12 @@ body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
 h1 {text-transform: capitalize;}
 
+.page-item.active .page-link {
+  background-color: #eee;
+  border-color: #cccccc;
+  color: #333;
+}
+
 .fmr-logo {background:url(./images/findmyroof.png) no-repeat 0 0;}
 
 .fmr-lg-text {font-size: 0.95rem}

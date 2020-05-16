@@ -1,5 +1,5 @@
 <template>
-  <div class="fmr-bordered-area">
+  <div class="fmr-bordered-area" :class="{ fadeOut: accountDeleted }">
     <message />
     <div class="header">
       <h1>Settings</h1>
@@ -44,11 +44,11 @@
       <div class="form-row">
         <div class="col">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="passwordRemoveAccount" v-model="passwordRemoveAccount">
+          <input type="password" class="form-control" id="accountDeletionPassword" v-model="accountDeletionPassword">
         </div>
       </div>
       <div class="form-row mt-3 mb-3 ml-1">
-        <input type="checkbox" class="mt-1 mr-1" />
+        <input type="checkbox" class="mt-1 mr-1" v-model="accountDeletionConfirmation" />
         I want to remove my account and all my ads.
       </div>
       <div class="form-row mt-4">
@@ -73,7 +73,9 @@ export default {
       password: '',
       newPassword: '',
       confirmPassword: '',
-      passwordRemoveAccount: '',
+      accountDeletionPassword: '',
+      accountDeletionConfirmation: false,
+      accountDeleted: false,
       posting: false
     }
   },
@@ -116,11 +118,25 @@ export default {
       })
     },
     removeAccount() {
+      if (!this.accountDeletionPassword) {
+        EventManager.publishAppEvent(AppEvent.ofFailure(AppEvent.GENERIC_MISSING_INPUT, "Please provide your password."))
+        return
+      }
+      if (!this.accountDeletionConfirmation) {
+        EventManager.publishAppEvent(AppEvent.ofFailure(AppEvent.GENERIC_MISSING_INPUT, "Please check the confirmation box."))
+        return
+      }
+
       const self = this
       self.posting = true
-      AccountService.removeAccount()
+      AccountService.removeAccount(this.accountDeletionPassword)
       .then(() => {
         self.posting = false
+        EventManager.publishAppEvent(AppEvent.ofSuccess(AppEvent.ACCOUNT_DELETION_SUCCESS, "Your account has been deleted. Thank you for using FindMyRoof!"))
+        self.accountDeleted = true
+        setTimeout(() => {
+          window.location.replace('/');
+        },  3200);
       })
       .catch((error) => {
         console.error(error)
@@ -131,3 +147,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 4s, opacity 4s linear;
+}
+</style>

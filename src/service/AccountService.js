@@ -199,7 +199,7 @@ export default class AccountService {
         let serviceRequest = AccountServiceRequest.forDeletaAccount(password)
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
-                RestClient.instance(token).post('/account/removeAccount', serviceRequest)
+                RestClient.instance(token).post('/account/remove', serviceRequest)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve()

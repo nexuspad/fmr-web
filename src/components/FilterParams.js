@@ -1,6 +1,8 @@
 export default class FilterParams {
     _state = null
     _categoryId = 0
+    _fsbo = false
+
     _filters = {
         'zip_code': '',
         'city': '',
@@ -14,6 +16,7 @@ export default class FilterParams {
     constructor(otherFilterParam) {
         if (otherFilterParam) {
             this._state = otherFilterParam._state
+            this._fsbo = otherFilterParam._fsbo
             this._categoryId = otherFilterParam._categoryId
             this._page = otherFilterParam._page
             this._filters = {}
@@ -32,6 +35,14 @@ export default class FilterParams {
 
     getCategoryId() {
         return this._categoryId
+    }
+
+    setFsbo(isFsbo) {
+        this._fsbo = isFsbo
+    }
+
+    isFsbo() {
+        return this._fsbo
     }
 
     getPage() {
@@ -56,6 +67,10 @@ export default class FilterParams {
             this._categoryId = otherParams['categoryId']
         }
         
+        if (otherParams['fsbo']) {
+            this._fsbo = true
+        }
+
         if (otherParams['page']) {
             this._page = otherParams['page']
         }

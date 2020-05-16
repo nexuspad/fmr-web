@@ -85,11 +85,14 @@
               <div class="container fmr-lg-text">
                 <div class="row">
                   <div class="col-auto">
-                    <router-link class="dropdown-item primary" :to="getPath(3011)">Single family homes</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3012)">Townhomes/multi-units</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3013)">Condos</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(3014)">Manufactured homes</router-link>
-                    <router-link class="dropdown-item primary" :to="getPath(2011)">Land</router-link>
+                    <h4 class="dropdown-header">
+                      <router-link :to="getPath(2001, true)">All FSBO</router-link>
+                    </h4>
+                    <router-link class="dropdown-item primary" :to="getPath(3011, true)">Single family homes</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3012, true)">Townhomes/multi-units</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3013, true)">Condos</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(3014, true)">Manufactured homes</router-link>
+                    <router-link class="dropdown-item primary" :to="getPath(2011, true)">Land</router-link>
                   </div>
                 </div>
               </div>
@@ -117,7 +120,11 @@ export default {
     }
   },
   methods: {
-    getPath(categoryId) {
+    getPath(categoryId, isFsbo) {
+      if (isFsbo) {
+        let {path} = AppContext.makePath({categoryId: categoryId, fsbo: true})
+        return path
+      }
       let {path} = AppContext.makePath({categoryId: categoryId})
       return path
     }
