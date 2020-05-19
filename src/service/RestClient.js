@@ -6,7 +6,7 @@ import StorageUtils from '../util/StorageUtil'
 
 export default class RestClient {
     static _axiosInstance = null;
-    static apiUrl = 'http://localhost:8080/';
+    static apiUrl = process.env.VUE_APP_API_URL;
 
     static get(fullUrl) {
         return axios.get(fullUrl);

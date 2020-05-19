@@ -32,11 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
-        <label>Available date</label>
-        <datepicker input-class="form-control" bootstrap-styling clear-button
-          v-model="ad.getAttribute(attributeId('available_date')).value" />
-      </div>
+      <available-date :ad="ad" />
     </div>
     <div class="form-row">
       <div class="col-md-9">
@@ -50,13 +46,13 @@
 
 <script>
 import AppDataHelper from '../../AppDataHelper'
-import Datepicker from 'vuejs-datepicker'
+import AvailableDate from '../AvailableDate'
 
 export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    Datepicker
+    AvailableDate
   }
 }
 </script>

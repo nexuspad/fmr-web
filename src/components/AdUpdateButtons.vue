@@ -5,7 +5,8 @@
       expires in {{ daysToExpire() }} days
     </div>
     <div class="btn-group float-right mr-4">
-      <button type="button" class="btn btn-primary" @click="editAd()">Update</button>
+      <button type="button" class="btn btn-primary" @click="editAd()" v-if="!ad.isDraft()">Update</button>
+      <button type="button" class="btn btn-primary" @click="editAd()" v-if="ad.isDraft()">Edit</button>
       <button type="button" class="btn btn-primary" @click="extend()" v-if="!ad.isDraft() && daysToExpire() < 7">Extend</button>
       <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && ad.isDeactivated()" @click="activate()">
         Activate

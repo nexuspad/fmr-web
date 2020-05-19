@@ -22,8 +22,6 @@ export default class AppContext {
         // merge into the context and overwrite existing values
         this._filterParams.merge(routeParams, true)
         this._filterParams.merge(routeQueries, true)
-        
-        console.log('From the route....', this._filterParams);
 
         // merge the locally saved context.
         this._mergeFromLocal()

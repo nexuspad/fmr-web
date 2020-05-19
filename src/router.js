@@ -30,7 +30,6 @@ router.addRoutes(AccountRoute.routes())
 
 router.beforeEach((to, from, next) => {    
     // update app context
-    console.log('>>>>', to.params)
     AppContext.updateContext({routeParams: to.params, routeQueries: to.query})
 
     // -- Inject meta heads

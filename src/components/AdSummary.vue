@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row pt-2">
       <div class="col-3">
         <router-link :to="'/ad/' + ad.id + '/' + ad.uri">
           <img v-lazy="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
@@ -26,6 +26,9 @@
                 <price-bed-bath :ad="ad" />
               </div>
             </div>
+          </div>
+          <div v-if="hasAttributeValue('special_offer')" class="mt-2">
+            <span class="bg-gradient-warning p-1 rounded">{{ attributeValue('special_offer') }}</span>
           </div>
           <div class="row">
             <div class="col">

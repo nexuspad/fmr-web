@@ -1,6 +1,8 @@
 import { attributeTypeLookup } from '../../service/AppData'
 
 export default class AdAttribute {
+    static GEO_COORDINATES = 48
+
     id
     name
     value
@@ -20,9 +22,8 @@ export default class AdAttribute {
                 this.value = ''
             }
 
-            if (this.id === 48) {
+            if (this.id === 48 && this.value) {
                 this.value = JSON.parse(this.value)
-                console.log(this.value)
             }
 
             if (attributeTypeLookup(this.id) === 'array') {
@@ -60,5 +61,12 @@ export default class AdAttribute {
         } else {
             this.value = value
         }
+    }
+
+    isSystemGenerated() {
+        if (this.id === AdAttribute.GEO_COORDINATES) {
+            return true
+        }
+        return false
     }
 }

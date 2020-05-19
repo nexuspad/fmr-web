@@ -1,11 +1,11 @@
 <template>
   <div class="pb-3 mb-2">
     <div class="d-flex flex-row flex-wrap bd-highlight mb-2" v-if="hasAttributeValue('neighborhood') || hasAttributeValue('close_to')">
-      <div class="mr-4">
+      <div class="mr-4" v-if="hasAttributeValue('neighborhood')">
         <label>neighborhood</label>
         <div>{{ attributeValue('neighborhood') }}</div>
       </div>
-      <div class="mr-4">
+      <div class="mr-4" v-if="hasAttributeValue('close_to')">
         <label>Close to</label>
         <div>{{ attributeValue('close_to') }}</div>
       </div>

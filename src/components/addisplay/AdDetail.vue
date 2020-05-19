@@ -8,7 +8,7 @@
           <div class="container mb-4">
             <div class="row">
               <div class="col">
-                <img :src="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded" />
+                <a href="#photos"><img :src="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded" /></a>
               </div>
             </div>
           </div>
@@ -27,13 +27,14 @@
         <div class="col">
           <div class="container-fluid pl-0">
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-7">
                 <full-address :ad="ad" />
                 <location-and-schools :ad="ad" />
                 <property :ad="ad" v-if="isResidential(ad.categoryId)" />
+                <pet-policy :ad="ad" />
                 <building-and-lot :ad="ad" v-if="isCommercial(ad.categoryId)" />
               </div>
-              <div class="col-md-4" v-if="ad.hasCoordinate()">
+              <div class="col-md-5" v-if="ad.hasCoordinate()">
                 <bing-map :ad="ad" />
               </div>
             </div>
@@ -53,7 +54,7 @@
         </div>
       </div>
       <hr class="border-bottom shadow-sm" style="margin-right:-15px;" v-if="ad.photos.length > 0" />
-      <div class="row pl-2 no-gutters">
+      <div class="row pl-2 no-gutters" id="photos">
         <div class="col">
           <photos :ad="ad" />
         </div>
@@ -70,6 +71,7 @@ import Contact from './Contact'
 import Photos from './Photos'
 import PriceAndOffers from './residential/PriceAndOffers'
 import Property from './residential/Property'
+import PetPolicy from './residential/PetPolicy'
 import Features from './residential/Features'
 import BuildingAndLot from './commercial/BuildingAndLot'
 import RateLeasePrice from './commercial/RateLeasePrice'
@@ -82,7 +84,7 @@ export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    PriceAndOffers, FullAddress, LocationAndSchools, Property, Features, Contact,
+    PriceAndOffers, FullAddress, LocationAndSchools, Property, PetPolicy, Features, Contact,
     BuildingAndLot, RateLeasePrice, ComAmenities, Tenancy, Financials,
     Photos, BingMap
   }

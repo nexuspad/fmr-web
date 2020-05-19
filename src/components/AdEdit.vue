@@ -19,10 +19,10 @@
         <div class="fmr-tab shadow-sm sticky-top">
           <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1">
             <button class="btn btn-primary" :class="{disabled: invalidFields.length > 0}" 
-              v-on:click="save(false)" v-if="ad !== null && !ad.isDraft()">Save</button>
+              v-on:click="save(false)" v-if="ad !== null && !ad.isDraft()">Update</button>
             <button class="btn btn-primary" 
               data-toggle="modal" data-target="#SubmissionConfirmation" :class="{disabled: invalidFields.length > 0}" 
-              v-if="ad !== null && ad.isDraft()">Submit</button>
+              v-if="ad !== null && ad.isDraft()">Publish</button>
           </div>
           <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -68,7 +68,8 @@
           <div class="tab-pane" id="Submit">
             <div class="align-middle text-center pt-5 pb-5">
               <p>
-              Before submitting, please review and make sure you agree to FindMyRoof.com's Terms of use and Privacy policy.
+              Before publishing, please review and make sure you agree to FindMyRoof.com's 
+              <a href="/site/termsofservice">Terms of Service</a> and <a href="/site/privacypolicy">Privacy Policy</a>.
               </p>
               <button class="btn btn-primary" v-on:click="save">I agree and submit</button>
             </div>

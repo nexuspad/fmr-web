@@ -25,52 +25,20 @@
         <input type="text" class="form-control" placeholder="1,2 Yrs / negotiable"
           name="lease_term" v-model="ad.getAttribute(attributeId('lease_term')).value" />
       </div>
-      <div class="col-md-4">
-        <div class="custom-control custom-switch">
-          <input type="checkbox" class="custom-control-input" id="availableNow" 
-            v-model="isAvailableNow" @change="changeToAvailableNow()" />
-          <label class="custom-control-label mb-2" for="availableNow">Available now or</label>
-        </div>
-        <datepicker input-class="form-control" bootstrap-styling clear-button 
-          :disabled="isAvailableNow" placeholder="Select a date"
-          v-model="ad.getAttribute(attributeId('available_date')).value" />
-      </div>
+      <available-date :ad="ad" />
     </div>
   </div>
 </template>
 
 <script>
 import AppDataHelper from '../../AppDataHelper'
-import Datepicker from 'vuejs-datepicker'
+import AvailableDate from '../AvailableDate'
 
 export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    Datepicker
-  },
-  data() {
-    return {
-      isAvailableNow: this.checkIfAvailableNow()
-    }
-  },
-  methods: {
-    checkIfAvailableNow() {
-      let attribute = this.ad.getAttribute(this.attributeId('available_date'))
-      if (attribute && attribute.value === 'now') {
-        this.isAvailableNow = true
-      } else {
-        this.isAvailableNow = false
-      }
-    },
-    changeToAvailableNow() {
-      if (this.isAvailableNow) {
-        this.ad.getAttribute(this.attributeId('available_date')).value = 'now'
-      } else {
-        this.ad.getAttribute(this.attributeId('available_date')).value = ''
-      }
-      console.log(this.ad.getAttribute(this.attributeId('available_date')))
-    }
+    AvailableDate
   }
 }
 </script>

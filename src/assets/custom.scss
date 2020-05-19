@@ -145,3 +145,10 @@ a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
 ul.pagination {
   margin-bottom: 0;
 }
+
+.fmr-map-embed {width: 100%; height: 380px;}
+.fmr-map-fullscreen {position: fixed !important; width: 100%; height: 100%; left: 0; top: 0;
+  background: rgba(51,51,51,0.9); z-index: 1000;}
+
+
+.debug-css { background:#c00; }

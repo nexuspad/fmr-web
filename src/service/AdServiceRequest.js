@@ -145,11 +145,11 @@ export default class AdServiceRequest {
         this.ad.category.id = adObj.categoryId
 
         if (adObj.attributes) {
-            adObj.attributes.forEach(element => {
-                if (element.value) {
+            adObj.attributes.forEach(attr => {
+                if (!attr.isSystemGenerated() && attr.value) {
                     const attrObj = new AdAttribute
-                    attrObj.id = element.id
-                    attrObj.setValue(element.value)
+                    attrObj.id = attr.id
+                    attrObj.setValue(attr.value)
                     this.ad.attributes.push(attrObj)
                 }
             })

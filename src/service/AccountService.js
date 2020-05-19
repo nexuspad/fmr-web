@@ -3,6 +3,7 @@ import User from './model/User'
 import ApiError from './ApiError'
 import StorageUtils from '../util/StorageUtil'
 import AccountServiceRequest from './AccountServiceRequest'
+import PromiseManager from '../util/PromiseManager'
 
 export default class AccountService {
     static _user = User.visitor()
@@ -124,8 +125,17 @@ export default class AccountService {
     }
 
     static current(token) {
-        return new Promise((resolve, reject) => {
-            RestClient.instance(token).get('/account/session')
+        const serviceUri = '/account/session'
+
+        let p = PromiseManager.get(serviceUri, 'GET')
+
+        if (p) {
+            console.log('Getting user session in progress: ' + serviceUri)
+            return p
+        }
+
+        p = new Promise((resolve, reject) => {
+            RestClient.instance(token).get(serviceUri)
             .then((response) => {
                 if (response.data && response.data.code === 'SUCCESS') {
                     AccountService._user = new User(response.data.user)
@@ -139,6 +149,9 @@ export default class AccountService {
                 reject(error)
             })  
         })
+
+        PromiseManager.set(p, serviceUri, 'GET');
+        return p
     }
 
     static changePassword(password, newPassword) {

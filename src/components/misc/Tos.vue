@@ -5,15 +5,15 @@
     </div>
     <div class="p-4">
 <p>
-Please read this Terms of Use agreement (referred to hereafter as "TOU") before accessing or using FindMyRoof.com.
+Please read this Terms of Service agreement (referred to hereafter as "TOS") before accessing or using FindMyRoof.com.
 </p>
-<p><b>By using the Service in any way, you must be at least 18 years old and you agree to comply with the TOU. If you do not agree to the TOU, please immediately cease using the Service.</b></p>
+<p><b>By using the Service in any way, you must be at least 18 years old and you agree to comply with the TOS. If you do not agree to the TOS, please immediately cease using the Service.</b></p>
 
 <h2>
 ACCEPTANCE OF TERMS
 </h2>
 
-<p>FindMyRoof.com provides an online platform for "Do-It-Yourself" real estate classified ad listing service (referred to hereafter as "the Service"), and other online resources.  By using the Service in any way, you agree to comply with the TOU.  Should you object to any term or condition thereto or become dissatisfied with the Service in any way, your only recourse is to immediately discontinue use of the Service.  FindMyRoof.com has the right, but is not obligated to strictly enforce the TOU through self-help, community moderation, active investigation, litigation and prosecution.
+<p>FindMyRoof.com provides an online platform for "Do-It-Yourself" real estate classified ad listing service (referred to hereafter as "the Service"), and other online resources.  By using the Service in any way, you agree to comply with the TOS.  Should you object to any term or condition thereto or become dissatisfied with the Service in any way, your only recourse is to immediately discontinue use of the Service.  FindMyRoof.com has the right, but is not obligated to strictly enforce the TOS through self-help, community moderation, active investigation, litigation and prosecution.
 </p>
 
 <h2>ABOUT FINDMYROOF.COM</h2>
@@ -25,7 +25,7 @@ FindMyRoof.com is not a real estate agency or company and does not involved in t
 
 <p>
 You understand that all postings, messages, text, files, images, photos, video, sounds, or other materials ("Content") posted on, transmitted through, or linked from the Service, are the sole responsibility of the person from whom such Content originated. More specifically, you are entirely responsible for each individual item ("Item") of Content that you post, email or otherwise make available through the Service.  You understand that FindMyRoof.com does not control, pre-screen and is not responsible for Content made available through the Service, and that by using the Service, you may be exposed to Content that is offensive, indecent, inaccurate misleading, or otherwise objectionable.
-You acknowledge that FindMyRoof.com does not pre-screen or approve Content, but that FindMyRoof.com shall have the right (but not the obligation) in its sole discretion to refuse, delete or move any Content that is available through the Service, for violating the letter or spirit of the TOU or for any other reason.
+You acknowledge that FindMyRoof.com does not pre-screen or approve Content, but that FindMyRoof.com shall have the right (but not the obligation) in its sole discretion to refuse, delete or move any Content that is available through the Service, for violating the letter or spirit of the TOS or for any other reason.
 </p>
 
 <h2>PUBLIC RECORDS ON THE INTERNET</h2>
@@ -57,7 +57,7 @@ http://www.findmyroof.com/help/privacy.
 </p>
 
 <p>
-Your use of the FindMyRoof website or the Service signifies acknowledgment of and agreement to our Privacy Policy.  You further acknowledge and agree that FindMyRoof may, in its sole discretion preserve or disclose your Content, as well as your information, such as email addresses, IP addresses, timestamps, and other user information, if required to do so by law or in the good faith belief that such preservation or disclosure is reasonably necessary to: comply with legal process; enforce the TOU; respond to claims that any Content violates the rights of third-parties; respond to claims that contact information (e.g. phone number, street address) of a third-party has been posted or transmitted without their consent or as a form of harassment; protect the rights, property, or personal safety of FindMyRoof, its users or the general public.
+Your use of the FindMyRoof website or the Service signifies acknowledgment of and agreement to our Privacy Policy.  You further acknowledge and agree that FindMyRoof may, in its sole discretion preserve or disclose your Content, as well as your information, such as email addresses, IP addresses, timestamps, and other user information, if required to do so by law or in the good faith belief that such preservation or disclosure is reasonably necessary to: comply with legal process; enforce the TOS; respond to claims that any Content violates the rights of third-parties; respond to claims that contact information (e.g. phone number, street address) of a third-party has been posted or transmitted without their consent or as a form of harassment; protect the rights, property, or personal safety of FindMyRoof, its users or the general public.
 
 <h2>CONDUCT</h2>
 <p>
@@ -133,7 +133,7 @@ Upon completion of our review, we will remove the infringing posting(s) promptly
 </p>
 
 <h2>NO SPAM POLICY</h2>
-<p>Spam posting, in any of its forms, will not be tolerated and users who violate the TOU will be banned from using the Service.
+<p>Spam posting, in any of its forms, will not be tolerated and users who violate the TOS will be banned from using the Service.
 <a href="http://www.findmyroof.com/help/anti-spam-policy">See our current anti-spam policy.</a>
 </p>
 </div>
@@ -182,7 +182,7 @@ You agree that FindMyRoof, in its sole discretion, has the right (but not the ob
 3. ANY MATERIAL DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE SERVICE IS DONE AT YOUR OWN DISCRETION AND RISK AND THAT YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE DOWNLOAD OF ANY SUCH MATERIAL.
 </p>
 <p>
-4. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM FINDMYROOF.COM OR THROUGH OR FROM THE SERVICE SHALL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THE TERMS OF USE.
+4. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM FINDMYROOF.COM OR THROUGH OR FROM THE SERVICE SHALL CREATE ANY WARRANTY NOT EXPRESSLY STATED IN THE TERMS OF SERVICE.
 </p>
 
 <h2>LIMITATION OF LIABILITY</h2>
@@ -190,7 +190,7 @@ You agree that FindMyRoof, in its sole discretion, has the right (but not the ob
 </p>
 
 <h2>INDEMNITY</h2>
-<p>You agree to indemnify and hold FindMyRoof, its officers, subsidiaries, affiliates, successors, assigns, directors, officers, agents, service providers, suppliers and employees, harmless from any claim or demand, including reasonable attorney fees and court costs, made by any third party due to or arising out of Content you submit, post or make available through the Service, your use of the Service, your violation of the TOU, your breach of any of the representations and warranties herein, or your violation of any rights of another.
+<p>You agree to indemnify and hold FindMyRoof, its officers, subsidiaries, affiliates, successors, assigns, directors, officers, agents, service providers, suppliers and employees, harmless from any claim or demand, including reasonable attorney fees and court costs, made by any third party due to or arising out of Content you submit, post or make available through the Service, your use of the Service, your violation of the TOS, your breach of any of the representations and warranties herein, or your violation of any rights of another.
 
 <h2>NOTIFICATION OF CHANGES</h2>
 <p>
@@ -205,7 +205,7 @@ http://www.findmyroof.com/help/term.
 
 <h2>WAIVER AND SEVERABILITY OF TERMS.</h2>
 <p>
-The failure of FindMyRoof to exercise or enforce any right or provision of the Terms of Use shall not constitute a waiver of such right or provision. If any provision of the Terms of Use is found by a court of competent jurisdiction to be invalid, the parties nevertheless agree that the court should endeavor to give effect to the parties' intentions as reflected in the provision, and the other provisions of the Terms of Use remain in full force and effect.
+The failure of FindMyRoof to exercise or enforce any right or provision of the Terms of Service shall not constitute a waiver of such right or provision. If any provision of the Terms of Service is found by a court of competent jurisdiction to be invalid, the parties nevertheless agree that the court should endeavor to give effect to the parties' intentions as reflected in the provision, and the other provisions of the Terms of Service remain in full force and effect.
 </p>
 
 

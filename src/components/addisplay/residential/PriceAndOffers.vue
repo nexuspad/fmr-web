@@ -9,6 +9,11 @@
         <span v-if="hasAttributeValue('owner_financing_available')">Owner financing available</span>
       </div>
     </div>
+    <div class="row" v-if="hasAttributeValue('available_date')">
+      <div class="col">
+        <label class="mr-2">Available:</label><span>{{ attributeValue('available_date') }}</span>
+      </div>
+    </div>
     <div class="row" v-if="hasAttributeValue('monthly_rent')">
       <div class="col">
         <label>Monthly rent:</label>
@@ -16,7 +21,7 @@
       </div>
       <div class="col">
         <div v-if="hasAttributeValue('special_offer')">
-          {{ attributeValue('special_offer') }}
+          <span class="bg-gradient-warning p-1 rounded">{{ attributeValue('special_offer') }}</span>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
       <input type="text" class="form-control" id="neighborhood" v-model="ad.getAttribute(attributeId('neighborhood')).value" />
     </div>
     <div class="form-row">
-      <label for="close_to">Close to</label>
+      <label for="close_to">What's nearby</label>
       <textarea-autosize id="close_to" rows="2" class="form-control" v-model="ad.getAttribute(attributeId('close_to')).value"></textarea-autosize>
     </div>
   </div>

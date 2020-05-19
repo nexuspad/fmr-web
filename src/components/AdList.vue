@@ -13,7 +13,7 @@
                     <h1>{{ title }}</h1>
                   </div>
                   <div class="col-md-6">
-                    <paginate v-show="adList !== null && pageCount > 1" class="float-right mr-2 mb-1"
+                    <paginate v-show="adList !== null && pageCount > 1" class="float-right mr-1 mt-n1"
                       :page-count="pageCount" :page-range="5" :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
                       :container-class="'pagination'" :prev-class="'page-item'" :next-class="'page-item'" :page-class="'page-item'"
                       :page-link-class="'page-link'" :prev-link-class="'page-link'" :next-link-class="'page-link'" />

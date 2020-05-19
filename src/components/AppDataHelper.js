@@ -57,6 +57,8 @@ export default {
                     if (value !== null && typeof value !== 'undefined') {
                         if (typeof(value) === 'string') {
                             return value.length > 0 ? true : false
+                        } else if (value instanceof Array) {
+                            return value.length > 0 ? true : false
                         } else {
                             return true
                         }

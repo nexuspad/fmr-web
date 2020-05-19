@@ -226,7 +226,7 @@ export default class FmrAd {
     }
 
     hasCoordinate() {
-        return this.attributeMap.has(48)
+        return this.attributeMap.has(48) && this.attributeMap.get(48).value
     }
 
     printSelf() {
