@@ -14,8 +14,7 @@
           </div>
         </div>
         <div class="col pl-4 pb-4">
-          <price-and-offers :ad="ad" v-if="isResidential(ad.categoryId)" />
-          <rate-lease-price :ad="ad" v-if="isCommercial(ad.categoryId)" />
+          <vac-rate :ad="ad" />
           <div v-html=ad.description class="mt-3"></div>
         </div>
         <div class="col-md-3">
@@ -28,26 +27,17 @@
           <div class="container-fluid pl-0">
             <div class="row">
               <div class="col-md-7">
-                <full-address :ad="ad" />
-                <location-and-schools :ad="ad" />
-                <property :ad="ad" v-if="isResidential(ad.categoryId)" />
+                <property-space :ad="ad" />
                 <pet-policy :ad="ad" />
-                <building-and-lot :ad="ad" v-if="isCommercial(ad.categoryId)" />
+                <full-address :ad="ad" />
               </div>
               <div class="col-md-5" v-if="ad.hasCoordinate()">
                 <bing-map :ad="ad" />
               </div>
             </div>
-            <div class="row" v-if="isResidential(ad.categoryId)">
-              <div class="col">
-                <features :ad="ad" />
-              </div>
-            </div>
-            <div class="row" v-if="isCommercial(ad.categoryId)">
-              <div class="col">
-                <com-amenities :ad="ad" />
-                <tenancy :ad="ad" />
-                <financials :ad="ad" />
+            <div class="row">
+              <div class="col pt-4">
+                <vac-provides :ad="ad" />
               </div>
             </div>
           </div>
@@ -66,26 +56,19 @@
 <script>
 import AppDataHelper from '../AppDataHelper'
 import FullAddress from './FullAddress'
-import LocationAndSchools from './LocationAndSchools'
 import Contact from './Contact'
 import Photos from './Photos'
-import PriceAndOffers from './residential/PriceAndOffers'
-import Property from './residential/Property'
+import VacRate from './vacation/VacRate'
+import VacProvides from './vacation/VacProvides'
+import PropertySpace from './vacation/PropertySpace'
 import PetPolicy from './residential/PetPolicy'
-import Features from './residential/Features'
-import BuildingAndLot from './commercial/BuildingAndLot'
-import RateLeasePrice from './commercial/RateLeasePrice'
-import ComAmenities from './commercial/ComAmenities'
-import Tenancy from './commercial/Tenancy'
-import Financials from './commercial/Financials'
 import BingMap from './maps/BingMap'
 
 export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    PriceAndOffers, FullAddress, LocationAndSchools, Property, PetPolicy, Features, Contact,
-    BuildingAndLot, RateLeasePrice, ComAmenities, Tenancy, Financials,
+    VacRate, VacProvides, FullAddress, PropertySpace, PetPolicy, Contact,
     Photos, BingMap
   }
 }

@@ -16,6 +16,7 @@
               </div>
             </li>
           </ul>
+          <div v-if="adList == null" class="p-4">Loading...</div>
           <there-is-nothing v-if="adList != null && selectedAds.length === 0" />
         </div>
       </div>

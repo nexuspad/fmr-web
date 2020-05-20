@@ -108,6 +108,9 @@ export default {
         isLand(categoryId) {
             return categoryId == 3015 || categoryId == 3023 ? true : false
         },
+        isVacation(categoryId) {
+            return categoryId == 2011 ? true : false
+        },
         isHomeStyle(categoryId) {
             let code = this.categoryCode(categoryId)
             if (!code) {

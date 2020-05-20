@@ -21,7 +21,7 @@
             <button class="btn btn-primary" :class="{disabled: invalidFields.length > 0}" 
               v-on:click="save(false)" v-if="ad !== null && !ad.isDraft()">Update</button>
             <button class="btn btn-primary" 
-              data-toggle="modal" data-target="#SubmissionConfirmation" :class="{disabled: invalidFields.length > 0}" 
+              data-toggle="modal" data-target="#SubmissionConfirmation" :disabled="invalidFields.length > 0" 
               v-if="ad !== null && ad.isDraft()">Publish</button>
           </div>
           <ul class="nav nav-tabs">
@@ -45,9 +45,11 @@
         <div class="tab-content pt-4 pr-2">
           <div class="tab-pane active pl-4" id="Content">
             <residential-for-sale :ad="ad" v-if="template == 'ResidentialForSale'" />
+            <residential-foreclosure :ad="ad" v-if="template == 'ResidentialForeclosure'" />
             <residential-for-rent :ad="ad" v-if="template == 'ResidentialForRent'" />
             <commercial-for-sale :ad="ad" v-if="template == 'CommercialForSale'" />
             <commercial-for-rent :ad="ad" v-if="template == 'CommercialForRent'" />
+            <vacation-rental :ad="ad" v-if="template == 'VacationRental'" />
             <land-for-sale :ad="ad" v-if="template == 'LandForSale'" />
             <post-warning />
           </div>
@@ -55,9 +57,12 @@
             <uploader :ad=ad />
           </div>
           <div class="tab-pane" id="Preview">
-            <ad-detail :ad=ad :key="ad.updateTime" v-if="invalidFields.length === 0" />
-            <div v-if="invalidFields.length > 0">
-              The following fields are required before you can submit the ad:
+            <ad-detail-residential :ad=ad :key="ad.updateTime" v-if="isResidential(ad.categoryId) && invalidFields.length === 0" />
+            <ad-detail-land :ad=ad :key="ad.updateTime" v-if="isLand(ad.categoryId) && invalidFields.length === 0" />
+            <ad-detail-vacation :ad=ad :key="ad.updateTime" v-if="isVacation(ad.categoryId) && invalidFields.length === 0" />
+            <ad-detail-commercial :ad=ad :key="ad.updateTime" v-if="isCommercial(ad.categoryId) && invalidFields.length === 0" />
+            <div v-if="invalidFields.length > 0" class="pl-2">
+              <p class="lead">The following information is required before you can submit the ad:</p>
               <ul v-if="invalidFields.length > 0">
                 <li v-for="(field, index) in invalidFields" v-bind:key="index" class="border-bottom p-2 text-capitalize">
                   {{ field.replace('_', ' ') }}
@@ -111,12 +116,17 @@
 <script>
 import Message from './Message'
 import ResidentialForSale from "./templates/ResidentialForSale"
+import ResidentialForeclosure from './templates/ResidentialForeclosure'
 import ResidentialForRent from "./templates/ResidentialForRent"
 import CommercialForSale from "./templates/CommercialForSale"
 import CommercialForRent from "./templates/CommercialForRent"
+import VacationRental from './templates/VacationRental'
 import LandForSale from './templates/LandForSale'
 import Uploader from './Uploader'
-import AdDetail from './addisplay/AdDetail'
+import AdDetailResidential from './addisplay/AdDetailResidential'
+import AdDetailLand from './addisplay/AdDetailLand'
+import AdDetailVacation from './addisplay/AdDetailVacation'
+import AdDetailCommercial from './addisplay/AdDetailCommercial'
 import AdService from "../service/AdService"
 import AppDataHelper from './AppDataHelper'
 import EventManager from '../util/EventManager'
@@ -137,8 +147,8 @@ export default {
   },
   mixins: [ AppDataHelper, AdUpdateHelper ],
   components: {
-    ResidentialForSale, ResidentialForRent, CommercialForSale, CommercialForRent, LandForSale,
-    Uploader, AdDetail, Message, PostWarning
+    ResidentialForSale, ResidentialForeclosure, ResidentialForRent, CommercialForSale, CommercialForRent, VacationRental, LandForSale,
+    Uploader, AdDetailResidential, AdDetailLand, AdDetailVacation, AdDetailCommercial, Message, PostWarning
   },
   computed: {
     invalidFields: function() {
@@ -191,19 +201,24 @@ export default {
   },
   methods: {
     getTemplate() {
-      let cCode = this.categoryCode(this.categoryId)
-      if (cCode.startsWith('for-rent|residential')) {
-        return 'ResidentialForRent'
-      } else if (cCode.startsWith('for-sale|residential')) {
-        return 'ResidentialForSale'
-      } else if (cCode.startsWith('for-rent|commercial')) {
-        return 'CommercialForRent'
-      } else if (cCode.startsWith('for-sale|commercial')) {
-        return 'CommercialForSale'
-      } else if (cCode.startsWith('for-rent|vacation')) {
-        return 'ResidentialForRent'
-      } else if (cCode.startsWith('for-sale|land')) {
-        return 'LandForSale'
+      if (this.categoryId === 2011) {
+        return 'VacationRental'
+      } else {
+        let cCode = this.categoryCode(this.categoryId)
+        if (cCode.startsWith('for-rent|residential')) {
+          return 'ResidentialForRent'
+        } else if (cCode.startsWith('for-sale|residential')) {
+          if (cCode === 'for-sale|residential|foreclosure') {
+            return 'ResidentialForeclosure'
+          }
+          return 'ResidentialForSale'
+        } else if (cCode.startsWith('for-rent|commercial')) {
+          return 'CommercialForRent'
+        } else if (cCode.startsWith('for-sale|commercial')) {
+          return 'CommercialForSale'
+        } else if (cCode.startsWith('for-sale|land')) {
+          return 'LandForSale'
+        }
       }
     },
     exitEdit() {

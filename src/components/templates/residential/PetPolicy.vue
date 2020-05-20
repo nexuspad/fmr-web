@@ -1,15 +1,6 @@
 <template>
   <div class="border-bottom pb-3 mb-3">
     <div class="form-row">
-      <div class="col-md-6">
-        <label>Rent includes</label>
-        <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
-          <div class="mr-4" v-for="(option, index) in attributeOptions('rent_includes')" :key="index">
-            <input type="checkbox" v-model="ad.getAttribute(attributeId('rent_includes')).value" :id="index" :value="option" />
-            <span class="p-2">{{ option }}</span>
-          </div>
-        </div>
-      </div>
       <div class="col-md-2">
         <label for="pp">Pet policy</label>
         <select id="pp" class="form-control" v-model="allowPets" @change="updatePetPolicy()">
@@ -38,10 +29,13 @@ export default {
   },
   mixins: [ AppDataHelper ],
   props: ['ad'],
+  mounted() {
+    this.allowPets = this.isAllowPets()
+  },
   methods: {
     isAllowPets() {
       if (this.ad.getAttribute(this.attributeId('pet_policy')).value &&
-        this.ad.getAttribute(this.attributeId('pet_policy')).value.toLowerCase === 'yes')
+        this.ad.getAttribute(this.attributeId('pet_policy')).value.toLowerCase() === 'yes')
       {
         return 'yes'
       }

@@ -5,16 +5,16 @@
     <location-close-to :ad=ad />
     <schools :ad=ad />
     <bed-bath :ad=ad v-if="!isHomeStyle(ad.categoryId)" />
-    <bed-bath-basement :ad=ad v-if="isHomeStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
+    <bed-bath-basement :ad=ad v-if="isHomeStyle(ad.categoryId)" />
     <manufactured-home :ad=ad v-if="isManufacturedHome(ad.categoryId)" />
     <property-size :ad=ad />
-    <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
-    <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
-    <bed-bath-features :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
-    <exterior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
+    <kitchen-dining :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
+    <interior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
+    <bed-bath-features :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
+    <exterior :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <condo-amenities :ad=ad v-if="isCondoStyle(ad.categoryId)" />
-    <community :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
-    <other-amenities :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId) || isForeClosure(ad.categoryId)" />
+    <community :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
+    <other-amenities :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <description :ad=ad />
     <by-owner :ad=ad v-if="isByOwnerEligible(ad.categoryId)" />
     <contact :ad=ad />
@@ -27,7 +27,7 @@ import BedBath from './residential/BedBath'
 import BedBathBasement from './residential/BedBathBasement'
 import FullAddress from './FullAddress'
 import LocationCloseTo from './LocationCloseTo'
-import Schools from './Schools'
+import Schools from './residential/Schools'
 import Interior from './residential/Interior'
 import Exterior from './residential/Exterior'
 import KitchenDining from './residential/KitchenDining'

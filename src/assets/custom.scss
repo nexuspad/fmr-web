@@ -25,6 +25,11 @@ body { background:url(./images/bgr-body.png) repeat; color:#333333 }
 
 h1 {text-transform: capitalize;}
 
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
 .page-item.active .page-link {
   background-color: #eee;
   border-color: #cccccc;

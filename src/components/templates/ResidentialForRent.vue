@@ -1,7 +1,8 @@
 <template>
   <div class="mb-4">
     <title-rent :ad=ad />
-    <rent-includes-and-pets :ad=ad />
+    <rent-includes :ad=ad />
+    <pet-policy :ad=ad />
     <full-address :ad=ad />
     <location-close-to :ad=ad />
     <schools :ad=ad />
@@ -25,11 +26,12 @@
 
 <script>
 import TitleRent from './residential/TitleRent'
-import RentIncludesAndPets from './residential/RentIncludesAndPets'
+import RentIncludes from './residential/RentIncludes'
+import PetPolicy from './residential/PetPolicy'
 import BedBath from './residential/BedBath'
 import FullAddress from './FullAddress'
 import LocationCloseTo from './LocationCloseTo'
-import Schools from './Schools'
+import Schools from './residential/Schools'
 import Interior from './residential/Interior'
 import Exterior from './residential/Exterior'
 import KitchenDining from './residential/KitchenDining'
@@ -50,7 +52,7 @@ export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-      TitleRent, RentIncludesAndPets, BedBath, FullAddress, LocationCloseTo, Schools,
+      TitleRent, RentIncludes, PetPolicy, BedBath, FullAddress, LocationCloseTo, Schools,
       Interior, Exterior, CondoAmenities, KitchenDining, BedBathFeatures, ApartmentUnitAmenities, ApartmentAmenities,
       Community, OtherAmenities, Contact, ByOwner, PropertySize, ManufacturedHome, Description
   },

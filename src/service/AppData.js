@@ -55,6 +55,13 @@ function attributeIdLookup(name) {
     return parseInt(ATTRIBUTE_NAME_LOOKUP[name])
 }
 
+function isRequiredAttribute(attributeId) {
+    if (ATTRIBUTES[attributeId]) {
+        return ATTRIBUTES[attributeId].required && ATTRIBUTES[attributeId].required == true
+    }
+    return false
+}
+
 function categoryLookup(categoryId) {
     if (CATEGORIES[categoryId]) {
         return CATEGORIES[categoryId]
@@ -82,6 +89,7 @@ export {
     attributeNameLookup, 
     attributeTypeLookup, 
     attributeOptionsLookup, 
+    isRequiredAttribute,
     categoryLookup,
     categoryNameLookup,
     categoryIdLookup

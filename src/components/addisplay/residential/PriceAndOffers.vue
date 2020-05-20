@@ -8,6 +8,10 @@
       <div class="col">
         <span v-if="hasAttributeValue('owner_financing_available')">Owner financing available</span>
       </div>
+      <div class="col" v-if="hasAttributeValue('hoa_fee')">
+        <label>HOA fee:</label>
+        <span class="fmr-green ml-1">{{ dollar(attributeValue('hoa_fee')) }}</span> per month
+      </div>
     </div>
     <div class="row" v-if="hasAttributeValue('available_date')">
       <div class="col">

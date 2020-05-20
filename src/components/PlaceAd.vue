@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col">
           <h2><small>FOR RENT</small></h2>
-          <h3 class="ml-2"><small>Residential</small></h3>
+          <h3 class="ml-2"><small>Residential</small><span class="fmr-forrent ml-2"></span></h3>
           <ul class="list-group ml-4">
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3001)">Single family home for rent</a>
@@ -34,7 +34,7 @@
               <a href="javascript:;" @click="newAd(2007)">I need a roommate</a>
             </li>
           </ul>
-          <h3 class="ml-2 mt-4"><small>Commercial</small></h3>
+          <h3 class="ml-2 mt-4"><small>Commercial</small><span class="fmr-forrent ml-2"></span></h3>
           <ul class="list-group ml-4">
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3008)">Office space for rent</a>
@@ -61,7 +61,7 @@
         </div>
         <div class="col pl-4">
           <h2><small>FOR SALE</small></h2>
-          <h3 class="ml-2"><small>Residential</small></h3>
+          <h3 class="ml-2"><small>Residential</small><span class="fmr-forsale ml-2"></span></h3>
           <ul class="list-group ml-4">
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3011)">Single family home for sale</a>
@@ -82,7 +82,7 @@
               <a href="javascript:;" @click="newAd(3025)">Foreclosures</a>
             </li>
           </ul>
-          <h3 class="ml-2 mt-4"><small>Commercial</small></h3>
+          <h3 class="ml-2 mt-4"><small>Commercial</small><span class="fmr-forsale ml-2"></span></h3>
           <ul class="list-group ml-4">
             <li class="list-group-item fmr-lg-text">
               <a href="javascript:;" @click="newAd(3017)">Office building for sale</a>

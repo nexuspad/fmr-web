@@ -49,10 +49,10 @@ const CATEGORIES =
     },
     "2011": {
         "id": 2011,
-        "code": "for-rent|residential|vacation",
+        "code": "for-rent|vacation",
         "name": "vacation rental",
         "uri": "vacation-rental",
-        "residential": true,
+        "residential": false,
         "commercial": false
     },
     "2012": {

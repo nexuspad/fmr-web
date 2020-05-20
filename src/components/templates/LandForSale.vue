@@ -11,7 +11,7 @@
 <script>
 import TitlePrice from './residential/TitlePrice'
 import FullAddress from './FullAddress'
-import LandZoneSize from './LandZoneSize'
+import LandZoneSize from './land/LandZoneSize'
 import Description from './Description'
 import Contact from './Contact'
 import AppDataHelper from '../AppDataHelper'

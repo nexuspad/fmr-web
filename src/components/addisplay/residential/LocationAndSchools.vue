@@ -6,7 +6,7 @@
         <div>{{ attributeValue('neighborhood') }}</div>
       </div>
       <div class="mr-4" v-if="hasAttributeValue('close_to')">
-        <label>Close to</label>
+        <label>What's nearby</label>
         <div>{{ attributeValue('close_to') }}</div>
       </div>
     </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import AppDataHelper from '../AppDataHelper'
+import AppDataHelper from '../../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],
