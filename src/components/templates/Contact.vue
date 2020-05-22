@@ -17,7 +17,7 @@
           name="contact_name" v-model="ad.getAttribute(attributeId('contact_email')).value" />
       </div>
     </div>
-    <div class="form-row mt-2" v-show="!isByOwner">
+    <div class="form-row mt-2" v-show="!ad.getAttribute(attributeId('represented_by_owner')).value">
       <div class="col-md-4">
         <label for="brokerage_company">Brokage or management company</label>
         <input type="text" class="form-control" id="brokerage_company"
@@ -29,7 +29,7 @@
           name="mls_id" v-model="ad.getAttribute(attributeId('mls_id')).value" />
       </div>
     </div>
-    <div class="form-row mt-2" v-show="!isByOwner">
+    <div class="form-row mt-2" v-show="!ad.getAttribute(attributeId('represented_by_owner')).value">
       <div class="col-md-8">
         <label for="company_web_address">Company web address</label>
         <input type="text" class="form-control" id="company_web_address"
@@ -60,11 +60,6 @@ export default {
   props: ['ad'],
   components: {
     Datepicker
-  },
-  computed: {
-    isByOwner: function() {
-      return this.ad.getAttribute(this.attributeId('represented_by_owner')).value === 'yes' ? true : false
-    }
   }
 }
 </script>

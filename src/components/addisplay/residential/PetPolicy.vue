@@ -1,7 +1,7 @@
 <template>
-  <div class="mb-2" v-if="hasAttributeValue('pet_policy')">
+  <div class="mb-2" v-if="hasAttributeValue('pet_allowed')">
     <label>Pet policy</label>
-    <div v-if="attributeValue('pet_policy') == 'yes'">
+    <div v-if="attributeValue('pet_allowed')">
       <div v-if="!hasAttributeValue('pet_policy_details')">
         Yes
       </div>
@@ -9,7 +9,7 @@
         {{ attributeValue('pet_policy_details') }}
       </div>
     </div>
-    <div v-if="attributeValue('pet_policy') == 'no'">
+    <div v-if="!attributeValue('pet_allowed')">
       No pets
     </div>
   </div>

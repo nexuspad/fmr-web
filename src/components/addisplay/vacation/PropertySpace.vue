@@ -1,5 +1,9 @@
 <template>
-  <div class="mb-2">
+  <div class="mb-4">
+    <div class="mr-4 mb-4" v-if="hasAttributeValue('close_to')">
+      <label>What's nearby</label>
+      <div>{{ attributeValue('close_to') }}</div>
+    </div>
     <div class="d-flex flex-row flex-wrap bd-highlight">
       <div class="mr-4" v-if="hasAttributeValue('bedroom')">
         <label>Bedroom</label>
@@ -16,6 +20,10 @@
       <div class="mr-4" v-if="hasAttributeValue('square_footage')">
         <label>Square footage</label>
         <div>{{ attributeValue('square_footage') }} SF</div>
+      </div>
+      <div class="mr-4" v-if="hasAttributeValue('parking')">
+        <label>Parking</label>
+        <div>{{ attributeValue('parking') }}</div>
       </div>
     </div>
   </div>

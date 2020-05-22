@@ -6,8 +6,10 @@
           {{ categoryName(categoryId) }}
           <span class="fmr-deact ml-2" v-if="ad !== null && ad.isDeactivated()"></span>
         </span>
-        <span class="font-italic font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft()">draft
-          &nbsp;<span v-if="ad !== null && ad.id">#{{ ad.id }}</span>
+        <span class="font-italic font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft()">
+          <i class="fas fa-circle fa-sm ml-1" :class="{'fmr-green' : posting}" v-if="autoSaveTimerId > 0"></i>
+          <span class="ml-1">draft</span>
+          <span class="ml-1" v-if="ad !== null && ad.id">#{{ ad.id }}</span>
         </span>
         <div class="mr-2 float-right">
           <a class="far fa-times-circle fa-lg" @click="exitEdit()"></a>
@@ -142,7 +144,8 @@ export default {
       id: 0,
       ad: null,
       changeTimestamp: 0,
-      timerId: 0
+      posting: false,
+      autoSaveTimerId: 0
     }
   },
   mixins: [ AppDataHelper, AdUpdateHelper ],
@@ -173,6 +176,7 @@ export default {
           self.ad = ad;
           self.categoryId = self.ad.categoryId
           self.template = self.getTemplate(self.categoryId)
+          self.setupAutoSave()
         })
         .catch((error) => {
           console.error("...error", error);
@@ -184,19 +188,17 @@ export default {
           self.ad = draft;
           // set an update time for use in "saveAsNeeded"
           self.ad.updateTime = Math.floor(Date.now() / 1000)
+          self.setupAutoSave()
         })
         .catch((error) => {
           console.error("...error", error);
           EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
         })
     }
-
-    // set a timer to save every 5 seconds
-    this.timerId = setInterval(() => self.saveAsNeeded(), 20000);
   },
   beforeDestroy() {
-    if (this.timerId) {
-      clearInterval(this.timerId)
+    if (this.autoSaveTimerId) {
+      clearInterval(this.autoSaveTimerId)
     }
   },
   methods: {
@@ -224,6 +226,12 @@ export default {
     exitEdit() {
       this.saveAsNeeded()
       this.$router.back(-1)
+    },
+    setupAutoSave() {
+      // for draft, set a timer to save every 5 seconds
+      if (this.ad != null && this.ad.isDraft()) {
+        this.autoSaveTimerId = setInterval(() => this.saveAsNeeded(), 5000);
+      }
     },
     saveAsNeeded() {
       if (this.changeTimestamp - this.ad.updateTime > 2)

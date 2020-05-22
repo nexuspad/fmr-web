@@ -30,6 +30,11 @@
           </div>
         </div>
       </div>
+      <div class="col-md-2">
+        <label for="parking">Parking</label>
+        <input type="text" class="form-control" id="parking"
+          name="parking" v-model="ad.getAttribute(attributeId('parking')).value" />
+      </div>
     </div>
   </div>
 </template>

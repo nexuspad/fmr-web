@@ -48,7 +48,7 @@
       <div class="row row-cols-sm-1 row-cols-md-3 row-cols-lg-4" id="PropertyPhotos" :key=forceRefreshKey>
         <div class="col" v-for="photo in ad.photos" v-bind:key="photo.displayOrder" :data-id="photo.viewId">
           <div class="card">
-            <img :src="photo.url" class="fmr-photo" />
+            <img :src="photo.url" class="card-img-top" />
             <div class="card-body">
               <h5 class="card-title" v-show="photo.newTitle == null" @click="photo.newTitle = photo.title ? photo.title : ''">
                 {{ photo.title || 'Add a title' }}

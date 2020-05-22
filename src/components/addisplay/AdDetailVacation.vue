@@ -27,9 +27,9 @@
           <div class="container-fluid pl-0">
             <div class="row">
               <div class="col-md-7">
+                <full-address :ad="ad" />
                 <property-space :ad="ad" />
                 <pet-policy :ad="ad" />
-                <full-address :ad="ad" />
               </div>
               <div class="col-md-5" v-if="ad.hasCoordinate()">
                 <bing-map :ad="ad" />

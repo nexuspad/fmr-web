@@ -20,6 +20,10 @@
         <label>Security deposit:</label>
         <strong class="fmr-green ml-1">{{ dollar(attributeValue('security_deposit')) }}</strong>
       </div>
+      <div class="col">
+        <label>Cancellation policy:</label>
+        <span class="ml-1">{{ attributeValue('cancellation_policy') }}</span>
+      </div>
     </div>
   </div>
 </template>

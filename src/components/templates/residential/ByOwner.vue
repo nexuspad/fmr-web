@@ -4,7 +4,7 @@
       <div class="col">
         <div class="custom-control custom-switch">
           <input type="checkbox" class="custom-control-input" id="fsbo" 
-            v-model="byOwner" @change="updateRepresentation()" />
+            v-model="ad.getAttribute(attributeId('represented_by_owner')).value" />
           <label class="custom-control-label" for="fsbo">Represented by owner (FSBO, FRBO)</label>
         </div>
       </div>
@@ -17,26 +17,6 @@ import AppDataHelper from '../../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],
-  props: ['ad'],
-  data() {
-    return {
-      byOwner: this.isByOwner()
-    }
-  },
-  methods: {
-    isByOwner() {
-      if (this.ad.getAttribute(this.attributeId('represented_by_owner')).value === 'yes') {
-          return true
-        }
-      return false
-    },
-    updateRepresentation() {
-      if (this.byOwner) {
-        this.ad.getAttribute(this.attributeId('represented_by_owner')).value = 'yes'
-      } else {
-        this.ad.getAttribute(this.attributeId('represented_by_owner')).value = 'no'
-      }
-    }
-  }
+  props: ['ad']
 }
 </script>

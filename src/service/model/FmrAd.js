@@ -56,7 +56,9 @@ export default class FmrAd {
         this.id = otherAd.id
         this.status = otherAd.status
         this.postDate = otherAd.postDate
+        this.expiryDate = otherAd.expiryDate
         this.updateTime = otherAd.updateTime
+        this.updateTimeDisplay = otherAd.updateTimeDisplay
 
         if (otherAd.attributes) {
             while (this.attributes.length) {

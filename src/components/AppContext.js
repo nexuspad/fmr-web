@@ -121,7 +121,7 @@ export default class AppContext {
         }
 
         if (this._filterParams.isFsbo()) {
-            listCriteria.addFilter(AttributeFilter.eq('represented_by_owner', 'yes'))
+            listCriteria.addFilter(AttributeFilter.eq('represented_by_owner', 'true'))
         }
 
         listCriteria.page = this._filterParams.getPage()

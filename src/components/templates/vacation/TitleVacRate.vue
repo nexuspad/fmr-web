@@ -32,7 +32,7 @@
         <input type="text" class="form-control" id="min_stay"
           name="min_stay" v-model="ad.getAttribute(attributeId('min_stay')).value" />
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group">
           <label for="sec_dep">Security deposit</label>
           <div class="input-group">
@@ -43,6 +43,11 @@
               name="security_deposit" v-model="ad.getAttribute(attributeId('security_deposit')).value" />
           </div>
         </div>
+      </div>
+      <div class="col-md-6">
+        <label for="cancellation_policy" class="required">Cancellation policy</label>
+        <input type="text" class="form-control" id="cancellation_policy"
+          name="cancellation_policy" v-model="ad.getAttribute(attributeId('cancellation_policy')).value" />
       </div>
     </div>
   </div>

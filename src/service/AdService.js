@@ -7,7 +7,7 @@ import FmrUtils from '../util/FmrUtils'
 import PromiseManager from '../util/PromiseManager'
 
 const AD_LISTING = 'ads'
-const AD_VIEW = 'ad?id=#Id'
+const AD_VIEW = 'ad/#Id'
 const AD_TEMPLATE = 'account/ad/template?categoryId=#CategoryId'
 const AD_UPDATE = 'account/ad/#Id'
 

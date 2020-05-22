@@ -1,7 +1,7 @@
 <template>
   <div class="border-bottom pb-3 mb-3">
     <div class="form-row">
-      <div class="form-group col-md-8 mb-0">
+      <div class="form-group col-md-6 mb-0">
         <div class="form-group">
           <label for="inputAddress" class="required" v-if="!isLand(ad.categoryId)">Street address</label>
           <label for="inputAddress" class="required" v-if="isLand(ad.categoryId)">Address</label>
@@ -9,11 +9,19 @@
             name="title" v-model="ad.getAttribute(attributeId('street_address')).value" />
         </div>
       </div>
-      <div class="form-group col-md-4 mb-0">
+      <div class="form-group col-md-3 mb-0">
         <div class="form-group" v-if="!isLand(ad.categoryId)">
           <label for="inputAddress2">Building, unit, suite, floor, etc.</label>
           <input id="inputAddress2" type="text" class="form-control"
             name="title" v-model="ad.getAttribute(attributeId('address_line_2')).value" />
+        </div>
+      </div>
+      <div class="form-group col-md-3 mb-0">
+        <label for="hide_address">Do not show address</label>
+        <div class="custom-control custom-switch right">
+          <input type="checkbox" class="custom-control-input" id="hide_address" 
+            v-model="ad.getAttribute(attributeId('hide_address')).value" />
+          <label class="custom-control-label" for="hide_address"></label>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@
     <other-amenities :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <description :ad=ad />
     <by-owner :ad=ad v-if="isByOwnerEligible(ad.categoryId)" />
-    <contact :ad=ad />
+    <contact :ad=ad :key="ad.updateTime" />
   </div>
 </template>
 

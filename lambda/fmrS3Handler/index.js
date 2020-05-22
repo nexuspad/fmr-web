@@ -13,7 +13,7 @@ exports.handler = function (event, context, callback) {
     var srcBucket = event.Records[0].s3.bucket.name;
 
     // Object key may have spaces or unicode non-ASCII characters.
-    // srcKey should look like this: USER_ID/AD_ID/IMG-2383.JPG
+    // srcKey should look like this: AD_ID/IMG-2383.JPG
     var srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, " "));
 
     // Infer the image type.
@@ -31,9 +31,8 @@ exports.handler = function (event, context, callback) {
 
     var pieces = srcKey.split('/');
 
-    var userId = parseInt(pieces[0]);
-    var adId = parseInt(pieces[1]);
-    var fileName = pieces[2];
+    var adId = parseInt(pieces[0]);
+    var fileName = pieces[1];
 
     var destBucket = 'findmyroof';
     var destKey = srcKey;
@@ -63,9 +62,6 @@ exports.handler = function (event, context, callback) {
                         action: 'UPDATE_PHOTO',
                         ad: {
                             id: adId,
-                            owner: {
-                                id: userId
-                            },
                             photos: [
                                 {
                                     adId: adId,
@@ -85,7 +81,8 @@ exports.handler = function (event, context, callback) {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json; charset=utf-8',
-                            'Content-Length': data.length
+                            'Content-Length': data.length,
+                            'Fmr-Access-Key': 'AKIAWU3SKYLCZG5AI34X'
                         }
                     };
         
@@ -99,6 +96,9 @@ exports.handler = function (event, context, callback) {
                         res.on('end', function () {
                             var result = JSON.parse(msg);
                             console.log('API response', result);
+                            if (result['code'] == 'SUCCESS') {
+                                console.log('The photo is successfully updated.')
+                            }
                         });
                     });
         

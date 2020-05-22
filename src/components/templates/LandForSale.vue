@@ -4,6 +4,7 @@
     <full-address :ad=ad />
     <land-zone-size :ad=ad />
     <description :ad=ad />
+    <by-owner :ad=ad />
     <contact :ad=ad />
   </div>
 </template>
@@ -13,6 +14,7 @@ import TitlePrice from './residential/TitlePrice'
 import FullAddress from './FullAddress'
 import LandZoneSize from './land/LandZoneSize'
 import Description from './Description'
+import ByOwner from './residential/ByOwner'
 import Contact from './Contact'
 import AppDataHelper from '../AppDataHelper'
 
@@ -20,7 +22,7 @@ export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-      TitlePrice, FullAddress, LandZoneSize, Contact, Description
+      TitlePrice, FullAddress, LandZoneSize, ByOwner, Contact, Description
   }
 };
 </script>

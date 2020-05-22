@@ -22,8 +22,10 @@ export default class AdAttribute {
                 this.value = ''
             }
 
-            if (this.id === 48 && this.value) {
-                this.value = JSON.parse(this.value)
+            if (attributeTypeLookup(this.id) === 'json') {
+                if (this.value && typeof(this.value) === 'string') {
+                    this.value = JSON.parse(this.value)
+                }
             }
 
             if (attributeTypeLookup(this.id) === 'array') {

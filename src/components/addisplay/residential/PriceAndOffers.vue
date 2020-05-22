@@ -23,11 +23,6 @@
         <label>Monthly rent:</label>
         <strong class="fmr-green ml-1">{{ dollar(attributeValue('monthly_rent')) }}</strong>
       </div>
-      <div class="col">
-        <div v-if="hasAttributeValue('special_offer')">
-          <span class="bg-gradient-warning p-1 rounded">{{ attributeValue('special_offer') }}</span>
-        </div>
-      </div>
     </div>
     <div class="row" v-if="hasAttributeValue('security_deposit')">
       <div class="col">
@@ -42,6 +37,13 @@
           <div class="mr-4" v-for="(value, index) in attributeValue('rent_includes')" :key="index">
             <span class="p-2 text-nowrap"><i class="fas fa-check fa-xs mr-1"></i>{{ value }}</span>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" v-if="hasAttributeValue('special_offer')">
+      <div class="col pt-2">
+        <div v-if="hasAttributeValue('special_offer')">
+          <span class="bg-gradient-warning p-1 rounded">{{ attributeValue('special_offer') }}</span>
         </div>
       </div>
     </div>

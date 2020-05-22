@@ -34,8 +34,10 @@ export default {
         save(background=true) {
             let serviceRequest = AdServiceRequest.fullUpdate(this.ad)
             const self = this
+            self.posting = true
             AdService.update(serviceRequest).then((updatedAd) => {
                 self.ad.copy(updatedAd)
+                self.posting = false
                 console.log('saved...')
 
                 // the server timestamp is a little different from the local, so set it to local here.
@@ -54,6 +56,7 @@ export default {
                 }
             })
             .catch((error) => {
+                self.posting = false
                 this._handleError(error)
             })
         },
@@ -96,8 +99,8 @@ export default {
                 this._handleError(error, AppEvent.AD_DEACTIVATION_FAILURE, 'There is an error de-activating the ad.')
             })
         },
-        extend() {
-            let serviceRequest = AdServiceRequest.extention(this.ad)
+        extend(ad) {
+            let serviceRequest = AdServiceRequest.extention(ad)
             const self = this
             AdService.update(serviceRequest).then((updatedAd) => {
                 self.ad.copy(updatedAd)

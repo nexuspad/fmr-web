@@ -56,7 +56,7 @@ export default class AdServiceRequest {
 
     static extention(adObj) {
         const serviceRequest = new AdServiceRequest
-        serviceRequest.action = 'EXTENSION'
+        serviceRequest.action = 'EXTEND'
         const ad = new FmrAd
         ad.id = adObj.id
         serviceRequest.ad = ad

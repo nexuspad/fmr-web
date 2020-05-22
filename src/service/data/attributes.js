@@ -129,11 +129,11 @@ const ATTRIBUTES =
     "31": {
         "name": "represented_by_owner",
         "options": [
-            "yes",
-            "no"
+            "true",
+            "false"
         ],
         "id": 31,
-        "type": "string",
+        "type": "bool",
         "required": false
     },
     "32": {
@@ -167,13 +167,13 @@ const ATTRIBUTES =
         "required": false
     },
     "39": {
-        "name": "pet_policy",
+        "name": "pet_allowed",
         "options": [
-            "yes",
-            "no"
+            "true",
+            "false"
         ],
         "id": 39,
-        "type": "string",
+        "type": "bool",
         "required": false
     },
     "41": {
@@ -217,7 +217,7 @@ const ATTRIBUTES =
     "48": {
         "name": "geo_coordinates",
         "id": 48,
-        "type": "string",
+        "type": "json",
         "required": false
     },
     "49": {
@@ -338,31 +338,31 @@ const ATTRIBUTES =
     "63": {
         "name": "lot_developed",
         "options": [
-            "yes",
-            "no"
+            "true",
+            "false"
         ],
         "id": 63,
-        "type": "string",
+        "type": "bool",
         "required": false
     },
     "64": {
-        "name": "hide_my_address",
+        "name": "hide_address",
         "options": [
-            "yes",
-            "no"
+            "true",
+            "false"
         ],
         "id": 64,
-        "type": "string",
+        "type": "bool",
         "required": false
     },
     "65": {
         "name": "owner_financing_available",
         "options": [
-            "yes",
-            "no"
+            "true",
+            "false"
         ],
         "id": 65,
-        "type": "string",
+        "type": "bool",
         "required": false
     },
     "66": {
@@ -545,7 +545,7 @@ const ATTRIBUTES =
             "No Smoking",
             "Air Conditioning",
             "Private Pool",
-            "Swimming pool",
+            "Communal Pool",
             "Washer & Dryer",
             "Air Conditioning"
         ],
@@ -584,6 +584,12 @@ const ATTRIBUTES =
         "id": 96,
         "type": "array",
         "required": false
+    },
+    "99": {
+        "name": "cancellation_policy",
+        "id": 99,
+        "type": "string",
+        "required": true
     },
     "101": {
         "name": "typical_floor_size",
