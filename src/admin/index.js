@@ -12,7 +12,6 @@ Vue.use(VueRouter);
 Vue.config.productionTip = false
 
 const router = new VueRouter({
-    mode: 'history',
     base: __dirname,
     routes: [
       { name: 'landing', path: '/', component: Landing },
@@ -25,10 +24,6 @@ new Vue({
   router,
   template: `
   <div class="container-fluid">
-    <nav class="nav">
-      <a class="nav-link active" href="/users">users</a>
-      <a class="nav-link" href="/posts">posts</a>
-    </nav>
     <router-view class="view"></router-view>
   </div>
   `,

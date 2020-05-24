@@ -6,9 +6,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --mode production",
     "serve.admin": "vue-cli-service serve",
-    "build:admin": "vue-cli-service build --no-clean --dest dist/admin src/admin/index.js",
+    "build.admin": "NODE_ENV=admin vue-cli-service build --dest dist.admin src/admin/index.js",
     "lint": "vue-cli-service lint",
     "deploy.panda": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket panda.findmyroof.com",
+    "deploy.admin": "rsync -avu --delete --stats --rsh='ssh -p 6822' dist.admin/ fmr@45.56.96.166:/home/fmr/admin --exclude=logs --exclude=.*",
     "deploy": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket findmyroof.com"
   },
   "dependencies": {

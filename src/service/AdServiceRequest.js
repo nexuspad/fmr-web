@@ -105,6 +105,21 @@ export default class AdServiceRequest {
         return serviceRequest
     }
 
+    static updatePhotoTitle(adId, viewId, title) {
+        const ad = new FmrAd
+        ad.id = adId
+        const photo = new AdPhoto
+        photo.adId = adId
+        photo.viewId = viewId
+        photo.title = title
+        ad.addPhoto(photo)
+  
+        const serviceRequest = new AdServiceRequest
+        serviceRequest.action = 'UPDATE_PHOTO_TITLE'
+        serviceRequest.ad = ad
+        return serviceRequest
+    }
+
     static deletePhoto(adId, viewId) {
         const ad = new FmrAd
         ad.id = adId

@@ -112,6 +112,38 @@ export default {
                 this._handleError(error, AppEvent.AD_EXTENSION_FAILURE, 'There is an error extending the ad.')
             })
         },
+        updatePhotoTitle(photoObj) {
+            AdService.update(AdServiceRequest.updatePhotoTitle(photoObj.adId, photoObj.viewId, photoObj.title)).then((updatedAd) => {
+                updatedAd.photos.forEach(photo => {
+                    if (photo.viewId === photoObj.viewId) {
+                        photoObj.title = photo.title
+                        console.log('local title updated')
+                    }
+                })
+            })
+            .catch((error) => {
+                console.error(error)
+                this._handleError(error, AppEvent.AD_EXTENSION_FAILURE, 'There is an error extending the ad.')
+            })
+        },
+        deletePhoto(photoObj) {
+            const self = this
+            AdService.update(AdServiceRequest.deletePhoto(this.ad.id, photoObj.viewId)).then((ad) => {
+              self.ad.mergePhotos(ad)
+            }).catch((error) => {
+              EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
+            })
+        },
+        reorderPhotos(viewIdInOrders) {
+            const self = this
+            AdService.update(AdServiceRequest.reorderPhotos(this.ad.id, viewIdInOrders)).then((ad) => {
+              self.ad.mergePhotos(ad)
+              self.forceRefreshKey = Date.now()
+            }).catch((error) => {
+              console.error(error)
+              EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
+            })
+        },
         deleteAd(ad) {
             AdService.delete(ad.id).then(() => {
                 let message

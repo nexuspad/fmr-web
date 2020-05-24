@@ -77,7 +77,7 @@ exports.handler = function (event, context, callback) {
                     var options = {
                         host: 'api.findmyroof.com',
                         port: '443',
-                        path: '/account/upload/updatePhoto',
+                        path: '/upload/updatePhoto',
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json; charset=utf-8',

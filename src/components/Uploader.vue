@@ -77,13 +77,13 @@
 import Sortable from 'sortablejs/modular/sortable.core.esm.js'
 import UploadServicePool from '../service/UploadServicePool'
 import FileWrapper from '../service/model/FileWrapper'
-import AdService from '../service/AdService'
-import AdServiceRequest from '../service/AdServiceRequest'
+import AdUpdateHelper from './AdUpdateHelper'
 import Message from './Message'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
 
 export default {
+  mixins: [ AdUpdateHelper ],
   props: [ 'ad' ],
   data() {
     return {
@@ -112,29 +112,12 @@ export default {
         if (this.ad.photos[i].viewId === viewId) {
           if (saveIt) {
             this.ad.photos[i].title = this.ad.photos[i].newTitle
+            this.updatePhotoTitle(this.ad.photos[i])
           }
           this.ad.photos[i].newTitle = null
           break
         }
       }
-    },
-    deletePhoto(photoObj) {
-      const self = this
-      AdService.update(AdServiceRequest.deletePhoto(this.ad.id, photoObj.viewId)).then((ad) => {
-        self.ad.mergePhotos(ad)
-      }).catch((error) => {
-        EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
-      })
-    },
-    reorderPhotos(viewIdInOrders) {
-      const self = this
-      AdService.update(AdServiceRequest.reorderPhotos(this.ad.id, viewIdInOrders)).then((ad) => {
-        self.ad.mergePhotos(ad)
-        self.forceRefreshKey = Date.now()
-      }).catch((error) => {
-        console.error(error)
-        EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
-      })
     },
     upload () {
       this._uploadAll();
