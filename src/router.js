@@ -30,7 +30,7 @@ router.addRoutes(AccountRoute.routes())
 
 router.beforeEach((to, from, next) => {    
     // update app context
-    AppContext.updateContext({routeParams: to.params, routeQueries: to.query})
+    AppContext.updateContext({routeParams: to.params, queryParams: to.query})
 
     // -- Inject meta heads
     // https://alligator.io/vuejs/vue-router-modify-head/

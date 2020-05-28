@@ -13,18 +13,19 @@ export default class AppContext {
     }
 
     // called by router to set the context
-    static updateContext({routeParams = {}, routeQueries = {}}) {
+    static updateContext({routeParams = {}, queryParams = {}}) {
         // convert the category name in the uri to category id
         if (routeParams['categoryName']) {
             routeParams['categoryId'] = categoryIdLookup(routeParams['categoryName'])
         }
 
         // merge into the context and overwrite existing values
-        this._filterParams.merge(routeParams, true)
-        this._filterParams.merge(routeQueries, true)
-
-        // merge the locally saved context.
+        // The order is important.
+        // The "fsbo" parameter must come in the last in route param because fsbo filter will be set to false
+        // if the parameter is not there.
         this._mergeFromLocal()
+        this._filterParams.mergeQueryParams(queryParams)
+        this._filterParams.mergePathParams(routeParams)
 
         // store back locally
         this._updateLocal()
@@ -58,15 +59,23 @@ export default class AppContext {
     // This call creates path and params for the route, it should not update the context
     static makePath(updateParams = {}) {
         let fp = new FilterParams(this._filterParams)
-        fp.merge(updateParams, true)
+
+        fp.mergePathParams(updateParams)
+        fp.mergeQueryParams(updateParams)
 
         let pathParams = []
         if (fp.getState()) {
             pathParams.push(fp.getState())
         }
 
-        if (fp.isFsbo()) {
-            pathParams.push('fsbo')
+        if (typeof(updateParams['fsbo']) !== 'undefined') {
+            if (updateParams['fsbo']) {
+                pathParams.push('fsbo')
+            }
+        } else {
+            if (fp.isFsbo()) {
+                pathParams.push('fsbo')
+            }
         }
 
         if (fp.getCategoryId()) {
@@ -93,7 +102,9 @@ export default class AppContext {
     static _mergeFromLocal() {
         let localParams = StorageUtils.get('context')
         if (localParams != null && typeof localParams === 'object') {
-            this._filterParams.merge(localParams, false)
+            if (localParams['state']) {
+                this._filterParams._state = localParams['state'].toLowerCase()
+            }
         }
     }
 
@@ -121,7 +132,7 @@ export default class AppContext {
         }
 
         if (this._filterParams.isFsbo()) {
-            listCriteria.addFilter(AttributeFilter.eq('represented_by_owner', 'true'))
+            listCriteria.addFilter(AttributeFilter.eq('represented_by_owner', true))
         }
 
         listCriteria.page = this._filterParams.getPage()

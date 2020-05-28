@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fmr-tab shadow-sm sticky-top mb-4" style="background:#fff !important;">
     <nav class="nav">
       <router-link to="users" class="nav-link">users</router-link>
       <router-link to="posts" class="nav-link">posts</router-link>

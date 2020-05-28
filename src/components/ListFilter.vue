@@ -229,6 +229,23 @@ export default {
         this.bathMin = 0
         this.bathMax = 'max'
       }
+
+      if (params['rent'] && params['rent'].includes('-')) {
+        let [min, max] = params['rent'].split('-')
+        if (min) {
+          this.rentMin = min
+        } else {
+          this.rentMax = 0
+        }
+        if (max) {
+          this.rentMax = max
+        } else {
+          this.rentMax = 'max'
+        }
+      } else {
+        this.rentMin = 0
+        this.rentMax = 'max'
+      }
     },
     applyFilter() {
       let params = {}

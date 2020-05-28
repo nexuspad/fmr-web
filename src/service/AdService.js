@@ -6,10 +6,10 @@ import ApiError from './ApiError'
 import FmrUtils from '../util/FmrUtils'
 import PromiseManager from '../util/PromiseManager'
 
-const AD_LISTING = 'ads'
-const AD_VIEW = 'ad/#Id'
-const AD_TEMPLATE = 'account/ad/template?categoryId=#CategoryId'
-const AD_UPDATE = 'account/ad/#Id'
+const AD_LISTING = 'posts'
+const AD_VIEW = 'post/#Id'
+const AD_TEMPLATE = 'account/post/template?categoryId=#CategoryId'
+const AD_UPDATE = 'account/post/#Id'
 
 export default class AdService {
     static _adList
@@ -197,7 +197,7 @@ export default class AdService {
     static myAds() {
         return new Promise((resolve, reject) => {
             AccountService.getToken().then((token) => {
-                RestClient.instance(token).get('/account/myads')
+                RestClient.instance(token).get('/account/myposts')
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve(new AdList(response.data.adList))

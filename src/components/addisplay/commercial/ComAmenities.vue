@@ -10,9 +10,7 @@
     </div>
     <div v-if="hasAttributeValue('other_amenities')">
       <label>Other amenities</label>
-      <div>
-        {{ attributeValue('other_amenities') }}
-      </div>
+      <div v-html="addLineBreak(attributeValue('other_amenities'))"></div>
     </div>
   </div>
 </template>

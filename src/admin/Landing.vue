@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4">
     <form v-on:submit.prevent>
       <div class="form-group pl-1">
         <label for="email">Email address</label>

@@ -1,11 +1,12 @@
 <template>
   <div class="border-bottom pb-3 mb-3">
-    <div class="form-group">
-      <div>
+    <div class="form-row mb-4">
+      <div class="col-md-9">
         <label for="title" class="required">Title</label>
         <input type="text" class="form-control" id="title" size="80" maxlength="80"
           name="title" v-model="ad.getAttribute(attributeId('title')).value" />
       </div>
+      <available-date :ad="ad" />
     </div>
     <div class="form-row">
       <div class="col-md-4">
@@ -25,7 +26,6 @@
         <input type="text" class="form-control" placeholder="1,2 Yrs / negotiable"
           name="lease_term" v-model="ad.getAttribute(attributeId('lease_term')).value" />
       </div>
-      <available-date :ad="ad" />
     </div>
   </div>
 </template>

@@ -36,7 +36,9 @@ export default {
             const self = this
             self.posting = true
             AdService.update(serviceRequest).then((updatedAd) => {
-                self.ad.copy(updatedAd)
+                // copy makes typing jitters
+                // self.ad.copy(updatedAd)
+                self.ad.id = updatedAd.id
                 self.posting = false
                 console.log('saved...')
 
@@ -51,7 +53,7 @@ export default {
                 }
                 let query = Object.assign({}, this.$route.query);
                 if (!query.id) {
-                    query.id = self.ad.id
+                    query.id = updatedAd.id
                     this.$router.replace({ query });
                 }
             })

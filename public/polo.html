@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+      window.addEventListener('message', function(e) {
+        if (e.origin !== "https://api.findmyroof.com") {
+          return;
+        }
+        var payload = JSON.parse(e.data);
+        localStorage.setItem(payload.key, payload.data);
+      });
+    </script>
+  </head>
+  <body>
+    polo
+  </body>
+</html>

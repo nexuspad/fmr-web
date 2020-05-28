@@ -17,12 +17,16 @@
       </div>
     </div>
     <div v-if="hasAttributeValue('vac_amenities')">
-      <label>Other amenities</label>
+      <label>Amenities</label>
       <div class="d-flex flex-row flex-wrap bd-highlight mb-3">
         <div class="mr-4" v-for="(value, index) in ad.getAttribute(attributeId('vac_amenities')).value" :key="index">
           <span class="p-2 text-nowrap"><i class="fas fa-check fa-xs mr-1"></i>{{ value }}</span>
         </div>
       </div>
+    </div>
+    <div v-if="hasAttributeValue('other_amenities')">
+      <label>Other amenities</label>
+      <div v-html="addLineBreak(attributeValue('other_amenities'))"></div>
     </div>
   </div>
 </template>

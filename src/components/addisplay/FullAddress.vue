@@ -1,11 +1,11 @@
 <template>
   <div class="mb-2">
     <label>Property address</label>
-    <div v-if="!hasAttributeValue('hide_address')">
+    <div v-if="!hideAddress">
       {{ attributeValue('street_address') }}
       {{ attributeValue('city') }}, {{ attributeValue('state') }} {{ attributeValue('zip_code') }}
     </div>
-    <div v-if="hasAttributeValue('hide_address')">
+    <div v-if="hideAddress">
       Details available upon request
     </div>
   </div>
@@ -16,6 +16,11 @@ import AppDataHelper from '../AppDataHelper'
 
 export default {
   mixins: [ AppDataHelper ],
-  props: ['ad']
+  props: ['ad'],
+  computed: {
+    hideAddress() {
+      return this.ad.getAttribute(this.attributeId('hide_address')).value == true
+    }
+  }
 }
 </script>

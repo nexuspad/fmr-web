@@ -1,11 +1,12 @@
 <template>
   <div class="border-bottom pb-3 mb-3">
-    <div class="form-group">
-      <div>
+    <div class="form-row mb-4">
+      <div class="col-md-9">
         <label for="title" class="required">Title</label>
-        <input type="text" class="form-control input-underline" id="title" size="80" maxlength="80"
+        <input type="text" class="form-control" id="title" size="80" maxlength="80"
           name="title" v-model="ad.getAttribute(attributeId('title')).value" />
       </div>
+      <available-date :ad="ad" />
     </div>
     <div class="form-row">
       <div class="col-md-3">
@@ -16,7 +17,7 @@
               <div class="input-group-text fmr-green bg-light">$</div>
             </div>
             <input type="text" class="form-control" id="monthly_rent"
-              name="monthly_rent" v-model="ad.getAttribute(attributeId('monthly_rent')).value" />
+              name="monthly_rent" v-model="ad.getAttribute(attributeId('rent')).value" />
           </div>
         </div>
       </div>
@@ -32,7 +33,13 @@
           </div>
         </div>
       </div>
-      <available-date :ad="ad" />
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="sec_dep">Other fees</label>
+          <textarea-autosize id="ppd" class="form-control" v-model="ad.getAttribute(attributeId('other_fees')).value"
+            :min-height="20" :max-height="80"></textarea-autosize>
+        </div>
+      </div>      
     </div>
     <div class="form-row">
       <div class="col-md-9">

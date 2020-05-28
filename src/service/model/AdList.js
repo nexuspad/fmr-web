@@ -19,17 +19,6 @@ export default class AdList {
         }
     }
 
-    merge (otherList) {
-        if (this.listCriteria.key === otherList.listCriteria.key) {
-            if (this.pages.indexOf(otherList.listCriteria.page) === -1) {
-                this.pages.push(otherList.listCriteria.page)
-                this.ads.push(...otherList.ads)
-            }
-        } else {
-            throw 'Not able to merge the list'
-        }
-    }
-
     getAd(id) {
         const ad = this.ads.find((item) => {
             return item.id == id

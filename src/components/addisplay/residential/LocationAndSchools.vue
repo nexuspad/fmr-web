@@ -7,7 +7,7 @@
       </div>
       <div class="mr-4" v-if="hasAttributeValue('close_to')">
         <label>What's nearby</label>
-        <div>{{ attributeValue('close_to') }}</div>
+        <div v-html="addLineBreak(attributeValue('close_to'))"></div>
       </div>
     </div>
     <div class="d-flex flex-row flex-wrap bd-highlight">

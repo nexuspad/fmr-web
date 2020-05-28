@@ -15,13 +15,13 @@
     </div>
     <div class="row" v-if="hasAttributeValue('available_date')">
       <div class="col">
-        <label class="mr-2">Available:</label><span>{{ attributeValue('available_date') }}</span>
+        <label class="mr-2">Available:</label><span>{{ formatDate(attributeValue('available_date')) }}</span>
       </div>
     </div>
-    <div class="row" v-if="hasAttributeValue('monthly_rent')">
+    <div class="row" v-if="hasAttributeValue('rent')">
       <div class="col">
         <label>Monthly rent:</label>
-        <strong class="fmr-green ml-1">{{ dollar(attributeValue('monthly_rent')) }}</strong>
+        <strong class="fmr-green ml-1">{{ dollar(attributeValue('rent')) }}</strong>
       </div>
     </div>
     <div class="row" v-if="hasAttributeValue('security_deposit')">

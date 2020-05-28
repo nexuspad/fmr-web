@@ -15,6 +15,7 @@
             <div class="col-9">
               <h2>
                 <router-link :to="'/ad/' + ad.id + '/' + ad.uri" class="fmr-red">{{ ad.title }}</router-link>
+                <span class="fmr-disapp ml-2" v-if="ad.isDisapproved()"></span>
                 <span class="fmr-deact ml-2" v-if="ad.isDeactivated()"></span>
                 <span class="fmr-forsale ml-2" v-if="isForSale(ad.categoryId)"></span>
                 <span class="fmr-forrent ml-2" v-if="isForRent(ad.categoryId)"></span>

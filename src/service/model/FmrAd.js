@@ -6,7 +6,6 @@ export default class FmrAd {
     id = 0
     category
     status
-    owner
     attributes = []
     photos = []
 
@@ -17,8 +16,6 @@ export default class FmrAd {
     expiryDate
     updateTime
     updateTimeDisplay
-
-    attributeMap = new Map
     
     constructor(jsonObj) {
         if (jsonObj) {
@@ -39,7 +36,6 @@ export default class FmrAd {
                 jsonObj.attributes.forEach(element => {
                     const attrObj = new AdAttribute(element)
                     this.attributes.push(attrObj)
-                    this.attributeMap.set(attrObj.id, attrObj)
                 })
             }
 
@@ -67,17 +63,18 @@ export default class FmrAd {
             otherAd.attributes.forEach(element => {
                 const attrObj = new AdAttribute(element)
                 this.attributes.push(attrObj)
-                this.attributeMap.set(attrObj.id, attrObj)
             })
         }
     }
 
     getAttribute (id) {
-        if (this.attributeMap.has(id)) {
-            return this.attributeMap.get(id)
-        } else {
-            return AdAttribute.instance(id)
-        }
+        let attr = AdAttribute.instance(id)
+        this.attributes.forEach(attribute => {
+            if (attribute.id == id) {
+                attr = attribute
+            }
+        })
+        return attr
     }
 
     get title() {
@@ -105,6 +102,20 @@ export default class FmrAd {
 
     isDeactivated() {
         if (this.status === 'DEACTIVATED') {
+            return true
+        }
+        return false
+    }
+
+    isExpired() {
+        if (this.status === 'EXPIRED') {
+            return true
+        }
+        return false
+    }
+
+    isDisapproved() {
+        if (this.status === 'DISAPPROVED') {
             return true
         }
         return false
@@ -228,7 +239,13 @@ export default class FmrAd {
     }
 
     hasCoordinate() {
-        return this.attributeMap.has(48) && this.attributeMap.get(48).value
+        let hasIt = false
+        this.attributes.forEach(attribute => {
+            if (attribute.id === 48 && attribute.value) {
+                hasIt = true
+            }
+        })
+        return hasIt
     }
 
     printSelf() {

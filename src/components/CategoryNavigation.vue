@@ -125,7 +125,7 @@ export default {
         let {path} = AppContext.makePath({categoryId: categoryId, fsbo: true})
         return path
       }
-      let {path} = AppContext.makePath({categoryId: categoryId})
+      let {path} = AppContext.makePath({categoryId: categoryId, fsbo: false})
       return path
     }
   },

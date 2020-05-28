@@ -43,6 +43,14 @@ export default {
           } else {
             return value + ' ' + name
           }
+        } else if (name ==='rent') {
+          if (value.startsWith('-')) {
+            return 'rent < $' + value.replace('-', '')
+          } else if (value.endsWith('-')) {
+            return 'rent > $' + value.replace('-', '')
+          } else {
+            return 'rent between ' + value
+          }
         }
         return value
       }
@@ -61,8 +69,9 @@ export default {
     removeFilter(name) {
       let overwriteParam = {}
       overwriteParam[name] = null
+console.log(overwriteParam)
       let {path, queryParams} = AppContext.makePath(overwriteParam)
-
+console.log(path, queryParams)
       this.$router.push({path: path, query:queryParams})
       .catch(error => {
         if (error.name != "NavigationDuplicated") {

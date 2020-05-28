@@ -53,40 +53,33 @@ export default class FilterParams {
         return this._filters
     }
 
-    merge(otherParams, alwaysOverwrite) {
-        if (otherParams['state']) {
-            if (FilterParams.noValue(this._state)) {
-                this._state = otherParams['state'].toLowerCase()
-            } else {
-                if (alwaysOverwrite) {
-                    this._state = otherParams['state'].toLowerCase()
-                }
-            }
-        }
-        if (FilterParams.hasValue(otherParams['categoryId'])) {
-            this._categoryId = otherParams['categoryId']
-        }
-        
-        if (otherParams['fsbo']) {
-            this._fsbo = true
+    mergePathParams(pathParams) {
+        if (pathParams['state']) {
+            this._state = pathParams['state'].toLowerCase()
         }
 
-        if (otherParams['page']) {
-            this._page = otherParams['page']
+        if (FilterParams.hasValue(pathParams['categoryId'])) {
+            this._categoryId = pathParams['categoryId']
+        }
+        
+        if (pathParams['fsbo']) {
+            this._fsbo = true
+        } else {
+            this._fsbo = false;
+        }
+
+    }
+
+    mergeQueryParams(queryParams) {
+        if (queryParams['page']) {
+            this._page = queryParams['page']
         }
 
         for (let name in this._filters) {
-            if (alwaysOverwrite) {
-                if (FilterParams.noValue(otherParams[name])) {       // this means the parameter should be removed
-                    this._filters[name] = ''
-                } else {
-                    this._filters[name] = otherParams[name]
-                }
+            if (FilterParams.noValue(queryParams[name])) {       // this means the parameter should be removed
+                this._filters[name] = ''
             } else {
-                // if NOT always overwrite, only replace when there is no current value
-                if (FilterParams.noValue(this._filters[name]) && !FilterParams.noValue(otherParams[name])) {
-                    this._filters[name] = otherParams[name]
-                }
+                this._filters[name] = queryParams[name]
             }
         }
     }

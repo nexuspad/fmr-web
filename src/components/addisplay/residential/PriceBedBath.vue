@@ -4,8 +4,8 @@
       <div class="col text-center mb-1" v-if="hasAttributeValue('asking_price')">
         <strong class="fmr-green">{{ dollar(attributeValue('asking_price')) }}</strong>
       </div>
-      <div class="col text-center mb-1" v-if="hasAttributeValue('monthly_rent')">
-        <strong class="fmr-green">{{ dollar(attributeValue('monthly_rent')) }}</strong>
+      <div class="col text-center mb-1" v-if="hasAttributeValue('rent')">
+        <strong class="fmr-green">{{ dollar(attributeValue('rent')) }}</strong>
       </div>
     </div>
     <div class="row justify-content-md-center" v-if="hasAttributeValue('bedroom') && hasAttributeValue('bathroom')">

@@ -6,7 +6,7 @@
           {{ categoryName(categoryId) }}
           <span class="fmr-deact ml-2" v-if="ad !== null && ad.isDeactivated()"></span>
         </span>
-        <span class="font-italic font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft()">
+        <span class="font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft()">
           <i class="fas fa-circle fa-sm ml-1" :class="{'fmr-green' : posting}" v-if="autoSaveTimerId > 0"></i>
           <span class="ml-1">draft</span>
           <span class="ml-1" v-if="ad !== null && ad.id">#{{ ad.id }}</span>
@@ -230,7 +230,7 @@ export default {
     setupAutoSave() {
       // for draft, set a timer to save every 5 seconds
       if (this.ad != null && this.ad.isDraft()) {
-        this.autoSaveTimerId = setInterval(() => this.saveAsNeeded(), 5000);
+        this.autoSaveTimerId = setInterval(() => this.saveAsNeeded(), 8000);
       }
     },
     saveAsNeeded() {

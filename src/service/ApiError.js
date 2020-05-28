@@ -4,6 +4,7 @@ const ApiErrorMessage = {
     ACCT_LOGIN_FAILED: 'Login failed. Invalid credentials.',
     ACCT_VERIFICATION_CODE_TOO_OLD: 'The verification code has expired.',
     ACCT_VERIFICATION_FAILED: 'The code cannot be verified.',
+    ACCT_SUSPENDED: 'Your account has been suspended. Please contact us if you have any questions.',
     DATA_ERROR_AD_NOT_FOUND: 'The ad cannot be found in the system.',
     DATA_ERROR_MISSING_REQUIRED: 'Some required fields are missing.',
     DATA_ERROR_INVALID_INPUT: 'The input is invalid.',

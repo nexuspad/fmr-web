@@ -36,6 +36,13 @@ export default class User {
         return false
     }
 
+    isSuspended() {
+        if (this.status === 'SUSPENDED') {
+            return true
+        }
+        return false
+    }
+
     verificationCodeSent() {
         if (this.status === 'VERIFICATION_SENT') {
             return true

@@ -4,8 +4,8 @@
       <div class="col-md-2">
         <label for="pp">Pets allowed</label>
         <select id="pp" class="form-control" v-model="ad.getAttribute(attributeId('pet_allowed')).value">
-          <option value="false">No</option>
-          <option value="true">Yes</option>
+          <option :value="false">No</option>
+          <option :value="true">Yes</option>
         </select>
       </div>
       <div class="col-md-4" v-show="ad.getAttribute(attributeId('pet_allowed')).value == true">

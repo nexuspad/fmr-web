@@ -1,18 +1,18 @@
 export default class StorageUtils {
   static save (name, value) {
     if (typeof(value) !== 'undefined') {
-      window.sessionStorage.setItem(name, JSON.stringify(value));
+      window.localStorage.setItem(name, JSON.stringify(value));
     }
   }
 
   static saveString(name, value) {
     if (typeof(value) !== 'undefined') {
-      window.sessionStorage.setItem(name, value);
+      window.localStorage.setItem(name, value);
     }
   }
 
   static get (name) {
-    let jsonStr = window.sessionStorage.getItem(name);
+    let jsonStr = window.localStorage.getItem(name);
     if (jsonStr) {
       return JSON.parse(jsonStr);
     }
@@ -20,14 +20,14 @@ export default class StorageUtils {
   }
 
   static getString(name) {
-    return window.sessionStorage.getItem(name);
+    return window.localStorage.getItem(name);
   }
 
   static delete (name) {
-    window.sessionStorage.removeItem(name);
+    window.localStorage.removeItem(name);
   }
 
   static deleteAll () {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
   }
 }

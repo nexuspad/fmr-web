@@ -9,12 +9,24 @@
           <router-link :to="{path: getPath({state: ad.state}), query: {city: ad.city}}">{{ ad.city }}</router-link> / 
           <router-link :to="getPath({state: ad.state, categoryId: ad.category.id})">{{ categoryName([ad.categoryId]) }}</router-link> / 
           Ad# {{ ad.id }}
+          <span class="fmr-disapp ml-2" v-if="ad.isDisapproved()"></span>
         </h1>
       </div>
-      <ad-detail-commercial v-if="isCommercial(ad.categoryId) && ad.id > 0" :ad=ad />
-      <ad-detail-residential v-if="isResidential(ad.categoryId) && ad.id > 0" :ad=ad />
-      <ad-detail-land v-if="isLand(ad.categoryId) && ad.id > 0" :ad=ad />
-      <ad-detail-vacation v-if="isVacation(ad.categoryId) && ad.id > 0" :ad=ad />
+      <div class="alert alert-warning m-4" v-if="ad.isExpired()">
+        This ad is expired.
+      </div>
+      <div class="alert alert-warning m-4" v-if="ad.isDeactivated()">
+        This ad is de-activated.
+      </div>
+      <div class="alert alert-danger m-4" v-if="ad.isDisapproved()">
+        This ad is disapproved.
+      </div>
+      <div v-if="!ad.isDisapproved()">
+        <ad-detail-commercial v-if="isCommercial(ad.categoryId) && ad.id > 0" :ad=ad />
+        <ad-detail-residential v-if="isResidential(ad.categoryId) && ad.id > 0" :ad=ad />
+        <ad-detail-land v-if="isLand(ad.categoryId) && ad.id > 0" :ad=ad />
+        <ad-detail-vacation v-if="isVacation(ad.categoryId) && ad.id > 0" :ad=ad />
+      </div>
       <ad-warning v-if="ad.id > 0" />
     </div>
     <vue-headful :title="ad.title" description="" />

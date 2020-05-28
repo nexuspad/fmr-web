@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import '../assets/custom.scss'
 
 import Landing from './Landing'
 import UserManagement from './components/UserManagement'

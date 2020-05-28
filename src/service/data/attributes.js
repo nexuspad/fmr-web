@@ -73,7 +73,7 @@ const ATTRIBUTES =
         "required": false
     },
     "21": {
-        "name": "monthly_rent",
+        "name": "rent",
         "id": 21,
         "type": "number",
         "required": true

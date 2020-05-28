@@ -1,5 +1,5 @@
 const STATES = {
-    'ALL': 'All', 
+    'ALL': 'All U.S. states', 
     'AL': 'Alabama',
     'AK': 'Alaska',
     'AZ': 'Arizona',

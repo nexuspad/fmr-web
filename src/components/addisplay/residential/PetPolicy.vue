@@ -5,9 +5,7 @@
       <div v-if="!hasAttributeValue('pet_policy_details')">
         Yes
       </div>
-      <div v-if="hasAttributeValue('pet_policy_details')">
-        {{ attributeValue('pet_policy_details') }}
-      </div>
+      <div v-html="addLineBreak(attributeValue('pet_policy_details'))" v-if="hasAttributeValue('pet_policy_details')"></div>
     </div>
     <div v-if="!attributeValue('pet_allowed')">
       No pets
