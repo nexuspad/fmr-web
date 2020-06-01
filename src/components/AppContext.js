@@ -39,6 +39,10 @@ export default class AppContext {
         return this._filterParams.getCategoryId()
     }
 
+    static getPage() {
+        return this._filterParams.getPage()
+    }
+
     // _state should always be stored in lower case
     static changeState(stateCode) {
         if (!stateCode || stateCode === 'all') {
@@ -58,24 +62,21 @@ export default class AppContext {
 
     // This call creates path and params for the route, it should not update the context
     static makePath(updateParams = {}) {
-        let fp = new FilterParams(this._filterParams)
+        let allParams = this._filterParams.getParams()
+        for (let name in updateParams) {
+            allParams[name] = updateParams[name]
+        }
 
-        fp.mergePathParams(updateParams)
-        fp.mergeQueryParams(updateParams)
+        let fp = new FilterParams
+        fp.initWith(allParams)
 
         let pathParams = []
         if (fp.getState()) {
             pathParams.push(fp.getState())
         }
 
-        if (typeof(updateParams['fsbo']) !== 'undefined') {
-            if (updateParams['fsbo']) {
-                pathParams.push('fsbo')
-            }
-        } else {
-            if (fp.isFsbo()) {
-                pathParams.push('fsbo')
-            }
+        if (fp.isFsbo()) {
+            pathParams.push('fsbo')
         }
 
         if (fp.getCategoryId()) {
@@ -86,9 +87,7 @@ export default class AppContext {
         let path = '/' + pathParams.join('/')
 
         let queryParams = {}
-        if (fp.getPage() != 1) {
-            queryParams['page'] = fp.getPage()
-        }
+        queryParams['page'] = fp.getPage()
         
         for (let name in fp.getFilters()) {
             if (!FilterParams.noValue(fp.getFilters()[name])) {

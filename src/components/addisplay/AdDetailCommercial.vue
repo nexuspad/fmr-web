@@ -28,7 +28,6 @@
             <div class="row">
               <div class="col-md-7">
                 <full-address :ad="ad" />
-                <location-and-schools :ad="ad" />
                 <building-and-lot :ad="ad" />
               </div>
               <div class="col-md-5" v-if="ad.hasCoordinate()">

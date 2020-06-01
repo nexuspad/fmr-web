@@ -23,7 +23,7 @@
             <strong>Hours:</strong> {{ attributeValue('open_house_hours') }}
           </div>
         </div>
-        <a :href="attributeValue('company_web_address')" class="card-link" v-if="hasAttributeValue('company_web_address')">
+        <a :href="attributeValue('company_web_address')" class="card-link" target="_blank" v-if="hasAttributeValue('company_web_address')">
           More info...
         </a>
       </div>
@@ -36,6 +36,17 @@ import AppDataHelper from '../AppDataHelper'
 export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
+  data() {
+    return {
+      hasContactInfo: false
+    }
+  },
+  mounted() {
+    if (this.hasAttributeValue('brokerage_company') || this.hasAttributeValue('contact_name') || this.hasAttributeValue('mls_id') ||
+        this.hasAttributeValue('open_house') || this.hasAttributeValue('open_house_hours')) {
+      this.hasContactInfo = true
+    }
+  },
   methods: {
     formatPhone(number) {
       let match = number.toString().match(/^(\d{3})(\d{3})(\d{4})$/);

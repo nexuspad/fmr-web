@@ -15,7 +15,7 @@ export default class AdService {
     static _adList
 
     static getAds(listCriteria) {
-        console.log('List criteria with key...', listCriteria, listCriteria.getKey())
+        console.log(listCriteria.getKey())
 
         if (AdService._adList) {
             if (AdService._adList.listCriteria.key == listCriteria.getKey()) {

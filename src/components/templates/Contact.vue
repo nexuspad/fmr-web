@@ -32,7 +32,7 @@
     <div class="form-row mt-2" v-show="!ad.getAttribute(attributeId('represented_by_owner')).value">
       <div class="col-md-8">
         <label for="company_web_address">Company web address</label>
-        <input type="text" class="form-control" id="company_web_address"
+        <input type="text" class="form-control" id="company_web_address" placeholder="http://company-web-address.com"
           name="company_web_address" v-model="ad.getAttribute(attributeId('company_web_address')).value" />
       </div>
     </div>

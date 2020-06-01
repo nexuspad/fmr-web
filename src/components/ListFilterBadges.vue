@@ -2,7 +2,7 @@
   <div class="border-bottom pt-2 pr-2" v-if="filters.length > 0">
     <ul class="list-inline text-right mb-1">
       <li v-for="(filter, index) in filters" v-bind:key="index" class="list-inline-item">
-        <span class="badge badge-info fmr-sm-text pt-1 pl-2">{{ filter.value }}
+        <span class="badge badge-info fmr-sm-text font-weight-light pt-1 pl-2">{{ filter.value }}
           <button type="button" class="icon-button" v-on:click="removeFilter(filter.name)">
             <i class="fa fa-times fa-medium text-light"></i>
           </button>
@@ -15,8 +15,10 @@
 <script>
 import AppContext from './AppContext'
 import FilterParams from './FilterParams'
+import AppDataHelper from './AppDataHelper'
 
 export default {
+  mixins: [ AppDataHelper ],
   data() {
     return {
       filters: []
@@ -45,14 +47,25 @@ export default {
           }
         } else if (name ==='rent') {
           if (value.startsWith('-')) {
-            return 'rent < $' + value.replace('-', '')
+            return 'rent < ' + this.dollar(value.replace('-', ''))
           } else if (value.endsWith('-')) {
-            return 'rent > $' + value.replace('-', '')
+            return 'rent > ' + this.dollar(value.replace('-', ''))
           } else {
-            return 'rent between ' + value
+            let values = value.split('-')
+            return 'rent between ' + this.dollar(values[0]) + ' and ' + this.dollar(values[1])
           }
+        } else if (name ==='price') {
+          if (value.startsWith('-')) {
+            return 'price < ' + this.dollar(value.replace('-', ''))
+          } else if (value.endsWith('-')) {
+            return 'price > ' + this.dollar(value.replace('-', ''))
+          } else {
+            let values = value.split('-')
+            return 'price between ' + this.dollar(values[0]) + ' and ' + this.dollar(values[1])
+          }
+        } else {
+          return this.capitalizeFirstLetter(name.replace('_', ' ')) + ': ' + value
         }
-        return value
       }
       
       while (this.filters.length > 0) {
@@ -69,9 +82,7 @@ export default {
     removeFilter(name) {
       let overwriteParam = {}
       overwriteParam[name] = null
-console.log(overwriteParam)
       let {path, queryParams} = AppContext.makePath(overwriteParam)
-console.log(path, queryParams)
       this.$router.push({path: path, query:queryParams})
       .catch(error => {
         if (error.name != "NavigationDuplicated") {

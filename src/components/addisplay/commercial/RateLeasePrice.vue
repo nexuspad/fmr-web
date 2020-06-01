@@ -1,9 +1,9 @@
 <template>
   <div class="container p-0">
-    <div class="row" v-if="hasAttributeValue('asking_price')">
+    <div class="row" v-if="hasAttributeValue('price')">
       <div class="col">
         <label>Asking price:</label>
-        <strong class="fmr-green ml-1">{{ dollar(attributeValue('asking_price')) }}</strong>
+        <strong class="fmr-green ml-1">{{ dollar(attributeValue('price')) }}</strong>
       </div>
       <div class="col">
         <span v-if="hasAttributeValue('owner_financing_available')">Owner financing available</span>

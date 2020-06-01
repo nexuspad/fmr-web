@@ -192,6 +192,9 @@ export default {
   },
   methods: {
     setFilter() {
+      this.forRent = this.isForRent(AppContext.getCategoryId())
+      this.forSale = this.isForSale(AppContext.getCategoryId())
+
       let params = AppContext.getParams().filters
       this.city = params['city']
       this.zipCode = params['zip_code']
@@ -245,6 +248,23 @@ export default {
       } else {
         this.rentMin = 0
         this.rentMax = 'max'
+      }
+
+      if (params['price'] && params['price'].includes('-')) {
+        let [min, max] = params['price'].split('-')
+        if (min) {
+          this.priceMin = min
+        } else {
+          this.priceMax = 0
+        }
+        if (max) {
+          this.priceMax = max
+        } else {
+          this.priceMax = 'max'
+        }
+      } else {
+        this.priceMin = 0
+        this.priceMax = 'max'
       }
     },
     applyFilter() {
@@ -326,10 +346,11 @@ export default {
     }
   },
   watch: {
+    "$route.params": function() {
+      this.setFilter()
+    },
     "$route.query": function() {
       this.setFilter()
-      this.forRent = this.isForRent(AppContext.getCategoryId())
-      this.forSale = this.isForSale(AppContext.getCategoryId())
     }
   }
 }

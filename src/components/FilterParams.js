@@ -26,6 +26,18 @@ export default class FilterParams {
         }
     }
 
+    getParams() {
+        const params = {}
+        params['state'] = this._state
+        params['categoryId'] = this._categoryId
+        params['fsbo'] = this._fsbo
+        params['page'] = this._page
+        for (let name in this._filters) {
+            params[name] = this._filters[name]
+        }
+        return params
+    }
+
     getState() {
         return this._state
     }
@@ -53,6 +65,21 @@ export default class FilterParams {
         return this._filters
     }
 
+    // preserve the current values
+    initWith(params) {
+        this._state = params['state']
+        this._categoryId = params['categoryId']
+        this._fsbo = params['fsbo']
+
+        if (params['page']) {
+            this._page = params['page']
+        }
+
+        for (let name in this._filters) {
+            this._filters[name] = params[name]
+        }
+    }
+
     mergePathParams(pathParams) {
         if (pathParams['state']) {
             this._state = pathParams['state'].toLowerCase()
@@ -67,12 +94,13 @@ export default class FilterParams {
         } else {
             this._fsbo = false;
         }
-
     }
 
     mergeQueryParams(queryParams) {
         if (queryParams['page']) {
             this._page = queryParams['page']
+        } else {
+            this._page = 1
         }
 
         for (let name in this._filters) {

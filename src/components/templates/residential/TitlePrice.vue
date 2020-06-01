@@ -16,7 +16,7 @@
               <div class="input-group-text fmr-green bg-light">$</div>
             </div>
             <input type="text" class="form-control"
-              name="asking_price" v-model="ad.getAttribute(attributeId('asking_price')).value" />
+              name="asking_price" v-model="ad.getAttribute(attributeId('price')).value" />
           </div>
         </div>
       </div>

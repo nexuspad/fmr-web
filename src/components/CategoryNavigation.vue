@@ -61,7 +61,7 @@
                   </div>
                   <div class="col-6">
                     <h4 class="dropdown-header">
-                      <router-link :to="getPath(2011)">Commercial</router-link>
+                      <router-link :to="getPath(2012)">Commercial</router-link>
                     </h4>
                     <router-link class="dropdown-item primary" :to="getPath(3017)">Office buildings</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3016)">Retail centers</router-link>
@@ -122,10 +122,10 @@ export default {
   methods: {
     getPath(categoryId, isFsbo) {
       if (isFsbo) {
-        let {path} = AppContext.makePath({categoryId: categoryId, fsbo: true})
+        let {path} = AppContext.makePath({categoryId: categoryId, fsbo: true, page: 1})
         return path
       }
-      let {path} = AppContext.makePath({categoryId: categoryId, fsbo: false})
+      let {path} = AppContext.makePath({categoryId: categoryId, fsbo: false, page: 1})
       return path
     }
   },

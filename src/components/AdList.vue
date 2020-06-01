@@ -14,7 +14,8 @@
                   </div>
                   <div class="col-md-6">
                     <paginate v-show="adList !== null && pageCount > 1" class="float-right mr-1 mt-n1"
-                      :page-count="pageCount" :page-range="5" :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
+                      v-model="currentPage" :page-count="pageCount" :page-range="5" 
+                      :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
                       :container-class="'pagination'" :prev-class="'page-item'" :next-class="'page-item'" :page-class="'page-item'"
                       :page-link-class="'page-link'" :prev-link-class="'page-link'" :next-link-class="'page-link'" />
                   </div>
@@ -33,7 +34,8 @@
               <div class="col-md-6"></div>
               <div class="col-md-6">
                 <paginate v-show="adList !== null && pageCount > 1" class="float-right mr-2 mb-4"
-                  :page-count="pageCount" :page-range="5" :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
+                  v-model="currentPage" :page-count="pageCount" :page-range="5" 
+                  :click-handler="gotoPage" :prev-text="'Prev'" :next-text="'Next'" 
                   :container-class="'pagination'" :prev-class="'page-item'" :next-class="'page-item'" :page-class="'page-item'"
                   :page-link-class="'page-link'" :prev-link-class="'page-link'" :next-link-class="'page-link'" />
               </div>
@@ -108,12 +110,12 @@ export default {
     },
     gotoPage(pageId) {
       let {path, queryParams} = AppContext.makePath({page: pageId})
-      console.log(path, queryParams)
       this.$router.push({path: path, query:queryParams})
     },
     buildPages(adList) {
       this.title = this.categoryName(adList.listCriteria.category.id)
-      this.pageCount = adList.totalPages();
+      this.pageCount = adList.totalPages()
+      this.currentPage = adList.listCriteria.page
 
       while (this.ads.length) {
         this.ads.pop();

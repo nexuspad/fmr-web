@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col text-center mb-1" v-if="hasAttributeValue('asking_price')">
-        <strong class="fmr-green">{{ dollar(attributeValue('asking_price')) }}</strong>
+      <div class="col text-center mb-1" v-if="hasAttributeValue('price')">
+        <strong class="fmr-green">{{ dollar(attributeValue('price')) }}</strong>
       </div>
       <div class="col text-center mb-1" v-if="hasAttributeValue('rent')">
         <strong class="fmr-green">{{ dollar(attributeValue('rent')) }}</strong>

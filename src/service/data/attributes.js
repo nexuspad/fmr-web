@@ -79,7 +79,7 @@ const ATTRIBUTES =
         "required": true
     },
     "22": {
-        "name": "asking_price",
+        "name": "price",
         "id": 22,
         "type": "number",
         "required": true
