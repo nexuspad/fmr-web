@@ -1,8 +1,8 @@
 <template>
   <!-- about the container padding: https://stackoverflow.com/questions/25427407/bootstrap-3-and-4-container-fluid-with-grid-adding-unwanted-padding -->
   <div class="fmr-ad-detail">
-    <h2 class="fmr-red mt-2 pl-3">{{ ad.title }}</h2>
-    <div class="container-fluid pl-0 mt-3 mb-4 fmr-ad-detail">
+    <h2 class="fmr-red mt-2 pl-4">{{ ad.title }}</h2>
+    <div class="container-fluid pl-2 mt-3 mb-4 fmr-ad-detail">
       <div class="row pl-2">
         <div class="col-md-4 border-right" v-if="ad.thumbnailUrl">
           <div class="container mb-4">
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="col pl-4 pb-4">
-          <price-and-offers :ad="ad" />
+          <sale-price :ad="ad" />
           <div v-html=ad.description class="mt-3"></div>
         </div>
         <div class="col-md-3">
@@ -53,14 +53,14 @@ import FullAddress from './FullAddress'
 import ZoningAndSize from './land/ZoningAndSize'
 import Contact from './Contact'
 import Photos from './Photos'
-import PriceAndOffers from './residential/PriceAndOffers'
+import SalePrice from './residential/SalePrice'
 import BingMap from './maps/BingMap'
 
 export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    PriceAndOffers, FullAddress, ZoningAndSize, Contact, Photos, BingMap
+    SalePrice, FullAddress, ZoningAndSize, Contact, Photos, BingMap
   }
 }
 </script>

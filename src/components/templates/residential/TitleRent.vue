@@ -34,8 +34,8 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="sec_dep">Other fees</label>
+        <div class="form-group" v-if="isApartment(ad.categoryId)">
+          <label for="other_fees">Other fees</label>
           <textarea-autosize id="ppd" class="form-control" v-model="ad.getAttribute(attributeId('other_fees')).value"
             :min-height="20" :max-height="80"></textarea-autosize>
         </div>

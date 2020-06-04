@@ -4,13 +4,23 @@
       <!-- office space -->
       <div class="col-md-2">
         <label for="space_size">Space size</label>
-        <input type="text" class="form-control" id="space_size" placeholder="ex. 800 sqft."
-          name="space_size" v-model="ad.getAttribute(attributeId('space_size')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="space_size" placeholder="ex. 800"
+            name="space_size" v-model="ad.getAttribute(attributeId('space_size')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">SF</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
         <label for="building_size_sqft">Building size</label>
-        <input type="text" class="form-control" id="building_size_sqft" placeholder="ex. 5000 sqft."
-          name="building_size_sqft" v-model="ad.getAttribute(attributeId('building_size_sqft')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="building_size_sqft" placeholder="ex. 5000"
+            name="building_size_sqft" v-model="ad.getAttribute(attributeId('building_size_sqft')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">SF</span>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
         <label for="condition">Condition</label>

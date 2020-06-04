@@ -13,7 +13,7 @@ export default class AdminService {
     static _user = new User
 
     static getToken () {
-        if (AdminService._user.token) {
+        if (AdminService._user && AdminService._user.token) {
             return new Promise((resolve) => {
                 resolve(AdminService._user.token)
             })
@@ -106,7 +106,6 @@ export default class AdminService {
                 console.error('Account service', error)
                 AdminService.cleanup()
                 reject(error)
-                window.location = '/'
             })
         })
     }
@@ -131,13 +130,13 @@ export default class AdminService {
                 })
                 .catch((error) => {
                     console.error(error)
+                    AdminService.cleanup()
                     reject(error)
                 })    
             })
             .catch((error) => {
                 AdminService.cleanup()
                 reject(error)
-                window.location = '/'
             })
         })
     }
@@ -176,7 +175,6 @@ export default class AdminService {
             .catch((error) => {
                 AdminService.cleanup()
                 reject(error)
-                window.location = '/'
             })
         })
     }
@@ -210,7 +208,6 @@ export default class AdminService {
             .catch((error) => {
                 reject(error)
                 AdminService.cleanup()
-                window.location = '/'
             })
         })
     }
@@ -236,7 +233,6 @@ export default class AdminService {
             .catch((error) => {
                 AdminService.cleanup()
                 reject(error)
-                window.location = '/'
             })
         })
     }
@@ -268,9 +264,8 @@ export default class AdminService {
                 })     
             })
             .catch((error) => {
-                reject(error)
                 AdminService.cleanup()
-                window.location = '/'
+                reject(error)
             })
         })
     }
@@ -302,7 +297,6 @@ export default class AdminService {
                 console.error('Account service', error)
                 AdminService.cleanup()
                 reject(error)
-                window.location = '/'
             })
         })
     }
@@ -310,5 +304,6 @@ export default class AdminService {
     static cleanup() {
         AdminService._user = null
         StorageUtils.delete('admin-token')
+        window.location = '/madmin/'
     }
 }

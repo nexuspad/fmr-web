@@ -1,9 +1,9 @@
 <template>
   <div class="fmr-tab shadow-sm sticky-top mb-4" style="background:#fff !important;">
     <nav class="nav">
-      <router-link to="users" class="nav-link">users</router-link>
-      <router-link to="posts" class="nav-link">posts</router-link>
-      <a class="nav-link" href="https://api.findmyroof.com/madmin/logs" target="_blank">logs</a>
+      <router-link to="users" class="nav-link">Users</router-link>
+      <router-link to="posts" class="nav-link">Posts</router-link>
+      <a class="nav-link" href="https://api.findmyroof.com/madmin/logs" target="_blank">Logs</a>
     </nav>
   </div>
 </template>

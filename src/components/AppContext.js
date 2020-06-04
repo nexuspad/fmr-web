@@ -139,8 +139,7 @@ export default class AppContext {
         for (let name in this._filterParams.getFilters()) {
             let value = this._filterParams.getFilters()[name]
             if (value !== null && typeof value !== 'undefined') {
-                value = value.replace(/\s/g,'')
-                if (value.length == 0) {
+                if (value.replace(/\s/g,'').length == 0) {
                     continue
                 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-3 mb-2">
+  <div class="mb-4">
     <div class="d-flex flex-row flex-wrap bd-highlight mb-2" v-if="hasAttributeValue('neighborhood') || hasAttributeValue('close_to')">
       <div class="mr-4" v-if="hasAttributeValue('neighborhood')">
         <label>neighborhood</label>

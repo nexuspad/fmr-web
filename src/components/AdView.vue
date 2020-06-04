@@ -12,6 +12,9 @@
           <span class="fmr-disapp ml-2" v-if="ad.isDisapproved()"></span>
         </h1>
       </div>
+      <div class="alert alert-secondary m-4" v-if="ad.isDraft()">
+        This is a draft.
+      </div>
       <div class="alert alert-warning m-4" v-if="ad.isExpired()">
         This ad is expired.
       </div>

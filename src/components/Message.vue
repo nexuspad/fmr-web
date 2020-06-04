@@ -14,7 +14,7 @@
     </div>
     <div class="alert alert-danger" role="alert" v-if="showError">
       <button type="button" class="close" @click="showError=false" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+        <a class="fas fa-times"></a>
       </button>
       <div v-html="errorMessage"></div>
     </div>

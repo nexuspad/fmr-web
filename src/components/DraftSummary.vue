@@ -14,8 +14,10 @@
           <div class="row">
             <div class="col-9">
               <h2>
-                <span v-if="!ad.title">#{{ ad.id }}</span>
-                <span v-if="ad.title">{{ ad.title }}</span>
+                <router-link :to="'/ad/' + ad.id + '/' + ad.uri" class="text-muted">
+                  <span v-if="!ad.title">#{{ ad.id }}</span>
+                  <span v-if="ad.title">{{ ad.title }}</span>
+                </router-link>
                 <span class="fmr-deact ml-2" v-if="ad.isDeactivated()"></span>
                 <span class="fmr-forsale ml-2" v-if="isForSale(ad.categoryId)"></span>
                 <span class="fmr-forrent ml-2" v-if="isForRent(ad.categoryId)"></span>

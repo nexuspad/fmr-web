@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card">
+    <div class="card" v-if="hasContactInfo">
       <div class="card-header">
         <span v-if="hasAttributeValue('brokerage_company')">{{ attributeValue('brokerage_company') }}</span>
         <span v-if="!hasAttributeValue('brokerage_company')">Contact</span>

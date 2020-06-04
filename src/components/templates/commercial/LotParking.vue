@@ -1,7 +1,7 @@
 <template>
   <div class="border-bottom pb-3 mb-3">
     <div class="form-row">
-      <div class="col-md-2">
+      <div class="col-md-2" v-if="isForSale(ad.categoryId)">
         <label for="zoning_code">Zoning code</label>
         <input type="text" class="form-control" id="zoning_code" placeholder="ex. M1"
           name="zoning_code" v-model="ad.getAttribute(attributeId('zoning_code')).value" />

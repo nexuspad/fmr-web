@@ -1,5 +1,5 @@
 <template>
-  <div class="row mb-4">
+  <div class="row mb-4" v-if="hasAttributeValue('tenancy')">
     <div class="col-md-2">
       <label>Tenancy</label>
       <div class="text-capitalize">{{ attributeValue('tenancy') }}</div>

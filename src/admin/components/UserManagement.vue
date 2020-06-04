@@ -15,41 +15,49 @@
       </div>
     </div>
     -->
-    <iframe src="https://panda.findmyroof.com/polo.html" width="40" height="30" frameBorder="0"></iframe>
     <div class="container-fluid" v-if="users.length > 0">
-      <div class="row pb-1 font-weight-bold">
-        <div class="col-1">Id</div>
-        <div class="col">Email</div>
-        <div class="col"></div>
-        <div class="col"></div>
-      </div>
       <div class="row pb-1 border-bottom mb-2">
-        <div class="col-1"></div>
+        <div class="col-1">
+          <span v-if="selectedUser.id">{{ selectedUser.id }}</span>
+        </div>
         <div class="col">
           <input type="email" class="form-control" v-model="userEmail" />
         </div>
-        <div class="col"></div>
         <div class="col">
-          <button class="btn btn-primary" v-on:click="search()">Search</button>
-          <button class="btn btn-secondary ml-2" v-on:click="reset()">Reset</button>
+          <button class="btn btn-primary mr-2" v-on:click="search()">Search</button>
+        </div>
+        <div class="col">
+          <iframe src="https://panda.findmyroof.com/polo.html" width="40" height="30" frameBorder="0" id="Polo"></iframe>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-secondary mr-2" v-on:click="suspend(selectedUser.id)" v-if="selectedUser.id && !selectedUser.isSuspended()">Suspend</button>
+          <button class="btn btn-secondary mr-2" v-on:click="unSuspend(selectedUser.id)" v-if="selectedUser.id && selectedUser.isSuspended()">Un-Suspend</button>
+          <button class="btn btn-primary mr-2" v-on:click="impersonate(selectedUser.email)" v-if="selectedUser.id">Impersonate</button>
+          <button class="btn btn-secondary ml-2" v-on:click="reset()" v-if="selectedUser.id">Clear</button>
         </div>
       </div>
-      <div class="row pb-1 fmr-sm-text" v-for="u in users" v-bind:key="u.id">
+      <div class="row pb-1 font-weight-bold">
+        <div class="col-1">Id</div>
+        <div class="col">Email</div>
+        <div class="col">Status</div>
+        <div class="col"></div>
+        <div class="col">Note</div>
+      </div>
+      <div class="row pb-1 fmr-sm-text mb-2" v-for="u in users" v-bind:key="u.id">
         <div class="col-1">
           {{ u.id }}
         </div>
         <div class="col">
-          {{ u.email }}
+          <span @click="userEmail = u.email; selectedUser = u">{{ u.email }}</span>
         </div>
         <div class="col">
-          <span v-if="u.adminNote && u.adminNote.reviewFlag">{{ u.adminNote.comment }}</span>
+          {{ u.status }}
         </div>
         <div class="col">
-          <button class="btn btn-secondary" v-on:click="suspend(u.id)" v-if="!u.isSuspended()">Suspend</button>
-          &nbsp;
-          <button class="btn btn-secondary" v-on:click="unSuspend(u.id)" v-if="u.isSuspended()">Un-Suspend</button>
-          &nbsp;
-          <button class="btn btn-primary" v-on:click="impersonate(u.email)">Impersonate</button>
+          {{ (new Date(u.lastActivity*1000)).toLocaleString() }}
+        </div>
+        <div class="col">
+          <span v-if="u.adminNote" :class="{'text-danger': u.adminNote.reviewFlag}">{{ u.adminNote.comment }}</span>
         </div>
       </div>
     </div>
@@ -60,6 +68,7 @@
 import AdminMessage from './AdminMessage'
 import Navigation from './Navigation'
 import AdminService from '../service/AdminService'
+import User from '../../service/model/User'
 
 export default {
   components: {
@@ -67,6 +76,7 @@ export default {
   },
   data() {
     return {
+      selectedUser: new User,
       userEmail: '',
       users: [],
       email: '',
@@ -85,12 +95,14 @@ export default {
           self.users.pop()
         }
         self.users.push(userReturned)
+        self.selectedUser = userReturned
       }).catch((error) => {
         console.error(error)
       })
     },
     reset() {
-      this.userEmail = null
+      this.selectedUser = new User
+      this.userEmail = ''
       this.getLatest()
     },
     getLatest() {
@@ -101,6 +113,9 @@ export default {
         }
         returnedUsers.forEach(u => {
           self.users.push(u)
+          if (self.selectedUser.id == u.id) {
+            self.selectedUser.status = u.status
+          }
         });
       }).catch(() => {
       })
@@ -122,6 +137,7 @@ export default {
       const self = this
       AdminService.toggleSuspension(userId, true).then(() => {
         self.message = userId + " is suspended"
+        self.getLatest()
       }).catch((error) => {
         self.message(error)
       })
@@ -130,6 +146,7 @@ export default {
       const self = this
       AdminService.toggleSuspension(userId, false).then(() => {
         self.message = userId + " is un-suspended"
+        self.getLatest()
       }).catch((error) => {
         self.message(error)
       })

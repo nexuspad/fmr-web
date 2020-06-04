@@ -20,7 +20,7 @@
 <p>You only need to register if you want to post ads. </p>
 
 <h2>What kind of personal information do you store?</h2>
-<p>Your email only.<br/>
+<p>Your email address only.<br/>
 A valid email is required to create an account. We do not share your email with any third party.</p>
 
 <h2 id="Verification">Why do you need mobile text verification?</h2>
@@ -31,18 +31,17 @@ Your phone number is only used once for sending a verification code and we do no
 <p>You can email us at help@findmyroof.com. We'll be happy to manually verify your account and activate it for you.</p>
 
 <h2>How long will my ad stay "live" on FindMyRoof.com?</h2>
-<p>Technically your ad will stay "live" for a period of 60 days once it is submitted on FindMyRoof.com. 
+<p>Technically your ad will stay "live" for a period of 90 days once it is submitted on FindMyRoof.com. 
   During that period of time, you can remove your ad earlier if your property has been taken/sold. 
   You will be able to extend your ad one week before the expiration date. </p>
 
+<h2>How can I manage my ads?</h2>
+<p>You can log in to your account and update, de-activate(activate), or extend your ad.</p>
+
 <h2>Why is my account suspended?</h2>
-<p></p>
-
-<h2>Why is my ad disapproved?</h2>
-<p></p>
-
-<h2></h2>
-<p></p>
+<p>We review ads through automatic and manual processes, which could result your account being suspended if we think 
+  spams are posted by your account.
+</p>
 
 <h2></h2>
 <p></p>

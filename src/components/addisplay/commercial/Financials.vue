@@ -3,7 +3,7 @@
     <div class="d-flex flex-row flex-wrap bd-highlight">
       <div class="mr-4" v-if="hasAttributeValue('cap_rate')">
         <label>Cap rate</label>
-        <div>{{ attributeValue('cap_rate') }}</div>
+        <div>{{ attributeValue('cap_rate') }}%</div>
       </div>
     </div>
     <div class="d-flex flex-row flex-wrap bd-highlight">

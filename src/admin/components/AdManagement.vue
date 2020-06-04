@@ -22,11 +22,11 @@
         <div class="col"></div>
         <div class="col">
           <button class="btn btn-primary" v-on:click="search()">Search</button>
-          <button class="btn btn-secondary ml-2" v-on:click="reset()">Reset</button>
+          <button class="btn btn-secondary ml-2" v-on:click="reset()">Clear</button>
         </div>
       </div>
       </form>
-      <div class="row pb-1 fmr-sm-text" v-for="ad in ads" v-bind:key="ad.id">
+      <div class="row pb-1 fmr-sm-text mb-2" v-for="ad in ads" v-bind:key="ad.id">
         <div class="col-1">
           {{ ad.id }}
         </div>
@@ -37,7 +37,7 @@
           {{ ad.state }}
         </div>
         <div class="col-1">
-          {{ ad.status }}
+          {{ ad.status.replace('_', ' ') }}
         </div>
         <div class="col">
           <span @click="ownerEmail = ad.owner.email">{{ ad.owner.email }}</span>

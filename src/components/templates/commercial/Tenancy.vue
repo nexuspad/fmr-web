@@ -10,7 +10,7 @@
       </div>
       <div class="col-md-10" v-show="hasTenants">
         <label for="tenancy">Tenants</label>
-        <textarea-autosize id="tenents" rows="2" class="form-control" v-model="ad.getAttribute(attributeId('tenants')).value"></textarea-autosize>
+        <textarea-autosize id="tenents" :min-height="50"  class="form-control" v-model="ad.getAttribute(attributeId('tenants')).value"></textarea-autosize>
       </div>
     </div>
   </div>

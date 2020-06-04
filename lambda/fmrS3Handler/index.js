@@ -2,6 +2,7 @@
 var AWS = require('aws-sdk');
 const sharp = require('sharp');
 const https = require('https');
+const http = require('http');
 
 // constants
 var MD_WIDTH = 1200;
@@ -9,8 +10,24 @@ var MD_WIDTH = 1200;
 // get reference to S3 client 
 var s3 = new AWS.S3();
 
+var DEST_BUCKET = '', API_HOST = '', API_PORT = '';
+var apiClient = https;
+
 exports.handler = function (event, context, callback) {
     var srcBucket = event.Records[0].s3.bucket.name;
+
+    if (srcBucket === 'findmyroof-incoming') {
+        DEST_BUCKET = 'findmyroof'
+        API_HOST = 'api.findmyroof.com'
+        API_PORT = 443
+    } else {
+        DEST_BUCKET = 'findmyroof-dev'
+        API_HOST = '24.125.100.123'
+        API_PORT = 8080
+        apiClient = http
+    }
+
+    console.log("Handler using profile settings: " + DEST_BUCKET + ' ' + API_HOST + ':' + API_PORT)
 
     // Object key may have spaces or unicode non-ASCII characters.
     // srcKey should look like this: AD_ID/IMG-2383.JPG
@@ -34,7 +51,7 @@ exports.handler = function (event, context, callback) {
     var adId = parseInt(pieces[0]);
     var fileName = pieces[1];
 
-    var destBucket = 'findmyroof';
+    var destBucket = DEST_BUCKET;
     var destKey = srcKey;
 
     s3.getObject({Bucket: srcBucket, Key: srcKey}, function(error, response) {
@@ -75,8 +92,8 @@ exports.handler = function (event, context, callback) {
                     console.log('**** call findmyroof API to update the ad', data)
         
                     var options = {
-                        host: 'api.findmyroof.com',
-                        port: '443',
+                        host: API_HOST,
+                        port: API_PORT,
                         path: '/upload/updatePhoto',
                         method: 'POST',
                         headers: {
@@ -86,7 +103,7 @@ exports.handler = function (event, context, callback) {
                         }
                     };
         
-                    var req = https.request(options, function (res) {
+                    var req = apiClient.request(options, function (res) {
                         var msg = '';
         
                         res.setEncoding('utf8');

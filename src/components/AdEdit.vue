@@ -6,10 +6,9 @@
           {{ categoryName(categoryId) }}
           <span class="fmr-deact ml-2" v-if="ad !== null && ad.isDeactivated()"></span>
         </span>
-        <span class="font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft()">
-          <i class="fas fa-circle fa-sm ml-1" :class="{'fmr-green' : posting}" v-if="autoSaveTimerId > 0"></i>
-          <span class="ml-1">draft</span>
-          <span class="ml-1" v-if="ad !== null && ad.id">#{{ ad.id }}</span>
+        <span class="font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft() && autoSaveTimerId > 0">
+          <i class="fas fa-circle fa-sm ml-1" :class="{'fmr-green' : posting}"></i>
+          <span class="ml-1" v-if="ad !== null && ad.id">auto saved draft #{{ ad.id }}</span>
         </span>
         <div class="mr-2 float-right">
           <a class="far fa-times-circle fa-lg" @click="exitEdit()"></a>
@@ -22,6 +21,7 @@
           <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1">
             <button class="btn btn-primary" :class="{disabled: invalidFields.length > 0}" 
               v-on:click="save(false)" v-if="ad !== null && !ad.isDraft()">Update</button>
+            <button class="btn btn-outline-primary mr-2" v-if="ad !== null && ad.isDraft()">Save</button>
             <button class="btn btn-primary" 
               data-toggle="modal" data-target="#SubmissionConfirmation" :disabled="invalidFields.length > 0" 
               v-if="ad !== null && ad.isDraft()">Publish</button>
@@ -106,7 +106,7 @@
             <p>Before submitting, please review and make sure you agree to FindMyRoof.com's Terms of Service and Privacy Policy.</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" @click="submit()">I agree and submit</button>
           </div>
         </div>

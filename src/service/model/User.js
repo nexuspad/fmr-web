@@ -3,6 +3,7 @@ export default class User {
     email
     status
     token
+    lastActivity
     verification
 
     constructor (jsonObj) {
@@ -11,6 +12,7 @@ export default class User {
             this.email = jsonObj.email
             this.status = jsonObj.status
             this.token = jsonObj.token
+            this.lastActivity = jsonObj.lastActivity
         }
     }
 

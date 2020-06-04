@@ -1,8 +1,8 @@
 <template>
   <!-- about the container padding: https://stackoverflow.com/questions/25427407/bootstrap-3-and-4-container-fluid-with-grid-adding-unwanted-padding -->
   <div class="fmr-ad-detail">
-    <h2 class="fmr-red mt-2 pl-3">{{ ad.title }}</h2>
-    <div class="container-fluid pl-0 mt-3 mb-4 fmr-ad-detail">
+    <h2 class="fmr-red mt-2 pl-4">{{ ad.title }}</h2>
+    <div class="container-fluid pl-2 mt-3 mb-4 fmr-ad-detail">
       <div class="row pl-2">
         <div class="col-md-4 border-right" v-if="ad.thumbnailUrl">
           <div class="container mb-4">

@@ -3,8 +3,13 @@
     <div class="form-row">
       <div class="col-md-2 mb-2">
         <label for="cap_rate">Cap rate</label>
-        <input type="text" class="form-control" id="cap_rate" placeholder=""
-          name="cap_rate" v-model="ad.getAttribute(attributeId('cap_rate')).value" />
+        <div class="input-group">
+          <input type="text" class="form-control" id="cap_rate"
+            name="cap_rate" v-model="ad.getAttribute(attributeId('cap_rate')).value" />
+          <div class="input-group-append">
+            <span class="input-group-text">%</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-row">

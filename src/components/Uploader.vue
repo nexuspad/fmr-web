@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="pb-4">
     <message />
-    <div class="container-fluid mb-2">
-      <div class="row mb-4 rounded" style="background:#eee;">
-        <div class="col-md-3 pt-3 rounded">
+    <div class="container-fluid mb-3 rounded" style="background:#eee;">
+      <div class="row pt-2">
+        <div class="col-md-3">
           <!-- upload form -->
           <div class="input-group mb-3">
             <div class="custom-file">
@@ -12,29 +12,29 @@
             </div>
           </div>
         </div>
-        <div class="col pt-3">
-          <div class="container-fluid" v-if="files.length > 0">
-            <div class="row">
-              <div class="col">
-                <div class="btn-group">
-                  <button class="btn btn-primary" v-on:click="upload()">Upload</button>
-                  <button class="btn btn-secondary" v-on:click="clearAll()">Clear</button>
-                </div>
-              </div>
-            </div>
-            <div class="row p-2" v-for="(fileObj, index) in files" v-bind:key="index">
-              <div class="col-md-6 fmr-lg-text pb-1" v-bind:class="{active : fileObj.status === 'uploading'}">
+        <div class="col-md-3">
+          <div class="btn-group" v-if="files.length > 0">
+            <button class="btn btn-primary" v-on:click="upload()">Upload</button>
+            <button class="btn btn-secondary" v-on:click="clearAll()">Clear</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="container-fluid pb-2" v-if="files.length > 0">
+            <div class="row pb-2" v-for="(fileObj, index) in files" v-bind:key="index">
+              <div class="col-md-6 pb-1" v-bind:class="{active : fileObj.status === 'uploading'}">
                 {{ fileObj.file.name }}
                 <div class="progress" style="height:1px;">
                   <div class="progress-bar bg-success" role="progressbar" :style="{width: fileObj.uploadProgress + '%'}"></div>
                 </div>
               </div>
-              <div class="col">
+              <div class="col-1">
                 <span v-bind:class="{'text-danger': fileObj.status === 'failed', 'text-success': fileObj.status === 'completed'}">
                   {{ fileObj.status }}
                 </span>
               </div>
-              <div class="col">
+              <div class="col-1">
                 <a class="fas fa-times fa-lg fmr-red" href="javascript:;" @click="cancelUpload(index, fileObj)"
                   v-if="fileObj.status !== 'completed'"></a>
               </div>
@@ -50,11 +50,11 @@
           <div class="card">
             <img :src="photo.url" class="card-img-top" />
             <div class="card-body">
-              <h5 class="card-title" v-show="photo.newTitle == null" @click="photo.newTitle = photo.title ? photo.title : ''">
+              <h5 class="card-title" v-show="photo.newTitle == null" @click="openTitleEdit(photo)">
                 {{ photo.title || 'Add a title' }}
               </h5>
               <div class="input-group" v-show="photo.newTitle != null">
-                <input type="text" class="form-control" placeholder="Add a title" v-model="photo.newTitle">
+                <input type="text" :ref="'title' + photo.viewId" class="form-control" placeholder="Add a title" v-model="photo.newTitle">
                 <div class="input-group-append" id="button-addon4">
                   <button class="btn btn-outline-success" type="button" @click="closeTitleInput(photo.viewId, true)">
                     <i class="fas fa-check"></i></button>
@@ -107,6 +107,15 @@ export default {
     })
   },
   methods: {
+    openTitleEdit(photo) {
+      photo.newTitle = photo.title ? photo.title : ''
+      console.log(this.$refs['title' + photo.viewId][0])
+      if (this.$refs['title' + photo.viewId][0]) {
+        this.$nextTick(() => {
+          this.$refs['title' + photo.viewId][0].focus()
+        })
+      }
+    },
     closeTitleInput(viewId, saveIt) {
       for (let i in this.ad.photos) {
         if (this.ad.photos[i].viewId === viewId) {
