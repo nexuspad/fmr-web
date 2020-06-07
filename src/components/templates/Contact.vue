@@ -17,23 +17,25 @@
           name="contact_name" v-model="ad.getAttribute(attributeId('contact_email')).value" />
       </div>
     </div>
-    <div class="form-row mt-2" v-show="!ad.getAttribute(attributeId('represented_by_owner')).value">
+    <div class="form-row mt-2">
       <div class="col-md-4">
         <label for="brokerage_company">Brokage or management company</label>
-        <input type="text" class="form-control" id="brokerage_company"
-          name="brokerage_company" v-model="ad.getAttribute(attributeId('brokerage_company')).value" />
+        <input type="text" class="form-control" id="brokerage_company" name="brokerage_company"
+          :disabled="ad.getAttribute(attributeId('represented_by_owner')).value == true"
+          v-model="ad.getAttribute(attributeId('brokerage_company')).value" />
       </div>
       <div class="col-md-3">
         <label for="mls_id">MLS or other ID</label>
-        <input type="text" class="form-control" id="mls_id"
-          name="mls_id" v-model="ad.getAttribute(attributeId('mls_id')).value" />
+        <input type="text" class="form-control" id="mls_id" name="mls_id"
+          :disabled="ad.getAttribute(attributeId('represented_by_owner')).value == true"
+          v-model="ad.getAttribute(attributeId('mls_id')).value" />
       </div>
     </div>
-    <div class="form-row mt-2" v-show="!ad.getAttribute(attributeId('represented_by_owner')).value">
+    <div class="form-row mt-2">
       <div class="col-md-8">
-        <label for="company_web_address">Company web address</label>
-        <input type="text" class="form-control" id="company_web_address" placeholder="http://company-web-address.com"
-          name="company_web_address" v-model="ad.getAttribute(attributeId('company_web_address')).value" />
+        <label for="company_web_address">Other web address</label>
+        <input type="text" class="form-control" id="company_web_address" name="company_web_address" placeholder="ex. http://company-web-address.com"
+          v-model="ad.getAttribute(attributeId('company_web_address')).value" />
       </div>
     </div>
     <div class="form-row mt-2" v-if="isHomeStyle(ad.categoryId)">

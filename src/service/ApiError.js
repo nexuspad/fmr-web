@@ -11,7 +11,7 @@ const ApiErrorMessage = {
     ACCT_AUTHENTICATION_FAILURE: 'Your login session has expired. <a href="/account/login">Re-login</a>.',
     ACCT_WRONG_PASSWORD: 'The account password is incorrect.',
     ACCT_INVALID_TOKEN: 'The reset key is invalid. Please try again.',
-    ACCESS_DENIED: 'Access denied.',
+    ACCESS_DENIED: 'Service not available.',
 
     UPLOAD_FILE_NOT_SUPPORTED: 'The file is not a valid image. Only JPG, PNG and GIF files are allowed.'
 }

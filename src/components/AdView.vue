@@ -5,9 +5,9 @@
       <div class="header">
         <h1 class="fmr-md-text" v-if="ad.id > 0">
           <a class="fas fa-chevron-circle-left fa-lg pr-2" @click="$router.go(-1)"></a>
-          <router-link :to="getPath({state: ad.state})">{{ stateName(ad.state) }}</router-link> / 
-          <router-link :to="{path: getPath({state: ad.state}), query: {city: ad.city}}">{{ ad.city }}</router-link> / 
-          <router-link :to="getPath({state: ad.state, categoryId: ad.category.id})">{{ categoryName([ad.categoryId]) }}</router-link> / 
+          <router-link :to="getPath({state: ad.state.toLowerCase()})">{{ stateName(ad.state) }}</router-link> / 
+          <router-link :to="{path: getPath({state: ad.state.toLowerCase()}), query: {city: ad.city}}">{{ ad.city }}</router-link> / 
+          <router-link :to="getPath({state: ad.state.toLowerCase(), categoryId: ad.category.id})">{{ categoryName([ad.categoryId]) }}</router-link> / 
           Ad# {{ ad.id }}
           <span class="fmr-disapp ml-2" v-if="ad.isDisapproved()"></span>
         </h1>

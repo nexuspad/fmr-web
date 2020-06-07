@@ -46,6 +46,9 @@ export default {
       posting: false
     }
   },
+  mounted() {
+    AccountService.serviceCheck()
+  },
   methods: {
     login() {
       const self = this

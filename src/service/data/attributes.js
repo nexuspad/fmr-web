@@ -176,6 +176,16 @@ const ATTRIBUTES =
         "type": "bool",
         "required": false
     },
+    "40": {
+        "name": "furnished",
+        "options": [
+            "true",
+            "false"
+        ],
+        "id": 40,
+        "type": "bool",
+        "required": false
+    },
     "41": {
         "name": "other_amenities",
         "id": 41,
@@ -686,7 +696,10 @@ const ATTRIBUTES =
             "Central Heating",
             "Bus Line",
             "Conferencing Facility",
-            "Food Service"
+            "Food Service",
+            "Wi-Fi",
+            "Fitness Centers",
+            "Outdoor Space"
         ],
         "id": 140,
         "type": "array",

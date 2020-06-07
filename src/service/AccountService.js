@@ -38,6 +38,10 @@ export default class AccountService {
         }
     }
 
+    static serviceCheck() {
+        RestClient.instance().get('/servicecheck')
+    }
+
     static login (email, password) {
         return new Promise((resolve, reject) => {
             RestClient.instance().post('/login', AccountServiceRequest.forLogin(email, password))

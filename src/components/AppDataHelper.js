@@ -159,7 +159,7 @@ export default {
             return aDate
         },
         dollar(amount) {
-            return formatter.format(amount)
+            return formatter.format(amount.replace(/[^0-9]/gi, ''))
         }
     }
 }

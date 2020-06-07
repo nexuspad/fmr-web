@@ -10,6 +10,9 @@
         <h6 class="card-subtitle mb-2 text-muted" v-if="hasAttributeValue('contact_phone')">
           {{ formatPhone(attributeValue('contact_phone')) }}
         </h6>
+        <h6 class="card-subtitle mb-2 text-muted" v-if="hasAttributeValue('contact_email')">
+          {{ formatPhone(attributeValue('contact_email')) }}
+        </h6>
         <div class="card-text">
           <div v-if="hasAttributeValue('mls_id')">
             <strong>MLS ID:</strong> {{ attributeValue('mls_id') }}

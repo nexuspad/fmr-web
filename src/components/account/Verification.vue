@@ -116,7 +116,7 @@ export default {
       .then(() => {
         self.posting = false
         EventManager.publishAppEvent(AppEvent.ofSuccess(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, 
-              'Your account has been successfully verified. Thank you. <p class="p-4"><a href="/placead">Place ad</a></p>'))
+              'Your account has been successfully verified. Thank you. <p class="p-2"><a href="/placead">Post new ad</a></p>'))
       })
       .catch((error) => {
         console.error(error)

@@ -2,7 +2,7 @@
   <div class="mb-4">
     <div class="d-flex flex-row flex-wrap bd-highlight mb-2" v-if="hasAttributeValue('neighborhood') || hasAttributeValue('close_to')">
       <div class="mr-4" v-if="hasAttributeValue('neighborhood')">
-        <label>neighborhood</label>
+        <label>Neighborhood</label>
         <div>{{ attributeValue('neighborhood') }}</div>
       </div>
       <div class="mr-4" v-if="hasAttributeValue('close_to')">

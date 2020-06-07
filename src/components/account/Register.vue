@@ -62,6 +62,9 @@ export default {
       posting: false
     }
   },
+  mounted() {
+    AccountService.serviceCheck()
+  },
   methods: {
     register() {
       if (!this.email) {

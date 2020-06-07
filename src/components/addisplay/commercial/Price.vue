@@ -6,13 +6,15 @@
           <label>Asking price:</label>
           <strong class="fmr-green ml-1">{{ dollar(attributeValue('price')) }}</strong>
         </div>
-        <div>
+        <div v-if="hasAttributeValue('price_per_sqft')">
           <label>Price per SF:</label>
           <strong class="fmr-green ml-1">{{ dollar(attributeValue('price_per_sqft')) }}</strong>
         </div>
       </div>
       <div class="col">
-        <span v-if="hasAttributeValue('owner_financing_available')">Owner financing available</span>
+        <span v-if="hasAttributeValue('owner_financing_available') && attributeValue('owner_financing_available') != false">
+          Owner financing available
+        </span>
       </div>
     </div>
     <div class="row" v-if="hasAttributeValue('available_date')">

@@ -6,9 +6,9 @@
           {{ categoryName(categoryId) }}
           <span class="fmr-deact ml-2" v-if="ad !== null && ad.isDeactivated()"></span>
         </span>
-        <span class="font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft() && autoSaveTimerId > 0">
+        <span class="font-weight-light fmr-sm-text" v-if="ad !== null && ad.isDraft() && ad.id && autoSaveTimerId > 0">
           <i class="fas fa-circle fa-sm ml-1" :class="{'fmr-green' : posting}"></i>
-          <span class="ml-1" v-if="ad !== null && ad.id">auto saved draft #{{ ad.id }}</span>
+          <span class="ml-1">auto saved draft #{{ ad.id }}</span>
         </span>
         <div class="mr-2 float-right">
           <a class="far fa-times-circle fa-lg" @click="exitEdit()"></a>
@@ -21,7 +21,7 @@
           <div v-if="ad != null" class="float-right mr-2 pt-1 pb-1">
             <button class="btn btn-primary" :class="{disabled: invalidFields.length > 0}" 
               v-on:click="save(false)" v-if="ad !== null && !ad.isDraft()">Update</button>
-            <button class="btn btn-outline-primary mr-2" v-if="ad !== null && ad.isDraft()">Save</button>
+            <button class="btn btn-light mr-2" v-if="ad !== null && ad.isDraft()" @click="saveAsNeeded(true)">Save</button>
             <button class="btn btn-primary" 
               data-toggle="modal" data-target="#SubmissionConfirmation" :disabled="invalidFields.length > 0" 
               v-if="ad !== null && ad.isDraft()">Publish</button>
@@ -63,10 +63,10 @@
             <ad-detail-land :ad=ad :key="ad.updateTime" v-if="isLand(ad.categoryId) && invalidFields.length === 0" />
             <ad-detail-vacation :ad=ad :key="ad.updateTime" v-if="isVacation(ad.categoryId) && invalidFields.length === 0" />
             <ad-detail-commercial :ad=ad :key="ad.updateTime" v-if="isCommercial(ad.categoryId) && invalidFields.length === 0" />
-            <div v-if="invalidFields.length > 0" class="pl-2">
+            <div v-if="invalidFields.length > 0" class="pl-4">
               <p class="lead">The following information is required before you can submit the ad:</p>
               <ul v-if="invalidFields.length > 0">
-                <li v-for="(field, index) in invalidFields" v-bind:key="index" class="border-bottom p-2 text-capitalize">
+                <li v-for="(field, index) in invalidFields" v-bind:key="index" class="p-2 text-capitalize">
                   {{ field.replace('_', ' ') }}
                 </li>
               </ul>
@@ -233,8 +233,8 @@ export default {
         this.autoSaveTimerId = setInterval(() => this.saveAsNeeded(), 8000);
       }
     },
-    saveAsNeeded() {
-      if (this.changeTimestamp - this.ad.updateTime > 2)
+    saveAsNeeded(forceSave = false) {
+      if (this.changeTimestamp - this.ad.updateTime > 2 || forceSave)
         this.save()
     }
   },
