@@ -16,7 +16,7 @@
     <community :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <other-amenities :ad=ad v-if="isHomeStyle(ad.categoryId) || isCondoStyle(ad.categoryId)" />
     <description :ad=ad />
-    <by-owner :ad=ad v-if="isByOwnerEligible(ad.categoryId)" />
+    <by-owner :ad=ad />
     <contact :ad=ad :key="ad.updateTime" />
   </div>
 </template>
@@ -36,7 +36,7 @@ import CondoAmenities from './residential/CondoAmenities'
 import Community from './residential/Community'
 import OtherAmenities from './OtherAmenities'
 import Contact from './Contact'
-import ByOwner from './residential/ByOwner'
+import ByOwner from './ByOwner'
 import PropertySize from './residential/PropertySize'
 import ManufacturedHome from './residential/ManufacturedHome'
 import Description from './Description'

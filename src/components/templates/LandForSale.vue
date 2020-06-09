@@ -14,7 +14,7 @@ import TitlePrice from './residential/TitlePrice'
 import FullAddress from './FullAddress'
 import LandZoneSize from './land/LandZoneSize'
 import Description from './Description'
-import ByOwner from './residential/ByOwner'
+import ByOwner from './ByOwner'
 import Contact from './Contact'
 import AppDataHelper from '../AppDataHelper'
 

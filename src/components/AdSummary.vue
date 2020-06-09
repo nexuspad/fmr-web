@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row pt-2">
-      <div class="col-3">
+      <div class="col-md-3">
         <router-link :to="'/ad/' + ad.id + '/' + ad.uri">
           <img v-lazy="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
         </router-link>
@@ -9,10 +9,10 @@
           <div class="mt-n2">{{ categoryName(ad.categoryId) }}</div>
         </div>
       </div>
-      <div class="col-9">
+      <div class="col-md-9">
         <div class="container">
           <div class="row">
-            <div class="col-9">
+            <div class="col-md-9">
               <h2>
                 <router-link :to="'/ad/' + ad.id + '/' + ad.uri" class="fmr-red">{{ ad.title }}</router-link>
                 <span class="fmr-disapp ml-2" v-if="ad.isDisapproved()"></span>
@@ -22,7 +22,7 @@
               </h2>
               <div class="lead" v-if="ad.city && ad.state"><span class="text-capitalize">{{ ad.city }}</span>, {{ ad.state }}</div>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
               <div class="container">
                 <price-bed-bath :ad="ad" />
               </div>

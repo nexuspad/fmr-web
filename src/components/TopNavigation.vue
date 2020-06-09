@@ -1,10 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-transparent">
+  <nav class="navbar navbar-expand-lg bg-transparent navbar-light">
     <a class="navbar-brand" :href="homePath">
       <img src="@/assets/images/findmyroof.png" />
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#AccountNav"
-      aria-controls="AccountNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#AccountNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="AccountNav">

@@ -65,8 +65,17 @@ border-radius: 0.2rem !important;}
 .fmr-bordered-area .header {background: #f1f4fb; color:#555555; border-radius: 0.2rem 0.2em !important; 
   padding: 0.6em 0 0.2rem 1rem; border-bottom: 1px solid #dee2e6}
 
-.fmr-nav {text-transform: capitalize;
-  border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;}
+@media all and (min-width: 768px) {
+  .fmr-nav {text-transform: capitalize;
+    border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965; background:url(./images/bgr-vertical-sprite.png) repeat-x 0 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .fmr-nav {text-transform: capitalize;
+    border-width:1px; border-style:solid; border-color:#2f51b2 #264296 #152965;
+  }
+}
 
 a.far:hover, a.fas:hover { text-decoration: none; cursor: pointer;
   -webkit-transform: scale(1.3);

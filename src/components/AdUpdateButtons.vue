@@ -12,13 +12,16 @@
       <button type="button" class="btn btn-primary pl-4 pr-4" @click="editAd()" v-if="ad.isDraft()">
         Edit
       </button>
-      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && daysToExpire() < 100" data-toggle="modal" :data-target="'#ExtendConfirmation' + ad.id">
+      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && daysToExpire() < 30" 
+        data-toggle="modal" :data-target="'#ExtendConfirmation' + ad.id">
         Extend
       </button>
-      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && ad.isDeactivated()" @click="activate()">
+      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && ad.isDeactivated()" 
+        @click="activate()">
         Activate
       </button>
-      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && ad.isActive()" @click="deActivate()">
+      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && !ad.isDeactivated()" 
+        @click="deActivate()">
         De-activate
       </button>
       <button type="button" class="btn btn-danger" data-toggle="modal" :data-target="'#DeleteConfirmation' + ad.id">

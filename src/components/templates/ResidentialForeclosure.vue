@@ -14,7 +14,6 @@
     <community :ad=ad />
     <other-amenities :ad=ad />
     <description :ad=ad />
-    <by-owner :ad=ad v-if="isByOwnerEligible(ad.categoryId)" />
     <contact :ad=ad />
   </div>
 </template>
@@ -33,7 +32,6 @@ import BedBathFeatures from './residential/BedBathFeatures'
 import Community from './residential/Community'
 import OtherAmenities from './OtherAmenities'
 import Contact from './Contact'
-import ByOwner from './residential/ByOwner'
 import PropertySize from './residential/PropertySize'
 import Description from './Description'
 import AppDataHelper from '../AppDataHelper'
@@ -44,7 +42,7 @@ export default {
   components: {
       TitlePrice, ForeclosureType, BedBathBasement, FullAddress, LocationCloseTo, Schools,
       Interior, Exterior, KitchenDining, BedBathFeatures, Community, OtherAmenities,
-      Contact, ByOwner, PropertySize, Description
+      Contact, PropertySize, Description
   }
 };
 </script>

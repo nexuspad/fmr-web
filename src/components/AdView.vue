@@ -1,6 +1,7 @@
 <template>
   <div>
     <category-navigation />
+    <message />
     <div class="fmr-bordered-area">
       <div class="header">
         <h1 class="fmr-md-text" v-if="ad.id > 0">
@@ -47,11 +48,14 @@ import AdService from '../service/AdService'
 import FmrAd from '../service/model/FmrAd'
 import AppDataHelper from './AppDataHelper'
 import AdWarning from './misc/AdWarning'
+import Message from './Message'
+import EventManager from '../util/EventManager'
+import AppEvent from '../util/AppEvent'
 
 export default {
   mixins: [ AppDataHelper ],
   components: {
-    CategoryNavigation, AdDetailResidential, AdDetailLand, AdDetailVacation, AdDetailCommercial, AdWarning
+    CategoryNavigation, Message, AdDetailResidential, AdDetailLand, AdDetailVacation, AdDetailCommercial, AdWarning
   },
   data() {
     return {
@@ -63,6 +67,8 @@ export default {
       const self = this
       AdService.getAd(this.$route.params.id).then((ad) => {
         self.ad = ad
+      }).catch((error) => {
+        EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
       })
     }
   },

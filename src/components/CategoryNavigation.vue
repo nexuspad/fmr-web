@@ -1,11 +1,10 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fmr-nav rounded mb-1">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-        aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#CategoryNavigator">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav" :key="forceRefreshKey">
+      <div class="collapse navbar-collapse" id="CategoryNavigator" :key="forceRefreshKey">
         <ul class="navbar-nav">
           <li class="nav-item dropdown active">
             <a class="nav-link dropdown-toggle py-0" href="#" id="forRentDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -14,7 +13,7 @@
             <div class="dropdown-menu" aria-labelledby="forRentDropdown">
               <div class="container fmr-lg-text">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-md-6">
                     <h4 class="dropdown-header">
                       <router-link :to="getPath(2000)">Residential</router-link>
                     </h4>
@@ -25,7 +24,7 @@
                     <router-link class="dropdown-item primary" :to="getPath(3029)">Manufactured homes</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(2007)">Find roommate</router-link>
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6">
                     <h4 class="dropdown-header">
                       <router-link :to="getPath(2010)">Commercial</router-link>
                     </h4>
@@ -48,7 +47,7 @@
             <div class="dropdown-menu" aria-labelledby="forSaleDropdown">
               <div class="container fmr-lg-text">
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-md-6">
                     <h4 class="dropdown-header">
                       <router-link :to="getPath(2001)">Residential</router-link>
                     </h4>
@@ -59,7 +58,7 @@
                     <router-link class="dropdown-item primary" :to="getPath(3015)">Land</router-link>
                     <router-link class="dropdown-item primary" :to="getPath(3025)">Foreclosures</router-link>
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6">
                     <h4 class="dropdown-header">
                       <router-link :to="getPath(2012)">Commercial</router-link>
                     </h4>

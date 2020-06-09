@@ -2,19 +2,6 @@
   <div>
     <admin-message :message="message" />
     <navigation />
-    <!--
-    <div class="container-fluid p-2">
-      <div class="row">
-        <div class="col">
-          <input type="email" class="form-control" id="email" v-model="email" placeholder="email" />
-        </div>
-        <div class="col">
-          <button class="btn btn-primary" v-on:click="impersonate()">Impersonate</button>
-        </div>
-        <div class="col">{{ token }}</div>
-      </div>
-    </div>
-    -->
     <div class="container-fluid" v-if="users.length > 0">
       <div class="row pb-1 border-bottom mb-2">
         <div class="col-1">
@@ -27,7 +14,6 @@
           <button class="btn btn-primary mr-2" v-on:click="search()">Search</button>
         </div>
         <div class="col">
-          <iframe src="https://panda.findmyroof.com/polo.html" width="40" height="30" frameBorder="0" id="Polo"></iframe>
         </div>
         <div class="col-3">
           <button class="btn btn-secondary mr-2" v-on:click="suspend(selectedUser.id)" v-if="selectedUser.id && !selectedUser.isSuspended()">Suspend</button>
@@ -48,7 +34,7 @@
           {{ u.id }}
         </div>
         <div class="col">
-          <span @click="userEmail = u.email; selectedUser = u">{{ u.email }}</span>
+          <span @click="setUserEmail(u.email); selectedUser = u">{{ u.email }}</span>
         </div>
         <div class="col">
           {{ u.status }}
@@ -61,23 +47,59 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid" v-if="userAds.length > 0">
+      <div class="row pb-1 font-weight-bold">
+        <div class="col-1">Id</div>
+        <div class="col-2">Title</div>
+        <div class="col-1">State</div>
+        <div class="col-1"></div>
+        <div class="col">Owner</div>
+        <div class="col">Score</div>
+        <div class="col-3"></div>
+      </div>
+      <div class="row pb-1 fmr-sm-text mb-2" v-for="ad in userAds" v-bind:key="ad.id">
+        <div class="col-1">
+          {{ ad.id }}
+        </div>
+        <div class="col-2">
+          {{ ad.title }}
+        </div>
+        <div class="col-1">
+          {{ ad.state }}
+        </div>
+        <div class="col-1">
+          {{ ad.status.replace('_', ' ') }}
+        </div>
+        <div class="col">
+          <span @click="setUserEmail(ad.owner.email)">{{ ad.owner.email }}</span>
+        </div>
+        <div class="col">{{ ad.scoreCard.score }} <br/> {{ ad.scoreCard.comment }}</div>
+        <div class="col">
+          <button class="btn btn-secondary" v-on:click="disapprove(ad.id)" v-if="!ad.isDisapproved()">Disapprove</button>
+          &nbsp;
+          <button class="btn btn-secondary" v-on:click="approve(ad.id)" v-if="ad.isDisapproved()">Approve</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import AdminHelper from './AdminHelper'
 import AdminMessage from './AdminMessage'
 import Navigation from './Navigation'
 import AdminService from '../service/AdminService'
 import User from '../../service/model/User'
 
 export default {
+  mixins: [ AdminHelper ],
   components: {
     AdminMessage, Navigation
   },
   data() {
     return {
       selectedUser: new User,
-      userEmail: '',
       users: [],
       email: '',
       token: '',
@@ -99,10 +121,21 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
+
+      AdminService.searchAds(this.adId, this.userEmail).then((adsReturned) => {
+        while (self.userAds.length > 0) {
+          self.userAds.pop()
+        }
+        adsReturned.forEach(p => {
+          self.userAds.push(p)
+        });
+      }).catch((error) => {
+        console.error(error)
+      })
     },
     reset() {
       this.selectedUser = new User
-      this.userEmail = ''
+      this.setUserEmail('')
       this.getLatest()
     },
     getLatest() {
@@ -118,19 +151,6 @@ export default {
           }
         });
       }).catch(() => {
-      })
-    },
-    impersonate(email) {
-      const self = this
-      AdminService.impersonate(email)
-      .then((user) => {
-        alert('You are logged in as ' + user.email)
-        const win = document.getElementsByTagName('iframe')[0].contentWindow;
-        win.postMessage(JSON.stringify({key: 'token', data: user.token}), "*");
-        self.token = user.token
-      })
-      .catch((error) => {
-        alert(error)
       })
     },
     suspend(userId) {

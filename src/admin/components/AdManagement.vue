@@ -10,7 +10,7 @@
         <div class="col-1"></div>
         <div class="col">Owner</div>
         <div class="col">Score</div>
-        <div class="col"></div>
+        <div class="col-3"></div>
       </div>
       <form v-on:submit.prevent>
       <div class="row pb-1 border-bottom mb-2">
@@ -18,11 +18,12 @@
         <div class="col-2"></div>
         <div class="col-1"></div>
         <div class="col-1"></div>
-        <div class="col"><input type="email" class="form-control" v-model="ownerEmail" /></div>
+        <div class="col"><input type="email" class="form-control" v-model="userEmail" /></div>
         <div class="col"></div>
-        <div class="col">
-          <button class="btn btn-primary" v-on:click="search()">Search</button>
-          <button class="btn btn-secondary ml-2" v-on:click="reset()">Clear</button>
+        <div class="col-3">
+          <button class="btn btn-primary mr-2" v-on:click="search()" v-if="userEmail">Search</button>
+          <button class="btn btn-primary mr-2" v-on:click="impersonate(userEmail)" v-if="userEmail">Impersonate</button>
+          <button class="btn btn-secondary" v-on:click="reset()">Clear</button>
         </div>
       </div>
       </form>
@@ -40,7 +41,7 @@
           {{ ad.status.replace('_', ' ') }}
         </div>
         <div class="col">
-          <span @click="ownerEmail = ad.owner.email">{{ ad.owner.email }}</span>
+          <span @click="setUserEmail(ad.owner.email)">{{ ad.owner.email }}</span>
         </div>
         <div class="col">{{ ad.scoreCard.score }} <br/> {{ ad.scoreCard.comment }}</div>
         <div class="col">
@@ -50,23 +51,23 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
+import AdminHelper from './AdminHelper'
 import AdminMessage from './AdminMessage'
 import Navigation from './Navigation'
 import AdminService from '../service/AdminService'
 
 export default {
+  mixins: [ AdminHelper ],
   components: {
     AdminMessage, Navigation
   },
   data() {
     return {
       adId: null,
-      ownerEmail: null,
       ads: [],
       message: ''
     }
@@ -90,7 +91,7 @@ export default {
     },
     search () {
       const self = this
-      AdminService.searchAds(this.adId, this.ownerEmail).then((adsReturned) => {
+      AdminService.searchAds(this.adId, this.userEmail).then((adsReturned) => {
         while (self.ads.length > 0) {
           self.ads.pop()
         }
@@ -103,7 +104,7 @@ export default {
     },
     reset() {
       this.adId = null
-      this.ownerEmail = null
+      this.setUserEmail('')
       this.getLatest()
     },
     disapprove(id) {

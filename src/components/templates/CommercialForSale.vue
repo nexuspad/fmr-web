@@ -10,6 +10,7 @@
     <other-amenities :ad=ad />
     <description :ad=ad />
     <financials :ad=ad />
+    <by-owner :ad=ad />
     <contact :ad=ad />
   </div>
 </template>
@@ -18,6 +19,7 @@
 import AppDataHelper from '../AppDataHelper'
 import FullAddress from './FullAddress'
 import LocationCloseTo from './LocationCloseTo'
+import ByOwner from './ByOwner'
 import Contact from './Contact'
 import Description from './Description'
 import OtherAmenities from './OtherAmenities'
@@ -32,7 +34,7 @@ export default {
   mixins: [ AppDataHelper ],
   props: ['ad'],
   components: {
-    FullAddress, LocationCloseTo, Contact, Description, TitlePrice, BuildingForSale, LotParking, ComAmenities, OtherAmenities, Tenancy, Financials
+    FullAddress, LocationCloseTo, ByOwner, Contact, Description, TitlePrice, BuildingForSale, LotParking, ComAmenities, OtherAmenities, Tenancy, Financials
   }
 }
 </script>
