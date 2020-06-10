@@ -1,5 +1,6 @@
 <template>
   <div>
+    <vue-headful :title="getAdHeaderTitle(ad)" description="" />
     <category-navigation />
     <message />
     <div class="fmr-bordered-area">
@@ -33,7 +34,6 @@
       </div>
       <ad-warning v-if="ad.id > 0" />
     </div>
-    <vue-headful :title="ad.title" description="" />
   </div>
 </template>
 
@@ -47,13 +47,14 @@ import AdDetailCommercial from './addisplay/AdDetailCommercial'
 import AdService from '../service/AdService'
 import FmrAd from '../service/model/FmrAd'
 import AppDataHelper from './AppDataHelper'
+import PageTitleHelper from './PageTitleHelper'
 import AdWarning from './misc/AdWarning'
 import Message from './Message'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
 
 export default {
-  mixins: [ AppDataHelper ],
+  mixins: [ AppDataHelper, PageTitleHelper ],
   components: {
     CategoryNavigation, Message, AdDetailResidential, AdDetailLand, AdDetailVacation, AdDetailCommercial, AdWarning
   },

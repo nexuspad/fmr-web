@@ -15,10 +15,10 @@ export default {
           const self = this
           AdminService.impersonate(email)
           .then((user) => {
-            alert('You are logged in as ' + user.email)
             const win = document.getElementsByTagName('iframe')[0].contentWindow;
             win.postMessage(JSON.stringify({key: 'token', data: user.token}), "*");
             self.token = user.token
+            self.message = 'You are logged in as ' + email
           })
           .catch((error) => {
             alert(error)

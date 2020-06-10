@@ -93,6 +93,10 @@ export default class FmrAd {
         return this.getAttribute(12).value
     }
 
+    get zipCode() {
+        return this.getAttribute(33).value
+    }
+
     isActive() {
         if (this.status === 'ACTIVE') {
             return true

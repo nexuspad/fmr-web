@@ -5,7 +5,7 @@
       <h1>Settings</h1>
     </div>
     <div class="fmr-form p-4 col-lg-6 offset-lg-3">
-      <div class="form-row border-bottom lead bg-light pl-1 mb-2">
+      <div class="form-row border-bottom lead pl-1 mb-2">
         Email
       </div>
       <div class="form-row mb-4">
@@ -13,7 +13,7 @@
           {{ email }}
         </div>
       </div>
-      <div class="form-row border-bottom mb-4 lead pl-1 bg-light">
+      <div class="form-row border-bottom mb-4 lead pl-1">
         Update password
       </div>
       <div class="form-row">
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <div class="form-row border-bottom mt-4 mb-4 lead pl-1 bg-light">
+      <div class="form-row border-bottom mt-4 mb-4 lead pl-1">
         Remove my account
       </div>
       <div class="form-row">

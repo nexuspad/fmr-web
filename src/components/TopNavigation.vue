@@ -14,28 +14,28 @@
       </ul>
       <ul class="navbar-nav justify-content-end" v-if="!isLoggedIn">
         <li class="nav-item">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/account/register'}" to="/account/register">
+          <router-link class="nav-link" :class="{active: $route.path ==='/account/register'}" to="/account/register">
             Register
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/account/login'}" to="/account/login">
+          <router-link class="nav-link" :class="{active: $route.path ==='/account/login'}" to="/account/login">
             Log In
           </router-link>
         </li>
       </ul>
       <ul class="navbar-nav justify-content-end" v-if="(activity === 'browsing' || activity === 'account') && isLoggedIn">
         <li class="nav-item" v-if="!isVerified">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/account/verify'}" to="/account/verify">Verify Your Account</router-link>
+          <router-link class="nav-link" :class="{active: $route.path ==='/account/verify'}" to="/account/verify">Verify Your Account</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/placead'}" to="/placead">Post an Ad</router-link>
+          <router-link class="nav-link" :class="{active: $route.path ==='/placead'}" to="/placead">Post an Ad</router-link>
         </li>
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/account/myads'}" to="/account/myads">My Ads</router-link>
+          <router-link class="nav-link" :class="{active: $route.path ==='/account/myads'}" to="/account/myads">My Ads</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :class="{disabled: $route.path ==='/account/settings'}" to="/account/settings">Settings</router-link>
+          <router-link class="nav-link" :class="{active: $route.path ==='/account/settings'}" to="/account/settings">Settings</router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="javascript:;" v-on:click="logout()">Log Out</a>
@@ -43,7 +43,7 @@
       </ul>
       <ul class="navbar-nav justify-content-end" v-if="(activity === 'editing') && isLoggedIn">
         <li class="nav-item" v-if="isVerified">
-          <router-link class="nav-link" :class="{disabled : $route.path ==='/account/myads'}" to="/account/myads">My Ads</router-link>
+          <router-link class="nav-link" :class="{active : $route.path ==='/account/myads'}" to="/account/myads">My Ads</router-link>
         </li>
       </ul>
     </div>

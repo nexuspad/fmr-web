@@ -3,12 +3,12 @@
     <message />
     <div class="fmr-bordered-area" v-if="$route.path == '/account/requestpasswordreset'">
       <div class="header">
-        <h1>Request password reset</h1>
+        <h1>Password reset</h1>
       </div>
       <div class="p-2">
         <div class="fmr-form p-2 col-lg-6 offset-lg-3">
-          <div class="border-bottom lead bg-light pl-1 mb-4">
-            Please enter your account email address below and click on "Request password reset" button. You will receive instructions on how to reset your password.
+          <div class="border-bottom lead pl-1 mb-4">
+            Request password reset
           </div>
           <div class="form-group pl-1">
             <label for="email">Email address</label>
@@ -26,7 +26,7 @@
       </div>
       <div class="p-2">
         <div class="fmr-form p-2 col-lg-6 offset-lg-3">
-          <div class="border-bottom lead bg-light pl-1 mb-4">
+          <div class="border-bottom lead pl-1 mb-4">
             Enter your new password below
           </div>
           <div class="form-group pl-1">

@@ -1,9 +1,15 @@
 <template>
   <div class="container p-0">
-    <div class="row" v-if="hasAttributeValue('rate_per_night')">
+    <div class="row">
       <div class="col-md-3">
-        <label>Rate per night:</label>
-        <strong class="fmr-green ml-1">{{ dollar(attributeValue('rate_per_night')) }}</strong>
+        <div v-if="hasAttributeValue('rate_per_night')">
+          <label>Rate per night:</label>
+          <strong class="fmr-green ml-1">{{ dollar(attributeValue('rate_per_night')) }}</strong>
+        </div>
+        <div v-if="hasAttributeValue('rent')">
+          <label>Rent by month:</label>
+          <strong class="fmr-green ml-1">{{ dollar(attributeValue('rent')) }}</strong>
+        </div>
       </div>
       <div class="col-md-9">
         <div v-if="hasAttributeValue('special_offer')">

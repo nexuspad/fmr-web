@@ -3,7 +3,7 @@
     <div class="custom-control custom-switch">
       <input type="checkbox" class="custom-control-input" id="availableNow" 
         v-model="isAvailableNow" @change="changeToAvailableNow()" />
-      <label class="custom-control-label mb-2" for="availableNow">Available now or</label>
+      <label class="custom-control-label mb-2" for="availableNow">Available now or on</label>
     </div>
     <datepicker input-class="form-control" bootstrap-styling clear-button 
       :disabled="isAvailableNow" placeholder="Select a date"

@@ -23,12 +23,13 @@
 <p>Your email address only.<br/>
 A valid email is required to create an account. We do not share your email with any third party.</p>
 
-<h2 id="Verification">Why do you need mobile text verification?</h2>
-<p>Mobile text verification provides a stronger level of security and can effectively reduce spam/scam on our site.<br/>
+<h2 id="Verification">Why do you need SMS(text) verification?</h2>
+<p>Mobile text verification provides a stronger level of security and can effectively reduce spam/scam on our site
+  by filtering out some users who intend to use the site inappropriately.<br/>
 Your phone number is only used once for sending a verification code and we do not store your phone number in our system.</p>
 
 <h2>I don't have a mobile phone / I don't want to give out my number / Texting does not work, what do I do?</h2>
-<p>You can email us at help@findmyroof.com. We'll be happy to manually verify your account and activate it for you.</p>
+<p>Please email us at help@findmyroof.com.</p>
 
 <h2>How long will my ad stay "live" on FindMyRoof.com?</h2>
 <p>Technically your ad will stay "live" for a period of 90 days once it is submitted on FindMyRoof.com. 

@@ -3,6 +3,28 @@
     <admin-message :message="message" />
     <navigation />
     <div class="container-fluid" v-if="ads.length > 0">
+      <form v-on:submit.prevent>
+      <div class="row pb-1 border-bottom mb-2">
+        <div class="col-1">
+          <input type="text" class="form-control" v-model="adId" />
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary mr-2" v-on:click="search()" v-if="userEmail">Search</button>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1"></div>
+        <div class="col">
+          <input type="email" class="form-control" v-model="userEmail" />
+        </div>
+        <div class="col">
+          <button class="btn btn-primary mr-2" v-on:click="search()">Search</button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-primary mr-2" v-on:click="impersonate(userEmail)" v-if="userEmail">Impersonate</button>
+          <button class="btn btn-secondary" v-on:click="reset()">Clear</button>
+        </div>
+      </div>
+      </form>
       <div class="row pb-1 font-weight-bold">
         <div class="col-1">Id</div>
         <div class="col-2">Title</div>
@@ -12,21 +34,6 @@
         <div class="col">Score</div>
         <div class="col-3"></div>
       </div>
-      <form v-on:submit.prevent>
-      <div class="row pb-1 border-bottom mb-2">
-        <div class="col-1"><input type="text" class="form-control" v-model="adId" /></div>
-        <div class="col-2"></div>
-        <div class="col-1"></div>
-        <div class="col-1"></div>
-        <div class="col"><input type="email" class="form-control" v-model="userEmail" /></div>
-        <div class="col"></div>
-        <div class="col-3">
-          <button class="btn btn-primary mr-2" v-on:click="search()" v-if="userEmail">Search</button>
-          <button class="btn btn-primary mr-2" v-on:click="impersonate(userEmail)" v-if="userEmail">Impersonate</button>
-          <button class="btn btn-secondary" v-on:click="reset()">Clear</button>
-        </div>
-      </div>
-      </form>
       <div class="row pb-1 fmr-sm-text mb-2" v-for="ad in ads" v-bind:key="ad.id">
         <div class="col-1">
           {{ ad.id }}

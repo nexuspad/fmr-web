@@ -31,6 +31,10 @@ export default class AppContext {
         this._updateLocal()
     }
 
+    static isFsbo() {
+        return this._filterParams.isFsbo()
+    }
+    
     static getState() {
         return this._filterParams.getState()
     }

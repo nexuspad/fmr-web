@@ -10,13 +10,25 @@
     <div class="form-row">
       <div class="col-md-3">
         <div class="form-group">
-          <label for="rate_per_night" class="required">Avg. rate per night</label>
+          <label for="rate_per_night">Avg. rate per night</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text fmr-green bg-light">$</div>
             </div>
             <input type="text" class="form-control" id="rate_per_night"
               name="rate_per_night" v-model="ad.getAttribute(attributeId('rate_per_night')).value" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="monthly_rent">Rent by month</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text fmr-green bg-light">$</div>
+            </div>
+            <input type="text" class="form-control" id="monthly_rent"
+              name="monthly_rent" v-model="ad.getAttribute(attributeId('rent')).value" />
           </div>
         </div>
       </div>

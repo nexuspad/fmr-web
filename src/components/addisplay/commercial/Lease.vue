@@ -6,6 +6,10 @@
           <label class="mr-1">Rate/SF/YR:</label>
           <strong class="fmr-green ml-1">{{ dollar(attributeValue('rate_sqft_year')) }}</strong>
         </div>
+        <div v-if="hasAttributeValue('rent')">
+          <label>Rent by month:</label>
+          <strong class="fmr-green ml-1">{{ dollar(attributeValue('rent')) }}</strong>
+        </div>
         <div v-if="hasAttributeValue('lease_term')">
           <label class="mr-1">Lease term:</label>{{ attributeValue('lease_term') }}
         </div>

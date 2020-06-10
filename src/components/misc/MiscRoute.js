@@ -14,23 +14,38 @@ export default class MiscRoute {
             },
             {
                 path: '/site/aboutus',
-                component: AboutUs
+                component: AboutUs,
+                meta: {
+                    title: 'About FindMyRoof',
+                }
             },
             {
                 path: '/site/faqs',
-                component: Faq
+                component: Faq,
+                meta: {
+                    title: 'FAQs',
+                }
             },
             {
                 path: '/site/contactus',
-                component: ContactUs
+                component: ContactUs,
+                meta: {
+                    title: 'Contact us',
+                }
             },
             {
                 path: '/site/termsofservice',
-                component: Tos
+                component: Tos,
+                meta: {
+                    title: 'Terms of service',
+                }
             },
             {
                 path: '/site/privacypolicy',
-                component: PrivacyPolicy
+                component: PrivacyPolicy,
+                meta: {
+                    title: 'Privacy policy',
+                }
             }
         ]
     }

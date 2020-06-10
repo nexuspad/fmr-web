@@ -9,7 +9,7 @@
     </div>
     <div class="fmr-form mt-2 p-2 col-lg-6 offset-lg-3" v-if="!registrationSuccess">
       <form v-on:submit.prevent>
-        <div class="border-bottom lead bg-light pl-1 mb-4">
+        <div class="border-bottom lead pl-1 mb-4">
           Create a new account
         </div>
         <div class="form-group pl-1">

@@ -76,7 +76,7 @@ const ATTRIBUTES =
         "name": "rent",
         "id": 21,
         "type": "number",
-        "required": true
+        "required": false
     },
     "22": {
         "name": "price",
@@ -726,6 +726,12 @@ const ATTRIBUTES =
     "154": {
         "name": "parcel_number",
         "id": 154,
+        "type": "string",
+        "required": false
+    },
+    "161": {
+        "name": "showing_instruction",
+        "id": 161,
         "type": "string",
         "required": false
     },

@@ -1,44 +1,33 @@
 <template>
-  <footer class="container pt-5">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="d-block mb-3 text-muted">&copy; FindMyRoof.</div>
-        <div class="d-block mb-3 text-muted">All rights reserved.</div>
-      </div>
-      <div class="col-md-2">
-        <h5 class="text-muted">About</h5>
-        <ul class="list-unstyled text-small">
-          <li>
-            <router-link class="text-muted" to="/site/aboutus">The Site</router-link>
+  <footer class="container mt-5 mb-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#FooterContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="FooterContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <span class="nav-link">&copy; FindMyRoof. All rights reserved.</span>
           </li>
-          <li>
-            <router-link class="text-muted" to="/site/faqs">FAQs</router-link>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/site/aboutus">About</router-link>
           </li>
-          <li>
-            <router-link class="text-muted" to="/site/contactus">Contact</router-link>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/site/faqs">FAQs</router-link>
           </li>
-        </ul>
-      </div>
-      <div class="col-md-2">
-        <h5 class="text-muted">Legal Stuff</h5>
-        <ul class="list-unstyled text-small">
-          <li>
-            <router-link class="text-muted" to="/site/termsofservice">Terms of Use</router-link>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/site/contactus">Contact</router-link>
           </li>
-          <li>
-            <router-link class="text-muted" to="/site/privacypolicy">Privacy Policy</router-link>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/site/termsofservice">Terms of Service</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/site/privacypolicy">Privacy Policy</router-link>
           </li>
         </ul>
       </div>
-      <div class="col-md-3">
-        <h5 class="text-muted">Community Shoutout</h5>
-        <ul class="list-unstyled text-small">
-          <li>
-            <router-link class="text-muted" to="/site/termsofservice">Our Crafts</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </nav>
   </footer>
 </template>
 

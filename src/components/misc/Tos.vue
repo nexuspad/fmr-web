@@ -53,7 +53,7 @@ You can find the most recent version of the Privacy Policy at:
 </p>
 
 <p>
-http://www.findmyroof.com/help/privacy.
+http://www.findmyroof.com/site/privacypolicy.
 </p>
 
 <p>

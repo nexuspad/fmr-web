@@ -7,15 +7,13 @@
         <div class="col-1">
           <span v-if="selectedUser.id">{{ selectedUser.id }}</span>
         </div>
-        <div class="col">
+        <div class="col-3">
           <input type="email" class="form-control" v-model="userEmail" />
         </div>
-        <div class="col">
+        <div class="col-1">
           <button class="btn btn-primary mr-2" v-on:click="search()">Search</button>
         </div>
-        <div class="col">
-        </div>
-        <div class="col-3">
+        <div class="col-6">
           <button class="btn btn-secondary mr-2" v-on:click="suspend(selectedUser.id)" v-if="selectedUser.id && !selectedUser.isSuspended()">Suspend</button>
           <button class="btn btn-secondary mr-2" v-on:click="unSuspend(selectedUser.id)" v-if="selectedUser.id && selectedUser.isSuspended()">Un-Suspend</button>
           <button class="btn btn-primary mr-2" v-on:click="impersonate(selectedUser.email)" v-if="selectedUser.id">Impersonate</button>
@@ -101,6 +99,7 @@ export default {
     return {
       selectedUser: new User,
       users: [],
+      userAds: [],
       email: '',
       token: '',
       message: ''
@@ -137,6 +136,9 @@ export default {
       this.selectedUser = new User
       this.setUserEmail('')
       this.getLatest()
+      while (self.userAds.length > 0) {
+        self.userAds.pop()
+      }
     },
     getLatest() {
       const self = this

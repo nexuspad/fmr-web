@@ -6,8 +6,8 @@
     </div>
     <div class="fmr-form p-4 col-lg-6 offset-lg-3">
       <div v-show="!verificationSent">
-        <div class="border-bottom lead bg-light pl-1">
-          Mobile verification is required for ad posting.
+        <div class="border-bottom lead pl-1">
+          SMS(Text) verification
         </div>
         <div class="mt-4 pl-1">
           <div>
@@ -23,9 +23,11 @@
             </div>
             <div>
               <ul>
+                <li>A valid U.S. phone number is required.</li>
                 <li>A text message containing the verification code will be sent to the provided phone number.</li>
-                <li>Enter the code on the next page to verify your account. The code expired in 30 minutes.</li>
-                <li>Your privacy is important to us. We WILL NOT send you unsolicited text message and your phone number WILL NOT be stored or shared.</li>
+                <li>Enter the code on the next page to verify your account. The code expires in 30 minutes.</li>
+                <li>Your phone number will not be stored or shared. We will not send you unsolicited text message.</li>
+                <li>Please email help@findmyroof.com if you need any help.</li>
               </ul>
             </div>
           </div>

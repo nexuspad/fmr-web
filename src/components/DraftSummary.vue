@@ -2,9 +2,7 @@
   <div class="container">
     <div class="row pt-2">
       <div class="col-3">
-        <router-link :to="'/ad/' + ad.id + '/' + ad.uri">
-          <img v-lazy="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
-        </router-link>
+        <img v-lazy="ad.thumbnailUrl" v-if="ad.thumbnailUrl" class="img-fluid rounded shadow-sm" />
         <div class="h-75 rounded shadow-sm text-center jumbotron" v-if="!ad.thumbnailUrl">
           <div class="mt-n2">{{ categoryName(ad.categoryId) }}</div>
         </div>
@@ -14,10 +12,8 @@
           <div class="row">
             <div class="col-9">
               <h2>
-                <router-link :to="'/ad/' + ad.id + '/' + ad.uri" class="text-muted">
-                  <span v-if="!ad.title">#{{ ad.id }}</span>
-                  <span v-if="ad.title">{{ ad.title }}</span>
-                </router-link>
+                <span v-if="!ad.title">#{{ ad.id }}</span>
+                <span v-if="ad.title">{{ ad.title }}</span>
                 <span class="fmr-deact ml-2" v-if="ad.isDeactivated()"></span>
                 <span class="fmr-forsale ml-2" v-if="isForSale(ad.categoryId)"></span>
                 <span class="fmr-forrent ml-2" v-if="isForRent(ad.categoryId)"></span>

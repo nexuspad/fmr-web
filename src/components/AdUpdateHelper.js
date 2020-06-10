@@ -3,7 +3,7 @@ import AdService from '../service/AdService'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
 import ApiError from "../service/ApiError"
-import { isRequiredAttribute } from '../service/AppData'
+// import { isRequiredAttribute } from '../service/AppData'
 
 export default {
     methods: {
@@ -23,7 +23,8 @@ export default {
             if (ad !== null) {
                 let invalidAttributes = []
                 ad.attributes.forEach(attribute => {
-                    if (isRequiredAttribute(attribute.id) && (typeof attribute.value === 'undefined' || attribute.value.length === 0)) {
+                    // if (isRequiredAttribute(attribute.id) && (typeof attribute.value === 'undefined' || attribute.value.length === 0)) {
+                    if (attribute.required && (typeof attribute.value === 'undefined' || attribute.value.length === 0)) {
                         invalidAttributes.push(attribute.name)
                     }
                 })

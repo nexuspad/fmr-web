@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-headful :title="title" description="" />
+    <vue-headful :title="headerTitle" description="" />
     <category-navigation />
     <div class="container-fluid m-0">
       <div class="row">
@@ -62,6 +62,7 @@
 import CategoryNavigation from "./CategoryNavigation"
 import Paginate from 'vuejs-paginate'
 import AppDataHelper from './AppDataHelper'
+import PageTitleHelper from './PageTitleHelper'
 import ListFilter from "./ListFilter"
 import AdSummary from "./AdSummary"
 import AdService from "../service/AdService"
@@ -73,9 +74,10 @@ export default {
   components: {
     CategoryNavigation, Paginate, AdSummary, ListFilter, ThereIsNothing, ListFilterBadges
   },
-  mixins: [ AppDataHelper ],
+  mixins: [ AppDataHelper, PageTitleHelper ],
   data() {
     return {
+      headerTitle: '',
       title: '',
       pageCount: 0,
       adList: null,
@@ -113,6 +115,7 @@ export default {
       this.$router.push({path: path, query:queryParams})
     },
     buildPages(adList) {
+      this.headerTitle = this.getListHeaderTitle()
       this.title = this.categoryName(adList.listCriteria.category.id)
       this.pageCount = adList.totalPages()
       this.currentPage = adList.listCriteria.page
