@@ -1,4 +1,8 @@
 export default class FmrUtils {
+    static capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     static addParamToUri(uri, key, value) {
         if (!uri) {
             return '';

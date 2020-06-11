@@ -237,6 +237,29 @@ export default class AdminService {
         })
     }
 
+    static jobsLog() {
+        return new Promise((resolve, reject) => {
+            AdminService.getToken().then((token) => {
+                RestClient.instance(token).get('/admin/jobslog')
+                .then((response) => {
+                    if (response.data) {
+                        resolve(response.data)
+                    } else {
+                        reject()
+                    }
+                })
+                .catch((error) => {
+                    console.error(error)
+                    reject(error)
+                })    
+            })
+            .catch((error) => {
+                AdminService.cleanup()
+                reject(error)
+            })
+        })
+    }
+
     static toggleSuspension(userId, suspend) {
         const request = new AccountSerivceRequest
         if (suspend) {

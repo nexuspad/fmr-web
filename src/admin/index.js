@@ -8,6 +8,7 @@ import '../assets/custom.scss'
 import Landing from './Landing'
 import UserManagement from './components/UserManagement'
 import AdManagement from './components/AdManagement'
+import JobManagement from './components/JobManagement'
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false
@@ -17,7 +18,8 @@ const router = new VueRouter({
     routes: [
       { name: 'landing', path: '/', component: Landing },
       { name: 'users', path: '/users', component: UserManagement },
-      { name: 'posts', path: '/posts', component: AdManagement }
+      { name: 'posts', path: '/posts', component: AdManagement },
+      { name: 'jobs', path: '/jobs', component: JobManagement }
     ]
 });
 

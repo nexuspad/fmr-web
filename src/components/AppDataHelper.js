@@ -1,4 +1,5 @@
 import { allStatesOrTerritories, stateName, attributeIdLookup, attributeNameLookup, attributeOptionsLookup, categoryLookup, categoryNameLookup, attributeTypeLookup } from '../service/AppData'
+import FmrUtil from '../util/FmrUtils'
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -8,9 +9,6 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 export default {
     methods: {
-        capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        },
         states() {
             return allStatesOrTerritories()
         },
@@ -19,7 +17,7 @@ export default {
         },
         categoryName(id) {
             if (id || id == 0)
-                return this.capitalizeFirstLetter(categoryNameLookup(id))
+                return FmrUtil.capitalizeFirstLetter(categoryNameLookup(id))
             return ''
         },
         categoryCode(categoryId) {

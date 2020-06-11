@@ -31,7 +31,8 @@
         <div class="col-1">State</div>
         <div class="col-1"></div>
         <div class="col">Owner</div>
-        <div class="col">Score</div>
+        <div class="col-1">Score</div>
+        <div class="col"></div>
         <div class="col-3"></div>
       </div>
       <div class="row pb-1 fmr-sm-text mb-2" v-for="ad in ads" v-bind:key="ad.id">
@@ -39,7 +40,8 @@
           {{ ad.id }}
         </div>
         <div class="col-2">
-          {{ ad.title }}
+          <b>{{ categoryName(ad.categoryId) }}</b>
+          <div>{{ ad.title }}</div>
         </div>
         <div class="col-1">
           {{ ad.state }}
@@ -50,7 +52,8 @@
         <div class="col">
           <span @click="setUserEmail(ad.owner.email)">{{ ad.owner.email }}</span>
         </div>
-        <div class="col">{{ ad.scoreCard.score }} <br/> {{ ad.scoreCard.comment }}</div>
+        <div class="col-1">{{ ad.scoreCard.score }}</div>
+        <div class="col">{{ ad.scoreCard.comment }}</div>
         <div class="col">
           <button class="btn btn-secondary" v-on:click="disapprove(ad.id)" v-if="!ad.isDisapproved()">Disapprove</button>
           &nbsp;
@@ -66,6 +69,7 @@ import AdminHelper from './AdminHelper'
 import AdminMessage from './AdminMessage'
 import Navigation from './Navigation'
 import AdminService from '../service/AdminService'
+import { categoryNameLookup } from '../../service/AppData'
 
 export default {
   mixins: [ AdminHelper ],
@@ -95,6 +99,9 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
+    },
+    categoryName(categoryId) {
+      return categoryNameLookup(categoryId)
     },
     search () {
       const self = this

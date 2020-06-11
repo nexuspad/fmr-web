@@ -1,5 +1,6 @@
 import { stateName, categoryNameLookup } from '../service/AppData'
 import AppContext from './AppContext'
+import FmrUtil from '../util/FmrUtils'
 
 export default {
     methods: {
@@ -11,7 +12,7 @@ export default {
             if (AppContext.isFsbo()) {
                 titleParts.push('FSBO')
             }
-            titleParts.push(categoryNameLookup(AppContext.getCategoryId()))
+            titleParts.push(FmrUtil.capitalizeFirstLetter(categoryNameLookup(AppContext.getCategoryId())))
             titleParts.push('page ' + AppContext.getPage())
             return titleParts.join(' - ')
         },

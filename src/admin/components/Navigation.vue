@@ -7,6 +7,9 @@
       <router-link to="posts" class="nav-link" :class="{'bg-light': $route.name=='posts'}">
         Posts
       </router-link>
+      <router-link to="jobs" class="nav-link" :class="{'bg-light': $route.name=='jobs'}">
+        Jobs
+      </router-link>
       <a class="nav-link" href="https://api.findmyroof.com/madmin/logs" target="_blank">Logs</a>
       <div>
         <iframe src="https://panda.findmyroof.com/polo.html" width="40" height="0" style="padding:0; margin:0" 

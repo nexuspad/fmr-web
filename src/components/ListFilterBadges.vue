@@ -16,6 +16,7 @@
 import AppContext from './AppContext'
 import FilterParams from './FilterParams'
 import AppDataHelper from './AppDataHelper'
+import FmrUtil from '../util/FmrUtils'
 
 export default {
   mixins: [ AppDataHelper ],
@@ -64,7 +65,7 @@ export default {
             return 'price between ' + this.dollar(values[0]) + ' and ' + this.dollar(values[1])
           }
         } else {
-          return this.capitalizeFirstLetter(name.replace('_', ' ')) + ': ' + value
+          return FmrUtil.capitalizeFirstLetter(name.replace('_', ' ')) + ': ' + value
         }
       }
       
