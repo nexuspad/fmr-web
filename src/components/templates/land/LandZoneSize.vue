@@ -9,6 +9,11 @@
         </select>
       </div>
       <div class="col-md-2">
+        <label for="zoning_code">Zoning code</label>
+        <input type="text" class="form-control" id="zoning_code" placeholder=""
+          name="zoning_code" v-model="ad.getAttribute(attributeId('zoning_code')).value" />
+      </div>
+      <div class="col-md-2">
         <label for="lot_size">Size</label>
         <div class="input-group">
           <input type="text" class="form-control" id="lot_size" placeholder="ex. 1.68"

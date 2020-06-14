@@ -52,7 +52,7 @@ button:disabled {
 .fmr-deact {background:url(./images/deactivated.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
 .fmr-disapp {background:url(./images/disapproved.png) no-repeat 0 0; display:inline-block; width:65px; height:12px;}
 
-.fmr-photo { width:400px; object-fit: cover; }
+.fmr-photo { width:400px; max-width:100%; object-fit: cover; }
 .fmr-photo-filename { position: absolute; top:1px; left:1px; background-color: #eee; padding:2px; font-size: 0.80rem; border-radius: 0.2rem}
 
 /* #PropertyPhotos in AdEdit */

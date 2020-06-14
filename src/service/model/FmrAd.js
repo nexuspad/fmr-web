@@ -125,6 +125,13 @@ export default class FmrAd {
         return false
     }
 
+    isUnderReview() {
+        if (this.status === 'UNDER_REVIEW') {
+            return true
+        }
+        return false
+    }
+
     isDraft() {
         if (this.status === 'DRAFT') {
             return true

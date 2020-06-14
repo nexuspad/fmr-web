@@ -326,7 +326,6 @@ export default {
         params['price'] = price
       }
 
-
       // location
       if (this.zipCode) {
         params['zip_code'] = this.zipCode
@@ -334,6 +333,9 @@ export default {
       if (this.city) {
         params['city'] = this.city
       }
+
+      // reset the page
+      params['page'] = 1
 
       let {path, queryParams} = AppContext.makePath(params)
 

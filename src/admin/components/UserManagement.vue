@@ -16,6 +16,7 @@
         <div class="col-6">
           <button class="btn btn-secondary mr-2" v-on:click="suspend(selectedUser.id)" v-if="selectedUser.id && !selectedUser.isSuspended()">Suspend</button>
           <button class="btn btn-secondary mr-2" v-on:click="unSuspend(selectedUser.id)" v-if="selectedUser.id && selectedUser.isSuspended()">Un-Suspend</button>
+          <button class="btn btn-primary mr-2" v-on:click="activate(selectedUser.id)" v-if="selectedUser.id">Activate</button>
           <button class="btn btn-primary mr-2" v-on:click="impersonate(selectedUser.email)" v-if="selectedUser.id">Impersonate</button>
           <button class="btn btn-secondary ml-2" v-on:click="reset()" v-if="selectedUser.id">Clear</button>
         </div>
@@ -153,6 +154,15 @@ export default {
           }
         });
       }).catch(() => {
+      })
+    },
+    activate(userId) {
+      const self = this
+      AdminService.activate(userId).then(() => {
+        self.message = userId + " is activated"
+        self.getLatest()
+      }).catch((error) => {
+        self.message(error)
       })
     },
     suspend(userId) {

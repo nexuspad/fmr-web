@@ -37,7 +37,7 @@
       </div>
       <div class="row pb-1 fmr-sm-text mb-2" v-for="ad in ads" v-bind:key="ad.id">
         <div class="col-1">
-          {{ ad.id }}
+          <span @click="adId = ad.id">{{ ad.id }}</span>
         </div>
         <div class="col-2">
           <b>{{ categoryName(ad.categoryId) }}</b>
@@ -57,7 +57,7 @@
         <div class="col">
           <button class="btn btn-secondary" v-on:click="disapprove(ad.id)" v-if="!ad.isDisapproved()">Disapprove</button>
           &nbsp;
-          <button class="btn btn-secondary" v-on:click="approve(ad.id)" v-if="ad.isDisapproved()">Approve</button>
+          <button class="btn btn-secondary" v-on:click="approve(ad.id)" v-if="ad.isDisapproved() || ad.isUnderReview()">Approve</button>
         </div>
       </div>
     </div>
@@ -79,6 +79,7 @@ export default {
   data() {
     return {
       adId: null,
+      userEmail: '',
       ads: [],
       message: ''
     }
@@ -112,6 +113,12 @@ export default {
         adsReturned.forEach(p => {
           self.ads.push(p)
         });
+
+        // search by ad
+        if (self.adId && adsReturned.length > 0) {
+          this.userEmail = adsReturned[0].owner.email
+        }
+
       }).catch((error) => {
         console.error(error)
       })

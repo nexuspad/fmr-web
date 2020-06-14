@@ -43,7 +43,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2 order-lg-2 order-md-2 order-sm-1 mb-2 pr-1">
+        <div class="col-md-2 order-lg-2 order-md-2 order-first mb-2 pr-1">
           <div class="fmr-bordered-area">
             <div class="header">
               <h1>Search filters</h1>

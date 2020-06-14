@@ -224,7 +224,10 @@ export default {
       }
     },
     exitEdit() {
-      this.saveAsNeeded()
+      // Only auto save on exit if it's a draft. Do not save if it's an existing ad.
+      if (this.ad != null && this.ad.isDraft()) {
+        this.saveAsNeeded()
+      }
       this.$router.back(-1)
     },
     setupAutoSave() {

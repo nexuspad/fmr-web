@@ -2,7 +2,7 @@
   <div class="border-bottom pt-2 pr-2" v-if="filters.length > 0">
     <ul class="list-inline text-right mb-1">
       <li v-for="(filter, index) in filters" v-bind:key="index" class="list-inline-item">
-        <span class="badge badge-info fmr-sm-text font-weight-light pt-1 pl-2">{{ filter.value }}
+        <span class="badge badge-info fmr-sm-text font-weight-light pt-1 pl-2 pt-1">{{ filter.value }}
           <button type="button" class="icon-button" v-on:click="removeFilter(filter.name)">
             <i class="fa fa-times fa-medium text-light"></i>
           </button>

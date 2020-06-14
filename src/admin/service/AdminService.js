@@ -260,6 +260,34 @@ export default class AdminService {
         })
     }
 
+    static activate(userId) {
+        const request = new AccountSerivceRequest
+
+        let user = new User()
+        user.id = userId
+        request.user = user
+        
+        return new Promise((resolve, reject) => {
+            AdminService.getToken().then((token) => {
+                RestClient.instance(token).post('/admin/activate', request)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve()
+                    } else {
+                        reject()
+                    }
+                })
+                .catch((error) => {
+                    reject(error)
+                })     
+            })
+            .catch((error) => {
+                AdminService.cleanup()
+                reject(error)
+            })
+        })
+    }
+
     static toggleSuspension(userId, suspend) {
         const request = new AccountSerivceRequest
         if (suspend) {

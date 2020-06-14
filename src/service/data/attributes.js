@@ -682,6 +682,26 @@ const ATTRIBUTES =
         "type": "string",
         "required": false
     },
+    "127": {
+        "name": "current_zoning",
+        "options": [
+            "Residential",
+            "Commercial"
+        ],
+        "id": 127,
+        "type": "string",
+        "required": false
+    },
+    "128": {
+        "name": "land_features",
+        "options": [
+            "Electricity",
+            "Road Access"
+        ],
+        "id": 128,
+        "type": "string",
+        "required": false
+    },
     "131": {
         "name": "price_per_sqft",
         "id": 131,
@@ -757,16 +777,6 @@ const ATTRIBUTES =
             "Manufactured Home"
         ],
         "id": 202,
-        "type": "string",
-        "required": false
-    },
-    "1004": {
-        "name": "current_zoning",
-        "options": [
-            "Residential",
-            "Commercial"
-        ],
-        "id": 1004,
         "type": "string",
         "required": false
     }

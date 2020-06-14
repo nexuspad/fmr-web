@@ -5,6 +5,10 @@
         <label>Zoning</label>
         <div>{{ attributeValue('current_zoning') }}</div>
       </div>
+      <div class="mr-4" v-if="hasAttributeValue('zoning_code')">
+        <label>Zoning Code</label>
+        <div>{{ attributeValue('zoning_code') }}</div>
+      </div>
       <div class="mr-4" v-if="hasAttributeValue('lot_size')">
         <label>Size</label>
         <div>{{ attributeValue('lot_size') }} AC</div>
