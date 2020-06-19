@@ -4,56 +4,58 @@
     <div class="header">
       <h1>Settings</h1>
     </div>
-    <div class="fmr-form p-4 col-lg-6 offset-lg-3">
-      <div class="form-row border-bottom lead pl-1 mb-2">
-        Email
-      </div>
-      <div class="form-row mb-4">
-        <div class="col">
-          {{ email }}
+    <div class="conteiner-fluid">
+      <div class="fmr-form mt-2 p-2 col-md-6 offset-md-3">
+        <div class="form-row border-bottom lead pl-1 mb-2">
+          Email
         </div>
-      </div>
-      <div class="form-row border-bottom mb-4 lead pl-1">
-        Update password
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <label for="password">Current password</label>
-          <input type="password" class="form-control" id="password" v-model="password">
+        <div class="form-row mb-4">
+          <div class="col">
+            {{ email }}
+          </div>
         </div>
-      </div>
-      <div class="form-row pt-2">
-        <div class="col">
-          <label for="password">New password</label>
-          <input type="password" class="form-control" id="newPassword" v-model="newPassword">
+        <div class="form-row border-bottom mb-4 lead pl-1">
+          Update password
         </div>
-        <div class="col">
-          <label for="password">Confirm the new password</label>
-          <input type="password" class="form-control" id="confirmPassword" v-model="confirmPassword">
+        <div class="form-row">
+          <div class="col">
+            <label for="password">Current password</label>
+            <input type="password" class="form-control" id="password" v-model="password">
+          </div>
         </div>
-      </div>
-      <div class="form-row mt-4">
-        <div class="col text-center">
-          <button class="btn btn-primary" v-on:click="changePassword()" :disabled="posting">Update</button>
+        <div class="form-row pt-2">
+          <div class="col">
+            <label for="password">New password</label>
+            <input type="password" class="form-control" id="newPassword" v-model="newPassword">
+          </div>
+          <div class="col">
+            <label for="password">Confirm the new password</label>
+            <input type="password" class="form-control" id="confirmPassword" v-model="confirmPassword">
+          </div>
         </div>
-      </div>
+        <div class="form-row mt-4">
+          <div class="col text-center">
+            <button class="btn btn-primary" v-on:click="changePassword()" :disabled="posting">Update</button>
+          </div>
+        </div>
 
-      <div class="form-row border-bottom mt-4 mb-4 lead pl-1">
-        Remove my account
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="accountDeletionPassword" v-model="accountDeletionPassword">
+        <div class="form-row border-bottom mt-4 mb-4 lead pl-1">
+          Remove my account
         </div>
-      </div>
-      <div class="form-row mt-3 mb-3 ml-1">
-        <input type="checkbox" class="mt-1 mr-1" v-model="accountDeletionConfirmation" />
-        I want to remove my account and all my ads.
-      </div>
-      <div class="form-row mt-4">
-        <div class="col text-center">
-          <button class="btn btn-danger" v-on:click="removeAccount()" :disabled="posting">Remove my acount</button>
+        <div class="form-row">
+          <div class="col">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="accountDeletionPassword" v-model="accountDeletionPassword">
+          </div>
+        </div>
+        <div class="form-row mt-3 mb-3 ml-1">
+          <input type="checkbox" class="mt-1 mr-1" v-model="accountDeletionConfirmation" />
+          I want to remove my account and all my ads.
+        </div>
+        <div class="form-row mt-4">
+          <div class="col text-center">
+            <button class="btn btn-danger" v-on:click="removeAccount()" :disabled="posting">Remove my acount</button>
+          </div>
         </div>
       </div>
     </div>

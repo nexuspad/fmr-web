@@ -556,8 +556,7 @@ const ATTRIBUTES =
             "Air Conditioning",
             "Private Pool",
             "Communal Pool",
-            "Washer & Dryer",
-            "Air Conditioning"
+            "Washer & Dryer"
         ],
         "id": 94,
         "type": "array",

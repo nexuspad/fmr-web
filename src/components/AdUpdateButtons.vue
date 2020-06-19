@@ -62,7 +62,7 @@
           </div>
           <div class="modal-body">
             <p>
-              Extend your ad <span v-if="ad.title">"{{ ad.title }}"</span> for another 60 days?
+              Extend your ad <span v-if="ad.title">"{{ ad.title }}"</span> for another 90 days?
             </p>
           </div>
           <div class="modal-footer">
@@ -83,7 +83,10 @@ export default {
   mixins: [ AdUpdateHelper ],
   methods: {
     daysToExpire() {
-      return Math.floor((this.ad.expiryDate - new Date())/86400000)
+      let parts = this.ad.expiryDate.split('-')
+      let now = new Date
+      console.log(parts, now.getFullYear(), now.getMonth(), now.getDate())
+      return Math.floor((Date.UTC(parts[0], parts[1], parts[2]) - Date.UTC(now.getFullYear(), now.getMonth()+1, now.getDate()))/86400000)
     }
   }
 }

@@ -23,7 +23,7 @@ export default class FmrAd {
             this.category = new AdCategory(jsonObj.category)
             this.status = jsonObj.status
 
-            this.expiryDate = Date.parse(jsonObj.expiryDate)
+            this.expiryDate = jsonObj.expiryDate
             this.updateTime = jsonObj.updateTime
             this.updateTimeDisplay = new Date(jsonObj.updateTime * 1000).toLocaleString("en-US")
 

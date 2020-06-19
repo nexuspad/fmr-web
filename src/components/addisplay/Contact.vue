@@ -45,8 +45,12 @@ export default {
     }
   },
   mounted() {
-    if (this.hasAttributeValue('brokerage_company') || this.hasAttributeValue('contact_name') || this.hasAttributeValue('mls_id') ||
-        this.hasAttributeValue('open_house') || this.hasAttributeValue('open_house_hours')) {
+    if (this.hasAttributeValue('brokerage_company') || 
+        this.hasAttributeValue('contact_name') || 
+        this.hasAttributeValue('contact_phone') || 
+        this.hasAttributeValue('mls_id') ||
+        this.hasAttributeValue('open_house') || 
+        this.hasAttributeValue('open_house_hours')) {
       this.hasContactInfo = true
     }
   },

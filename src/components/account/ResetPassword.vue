@@ -5,8 +5,8 @@
       <div class="header">
         <h1>Password reset</h1>
       </div>
-      <div class="p-2">
-        <div class="fmr-form p-2 col-lg-6 offset-lg-3">
+      <div class="container-fluid">
+        <div class="fmr-form mt-2 p-2 col-md-6 offset-md-3">
           <div class="border-bottom lead pl-1 mb-4">
             Request password reset
           </div>
@@ -24,8 +24,8 @@
       <div class="header">
         <h1>Reset password</h1>
       </div>
-      <div class="p-2">
-        <div class="fmr-form p-2 col-lg-6 offset-lg-3">
+      <div class="container-fluid">
+        <div class="fmr-form mt-2 p-2 col-md-6 offset-md-3">
           <div class="border-bottom lead pl-1 mb-4">
             Enter your new password below
           </div>

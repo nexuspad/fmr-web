@@ -10,13 +10,18 @@ export default class MiscRoute {
         return [
             {
                 path: '/site/accessdenied',
-                component: AccessDenied
+                component: AccessDenied,
+                meta: {
+                    title: 'Service Not Available',
+                    activity: 'site'
+                }
             },
             {
                 path: '/site/aboutus',
                 component: AboutUs,
                 meta: {
                     title: 'About FindMyRoof',
+                    activity: 'site'
                 }
             },
             {
@@ -24,27 +29,31 @@ export default class MiscRoute {
                 component: Faq,
                 meta: {
                     title: 'FAQs',
+                    activity: 'site'
                 }
             },
             {
                 path: '/site/contactus',
                 component: ContactUs,
                 meta: {
-                    title: 'Contact us',
+                    title: 'Contact Us',
+                    activity: 'site'
                 }
             },
             {
                 path: '/site/termsofservice',
                 component: Tos,
                 meta: {
-                    title: 'Terms of service',
+                    title: 'Terms of Service',
+                    activity: 'site'
                 }
             },
             {
                 path: '/site/privacypolicy',
                 component: PrivacyPolicy,
                 meta: {
-                    title: 'Privacy policy',
+                    title: 'Privacy Policy',
+                    activity: 'site'
                 }
             }
         ]
