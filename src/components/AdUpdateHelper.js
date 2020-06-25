@@ -3,7 +3,6 @@ import AdService from '../service/AdService'
 import EventManager from '../util/EventManager'
 import AppEvent from '../util/AppEvent'
 import ApiError from "../service/ApiError"
-// import { isRequiredAttribute } from '../service/AppData'
 
 export default {
     methods: {
@@ -41,7 +40,7 @@ export default {
                 // self.ad.copy(updatedAd)
                 self.ad.id = updatedAd.id
                 self.posting = false
-                console.log('saved...')
+                console.debug('saved...')
 
                 // the server timestamp is a little different from the local, so set it to local here.
                 self.ad.updateTime = Math.floor(Date.now() / 1000)
@@ -120,7 +119,7 @@ export default {
                 updatedAd.photos.forEach(photo => {
                     if (photo.viewId === photoObj.viewId) {
                         photoObj.title = photo.title
-                        console.log('local title updated')
+                        console.debug('local title updated')
                     }
                 })
             })

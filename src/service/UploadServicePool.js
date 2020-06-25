@@ -8,7 +8,7 @@ export default class UploadServicePool {
     static timerId = 0
 
     static getServiceFromPool () {
-        console.log('upload service pool size: ', UploadServicePool.serviceReferences.length);
+        console.debug('upload service pool size: ', UploadServicePool.serviceReferences.length);
         if (UploadServicePool.serviceReferences.length < UploadServicePool.maxConcurrentUpload) {
           let uploadService = new UploadService();
           UploadServicePool.serviceReferences.push(uploadService);
@@ -17,7 +17,7 @@ export default class UploadServicePool {
           let i = UploadServicePool.serviceReferences.length;
           while (i--) {
             if (UploadServicePool.serviceReferences[i].isDone()) {
-              console.log('free service instance from the pool');
+              console.debug('free service instance from the pool');
               UploadServicePool.serviceReferences.splice(i, 1);
             }
           }

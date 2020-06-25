@@ -16,7 +16,12 @@
         <div class="col-6">
           <button class="btn btn-secondary mr-2" v-on:click="suspend(selectedUser.id)" v-if="selectedUser.id && !selectedUser.isSuspended()">Suspend</button>
           <button class="btn btn-secondary mr-2" v-on:click="unSuspend(selectedUser.id)" v-if="selectedUser.id && selectedUser.isSuspended()">Un-Suspend</button>
-          <button class="btn btn-primary mr-2" v-on:click="activate(selectedUser.id)" v-if="selectedUser.id">Activate</button>
+          <button class="btn btn-primary mr-2" v-on:click="activate(selectedUser.id)" v-if="selectedUser.id && selectedUser.status != 'VERIFIED'">
+            Activate
+          </button>
+          <button class="btn btn-primary mr-2" v-on:click="upgrade(selectedUser.id)" v-if="selectedUser.id && selectedUser.type != 'P'">
+            Upgrade
+          </button>
           <button class="btn btn-primary mr-2" v-on:click="impersonate(selectedUser.email)" v-if="selectedUser.id">Impersonate</button>
           <button class="btn btn-secondary ml-2" v-on:click="reset()" v-if="selectedUser.id">Clear</button>
         </div>
@@ -182,7 +187,15 @@ export default {
       }).catch((error) => {
         self.message(error)
       })
-
+    },
+    upgrade(userId) {
+      const self = this
+      AdminService.upgrade(userId).then(() => {
+        self.message = userId + " is upgraded"
+        self.getLatest()
+      }).catch((error) => {
+        self.message(error)
+      })
     }
   }
 }

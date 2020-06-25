@@ -4,9 +4,11 @@
       <router-link to="users" class="nav-link" :class="{'bg-light': $route.name=='users'}">
         Users
       </router-link>
-      <router-link to="posts" class="nav-link" :class="{'bg-light': $route.name=='posts'}">
-        Posts
-      </router-link>
+      <span class="nav-link text-dark" :class="{'bg-light': $route.name=='posts'}">
+        Posts &ndash;
+        <router-link class="text-primary" :to="{path:'posts'}">new</router-link> | 
+        <router-link class="text-primary" :to="{path:'posts', query:{status:'review'}}">review</router-link>
+      </span>
       <router-link to="jobs" class="nav-link" :class="{'bg-light': $route.name=='jobs'}">
         Jobs
       </router-link>

@@ -3,7 +3,8 @@
     <div class="p-2 pr-4 text-right fmr-sm-text">
       #{{ ad.id }} &ndash;
       Last Updated:  {{ ad.updateTimeDisplay }},
-      expires in {{ daysToExpire() }} days
+      <span v-if="daysToExpire > 0">expires in {{ daysToExpire }} days</span>
+      <span v-if="daysToExpire <= 0">expired</span>
     </div>
     <div class="btn-group float-right mr-4">
       <button type="button" class="btn btn-primary" @click="editAd()" v-if="!ad.isDraft()">
@@ -12,7 +13,7 @@
       <button type="button" class="btn btn-primary pl-4 pr-4" @click="editAd()" v-if="ad.isDraft()">
         Edit
       </button>
-      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && daysToExpire() < 30" 
+      <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && daysToExpire < 30" 
         data-toggle="modal" :data-target="'#ExtendConfirmation' + ad.id">
         Extend
       </button>
@@ -81,12 +82,24 @@ import AdUpdateHelper from './AdUpdateHelper'
 export default {
   props: ['ad'],
   mixins: [ AdUpdateHelper ],
+  data() {
+    return {
+      daysToExpire: 0
+    }
+  },
+  mounted() {
+    this.calcDaysToExpire()
+  },
   methods: {
-    daysToExpire() {
+    calcDaysToExpire() {
       let parts = this.ad.expiryDate.split('-')
       let now = new Date
-      console.log(parts, now.getFullYear(), now.getMonth(), now.getDate())
-      return Math.floor((Date.UTC(parts[0], parts[1], parts[2]) - Date.UTC(now.getFullYear(), now.getMonth()+1, now.getDate()))/86400000)
+      this.daysToExpire = Math.floor((Date.UTC(parts[0], parts[1], parts[2]) - Date.UTC(now.getFullYear(), now.getMonth()+1, now.getDate()))/86400000)
+    }
+  },
+  watch: {
+    "ad.expiryDate": function() {
+      this.calcDaysToExpire()
     }
   }
 }

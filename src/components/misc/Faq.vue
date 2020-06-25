@@ -17,15 +17,15 @@
 <p>Homeowners, landlords, property managers, and real estate professionals.</p>
 
 <h2>Do I need to create an account?</h2>
-<p>You only need to register if you want to post ads. </p>
+<p>Yes. A valid account is required.</p>
 
 <h2>What kind of personal information do you store?</h2>
-<p>Your email address only.<br/>
-A valid email is required to create an account. We do not share your email with any third party.</p>
+<p>Your email address only for login purpose.<br/>
+We do not share your email with any third party.</p>
 
 <h2 id="Verification">Why do you need SMS(text) verification?</h2>
 <p>Mobile text verification provides a stronger level of security and can effectively reduce spam/scam on our site
-  by filtering out some users who intend to use the site inappropriately.<br/>
+  by filtering out certain users who intend to use the site inappropriately.<br/>
 Your phone number is only used once for sending a verification code and we do not store your phone number in our system.</p>
 
 <h2>I don't have a mobile phone / I don't want to give out my number / Texting does not work, what do I do?</h2>

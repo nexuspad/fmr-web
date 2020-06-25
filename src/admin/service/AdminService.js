@@ -89,6 +89,7 @@ export default class AdminService {
                         response.data.forEach(element => {
                             let u = new User(element)
                             u.adminNote = element.adminNote
+                            u.type = element.accountType
                             users.push(u)
                         });
                         resolve(users)
@@ -110,10 +111,15 @@ export default class AdminService {
         })
     }
 
-    static getAds() {
+    static getAds(status = 0) {
+        let uri = '/admin/posts/new'
+
+        if (status === 2) {
+            uri = '/admin/posts/review'
+        }
         return new Promise((resolve, reject) => {
             AdminService.getToken().then((token) => {
-                RestClient.instance(token).get('/admin/newposts')
+                RestClient.instance(token).get(uri)
                 .then((response) => {
                     if (response.data) {
                         const ads = []
@@ -220,6 +226,7 @@ export default class AdminService {
                     if (response.data) {
                         const user = new User(response.data)
                         user.adminNote = response.data.adminNote
+                        user.type = response.data.accountType
                         resolve(user)
                     } else {
                         reject()
@@ -295,6 +302,35 @@ export default class AdminService {
         } else {
             request.action = 'UN_SUSPEND'
         }
+
+        let user = new User()
+        user.id = userId
+        request.user = user
+        
+        return new Promise((resolve, reject) => {
+            AdminService.getToken().then((token) => {
+                RestClient.instance(token).post('/admin/user/' + userId, request)
+                .then((response) => {
+                    if (response.data && response.data.code === 'SUCCESS') {
+                        resolve()
+                    } else {
+                        reject()
+                    }
+                })
+                .catch((error) => {
+                    reject(error)
+                })     
+            })
+            .catch((error) => {
+                AdminService.cleanup()
+                reject(error)
+            })
+        })
+    }
+
+    static upgrade(userId) {
+        const request = new AccountSerivceRequest
+        request.action = 'UPGRADE'
 
         let user = new User()
         user.id = userId

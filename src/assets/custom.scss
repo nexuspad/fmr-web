@@ -167,3 +167,35 @@ ul.pagination {
   background: rgba(51,51,51,0.9); z-index: 1000;}
   
 .debug-css { background:#c00; }
+
+
+/* https://gist.github.com/SimonPadbury/fc55c054c0480550c3be592111778763 */
+.sticky {
+  position: absolute;
+  right: 0;
+  z-index: 150;
+  padding: 10px;
+  background: rgba(241, 241, 192, 0.8);
+  box-shadow: -2px 2px 2px rgba(0,0,0,0.3);
+}
+.sticky:before, .sticky:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  right: 0;
+}
+.sticky:before {
+  border-top: solid 8px #fff;
+  border-right: solid 8px #fff;
+  border-left: solid 8px transparent;
+  border-bottom: solid 8px transparent;
+}
+.sticky:after {
+  border-bottom: solid 8px #dddd33;
+  border-left: solid 8px #dddd33;
+  border-right: solid 8px transparent;
+  border-top: solid 8px transparent;
+}

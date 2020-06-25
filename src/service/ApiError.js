@@ -1,6 +1,7 @@
 // Error message for Rest API status code
 const ApiErrorMessage = {
     INTERNAL_ERROR: 'The system encountered some problem while performing this action. Please try again later.',
+    ACCT_REGISTRATION_ALREADY_EXISTS: 'The email has been used to create an account.',
     ACCT_LOGIN_FAILED: 'Login failed. Invalid credentials.',
     ACCT_VERIFICATION_CODE_TOO_OLD: 'The verification code has expired.',
     ACCT_VERIFICATION_FAILED: 'The code cannot be verified.',

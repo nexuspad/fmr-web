@@ -27,11 +27,11 @@ export default class RestClient {
 
         // only reset when there is an existing token in the header, and it's different from the new non-null token
         if (token === null && tokenInHeader !== null) {
-            console.log('[RestClient] reset...because the Authorization token needs to be removed: ' + tokenInHeader);
+            console.debug('[RestClient] reset...because the Authorization token needs to be removed: ' + tokenInHeader);
             this._axiosInstance = null;
 
         } else if (token !== null && tokenInHeader !== token) {
-            console.log('[RestClient] reset...because the Authorization token has changed.');
+            console.debug('[RestClient] reset...because the Authorization token has changed.');
             this._axiosInstance = null;
         }
 
@@ -60,7 +60,7 @@ export default class RestClient {
                 },
                 (error) => {
                     if (error.code === 'ECONNABORTED') {
-                        console.log('Retry request...', error.config.url);
+                        console.debug('Retry request...', error.config.url);
                         return axios.request(error.config);
                     }
 

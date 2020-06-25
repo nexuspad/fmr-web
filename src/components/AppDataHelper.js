@@ -1,3 +1,4 @@
+import linkifyHtml from 'linkifyjs/html'
 import { allStatesOrTerritories, stateName, attributeIdLookup, attributeNameLookup, attributeOptionsLookup, categoryLookup, categoryNameLookup, attributeTypeLookup } from '../service/AppData'
 import FmrUtil from '../util/FmrUtils'
 
@@ -158,6 +159,9 @@ export default {
         },
         dollar(amount) {
             return formatter.format(amount.replace(/[^0-9]/gi, ''))
+        },
+        convertLinks(description) {
+            return linkifyHtml(description, {defaultProtocol: 'https'});
         }
     }
 }

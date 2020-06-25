@@ -56,7 +56,7 @@ export default class EventManager {
         if (callbackFunc) {
           callbackFunc(...args);
         } else {
-          console.log('EventManager: invalid callback function');
+          console.error('EventManager: invalid callback function');
         }
       });
       return true;

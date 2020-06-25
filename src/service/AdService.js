@@ -15,7 +15,7 @@ export default class AdService {
     static _adList
 
     static getAds(listCriteria) {
-        console.log(listCriteria.getKey())
+        console.debug(listCriteria.getKey())
 
         if (AdService._adList) {
             if (AdService._adList.listCriteria.key == listCriteria.getKey()) {
@@ -66,7 +66,7 @@ export default class AdService {
             AccountService.getToken().then((token) => {
                 RestClient.instance(token).get(uri)
                 .then((response) => {
-                    console.log(response)
+                    console.debug(response)
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve(new FmrAd(response.data.ad))
                     } else {
@@ -119,7 +119,7 @@ export default class AdService {
             })    
         } else {
             return new Promise((resolve, reject) => {
-                RestClient.instance().get(uri)
+                RestClient.instance(AccountService.currentUser().token).get(uri)
                 .then((response) => {
                     if (response.data && response.data.code === 'SUCCESS') {
                         resolve(new FmrAd(response.data.ad))
@@ -141,7 +141,7 @@ export default class AdService {
         let p = PromiseManager.get(serviceUri, 'POST')
 
         if (p) {
-            console.log('update in progress for ad: ' + adServiceRequest.ad.id)
+            console.debug('update in progress for ad: ' + adServiceRequest.ad.id)
             return p
         }
 

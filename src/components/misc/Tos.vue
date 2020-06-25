@@ -69,14 +69,13 @@ You agree not to post, email, or otherwise make available Content:
 
 <li>that violates the Fair Housing Act by stating, in any notice or ad for the sale or rental of any dwelling, a discriminatory preference based on race color, national origin, religion sex, familial status or handicap (or violates any state or local law prohibiting discrimination on the basis of these or other characteristics);</li>
 
-<h2><a name="fairhousing">Section 3604(c) of the Fair Housing Act:</a></h2>
+<a name="fairhousing"></a>
+<h2 id="fairhousing">Section 3604(c) of the Fair Housing Act:</h2>
 <p style="background-color: rgb(255, 255, 204);">It is unlawful "To make, print, or publish, or cause to be made, printed, or published any notice, statement, or advertisement, with respect to the sale or rental of a dwelling that indicates any preference, limitation, or discrimination based on race, color, religion, sex, handicap, familial status, or national origin, or an intention to make any such preference, limitation, or discrimination".
 
 Local statutes often extend anti-discrimination law to additional protected classes (e.g. sexual orientation).
 
 Violation(s) may be subject to legal consequences.
-
-<a href="http://www.findmyroof.com/help/fairhousing">Learn more about Fair Housing Act.</a>
 
 Official site for <a href="https://www.usdoj.gov/crt/housing/housing_coverage.htm">Fair Housing Act</a>.
 </p>
@@ -108,11 +107,8 @@ If you suspect that an ad posting is unlawful in any way, please immediately "RE
 
 <h2>NOTIFICATION OF CLAIMS OF INFRINGEMENT</h2>
 <p>
-If you believe that your Content and/or your personal information has been used in a way that constitutes identity theft, or your intellectual property rights have been otherwise violated, please notify us at:
-</p>
-
-<p>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d1dcd5c9f9dfd0d7ddd4c0cbd6d6df97dad6d4">[email&#160;protected]</a>
+If you believe that your Content and/or your personal information has been used in a way that constitutes identity theft, 
+or your intellectual property rights have been otherwise violated, please notify us at: help@findmyroof.com
 </p>
 
 <p>
@@ -134,7 +130,6 @@ Upon completion of our review, we will remove the infringing posting(s) promptly
 
 <h2>NO SPAM POLICY</h2>
 <p>Spam posting, in any of its forms, will not be tolerated and users who violate the TOS will be banned from using the Service.
-<a href="http://www.findmyroof.com/help/anti-spam-policy">See our current anti-spam policy.</a>
 </p>
 </div>
 
@@ -200,7 +195,7 @@ most recent version of these Terms at:
 </p>
 
 <p>
-http://www.findmyroof.com/help/term.
+http://findmyroof.com/site/termsofservice.
 </p>
 
 <h2>WAIVER AND SEVERABILITY OF TERMS.</h2>

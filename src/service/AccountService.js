@@ -55,7 +55,6 @@ export default class AccountService {
                 }
             })
             .catch((error) => {
-                console.log(error)
                 reject(error)
             })  
         })
@@ -134,7 +133,6 @@ export default class AccountService {
         let p = PromiseManager.get(serviceUri, 'GET')
 
         if (p) {
-            console.log('Getting user session in progress: ' + serviceUri)
             return p
         }
 

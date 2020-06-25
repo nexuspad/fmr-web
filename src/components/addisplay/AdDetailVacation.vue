@@ -15,7 +15,7 @@
         </div>
         <div class="col pl-4 pb-4">
           <vac-rate :ad="ad" />
-          <div v-html=ad.description class="mt-3"></div>
+          <div v-html=convertLinks(ad.description) class="mt-3"></div>
         </div>
         <div class="col-md-3">
           <div class="col"><contact :ad="ad" /></div>

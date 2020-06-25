@@ -109,7 +109,7 @@ export default {
   methods: {
     openTitleEdit(photo) {
       photo.newTitle = photo.title ? photo.title : ''
-      console.log(this.$refs['title' + photo.viewId][0])
+      console.debug(this.$refs['title' + photo.viewId][0])
       if (this.$refs['title' + photo.viewId][0]) {
         this.$nextTick(() => {
           this.$refs['title' + photo.viewId][0].focus()
@@ -149,7 +149,7 @@ export default {
 
         let serviceInstance = UploadServicePool.getServiceFromPool();
         if (serviceInstance === null) {
-          console.log('no more upload service instance, wait ' + UploadServicePool.timeInterval + ' seconds');
+          console.debug('no more upload service instance, wait ' + UploadServicePool.timeInterval + ' seconds');
           break;
         }
 
@@ -168,14 +168,14 @@ export default {
             }
           })
           .then(function (updatedAd) {
-            console.log('upload entry completed.', updatedAd);
+            console.debug('upload entry completed.', updatedAd);
             self.ad.mergePhotos(updatedAd)
             // publish an update event after successful uploading.
             fileObj.status = FileWrapper.COMPLETED;
           })
           .catch(function (error) {
             if (fileObj.status !== FileWrapper.CANCELLED) {
-              console.log(error);
+              console.debug(error);
               fileObj.status = FileWrapper.FAILED;
               EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
             }
@@ -215,7 +215,7 @@ export default {
     },
     cancelUpload (index, fileObj) {
       if (fileObj.uploadId.length > 0) {
-        console.log('cancel upload for ', fileObj.uploadId);
+        console.debug('cancel upload for ', fileObj.uploadId);
         UploadServicePool.cancelUpload(fileObj)
       } else {
         this.files.splice(index, 1);

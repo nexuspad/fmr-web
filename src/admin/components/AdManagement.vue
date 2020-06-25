@@ -85,15 +85,28 @@ export default {
     }
   },
   mounted() {
-    this.getLatest()
+    this.getAds()
+  },
+  watch: {
+    "$route.query": function() {
+      this.getAds()
+    }
   },
   methods: {
-    getLatest() {
+    getAds() {
+      let status = 0
+      if (this.$route.query.status === 'review') {
+        status = 2
+      } else {
+        status = 0
+      }
+
       const self = this
-      AdminService.getAds().then((adsReturned) => {
-        while (self.ads.length > 0) {
-          self.ads.pop()
-        }
+      while (self.ads.length > 0) {
+        self.ads.pop()
+      }
+
+      AdminService.getAds(status).then((adsReturned) => {
         adsReturned.forEach(p => {
           self.ads.push(p)
         });
@@ -126,7 +139,7 @@ export default {
     reset() {
       this.adId = null
       this.setUserEmail('')
-      this.getLatest()
+      this.getAds()
     },
     disapprove(id) {
       const self = this

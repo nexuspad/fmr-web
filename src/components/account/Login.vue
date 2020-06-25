@@ -59,7 +59,7 @@ export default {
       self.posting = true
       AccountService.login(this.email, this.password)
       .then((user) => {
-        console.log(user)
+        console.debug(user)
         if (user.isVerified()) {
           if (self.$route.query['returnUrl']) {
             window.location.href = self.$route.query['returnUrl']

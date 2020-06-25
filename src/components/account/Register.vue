@@ -40,14 +40,15 @@
               </div>
             </form>
           </div>
-          <div class="col-md-3 pt-4 order-lg-2 order-md-2 order-first">
-            <div class="pb-2"><strong>Please note the following:</strong></div>
-            <ul class="pl-4">
-              <li>Posting on FindMyRoof.com is free with a valid account.</li>
-              <li>After creating your account, a one-time text verification is required before you can post ads.
-                Standard carrier charges may apply.</li>
-              <li>The service is limited to properties in U.S. only.</li>
-            </ul>
+          <div class="col-md-3 pt-4 order-lg-2 order-md-2">
+            <div class="sticky m-2">
+              <ul class="pl-4">
+                <li>Posting on FindMyRoof.com is free with a valid account.</li>
+                <li>To complete new account registration, a one-time text verification is required.
+                  Standard carrier charges may apply.</li>
+                <li>The service is limited to properties in U.S. only.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -71,7 +71,6 @@ function categoryLookup(categoryId) {
 
 function categoryNameLookup(categoryId) {
     if (!CATEGORIES[categoryId]) {
-        console.log('error ', categoryId)
         return '';
     }
     return CATEGORIES[categoryId].name

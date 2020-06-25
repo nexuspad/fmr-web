@@ -35,7 +35,7 @@ export default class UploadService {
                 RestClient.instance(token).post(cloudConfigUrl, request)
                     .then(function (response) {
                         // Parse application level response data
-                        console.log(response)
+                        console.debug(response)
                         if (response.data.code !== 'SUCCESS') {
                             self._concludeService({ resolve: resolve, reject: reject, error: new ApiError(response.data.code) });
                         } else {
@@ -61,7 +61,7 @@ export default class UploadService {
                                         });
                                 })
                                 .catch(function (error) {
-                                    console.log(error)
+                                    console.debug(error)
                                 })
                         }
                     })
@@ -80,7 +80,7 @@ export default class UploadService {
     cancelUpload() {
         this._cancelled = true;
         if (this._axiosSource !== null) {
-            console.log('cancel the upload');
+            console.debug('cancel the upload');
             this._axiosSource.cancel('upload cancelled by user');
         }
     }
@@ -119,7 +119,7 @@ export default class UploadService {
         formData.append('filename', cloudConfig.file_name);
         formData.append('file', file);
 
-        console.log('submit form data for uploading', formData);
+        console.debug('submit form data for uploading', formData);
 
         return axiosClient.post(cloudConfig.s3_url, formData, option);
     }
