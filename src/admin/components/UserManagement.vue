@@ -2,7 +2,7 @@
   <div>
     <admin-message :message="message" />
     <navigation />
-    <div class="container-fluid" v-if="users.length > 0">
+    <div class="container-fluid">
       <div class="row pb-1 border-bottom mb-2">
         <div class="col-1">
           <span v-if="selectedUser.id">{{ selectedUser.id }}</span>
@@ -23,7 +23,7 @@
             Upgrade
           </button>
           <button class="btn btn-primary mr-2" v-on:click="impersonate(selectedUser.email)" v-if="selectedUser.id">Impersonate</button>
-          <button class="btn btn-secondary ml-2" v-on:click="reset()" v-if="selectedUser.id">Clear</button>
+          <button class="btn btn-secondary ml-2" v-on:click="reset()">Clear/Refresh</button>
         </div>
       </div>
       <div class="row pb-1 font-weight-bold">
@@ -118,22 +118,25 @@ export default {
     search () {
       const self = this
       AdminService.searchUser(this.userEmail).then((userReturned) => {
-        while (self.users.length > 0) {
+        while (self.users && self.users.length > 0) {
           self.users.pop()
         }
-        self.users.push(userReturned)
-        self.selectedUser = userReturned
-      }).catch((error) => {
-        console.error(error)
-      })
-
-      AdminService.searchAds(this.adId, this.userEmail).then((adsReturned) => {
-        while (self.userAds.length > 0) {
+        while (self.userAds && self.userAds.length > 0) {
           self.userAds.pop()
         }
-        adsReturned.forEach(p => {
-          self.userAds.push(p)
-        });
+
+        if (userReturned.id > 0) {
+          self.users.push(userReturned)
+          self.selectedUser = userReturned
+
+          AdminService.searchAds(self.adId, self.userEmail).then((adsReturned) => {
+            adsReturned.forEach(p => {
+              self.userAds.push(p)
+            });
+          }).catch((error) => {
+            console.error(error)
+          })
+        }
       }).catch((error) => {
         console.error(error)
       })
@@ -142,7 +145,7 @@ export default {
       this.selectedUser = new User
       this.setUserEmail('')
       this.getLatest()
-      while (self.userAds.length > 0) {
+      while (self.userAds && self.userAds.length > 0) {
         self.userAds.pop()
       }
     },
@@ -174,7 +177,7 @@ export default {
       const self = this
       AdminService.toggleSuspension(userId, true).then(() => {
         self.message = userId + " is suspended"
-        self.getLatest()
+        self.search()
       }).catch((error) => {
         self.message(error)
       })
@@ -183,7 +186,7 @@ export default {
       const self = this
       AdminService.toggleSuspension(userId, false).then(() => {
         self.message = userId + " is un-suspended"
-        self.getLatest()
+        self.search()
       }).catch((error) => {
         self.message(error)
       })
@@ -192,7 +195,7 @@ export default {
       const self = this
       AdminService.upgrade(userId).then(() => {
         self.message = userId + " is upgraded"
-        self.getLatest()
+        self.search()
       }).catch((error) => {
         self.message(error)
       })

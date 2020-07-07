@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import '@fortawesome/fontawesome-free/css/all.css'
 import '../assets/custom.scss'
 
 import Landing from './Landing'
@@ -19,6 +20,7 @@ const router = new VueRouter({
       { name: 'landing', path: '/', component: Landing },
       { name: 'users', path: '/users', component: UserManagement },
       { name: 'posts', path: '/posts', component: AdManagement },
+      { name: 'reviews', path: '/reviews', component: AdManagement },
       { name: 'jobs', path: '/jobs', component: JobManagement }
     ]
 });

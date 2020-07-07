@@ -1,7 +1,7 @@
 export default class PromiseManager {
     static promisePool = {};
   
-    static get (url, method) {
+    static get(url, method) {
       if (!method) method = 'GET';
       let key = url + method;
       PromiseManager.cleanPool();
@@ -13,13 +13,13 @@ export default class PromiseManager {
       }
     }
   
-    static set (promise, url, method) {
+    static set(promise, url, method) {
       if (!method) method = 'GET';
       let key = url + method;
       PromiseManager.promisePool[key] = new PromiseWrap(promise, key);
     }
   
-    static cleanPool () {
+    static cleanPool() {
       for (let k in PromiseManager.promisePool) {
         if (PromiseManager.promisePool[k] !== null && PromiseManager.promisePool[k].expires()) {
           delete PromiseManager.promisePool[k];

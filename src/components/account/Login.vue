@@ -8,7 +8,7 @@
       <div class="fmr-form mt-2 p-2 col-md-6 offset-md-3">
         <form v-on:submit.prevent>
           <div class="border-bottom lead pl-1 mb-4">
-            <span v-if="fromRegistration">Your account has been created.</span>
+            <span v-if="fromRegistration">Please login in to complete the next step.</span>
             <span v-if="!fromRegistration">Login to your account</span>
           </div>
           <div class="form-group pl-1">

@@ -14,12 +14,23 @@ export default {
   props: ['message'],
   data() {
     return {
-      showMessage: false
+      showMessage: false,
+      dismissTimer: null
     }
   },
   watch: { 
     message: function() {
       this.showMessage = true
+      
+      if (this.dismissTimer) {
+        clearTimeout(this.dismissTimer)
+      }
+
+      let self = this
+      this.dismissTimer = setTimeout(function() {
+        self.showMessage = false
+        self.dismissTimer = null
+    }, 4000);
     }
   }
 }

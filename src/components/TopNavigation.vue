@@ -53,7 +53,9 @@
 <script>
 import StateSelector from "./StateSelector"
 import AccountService from '../service/AccountService'
-import AppContext from './AppContext';
+import AppContext from './AppContext'
+import EventManager from '../util/EventManager'
+import AppEvent from '../util/AppEvent'
 
 export default {
   data() {
@@ -91,6 +93,12 @@ export default {
       self.forceLogin()
     })
   },
+  mounted() {
+    EventManager.subscribe(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, this.refreshMenu)
+  },
+  beforeDestroy() {
+    EventManager.unSubscribe(AppEvent.ACCOUNT_VERIFICATION_SUCCESS, this.refreshMenu)
+  },
   methods: {
     forceLogin() {
       if (this.$router.currentRoute.meta.requiresAuth) {
@@ -104,6 +112,9 @@ export default {
       .catch(() => {
         window.location = '/'
       })
+    },
+    refreshMenu() {
+      this.isVerified = true
     }
   },
   watch: {

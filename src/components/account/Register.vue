@@ -44,7 +44,7 @@
             <div class="sticky m-2">
               <ul class="pl-4">
                 <li>Posting on FindMyRoof.com is free with a valid account.</li>
-                <li>To complete new account registration, a one-time text verification is required.
+                <li>To complete new account registration, a <b>one-time text verification is required</b>.
                   Standard carrier charges may apply.</li>
                 <li>The service is limited to properties in U.S. only.</li>
               </ul>

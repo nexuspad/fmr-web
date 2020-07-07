@@ -8,8 +8,17 @@ export default {
         }
       },
     methods: {
-        setUserEmail(email) {
+        setUserEmail(email, event) {
             this.userEmail = email
+            if (event) {
+              var range = document.createRange();
+              range.selectNodeContents(event.target);
+              var sel = window.getSelection();
+              sel.removeAllRanges();
+              sel.addRange(range);
+
+              document.execCommand("copy");  
+            }
         },
         impersonate(email) {
           const self = this

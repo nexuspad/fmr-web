@@ -135,14 +135,18 @@ export default class AdService {
         }
     }
 
-    static update(adServiceRequest) {
+    static update(adServiceRequest, checkExistingRequest = true) {
         const serviceUri = AD_UPDATE.replace('#Id', adServiceRequest.ad.id)
 
-        let p = PromiseManager.get(serviceUri, 'POST')
+        let p = null
 
-        if (p) {
-            console.debug('update in progress for ad: ' + adServiceRequest.ad.id)
-            return p
+        if (checkExistingRequest) {
+            p = PromiseManager.get(serviceUri, 'POST')
+
+            if (p) {
+                console.debug('update in progress for ad: ' + adServiceRequest.ad.id)
+                return p
+            }
         }
 
         p = new Promise((resolve, reject) => {
@@ -166,7 +170,9 @@ export default class AdService {
             })
         })
 
-        PromiseManager.set(p, serviceUri, 'POST');
+        if (checkExistingRequest) {
+            PromiseManager.set(p, serviceUri, 'POST');
+        }
 
         return p
     }

@@ -10,7 +10,8 @@
     "lint": "vue-cli-service lint",
     "deploy.panda": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket panda.findmyroof.com",
     "deploy.admin": "rsync -avu --delete --stats --rsh='ssh -p 6822' dist.admin/ fmr@45.56.96.166:/home/fmr/admin --exclude=logs --exclude=.*",
-    "deploy": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket findmyroof.com"
+    "deploy": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket findmyroof.com",
+    "deploy.www": "s3-deploy './dist/**' --cwd './dist/' --region us-east-1 --bucket www.findmyroof.com"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",

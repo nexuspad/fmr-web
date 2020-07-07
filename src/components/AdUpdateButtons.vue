@@ -23,7 +23,7 @@
       </button>
       <button type="button" class="btn btn-primary" v-if="!ad.isDraft() && !ad.isDisapproved() && !ad.isDeactivated()" 
         @click="deActivate()">
-        De-activate
+        Deactivate
       </button>
       <button type="button" class="btn btn-danger" data-toggle="modal" :data-target="'#DeleteConfirmation' + ad.id">
         Remove

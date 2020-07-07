@@ -4,7 +4,9 @@
       <div class="col-6">
         <label>Asking price:</label>
         <strong class="fmr-green ml-1">{{ dollar(attributeValue('price')) }}</strong>
-        <div v-if="hasAttributeValue('owner_financing_available')">Owner financing available</div>
+        <div v-if="hasAttributeValue('owner_financing_available') && attributeValue('owner_financing_available') == true">
+          Owner financing available
+        </div>
       </div>
       <div class="col-6" v-if="hasAttributeValue('hoa_fee')">
         <label>HOA fee:</label>

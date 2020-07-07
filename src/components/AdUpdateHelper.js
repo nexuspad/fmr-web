@@ -130,7 +130,7 @@ export default {
         },
         deletePhoto(photoObj) {
             const self = this
-            AdService.update(AdServiceRequest.deletePhoto(this.ad.id, photoObj.viewId)).then((ad) => {
+            AdService.update(AdServiceRequest.deletePhoto(this.ad.id, photoObj.viewId), false).then((ad) => {
               self.ad.mergePhotos(ad)
             }).catch((error) => {
               EventManager.publishApiEvent(AppEvent.ofApiFailure(error));
@@ -138,7 +138,7 @@ export default {
         },
         reorderPhotos(viewIdInOrders) {
             const self = this
-            AdService.update(AdServiceRequest.reorderPhotos(this.ad.id, viewIdInOrders)).then((ad) => {
+            AdService.update(AdServiceRequest.reorderPhotos(this.ad.id, viewIdInOrders), false).then((ad) => {
               self.ad.mergePhotos(ad)
               self.forceRefreshKey = Date.now()
             }).catch((error) => {
