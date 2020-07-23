@@ -62,7 +62,8 @@ exports.handler = function (event, context, callback) {
 
         // User sharp image library to rotate and resize the photo
         // https://sharp.pixelplumbing.com/api-operation#rotate
-        sharp(response.Body).rotate().resize({width: MD_WIDTH, withoutEnlargement: true}).toBuffer().then(imageData => {
+        sharp(response.Body).rotate().resize({width: MD_WIDTH, withoutEnlargement: true}).toBuffer()
+        .then(imageData => {
             console.log('**** completed image rotation and resizing')
             s3.putObject({
                 Bucket: destBucket,
@@ -124,6 +125,8 @@ exports.handler = function (event, context, callback) {
         
                 }
             });
+        }).catch(function(err) {
+            console.log("Error occured ", err);
         });
     });
 };
